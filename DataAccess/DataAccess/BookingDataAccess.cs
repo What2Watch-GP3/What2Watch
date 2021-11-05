@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataAccess.Interfaces;
+using DataAccess.Model;
+
+namespace DataAccess.BookingDataAccess
+{
+    public class BookingDataAccess : IBookingDataAccess
+    {
+        public async Task<int> CreateAsync(Booking booking)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Booking> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+}
