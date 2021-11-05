@@ -11,28 +11,31 @@ namespace TestDataAccess.Tests
 {
     class TestConfirmBooking
     {
+        private BookingDataAccess _bookingDataAccess;
         [SetUp]
         public void Setup()
         {
+            _bookingDataAccess = new BookingDataAccess();
+
 
         }
 
         [Test]
-        public void ConfirmBooking()
+        public async Task ConfirmBooking()
         {
             decimal totalPrice = 11.99M;
             var dateString = "5/1/2021 8:30:52 AM";
             DateTime date = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
             Booking booking1 = new Booking(totalPrice, date);
-            BookingDataAccess.CreateAsync(booking1);
+
 
             // Act
-            //account.Debit(debitAmount);
+            int actual = await _bookingDataAccess.CreateAsync(booking1);
+            Booking newBooking = await _bookingDataAccess.GetAsync(actual);
 
 
             // Assert
-            Assert.AreEqual(expected, actual, 0.001, "Account not debited correctly");
-            Assert.Pass();
+            Assert.AreEqual(newBooking.Id, actual, $"Booking doesn't correspond to the expected Id: {newBooking.Id}");
         }
     }
 }

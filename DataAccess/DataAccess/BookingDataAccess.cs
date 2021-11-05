@@ -8,20 +8,16 @@ using DataAccess.Model;
 
 namespace DataAccess.BookingDataAccess
 {
-    class BookingDataAccess : IBookingDataAccess
+    public class BookingDataAccess : IBookingDataAccess
     {
         public async Task<int> CreateAsync(Booking booking)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<int> GetAsync(int id)
+        public async Task<Booking> GetAsync(int id)
         {
             throw new NotImplementedException();
-        }
-
-        public BookingDataAccess{
-
         }
 
     }

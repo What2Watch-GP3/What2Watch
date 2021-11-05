@@ -4,8 +4,9 @@ namespace DataAccess.Model
 {
     public class Booking
     {
-        public decimal TotalPrice { get; set; };
-        public DateTime Date { get; set; };
+        public int Id { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime Date { get; set; }
 
         public Booking(decimal TotalPrice, DateTime Date)
         {

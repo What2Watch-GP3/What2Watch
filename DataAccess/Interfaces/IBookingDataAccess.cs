@@ -10,7 +10,7 @@ namespace DataAccess.Interfaces
     interface IBookingDataAccess
     {
         Task<int> CreateAsync(Booking booking);
-        Task<int> GetAsync(int id);
+        Task<Booking> GetAsync(int id);
 
     }
 }
