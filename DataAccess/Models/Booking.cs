@@ -8,6 +8,7 @@ namespace DataAccess.Model
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
 
+        public Booking() {}
         public Booking(decimal TotalPrice, DateTime Date)
         {
             this.TotalPrice = TotalPrice;

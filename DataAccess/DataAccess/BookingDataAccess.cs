@@ -6,19 +6,10 @@ using System.Threading.Tasks;
 using DataAccess.Interfaces;
 using DataAccess.Model;
 
-namespace DataAccess.BookingDataAccess
+namespace DataAccess.DataAccess
 {
-    public class BookingDataAccess : IBookingDataAccess
+    public class BookingDataAccess : BaseDataAccess<Booking>
     {
-        public async Task<int> CreateAsync(Booking booking)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Booking> GetAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        public BookingDataAccess(string connectionstring) : base(connectionstring) {}
     }
 }
