@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccess.Model;
 using NUnit.Framework;
 using DataAccess.DataAccess;
+using System.Globalization;
 
 namespace TestDataAccess.Tests
 {
@@ -15,23 +16,22 @@ namespace TestDataAccess.Tests
         [SetUp]
         public void Setup()
         {
+            //TODO Change to configuration
             _bookingDataAccess = new BookingDataAccess(@"Data Source=DESKTOP-HU2QTEB\SQLEXPRESS;Initial Catalog=What2Watch;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         [Test]
         public async Task ConfirmBooking()
         {
-            decimal totalPrice = 11.99M;
-            var dateString = "5/1/2021 8:30:52 AM";
-            DateTime date = DateTime.Parse(dateString, System.Globalization.CultureInfo.InvariantCulture);
-            Booking booking1 = new Booking(totalPrice, date);
+            // Arrange
+            Booking booking = new() { TotalPrice=11.99M, Date=DateTime.Parse("5/1/2021 8:30:52 AM", CultureInfo.InvariantCulture) };
 
             // Act
-            int actual = await _bookingDataAccess.CreateAsync(booking1);
-            Booking newBooking = await _bookingDataAccess.GetByIdAsync(actual);
+            booking.Id = await _bookingDataAccess.CreateAsync(booking);
+            Booking newBooking = await _bookingDataAccess.GetByIdAsync(booking.Id);
 
             // Assert
-            Assert.AreEqual(newBooking.Id, actual, $"Booking doesn't correspond to the expected Id: {newBooking.Id}");
+            Assert.AreEqual(newBooking.Id, booking.Id, $"Booking doesn't correspond to the expected Id: {newBooking.Id}");
         }
     }
 }

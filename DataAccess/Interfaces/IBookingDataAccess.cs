@@ -7,10 +7,8 @@ using DataAccess.Model;
 
 namespace DataAccess.Interfaces
 {
-    interface IBookingDataAccess
+    interface IBookingDataAccess : IBaseDataAccess<Booking>
     {
-        Task<int> CreateAsync(Booking booking);
-        Task<Booking> GetAsync(int id);
 
     }
 }

@@ -4,49 +4,93 @@ using System.Linq;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
-using System.Text;
+using System;
+using DataAccess.Interfaces;
 
 namespace DataAccess.DataAccess
 {
-    public abstract class BaseDataAccess<T> where T : class
+    public abstract class BaseDataAccess<T> : IBaseDataAccess<T> where T : class
     {
         private readonly string _connectionstring;
 
-        protected string TableName => typeof(T).Name;
-        protected string ValueNames => string.Join(", ", typeof(T).GetProperties().Where(property => property.Name != "Id").ToList().Select(property => property.Name.Trim()));
-        public static string ValueParameters => string.Join(", ", (typeof(T).GetProperties()).Where(property => property.Name != "Id").ToList().Select(property => $"@property.Name.Trim()"));
-        public static string ValueUpdates => string.Join(", ", (typeof(T).GetProperties()).Where(property => property.Name != "Id").ToList().Select(property => $"{property.Name.Trim()}=@{property.Name.Trim()}"));
+        private string TableName => GetTableName();
+        private string ValueNames => string.Join(", ", GetPropertyNames().ToList().Select(property => property.Trim()));
+        private string ValueParameters => string.Join(", ", GetPropertyNames().ToList().Select(property => $"@{property.Trim()}"));
+        private string ValueUpdates => string.Join(", ", GetPropertyNames().ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
+
         protected BaseDataAccess(string connectionstring) => _connectionstring = connectionstring;
         protected IDbConnection CreateConnection() => new SqlConnection(_connectionstring);
+        protected string GetTableName() => typeof(T).Name;
+        protected IEnumerable<string> GetPropertyNames() => typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
 
         public async Task<int> CreateAsync(T entity)
         {
             string command = $"INSERT INTO [{TableName}] ({ValueNames}) OUTPUT INSERTED.Id VALUES ({ValueParameters});";
-            return await CreateConnection().QuerySingleAsync<int>(command, entity);
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.QuerySingleAsync<int>(command, entity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error during async creation of '{typeof(T).Name}'!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nValueNames: {ValueNames}\nCommand: {command}", ex);
+            }
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             string command = $"SELECT * FROM [{TableName}];";
-            return await CreateConnection().QueryAsync<T>(command);
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.QueryAsync<T>(command);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting all async of '{typeof(T).Name}'!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nValueNames: {ValueNames}\nCommand: {command}", ex);
+            }
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
             string command = $"SELECT * FROM [{TableName}] WHERE Id=@Id;";
-            return await CreateConnection().QuerySingleAsync<T>(command, new { Id=id });
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.QuerySingleAsync<T>(command, new { Id=id });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting asyng by Id:`{id}` of '{typeof(T).Name}'!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nValueNames: {ValueNames}\nCommand: {command}", ex);
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
             string command = $"DELETE FROM [{TableName}] WHERE Id=@Id;";
-            return await CreateConnection().ExecuteAsync(command, new { Id = id }) > 0;
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.ExecuteAsync(command, new { Id = id }) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error during async deletion of '{typeof(T).Name}' with Id:{id}!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nCommand: {command}", ex);
+            }
         }
 
         public async Task<bool> UpdateAsync(T entity)
         {
             string command = $"UPDATE [{TableName}] SET {ValueUpdates} WHERE Id=@Id;";
-            return await CreateConnection().ExecuteAsync(command, entity) > 0;
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.ExecuteAsync(command, entity) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error during async update of '{typeof(T).Name}'!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nValueNames: {ValueNames}\nCommand: {command}", ex);
+            }
         }
     }
 }
