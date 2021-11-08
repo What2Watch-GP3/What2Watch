@@ -12,16 +12,19 @@ namespace DataAccess.DataAccess
     public abstract class BaseDataAccess<T> : IBaseDataAccess<T> where T : class
     {
         private readonly string _connectionstring;
+        private string ValueNames => string.Join(", ", Values.ToList().Select(property => property.Trim()));
+        private string ValueParameters => string.Join(", ", Values.ToList().Select(property => $"@{property.Trim()}"));
+        private string ValueUpdates => string.Join(", ", Values.ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
 
-        private string TableName => GetTableName();
-        private string ValueNames => string.Join(", ", GetPropertyNames().ToList().Select(property => property.Trim()));
-        private string ValueParameters => string.Join(", ", GetPropertyNames().ToList().Select(property => $"@{property.Trim()}"));
-        private string ValueUpdates => string.Join(", ", GetPropertyNames().ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
-
-        protected BaseDataAccess(string connectionstring) => _connectionstring = connectionstring;
+        protected BaseDataAccess(string connectionstring)
+        {
+            TableName = typeof(T).Name;
+            Values = typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
+            _connectionstring = connectionstring;
+        }
         protected IDbConnection CreateConnection() => new SqlConnection(_connectionstring);
-        protected string GetTableName() => typeof(T).Name;
-        protected IEnumerable<string> GetPropertyNames() => typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
+        protected string TableName { get; set; }
+        protected IEnumerable<string> Values { get; set; }
 
         public async Task<int> CreateAsync(T entity)
         {
