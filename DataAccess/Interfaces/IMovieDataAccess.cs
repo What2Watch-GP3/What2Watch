@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DataAccess.Interfaces
 {
-    public interface IMovieDataAccess
+    public interface IMovieDataAccess : IBaseDataAccess<Movie>
+
     {
 
-        Task<IEnumerable<Movie>> GetAllAsync();
 
-        Task<Movie> GetByIdAsync(int id);
-            
         Task<IEnumerable<Movie>> GetByPartOfNameAsync(string searchString);
 
-
     }
+    
 }

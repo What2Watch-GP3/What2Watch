@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
 {
-    class ShowDataAccess : IShowDataAccess
+    public class ShowDataAccess : BaseDataAccess<Show>, IShowDataAccess
     {
+
+        public ShowDataAccess(string connectionString) : base(connectionString)
+        {
+
+        }
         public async Task<Show> GetByIdAsync(int id)
         {
             throw new NotImplementedException();

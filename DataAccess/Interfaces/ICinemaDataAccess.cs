@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Interfaces
 {
-    interface ICinemaDataAccess
+    public interface ICinemaDataAccess:IBaseDataAccess<Cinema>
     {
 
         
-
-        Task<Cinema> GetByIdAsync(int id);
-
         Task<IEnumerable<Cinema>> GetListByMovieIdAsync(int movieId);
     }
 }

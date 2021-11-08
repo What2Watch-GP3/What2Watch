@@ -1,4 +1,5 @@
-﻿using DataAccess.Interfaces;
+﻿using Dapper;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -8,22 +9,33 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
 {
-    class MovieDataAccess : IMovieDataAccess
+    public class MovieDataAccess : BaseDataAccess<Movie>, IMovieDataAccess
 
     {
-        public async Task<IEnumerable<Movie>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+      
 
-        public async Task<Movie> GetByIdAsync(int id)
+        public MovieDataAccess(string connectionString): base(connectionString)
         {
-            throw new NotImplementedException();
+
+
+           
         }
 
         public async Task<IEnumerable<Movie>> GetByPartOfNameAsync(string searchString)
         {
-            throw new NotImplementedException();
+            IEnumerable<Movie> movies;
+            string command = $"SELECT * FROM Movie WHERE title LIKE @SearchString";
+            try
+            {
+                using var connection = CreateConnection();
+                movies=await connection.QueryAsync<Movie>(command, new { SearchString =$"%{searchString}%" });
+
+                return movies;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting certain movies by part of name, by searchstring {searchString}. Error message: {ex.Message}", ex);
+            }
         }
     }
 }
