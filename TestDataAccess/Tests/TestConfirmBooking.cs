@@ -16,7 +16,7 @@ namespace TestDataAccess.Tests
         [SetUp]
         public void Setup()
         {
-            //TODO Change to configuration
+            //TODO Change to configuration with hildur
             _bookingDataAccess = new BookingDataAccess(@"Data Source=DESKTOP-HU2QTEB\SQLEXPRESS;Initial Catalog=What2Watch;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 

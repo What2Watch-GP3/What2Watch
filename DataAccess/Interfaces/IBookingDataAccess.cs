@@ -7,8 +7,5 @@ using DataAccess.Model;
 
 namespace DataAccess.Interfaces
 {
-    interface IBookingDataAccess : IBaseDataAccess<Booking>
-    {
-
-    }
+    interface IBookingDataAccess : IBaseDataAccess<Booking> { }
 }

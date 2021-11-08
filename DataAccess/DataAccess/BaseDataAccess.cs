@@ -12,19 +12,28 @@ namespace DataAccess.DataAccess
     public abstract class BaseDataAccess<T> : IBaseDataAccess<T> where T : class
     {
         private readonly string _connectionstring;
+        // ValueNames = "total_price, date"
         private string ValueNames => string.Join(", ", Values.ToList().Select(property => property.Trim()));
-        private string ValueParameters => string.Join(", ", Values.ToList().Select(property => $"@{property.Trim()}"));
-        private string ValueUpdates => string.Join(", ", Values.ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
-
+        // ValueParameters = "@total_price, @date"
+        private string ValueParameters => string.Join(", ", RawValues.ToList().Select(property => $"@{property.Trim()}"));
+        // ValueUpdates = "total_price=@total_price, date=@date"
+        private string ValueUpdates => string.Join(", ", RawValues.ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
+        
         protected BaseDataAccess(string connectionstring)
         {
+            // Sets TableName to the class' name e.g. 'TableName = "Booking"'
             TableName = typeof(T).Name;
-            Values = typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
+            // List of the names of the class' properties 'total_price, date'
+            RawValues = typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
+            Values = RawValues;
             _connectionstring = connectionstring;
         }
         protected IDbConnection CreateConnection() => new SqlConnection(_connectionstring);
         protected string TableName { get; set; }
+        // RawValues = total_price, date
         protected IEnumerable<string> Values { get; set; }
+        // RawValues = TotalPrice, Date
+        protected IEnumerable<string> RawValues;
 
         public async Task<int> CreateAsync(T entity)
         {
