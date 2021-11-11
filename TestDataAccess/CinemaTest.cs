@@ -56,6 +56,8 @@ namespace TestDataAccess
         [Test]
         public async Task GettingCinemasByMovieRturnsAListOfCinemas()
         {
+
+            //arrange
             IEnumerable<Cinema> cinemas;
 
             //act
