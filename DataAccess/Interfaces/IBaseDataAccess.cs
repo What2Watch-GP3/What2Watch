@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace DataAccess.Interfaces
 {
-    interface IBaseDataAccess<T>
+    public interface IBaseDataAccess<T>
     {
         Task<int> CreateAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();

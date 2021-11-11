@@ -1,7 +1,9 @@
 ﻿
+using System.Windows.Forms;
+
 namespace DesktopClientWinforms
 {
-    partial class DesktopClientForm
+    partial class DesktopClientForm : Form
     {
         /// <summary>
         ///  Required designer variable.
