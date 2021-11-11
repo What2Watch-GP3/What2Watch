@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DesktopClientWinforms
 {
-    partial class DesktopClientForm : Form
+    partial class DesktopClientForm
     {
         /// <summary>
         ///  Required designer variable.
