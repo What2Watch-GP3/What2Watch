@@ -15,10 +15,13 @@
 
   <ItemGroup>
     <Folder Include="Stubs\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
+
 </Project>
+
