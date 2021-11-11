@@ -14,28 +14,39 @@ namespace TestDataAccess
 
         private ShowDataAccess _showDataAccess;
 
+
         [SetUp]
 
         public void Setup()
         {
             _showDataAccess = new ShowDataAccess(Configuration.CONNECTION_STRING_TEST);
-
+           
         }
 
         [Test]
 
-        public async Task<Show> GettingOneShowById(int id)
+        public async Task GettingOneShowByIdReturnsAShow()
         {
             //arrange
+            Show show;
             //act
+            show = await _showDataAccess.GetByIdAsync(3);
             //assert
+            Assert.NotNull(show, $"No Show found by the id 3");
 
-            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
+        [Test]
+        public async Task GettingAListOfShowsByMovieAndCinemaReturnsListOfShows()
         {
-            throw new NotImplementedException();
+            //arrange
+            IEnumerable<Show> shows;
+
+            //act
+            shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(1,3);
+
+            //assert
+            Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");
         }
     }
 }
