@@ -15,13 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{5BCD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesktopClient", "DesktopClient", "{3706DF16-2761-4497-88EE-0F027D8DF59C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientWinforms", "DesktopClientWinforms\DesktopClientWinforms.csproj", "{33C546EA-82A7-4C25-8B3A-EB7F84D5CFAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopClientWinforms", "DesktopClientWinforms\DesktopClientWinforms.csproj", "{33C546EA-82A7-4C25-8B3A-EB7F84D5CFAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webserver", "Webserver\Webserver.csproj", "{5012EB99-76CA-44F2-B762-076D47B43C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webserver", "Webserver\Webserver.csproj", "{5012EB99-76CA-44F2-B762-076D47B43C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{D751B1EE-4859-448C-B455-755A223C0C8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{D751B1EE-4859-448C-B455-755A223C0C8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiClient", "WebApiClient\WebApiClient.csproj", "{44BF7E18-714A-4B7A-A6EB-3B26961E89D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiClient", "WebApiClient\WebApiClient.csproj", "{44BF7E18-714A-4B7A-A6EB-3B26961E89D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopWebApiClient", "DesktopWebApiClient\DesktopWebApiClient.csproj", "{8BB50787-5B33-4E63-ACC3-EDCC8D51A185}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{44BF7E18-714A-4B7A-A6EB-3B26961E89D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44BF7E18-714A-4B7A-A6EB-3B26961E89D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44BF7E18-714A-4B7A-A6EB-3B26961E89D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB50787-5B33-4E63-ACC3-EDCC8D51A185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB50787-5B33-4E63-ACC3-EDCC8D51A185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB50787-5B33-4E63-ACC3-EDCC8D51A185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB50787-5B33-4E63-ACC3-EDCC8D51A185}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{5012EB99-76CA-44F2-B762-076D47B43C34} = {5BCD2F20-843C-4672-A988-2477FCC24570}
 		{D751B1EE-4859-448C-B455-755A223C0C8B} = {343B39D7-5166-4FA7-A368-D6754F0DA7DE}
 		{44BF7E18-714A-4B7A-A6EB-3B26961E89D1} = {5BCD2F20-843C-4672-A988-2477FCC24570}
+		{8BB50787-5B33-4E63-ACC3-EDCC8D51A185} = {3706DF16-2761-4497-88EE-0F027D8DF59C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9571353-8C31-403E-A3BD-590CCA924F4F}
