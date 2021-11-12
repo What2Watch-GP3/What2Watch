@@ -9,7 +9,6 @@ namespace WebApi.DTOs.Converters
         private static MapperConfiguration config = new(cfg => cfg.CreateMap<U, T>());
         private static Mapper mapper = new(config);
 
-        //var bookingList = DtoConverter<BookingDto, Booking>.FromList(bookingDtoList);
         //var bookingDto = DtoConverter<Booking, BookingDto>.From(booking);
         //var booking = DtoConverter<BookingDto, Booking>.From(bookingDto);
         public static T From(U to) => mapper.Map<U, T>(to);
