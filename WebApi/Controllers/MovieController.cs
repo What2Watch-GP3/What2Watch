@@ -26,38 +26,58 @@ namespace WebApi.Controllers
             _movieDataAccess = new MovieDataAccess(configuration.GetConnectionString("DefaultConnection"));
 
         }
+
+        public MovieController(IMovieDataAccess movieDataAccess)
+        {
+            _movieDataAccess = movieDataAccess;
+
+        }
         // GET: api/<MovieController>
         [HttpGet]
-        public async Task<IEnumerable<MovieDto>> GetAllAsync()
+        public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
+        {
+            return Ok();
+
+
+        }
+        /*
+
+        // GET: api/<MovieController>
+        [HttpGet("{searchString}")]
+        public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync()
         {
 
 
-            return new string[] { "value1", "value2" };
+
         }
 
         // GET api/<MovieController>/5
         [HttpGet("{id}")]
-        public string GetByIdAsync(int id)
+        public async Task<ActionResult<MovieDto>> GetByIdAsync(int id)
         {
-            return "value";
+            return null;
         }
 
-        // POST api/<MovieController>
+
+
+        /* POST api/<MovieController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<int>> CreateAsync([FromBody] MovieDto movie)
         {
-        }
+            
+
+        
 
         // PUT api/<MovieController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> UpdateAsync(int id, [FromBody] MovieDto movie)
         {
         }
 
         // DELETE api/<MovieController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
-        }
+        }*/
     }
 }
