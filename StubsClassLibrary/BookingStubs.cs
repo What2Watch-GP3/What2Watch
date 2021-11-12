@@ -8,7 +8,7 @@ using DataAccess.Interfaces;
 
 namespace StubsClassLibrary
 {
-    class BookingStubs : IBookingDataAccess
+    public class BookingStubs : IBookingDataAccess
     {
         public async Task<int> CreateAsync(Booking entity)
         {

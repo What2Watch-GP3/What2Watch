@@ -1,5 +1,6 @@
 ﻿using DataAccess.Model;
 using NUnit.Framework;
+using StubsClassLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,13 @@ namespace TestBookingWebApi
 {
     class TestBookingWebApi
     {
-        private Booking _newBooking;
         private BookingDto _newBookingDto;
         private BookingController _testBookingWebApi;
 
         [SetUp]
         public async Task Setup()
         {
-
-            _newBooking = new Booking() { TotalPrice = 23, Date = DateTime.Now };
+            _testBookingWebApi = new BookingController(new BookingStubs());
         }
         //GETALL
         [Test]
@@ -46,7 +45,7 @@ namespace TestBookingWebApi
         }
         //POST
         [Test]
-        public async Task CreateBlogPostAsync()
+        public async Task CreateBookingAsync()
         {
             //ARRANGE & ACT done in setup
             var booking = await _testBookingWebApi.PostAsync(_newBookingDto);

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.DataAccess;
 using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using WebApi.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,12 +15,17 @@ namespace WebApi.Controllers
     public class BookingController : ControllerBase
     {
 
-        public BookingController(IBookingDataAccess bookingDataAccess)
-        {
-         
+        IBookingDataAccess _bookingDataAccess;
 
+        public BookingController(IConfiguration configuration)
+        {
+            _bookingDataAccess = new BookingDataAccess(configuration.GetConnectionString("DefaultConnection"));
         }
 
+        public BookingController(IBookingDataAccess bookingDataAccess)
+        {
+            _bookingDataAccess = bookingDataAccess;
+        }
 
         // GET: api/<BookingController>
         [HttpGet]
