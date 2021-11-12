@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 
@@ -12,6 +13,11 @@ namespace WebApi.Controllers
     public class BookingController : ControllerBase
     {
 
+        public BookingController(IBookingDataAccess bookingDataAccess)
+        {
+         
+
+        }
 
 
         // GET: api/<BookingController>

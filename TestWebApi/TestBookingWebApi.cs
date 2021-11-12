@@ -27,6 +27,7 @@ namespace TestBookingWebApi
         public async Task TestGetAllBookingsAsync()
         {
             //ARRANGE
+
             //ACT
             var bookings = await _testBookingWebApi.GetAllAsync();
             //ASSERT
