@@ -7,5 +7,9 @@ using DataAccess.Model;
 
 namespace DataAccess.Interfaces
 {
-    interface IBookingDataAccess : IBaseDataAccess<Booking> { }
+    public interface IBookingDataAccess : IBaseDataAccess<Booking> {
+    
+    
+    
+    }
 }
