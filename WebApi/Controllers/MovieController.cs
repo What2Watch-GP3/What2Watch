@@ -36,15 +36,15 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
-            return Ok();
+            return  Ok();
 
 
         }
-        /*
+      
 
         // GET: api/<MovieController>
         [HttpGet("{searchString}")]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync()
+        public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
 
 
@@ -66,7 +66,7 @@ namespace WebApi.Controllers
         {
             
 
-        
+        }*/
 
         // PUT api/<MovieController>/5
         [HttpPut("{id}")]
@@ -78,6 +78,6 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-        }*/
+        }
     }
 }

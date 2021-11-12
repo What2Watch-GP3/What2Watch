@@ -13,7 +13,7 @@ namespace DataAccess.Interfaces
     {
 
 
-        Task<IEnumerable<Movie>> GetByPartOfNameAsync(string searchString);
+        Task<IEnumerable<Movie>> GetListByPartOfNameAsync(string searchString);
 
     }
     

@@ -21,7 +21,7 @@ namespace DataAccess.DataAccess
            
         }
 
-        public async Task<IEnumerable<Movie>> GetByPartOfNameAsync(string searchString)
+        public async Task<IEnumerable<Movie>> GetListByPartOfNameAsync(string searchString)
         {
             IEnumerable<Movie> movies;
             string command = $"SELECT * FROM Movie WHERE title LIKE @SearchString";
