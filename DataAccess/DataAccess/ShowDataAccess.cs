@@ -15,10 +15,7 @@ namespace DataAccess.DataAccess
         {
 
         }
-        public async Task<Show> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
