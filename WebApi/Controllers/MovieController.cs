@@ -46,9 +46,7 @@ namespace WebApi.Controllers
         [HttpGet("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
-
-
-
+            throw new NotImplementedException();
         }
 
         // GET api/<MovieController>/5
@@ -72,12 +70,14 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(int id, [FromBody] MovieDto movie)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE api/<MovieController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }
