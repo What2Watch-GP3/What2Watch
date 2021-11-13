@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WebApi.Controllers;
@@ -35,10 +36,25 @@ namespace TestWebApi
             //arrange
 
             //act
-            var movies = (await _movieController.GetAllAsync()).Value;
+            var movieResult = (await _movieController.GetAllAsync()).Result;
 
-            //assert
-            Assert.IsTrue(movies.Count() > 0, "List of movies is curently 0");
+            //if you have populated the ok() with actual movies, then it returns an ObjectResult(e.g.  OKObjectResult, NotFoundObjectResult, they all have statuscode ).
+            //Option 1. assert for StatusCode property or Option 2. Assert for type - e.g. Assert.That(movieResult, Is.TypeOf<OKObjectResult>())
+            if (movieResult is ObjectResult objRes)
+            {
+                //assert.equals is deprecated wtf
+                Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
+                //you need to convert the value of the ObjectResult
+                IEnumerable<MovieDto> movies = (IEnumerable<MovieDto>)objRes.Value;
+
+                Assert.IsTrue(movies.Count() > 0, "List of movies is curently 0");
+            }
+            else if (movieResult is StatusCodeResult scr)
+            {
+                Assert.AreEqual(200, scr.StatusCode);
+            }
+            //if an empty status is sent back, then we need to test for a StatusCodeResult(which inheritantly has OKResult, NotFOundResult, etc. no value)
+
         }
 
         [Test]

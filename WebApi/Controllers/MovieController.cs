@@ -36,8 +36,13 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
-            return  Ok();
-
+            /*IEnumerable <MovieDto> movieCollection = new [] {
+                new MovieDto { Id = 5, Title = "10", Duration = 10 },
+                new MovieDto { Id = 5, Title = "10", Duration = 10 },
+                new MovieDto { Id = 5, Title = "10", Duration = 10 }
+            };*/
+            //return Ok();
+            return Ok(Enumerable.Empty<MovieDto>());
 
         }
       
