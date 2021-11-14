@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
 {
-    class UserDataAccess : BaseDataAccess<UserDataAccess>, IUserDataAccess
+    public class UserDataAccess : BaseDataAccess<UserDataAccess>, IUserDataAccess
     {
         public UserDataAccess(string connectionstring) : base(connectionstring)
         {
@@ -17,9 +17,9 @@ namespace DataAccess.DataAccess
 
         public async Task<int> LoginAsync(string email, string password)
         {
-            try
+           try
             {
-                var query = "SELECT id, password_hash_salt WHERE email=@Email";
+            var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
                 using var connection = CreateConnection();
                 var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = email });
                 if (BCryptTool.VerifyPassword(password, userTuple.Password_hash_salt))
@@ -29,10 +29,11 @@ namespace DataAccess.DataAccess
                 return -1;
             }
             catch(Exception ex)
-            {
+           {
                 //TODO: throw a more specific exception
-                throw new Exception(ex.Message, ex);
-            }
+                // throw new Exception(ex.Message, ex);
+                return -1;
+           }
         }
     }
     internal class UserTuple

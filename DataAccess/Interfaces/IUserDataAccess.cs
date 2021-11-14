@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Interfaces
 {
-    interface IUserDataAccess
+   public  interface IUserDataAccess
     {
         Task<int> LoginAsync(string email, string password); 
     }
