@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Models;
 
 namespace DataAccess.DataAccess
 {
@@ -15,14 +16,14 @@ namespace DataAccess.DataAccess
         {
         }
 
-        public async Task<int> LoginAsync(string email, string password)
+        public async Task<int> LoginAsync(User user)
         {
            try
             {
             var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
                 using var connection = CreateConnection();
-                var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = email });
-                if (BCryptTool.VerifyPassword(password, userTuple.Password_hash_salt))
+                var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = user.Email });
+                if (BCryptTool.VerifyPassword(user.Password, userTuple.Password_hash_salt))
                 {
                     return userTuple.Id;
                 }

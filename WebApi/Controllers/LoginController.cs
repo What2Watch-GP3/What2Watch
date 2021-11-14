@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs;
+using DataAccess.Models;
+using WebApi.DTOs.Converters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,9 +25,10 @@ namespace WebApi.Controllers
         }
         // POST api/<LoginController>
         [HttpPost]
-        public async Task<ActionResult<int>> PostAsync([FromBody] UserDto values)
+        public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)
         {
-           return await _userDataAccess.LoginAsync(values.Email, values.Password);
+            var user = DtoConverter<User, UserDto>.From(userDto);
+           return await _userDataAccess.LoginAsync(user);
         }
     }
 }

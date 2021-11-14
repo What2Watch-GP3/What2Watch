@@ -11,6 +11,6 @@ namespace DataAccess.Models
     {
         public int Id { get; set; }
         public string Email { get; set; }
-        public string PasswordHashSalt { get; set; }
+        public string Password { get; set; }
     }
 }
