@@ -26,7 +26,10 @@ namespace TestDataAccess
         public async Task SuccessfulLoginUserWithID1()
         {
             //Act
-            var userID = await _userDataAccess.LoginAsync("test@user.dk", "password1234");
+            var userID = await _userDataAccess.LoginAsync(
+                new User(){
+                Email = "test@user.dk", Password = "password1234"
+                });
             //Assert
             Assert.AreEqual(1, userID,"User ID was not found");
 
@@ -35,7 +38,12 @@ namespace TestDataAccess
         public async Task WrongPasswordLoginUser()
         {
             //Act
-            var userID = await _userDataAccess.LoginAsync("test@user.dk", "password12345");
+            var userID = await _userDataAccess.LoginAsync(
+                new User()
+                {
+                    Email = "test@user.dk",
+                    Password = "password12345"
+                });
             //Assert
             Assert.AreEqual(-1, userID, "User ID was not -1");
 
@@ -44,7 +52,12 @@ namespace TestDataAccess
         public async Task WrongEmailLoginUser()
         {
             //Act
-            var userID = await _userDataAccess.LoginAsync("tests@user.dk", "password1234");
+            var userID = await _userDataAccess.LoginAsync(
+                new User()
+                {
+                    Email = "tests@user.dk",
+                    Password = "password1234"
+                });
             //Assert
             Assert.AreEqual(-1, userID, "User ID was found");
 

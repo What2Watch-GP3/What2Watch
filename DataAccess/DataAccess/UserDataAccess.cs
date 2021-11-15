@@ -23,7 +23,7 @@ namespace DataAccess.DataAccess
             var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
                 using var connection = CreateConnection();
                 var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = user.Email });
-                if (BCryptTool.VerifyPassword(user.Password, userTuple.Password_hash_salt))
+                if ((userTuple != null)&&(BCryptTool.VerifyPassword(user.Password, userTuple.Password_hash_salt)))
                 {
                     return userTuple.Id;
                 }
