@@ -20,10 +20,11 @@ namespace DataAccess.DataAccess
         {
            try
             {
-            var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
+                var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
                 using var connection = CreateConnection();
                 var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = user.Email });
-                if ((userTuple != null)&&(BCryptTool.VerifyPassword(user.Password, userTuple.Password_hash_salt)))
+                //we don't check if userTuple is null because the async query always returns an object.
+                if (BCryptTool.VerifyPassword(user.Password, userTuple.Password_hash_salt))
                 {
                     return userTuple.Id;
                 }
@@ -31,10 +32,12 @@ namespace DataAccess.DataAccess
             }
             catch(Exception ex)
            {
-                //TODO: throw a more specific exception
-                // throw new Exception(ex.Message, ex);
+                //this would throw an exception when the password is wrong but the email is correct
+                //throw new Exception($"Error trying to login with email {user.Email}: '{ex.Message}'.", ex);
+                //we would rather return -1 again as not specifying which of the credentials is wrong
+                //provides more security
                 return -1;
-           }
+            }
         }
     }
     internal class UserTuple

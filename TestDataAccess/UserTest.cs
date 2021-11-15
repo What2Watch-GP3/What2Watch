@@ -14,14 +14,16 @@ namespace TestDataAccess
     class UserTest
     {
         private IUserDataAccess _userDataAccess;
-        [SetUp]
 
+
+        [SetUp]
         public void Setup()
         {
            //Arrange
             _userDataAccess = new UserDataAccess(Configuration.CONNECTION_STRING_TEST);
             //Console.WriteLine(BCrypt.Net.BCrypt.HashPassword("password1234", 13));
         }
+
         [Test]
         public async Task SuccessfulLoginUserWithID1()
         {
@@ -34,6 +36,7 @@ namespace TestDataAccess
             Assert.AreEqual(1, userID,"User ID was not found");
 
         }
+
         [Test]
         public async Task WrongPasswordLoginUser()
         {
@@ -48,6 +51,7 @@ namespace TestDataAccess
             Assert.AreEqual(-1, userID, "User ID was not -1");
 
         }
+
         [Test]
         public async Task WrongEmailLoginUser()
         {
