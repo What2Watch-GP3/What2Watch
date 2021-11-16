@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /UnitTests
+
+# Added DS_store
+**/.DS_Store
