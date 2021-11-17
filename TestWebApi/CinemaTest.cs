@@ -34,7 +34,12 @@ namespace TestWebApi
             cinemas = (IEnumerable<CinemaDto>)_objectResult.Value;
 
             //assert
-            Assert.
+            Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK(200)");
+            Assert.IsTrue(cinemas.Count() > 0, "List is currently 0");
         }
+
+        
+
+
     }
 }
