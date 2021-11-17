@@ -1,10 +1,8 @@
 ﻿using DataAccess.Model;
+using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using StubsClassLibrary;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApi.Controllers;
 using WebApi.DTOs;
@@ -13,7 +11,6 @@ namespace TestBookingWebApi
 {
     class TestBookingWebApi
     {
-        private BookingDto _newBookingDto;
         private BookingController _testBookingWebApi;
 
         [SetUp]
@@ -21,50 +18,67 @@ namespace TestBookingWebApi
         {
             _testBookingWebApi = new BookingController(new BookingStubs());
         }
-        //GETALL
+
         [Test]
         public async Task TestGetAllBookingsAsync()
         {
-            //ARRANGE
-
-            //ACT
-            var bookings = await _testBookingWebApi.GetAllAsync();
-            //ASSERT
-            Assert.IsTrue(bookings.Value.Count() > 0, "Bookings weren't returned");
+            // Arrange
+            // Act
+            // Assert
+            throw new NotImplementedException();
         }
 
-        //GETBYID
         [Test]
-        public async Task GetBookingByIdAsync()
+        public async Task GetBookingById3Async()
         {
-            //ARRANGE
-            //ACT
-            var booking = await _testBookingWebApi.GetByIdAsync(3);
-            //ASSERT
-            Assert.IsTrue(booking.Value.Equals(1) , "Bookings weren't returned");
+            // Arrange
+            // Act
+            var actionResult = (await _testBookingWebApi.GetByIdAsync(3)).Result;
+            if (actionResult is ObjectResult objRes)
+            {
+                // Assert
+                Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
+
+                Booking booking = (Booking)objRes.Value;
+                Assert.AreEqual(booking.Id, 3, "Booking id 3 was not recieved");
+            }
+            else if (actionResult is StatusCodeResult scr)
+            {
+                // Assert
+                Assert.AreEqual(200, scr.StatusCode);
+            }
         }
-        //POST
+
         [Test]
         public async Task CreateBookingAsync()
         {
-            //ARRANGE & ACT done in setup
-            var booking = await _testBookingWebApi.PostAsync(_newBookingDto);
-            //ASSERT
-            Assert.IsTrue(booking.Equals(0), "Bookings weren't created");
+            // Arrange
+            // Act
+            BookingDto newBooking = new() { Id = 2 };
+            var idActionResult = (await _testBookingWebApi.PostAsync(newBooking)).Result;
+            if (idActionResult is ObjectResult objRes)
+            {
+                // Assert
+                Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
+
+                int bookingId = (int) objRes.Value;
+                Assert.AreEqual(bookingId, newBooking.Id, "Booking wasn't created");
+
+            }
+            else if (idActionResult is StatusCodeResult scr)
+            {
+                // Assert
+                Assert.AreEqual(200, scr.StatusCode);
+            }
         }
 
-        //DELETE
         [Test]
-        public async Task DeleteBookingAsync()
+        public async Task DeleteBookingId3Async()
         {
-            //ARRANGE done in setup
-
-            //ACT
-            var booking = await _testBookingWebApi.DeleteAsync(1);
-            //ASSERT
-            Assert.IsTrue(booking.Equals(0), "Bookings weren't deleted");
+            // Arrange
+            // Act
+            // Assert
+            throw new NotImplementedException();
         }
-
-
     }
 }
