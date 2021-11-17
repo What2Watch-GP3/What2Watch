@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,22 +16,27 @@ namespace WebApi.Controllers
     [ApiController]
     public class CinemaController : ControllerBase
     {
-
-
         ICinemaDataAccess _cinemaDataAccess;
 
         public CinemaController(IConfiguration configuration)
         {
             _cinemaDataAccess = new CinemaDataAccess(configuration.GetConnectionString("DefaultConnection"));
-
         }
-        // GET: api/<CinemaController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        public CinemaController(ICinemaDataAccess cinemaDataAccess)
         {
-            return new string[] { "value1", "value2" };
+            _cinemaDataAccess = cinemaDataAccess;
         }
 
+
+        // GET: api/<CinemaController>
+        [HttpGet("{movieId}")]
+        public async Task<ActionResult<IEnumerable<CinemaDto>>> GetListByMovieIdAsync(int movieId)
+        {
+            return Ok(Enumerable.Empty<CinemaDto>());
+        }
+
+        /*
         // GET api/<CinemaController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -55,5 +61,6 @@ namespace WebApi.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }
