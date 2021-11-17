@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestSharp;
 
 namespace WebApiClient
 {
-    class WhatToWatchWebApiClient : IWhatToWatchApiClient
+    class WhatToWatchApiClient : IWhatToWatchApiClient
     {
+
 
     }
 }
