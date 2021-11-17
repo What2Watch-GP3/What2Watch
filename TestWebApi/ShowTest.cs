@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApi.DTOs
+namespace TestWebApi
 {
-    public class ShowDto
+    class ShowTest
     {
-        public int Id { get; set; }
-        public DateTime StartTime { get; set; }
     }
 }

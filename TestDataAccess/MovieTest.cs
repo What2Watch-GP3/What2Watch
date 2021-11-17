@@ -59,7 +59,7 @@ namespace TestDataAccess
             List<Movie> moviesList;
 
             //act
-            movies = await _movieDataAccess.GetByPartOfNameAsync("Harry");
+            movies = await _movieDataAccess.GetListByPartOfNameAsync("Harry");
             moviesList = movies.ToList();
 
 

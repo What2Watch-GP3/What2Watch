@@ -18,11 +18,8 @@ namespace TestDataAccess
         public void Setup()
         {
             _cinemaDataAccess = new CinemaDataAccess(Configuration.CONNECTION_STRING_TEST);
-
         }
 
-
-        
         [Test]
         public async Task GettingOneCinemaByIdReturnsRightCinema()
         {
@@ -32,8 +29,6 @@ namespace TestDataAccess
             cinema = await _cinemaDataAccess.GetByIdAsync(3);
             //assert
             Assert.NotNull(cinema, $"No Cinema found by the id 3");
-
-
         }
 
         [Test]

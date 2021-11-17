@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestSharp;
 
-namespace WebApi.DTOs
+namespace WebApiClient
 {
-    public class ShowDto
+    class WhatToWatchApiClient : IWhatToWatchApiClient
     {
-        public int Id { get; set; }
-        public DateTime StartTime { get; set; }
+
+
     }
 }

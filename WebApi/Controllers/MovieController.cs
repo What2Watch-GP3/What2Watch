@@ -18,37 +18,37 @@ namespace WebApi.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-
         IMovieDataAccess _movieDataAccess;
 
         public MovieController(IConfiguration configuration)
         {
             _movieDataAccess = new MovieDataAccess(configuration.GetConnectionString("DefaultConnection"));
-
         }
 
         public MovieController(IMovieDataAccess movieDataAccess)
         {
             _movieDataAccess = movieDataAccess;
-
         }
+
         // GET: api/<MovieController>
         [HttpGet]
         public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
-            return Ok();
-
-
+            /*IEnumerable <MovieDto> movieCollection = new [] {
+                new MovieDto { Id = 5, Title = "10", Duration = 10 },
+                new MovieDto { Id = 5, Title = "10", Duration = 10 },
+                new MovieDto { Id = 5, Title = "10", Duration = 10 }
+            };*/
+            //return Ok();
+            return Ok(Enumerable.Empty<MovieDto>());
         }
-        /*
+      
 
         // GET: api/<MovieController>
         [HttpGet("{searchString}")]
-        public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync()
+        public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
-
-
-
+            throw new NotImplementedException();
         }
 
         // GET api/<MovieController>/5
@@ -66,18 +66,20 @@ namespace WebApi.Controllers
         {
             
 
-        
+        }*/
 
         // PUT api/<MovieController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(int id, [FromBody] MovieDto movie)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE api/<MovieController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-        }*/
+            throw new NotImplementedException();
+        }
     }
 }
