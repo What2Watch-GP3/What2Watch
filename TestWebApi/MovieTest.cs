@@ -17,18 +17,15 @@ namespace TestWebApi
 {
     class MovieTest
     {
-        MovieController _movieController;
+        MovieController _movieController = new MovieController(new MovieStub());
+        ObjectResult _objectResult;
 
         [SetUp]
 
         public void Setup()
         {
-            _movieController = new MovieController(new MovieStub());
+            _objectResult = null;
         }
-
-        //arrange
-        //act
-        //assert
 
         [Test]
         public async Task GettingAllMoviesReturningAListOfMovies()
@@ -57,15 +54,19 @@ namespace TestWebApi
         }
 
         [Test]
-        public async Task GettingOneMovieByIdReturnsRightMovie()
+        public async Task GettingOneMovieById2ReturnsRightMovie()
         {
             //arrange
+            MovieDto movie;
 
             //act
-            MovieDto movie = (await _movieController.GetByIdAsync(2)).Value;
+            var movieResult = (await _movieController.GetByIdAsync(2)).Result;
+            _objectResult = (ObjectResult)movieResult;
+            movie = (MovieDto)_objectResult.Value;
 
             //assert
             Assert.IsTrue(movie.Id == 2, "The correct movie with id 2 wasn't found");
+            Assert.AreEqual(200, _objectResult.StatusCode, "Status was not OK (200).");
         }
 
         [Test]
@@ -76,12 +77,15 @@ namespace TestWebApi
             List<MovieDto> moviesList;
 
             //act
-            movies = (await _movieController.GetListByPartOfNameAsync("Movie")).Value;
+            var movieResult = (await _movieController.GetListByPartOfNameAsync("Movie")).Result;
+            _objectResult = (ObjectResult)movieResult;
+            movies = (IEnumerable<MovieDto>)_objectResult.Value;
             moviesList = movies.ToList();
 
             //assert
             Assert.IsTrue(movies.Count() > 0, "List of movies is currently 0");
             Assert.IsTrue(moviesList[0].Title.Contains("Movie"), "Searchphrase was not found");
+            Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK (200).");
         }
 
 
