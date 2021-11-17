@@ -31,7 +31,7 @@ namespace DataAccess.DataAccess
                 return -1;
             }
             catch(Exception ex)
-           {
+            {
                 //this would throw an exception when the password is wrong but the email is correct
                 //throw new Exception($"Error trying to login with email {user.Email}: '{ex.Message}'.", ex);
                 //we would rather return -1 again as not specifying which of the credentials is wrong
