@@ -41,12 +41,14 @@ namespace WebApi.Controllers
         public async Task<ActionResult<BookingDto>> GetByIdAsync(int id)
         {
             var booking = await _bookingDataAccess.GetByIdAsync(id);
-            if (booking == null) { 
-                return NotFound(); }
-            else { 
+            if (booking == null) 
+            { 
+                return NotFound(); 
+            }
+            else
+            { 
                 return Ok(booking); 
             }
-            //return null;
         }
 
         // POST api/<BookingController>
