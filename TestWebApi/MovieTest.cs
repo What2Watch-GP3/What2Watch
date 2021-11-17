@@ -54,7 +54,6 @@ namespace TestWebApi
                 Assert.AreEqual(200, scr.StatusCode);
             }
             //if an empty status is sent back, then we need to test for a StatusCodeResult(which inheritantly has OKResult, NotFOundResult, etc. no value)
-
         }
 
         [Test]
@@ -83,7 +82,6 @@ namespace TestWebApi
             //assert
             Assert.IsTrue(movies.Count() > 0, "List of movies is currently 0");
             Assert.IsTrue(moviesList[0].Title.Contains("Movie"), "Searchphrase was not found");
-
         }
 
 
