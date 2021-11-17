@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StubsClassLibrary
 {
-    class CinemaStub : ICinemaDataAccess
+    public class CinemaStub : ICinemaDataAccess
     {
         public async Task<int> CreateAsync(Cinema entity)
         {
