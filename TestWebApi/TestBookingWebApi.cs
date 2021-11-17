@@ -1,4 +1,5 @@
 ﻿using DataAccess.Model;
+using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using StubsClassLibrary;
 using System;
@@ -25,8 +26,6 @@ namespace TestBookingWebApi
         [Test]
         public async Task TestGetAllBookingsAsync()
         {
-            //ARRANGE
-
             //ACT
             var bookings = await _testBookingWebApi.GetAllAsync();
             //ASSERT
@@ -35,34 +34,51 @@ namespace TestBookingWebApi
 
         //GETBYID
         [Test]
-        public async Task GetBookingByIdAsync()
+        public async Task GetBookingById3Async()
         {
-            //ARRANGE
-            //ACT
-            var booking = await _testBookingWebApi.GetByIdAsync(3);
-            //ASSERT
-            Assert.IsTrue(booking.Value.Equals(1) , "Bookings weren't returned");
+            var actionResult = (await _testBookingWebApi.GetByIdAsync(3)).Result;
+            if (actionResult is ObjectResult objRes)
+            {
+                Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
+                BookingDto booking = (BookingDto) objRes.Value;
+
+                Assert.AreEqual(booking.Id, 3, "Booking id 3 was not recieved");
+            }
+            else if (actionResult is StatusCodeResult scr)
+            {
+                Assert.AreEqual(200, scr.StatusCode);
+            }
+
         }
         //POST
         [Test]
         public async Task CreateBookingAsync()
         {
-            //ARRANGE & ACT done in setup
-            var booking = await _testBookingWebApi.PostAsync(_newBookingDto);
-            //ASSERT
-            Assert.IsTrue(booking.Equals(0), "Bookings weren't created");
+            var idActionResult = (await _testBookingWebApi.PostAsync(_newBookingDto)).Result;
+            if (idActionResult is ObjectResult objRes)
+            {
+                Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
+                int bookingId = (int) objRes.Value;
+
+                Assert.AreEqual(bookingId, _newBookingDto.Id, "Booking wasn't created");
+
+            }
+            else if (idActionResult is StatusCodeResult scr)
+            {
+                Assert.AreEqual(200, scr.StatusCode);
+            }
         }
 
         //DELETE
         [Test]
-        public async Task DeleteBookingAsync()
+        public async Task DeleteBookingId3Async()
         {
             //ARRANGE done in setup
 
             //ACT
-            var booking = await _testBookingWebApi.DeleteAsync(1);
+            var booking = await _testBookingWebApi.DeleteAsync(3);
             //ASSERT
-            Assert.IsTrue(booking.Equals(0), "Bookings weren't deleted");
+            Assert.IsTrue(booking.Equals(3), "Bookings weren't deleted");
         }
 
 

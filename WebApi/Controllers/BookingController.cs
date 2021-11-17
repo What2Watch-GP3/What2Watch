@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using DataAccess.DataAccess;
 using DataAccess.Interfaces;
+using DataAccess.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using WebApi.DTOs;
+using WebApi.DTOs.Converters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,20 +40,30 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BookingDto>> GetByIdAsync(int id)
         {
-            return null;
+            var booking = await _bookingDataAccess.GetByIdAsync(id);
+            if (booking == null) { 
+                return NotFound(); }
+            else { 
+                return Ok(booking); 
+            }
+            //return null;
         }
 
         // POST api/<BookingController>
         [HttpPost]
         public async Task<ActionResult<int>> PostAsync([FromBody] BookingDto value)
         {
-            return null;
+            var booking = DtoConverter<Booking, BookingDto>.From(value);
+            return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 
         // PUT api/<BookingController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult> PutAsync(int id, [FromBody] BookingDto value)
         {
+            //var r = DtoConverter<Booking, BookingDto>.From(value);
+            //if (!await _bookingDataAccess.UpdateAsync(r)) { return NotFound(); }
+            //else { return Ok(); }
             return null;
         }
 
