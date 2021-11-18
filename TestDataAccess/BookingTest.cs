@@ -24,6 +24,7 @@ namespace TestDataAccess.Tests
         }
 
         [Test]
+        [Order(1)]
         public async Task TestConfirmBooking()
         {
             // Arrange
@@ -37,6 +38,7 @@ namespace TestDataAccess.Tests
         }
 
         [Test]
+        [Order(2)]
         public async Task GetBookingWithId1()
         {
             // Arrange
