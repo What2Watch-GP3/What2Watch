@@ -1,4 +1,5 @@
 ﻿using DataAccess.DataAccess;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using NUnit.Framework;
 using System;
@@ -11,64 +12,45 @@ namespace TestDataAccess
 {
     class MovieTest
     {
-        private MovieDataAccess _movieDataAccess;
-        [SetUp]
+        private IMovieDataAccess _movieDataAccess;
 
-        public void Setup()
+        [OneTimeSetUp]
+        public async Task SetUp()
         {
             _movieDataAccess = new MovieDataAccess(Configuration.CONNECTION_STRING_TEST);
-
-
         }
 
         [Test]
-
-        public async Task GettingAllMoviesReturnsListOfMovies()
+        public async Task GettingAllMoviesReturnsListOfMoviesBiggerThan0()
         {
-
-            //arrange
-            IEnumerable<Movie> movies ;
-
             //act
-            movies = await _movieDataAccess.GetAllAsync();
+            var movies = await _movieDataAccess.GetAllAsync();
 
             //assert
             Assert.IsTrue(movies.Count() > 0, "List of movies is currently 0");
-
         }
 
         [Test]
-        public async Task GettingOneMovieByIdReturnsRightMovie()
+        public async Task GettingOneMovieById1ReturnsRightMovie()
         {
-            //arrange
-            Movie movie;
             //act
-            movie = await _movieDataAccess.GetByIdAsync(1);           
+            var movie = await _movieDataAccess.GetByIdAsync(1);
+            
             //assert
             Assert.NotNull(movie, $"No Movie found by the id 1");
-
+            Assert.IsTrue(movie.Id == 1, $"The Id was not 1, it was {movie.Id}.");
         }
 
 
         [Test]
         public async Task GettingMovieListOfMoviesContainingSearchphrase()
         {
-
-            //arrange
-            IEnumerable<Movie> movies;
-            List<Movie> moviesList;
-
             //act
-            movies = await _movieDataAccess.GetListByPartOfNameAsync("Harry");
-            moviesList = movies.ToList();
-
+            var movies = (await _movieDataAccess.GetListByPartOfNameAsync("Harry")).ToList();
 
             //assert
             Assert.IsTrue(movies.Count() > 0, "List of movies is currently 0");
-            Assert.IsTrue(moviesList[0].Title.Contains("Harry"), "Searchphrase was not found");
-
-
+            Assert.IsTrue(movies[0].Title.Contains("Harry"), "Searchphrase was not found");
         }
-       
     }
 }

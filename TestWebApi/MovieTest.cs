@@ -17,14 +17,19 @@ namespace TestWebApi
 {
     class MovieTest
     {
-        MoviesController _movieController = new MoviesController(new MovieStub());
+        MoviesController _movieController;
         ObjectResult _objectResult;
 
         [SetUp]
-
-        public void Setup()
+        public async Task SetUp()
         {
             _objectResult = null;
+        }
+
+        [OneTimeSetUp]
+        public async Task OneTimeSetUp()
+        {
+            _movieController = new MoviesController(new MovieStub());
         }
 
         [Test]
@@ -72,19 +77,14 @@ namespace TestWebApi
         [Test]
         public async Task GettingMovieListOfMoviesContainsSearchString()
         {
-            //arrange
-            IEnumerable<MovieDto> movies;
-            List<MovieDto> moviesList;
-
             //act
             var movieResult = (await _movieController.GetListByPartOfNameAsync("Movie")).Result;
             _objectResult = (ObjectResult)movieResult;
-            movies = (IEnumerable<MovieDto>)_objectResult.Value;
-            moviesList = movies.ToList();
+            var movies = ((IEnumerable<MovieDto>)_objectResult.Value).ToList();
 
             //assert
             Assert.IsTrue(movies.Count() > 0, "List of movies is currently 0");
-            Assert.IsTrue(moviesList[0].Title.Contains("Movie"), "Searchphrase was not found");
+            Assert.IsTrue(movies[0].Title.Contains("Movie"), "Searchphrase was not found");
             Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK (200).");
         }
 
