@@ -13,7 +13,7 @@ namespace TestWebApi
 {
     class ShowTest
     {
-        ShowController _showController = new ShowController(new ShowStub());
+        ShowsController _showController = new ShowsController(new ShowStub());
         ObjectResult _objectResult;
 
         [SetUp]
