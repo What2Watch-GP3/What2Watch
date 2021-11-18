@@ -13,7 +13,7 @@ namespace TestWebApi
 {
     class CinemaTest
     {
-        CinemaController _cinemaController = new CinemaController(new CinemaStub());
+        CinemasController _cinemaController = new CinemasController(new CinemaStub());
         ObjectResult _objectResult;
 
         [SetUp]

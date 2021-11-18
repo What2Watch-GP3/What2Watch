@@ -14,16 +14,16 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CinemaController : ControllerBase
+    public class CinemasController : ControllerBase
     {
         ICinemaDataAccess _cinemaDataAccess;
 
-        public CinemaController(IConfiguration configuration)
+        public CinemasController(IConfiguration configuration)
         {
             _cinemaDataAccess = new CinemaDataAccess(configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public CinemaController(ICinemaDataAccess cinemaDataAccess)
+        public CinemasController(ICinemaDataAccess cinemaDataAccess)
         {
             _cinemaDataAccess = cinemaDataAccess;
         }

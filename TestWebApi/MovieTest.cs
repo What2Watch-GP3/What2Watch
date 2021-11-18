@@ -17,7 +17,7 @@ namespace TestWebApi
 {
     class MovieTest
     {
-        MovieController _movieController = new MovieController(new MovieStub());
+        MoviesController _movieController = new MoviesController(new MovieStub());
         ObjectResult _objectResult;
 
         [SetUp]

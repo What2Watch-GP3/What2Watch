@@ -14,16 +14,16 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShowController : ControllerBase
+    public class ShowsController : ControllerBase
     {
         IShowDataAccess _showDataAccess;
 
-        public ShowController(IConfiguration configuration)
+        public ShowsController(IConfiguration configuration)
         {
             _showDataAccess = new ShowDataAccess(configuration.GetConnectionString("DefaultConnection")); ;
         }
 
-        public ShowController(IShowDataAccess showDataAccess)
+        public ShowsController(IShowDataAccess showDataAccess)
         {
             _showDataAccess = showDataAccess;
         }

@@ -16,16 +16,16 @@ namespace WebApi.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class MovieController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         IMovieDataAccess _movieDataAccess;
 
-        public MovieController(IConfiguration configuration)
+        public MoviesController(IConfiguration configuration)
         {
             _movieDataAccess = new MovieDataAccess(configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public MovieController(IMovieDataAccess movieDataAccess)
+        public MoviesController(IMovieDataAccess movieDataAccess)
         {
             _movieDataAccess = movieDataAccess;
         }

@@ -10,7 +10,7 @@ namespace WebApiClient
 {
      static class RestExtentions
     {
-        public static async Task<IRestResponse<T>> RequestAsync<T>(this RestClient client, Method method, string resource = null, object body = null)
+        public static async Task<IRestResponse<T>> RequestAsync<T>(this IRestClient client, Method method, string resource = null, object body = null)
         {
             var request = new RestRequest(resource, method, DataFormat.Json);
             if (body != null)
@@ -20,7 +20,7 @@ namespace WebApiClient
             return await client.ExecuteAsync<T>(request, method);
         }
 
-        public static async Task<IRestResponse> RequestAsync(this RestClient client, Method method, string resource = null, object body = null)
+        public static async Task<IRestResponse> RequestAsync(this IRestClient client, Method method, string resource = null, object body = null)
         {
             var request = new RestRequest(resource, method, DataFormat.Json);
             if (body != null)
