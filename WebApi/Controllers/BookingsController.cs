@@ -18,11 +18,6 @@ namespace WebApi.Controllers
     {
         IBookingDataAccess _bookingDataAccess;
 
-        public BookingsController(IConfiguration configuration)
-        {
-            _bookingDataAccess = new BookingDataAccess(configuration.GetConnectionString("DefaultConnection"));
-        }
-
         public BookingsController(IBookingDataAccess bookingDataAccess)
         {
             _bookingDataAccess = bookingDataAccess;
