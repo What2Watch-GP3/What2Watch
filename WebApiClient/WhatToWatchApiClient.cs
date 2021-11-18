@@ -73,5 +73,15 @@ namespace WebApiClient
 
             return response.Data;
         }
+
+        public async Task<UserDto> LoginAsync(UserDto userDto)
+        {
+           var response = await _client.RequestAsync<UserDto>(Method.POST, "login", userDto);
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error login in for userDto email={userDto.Email}");
+            }
+            return (UserDto) response.Data;
+        }
     }
 }

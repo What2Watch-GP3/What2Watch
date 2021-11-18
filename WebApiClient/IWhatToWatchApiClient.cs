@@ -11,5 +11,6 @@ namespace WebApiClient
     {
         Task<int> CreateBookingAsync(BookingDto booking);
         Task<BookingDto> GetBookingByIdAsync(int id);
+        Task<UserDto> LoginAsync(UserDto userDto);
     }
 }
