@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using StubsClassLibrary;
-using System;
 using System.Threading.Tasks;
 using WebApi.Controllers;
 using WebApi.DTOs;
@@ -13,25 +12,16 @@ namespace TestBookingWebApi
     {
         private BookingController _testBookingWebApi;
 
-        [SetUp]
-        public async Task Setup()
+        [OneTimeSetUp]
+        public async Task OneTimeSetUp()
         {
             _testBookingWebApi = new BookingController(new BookingStubs());
         }
 
         [Test]
-        public async Task TestGetAllBookingsAsync()
-        {
-            // Arrange
-            // Act
-            // Assert
-            throw new NotImplementedException();
-        }
-
-        [Test]
         public async Task GetBookingById3Async()
         {
-            // Arrange
+            // Arrange - In OneTimeSetUp
             // Act
             var actionResult = (await _testBookingWebApi.GetByIdAsync(3)).Result;
             if (actionResult is ObjectResult objRes)
@@ -52,7 +42,7 @@ namespace TestBookingWebApi
         [Test]
         public async Task CreateBookingAsync()
         {
-            // Arrange
+            // Arrange - In OneTimeSetUp
             // Act
             BookingDto newBooking = new() { Id = 2 };
             var idActionResult = (await _testBookingWebApi.PostAsync(newBooking)).Result;
@@ -70,15 +60,6 @@ namespace TestBookingWebApi
                 // Assert
                 Assert.AreEqual(200, scr.StatusCode);
             }
-        }
-
-        [Test]
-        public async Task DeleteBookingId3Async()
-        {
-            // Arrange
-            // Act
-            // Assert
-            throw new NotImplementedException();
         }
     }
 }

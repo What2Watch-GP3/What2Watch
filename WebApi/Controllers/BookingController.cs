@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 using DataAccess.DataAccess;
 using DataAccess.Interfaces;
@@ -16,7 +16,6 @@ namespace WebApi.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-
         IBookingDataAccess _bookingDataAccess;
 
         public BookingController(IConfiguration configuration)
@@ -29,12 +28,12 @@ namespace WebApi.Controllers
             _bookingDataAccess = bookingDataAccess;
         }
 
-        // GET: api/<BookingController>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookingDto>>> GetAllAsync()
-        {
-            return null;
-        }
+        //// GET: api/<BookingController>
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<BookingDto>>> GetAllAsync()
+        //{
+        //    return null;
+        //}
 
         // GET api/<BookingController>/5
         [HttpGet("{id}")]
@@ -59,21 +58,20 @@ namespace WebApi.Controllers
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 
-        // PUT api/<BookingController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> PutAsync(int id, [FromBody] BookingDto value)
-        {
-            //var r = DtoConverter<Booking, BookingDto>.From(value);
-            //if (!await _bookingDataAccess.UpdateAsync(r)) { return NotFound(); }
-            //else { return Ok(); }
-            return null;
-        }
+        //// PUT api/<BookingController>/5
+        //[HttpPut("{id}")]
+        //public async Task<ActionResult> PutAsync(int id, [FromBody] BookingDto value)
+        //{
+        //    var r = DtoConverter<Booking, BookingDto>.From(value);
+        //    if (!await _bookingDataAccess.UpdateAsync(r)) { return NotFound(); }
+        //    else { return Ok(); }
+        //}
 
-        // DELETE api/<BookingController>/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
-        {
-            return null;
-        }
+        //// DELETE api/<BookingController>/5
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult> DeleteAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

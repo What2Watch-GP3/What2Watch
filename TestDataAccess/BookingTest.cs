@@ -3,32 +3,48 @@ using System.Threading.Tasks;
 using DataAccess.Model;
 using NUnit.Framework;
 using DataAccess.DataAccess;
-using System.Globalization;
 
 namespace TestDataAccess.Tests
 {
     class BookingTest
     {
         private BookingDataAccess _bookingDataAccess;
-        [SetUp]
-        public void Setup()
+        private int _leastCreatedBookingId;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
-            //TODO Change to configuration with hildur
-            _bookingDataAccess = new BookingDataAccess(@"Data Source=DESKTOP-HU2QTEB\SQLEXPRESS;Initial Catalog=What2Watch;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            _bookingDataAccess = new BookingDataAccess(Configuration.CONNECTION_STRING_TEST);
+        }
+        
+        [OneTimeTearDown]
+        public async Task OneTimeTearDown()
+        {
+            await _bookingDataAccess.DeleteAsync(_leastCreatedBookingId);
         }
 
         [Test]
-        public async Task ConfirmBooking()
+        public async Task TestConfirmBooking()
         {
             // Arrange
-            Booking booking = new() { TotalPrice=11.99M, Date=DateTime.Parse("5/1/2021 8:30:52 AM", CultureInfo.InvariantCulture) };
-
+            Booking booking = new() { TotalPrice=11.99M, Date= DateTime.Now };
             // Act
             booking.Id = await _bookingDataAccess.CreateAsync(booking);
             Booking newBooking = await _bookingDataAccess.GetByIdAsync(booking.Id);
-
+            _leastCreatedBookingId = booking.Id;
             // Assert
-            Assert.AreEqual(newBooking.Id, booking.Id, $"Booking doesn't correspond to the expected Id: {newBooking.Id}");
+            Assert.AreEqual(booking.Id, newBooking.Id, $"Booking doesn't correspond to the expected Id: {newBooking.Id}");
+        }
+
+        [Test]
+        public async Task GetBookingWithId1()
+        {
+            // Arrange
+            Booking booking = new() { TotalPrice = 11.99M, Date = DateTime.Now };
+            // Act
+            Booking newBooking = await _bookingDataAccess.GetByIdAsync(_leastCreatedBookingId);
+            // Assert
+            Assert.AreEqual(_leastCreatedBookingId, newBooking.Id, $"Booking doesn't correspond to the expected Id: {_leastCreatedBookingId}");
         }
     }
 }
