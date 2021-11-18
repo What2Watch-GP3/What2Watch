@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StubsClassLibrary
 {
-    class ShowStub : IShowDataAccess
+    public class ShowStub : IShowDataAccess
     {
         public async Task<int> CreateAsync(Show entity)
         {
