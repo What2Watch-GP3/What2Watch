@@ -18,20 +18,18 @@ namespace WebApi.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-
         IMovieDataAccess _movieDataAccess;
 
         public MovieController(IConfiguration configuration)
         {
             _movieDataAccess = new MovieDataAccess(configuration.GetConnectionString("DefaultConnection"));
-
         }
 
         public MovieController(IMovieDataAccess movieDataAccess)
         {
             _movieDataAccess = movieDataAccess;
-
         }
+
         // GET: api/<MovieController>
         [HttpGet]
         public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
@@ -43,7 +41,6 @@ namespace WebApi.Controllers
             };*/
             //return Ok();
             return Ok(Enumerable.Empty<MovieDto>());
-
         }
       
 
