@@ -10,8 +10,8 @@ namespace WebApiClient
 {
     class WhatToWatchApiClient : IWhatToWatchApiClient
     {
-        private RestClient _restClient;
-        public WhatToWatchApiClient(string uri) => _restClient = new RestClient(new Uri(uri));
+        private IRestClient _client;
+        public WhatToWatchApiClient(IRestClient client) => _client = client;
 
         public Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
         {
