@@ -9,6 +9,11 @@ namespace WebApiClient
 {
     public interface IWhatToWatchApiClient
     {
+        Task<IEnumerable<MovieDto>> GetAllMoviesAsync();
+        Task<IEnumerable<CinemaDto>> GetCinemasByMovieIdAsync(int movieId);
+        Task<MovieDto> GetMovieByIdAsync(int id);
+        Task<IEnumerable<MovieDto>> GetMoviesByPartOfNameAsync(string searchString);
+        Task<IEnumerable<ShowDto>> GetShowsByMovieAndCinemaIdAsync(int movieId, int cinemaId);
         Task<int> CreateBookingAsync(BookingDto booking);
         Task<BookingDto> GetBookingByIdAsync(int id);
     }
