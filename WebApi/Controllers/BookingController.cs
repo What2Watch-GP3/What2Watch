@@ -55,7 +55,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> PostAsync([FromBody] BookingDto value)
         {
-            var booking = DtoConverter<Booking, BookingDto>.From(value);
+            var booking = DtoConverter<BookingDto, Booking>.From(value);
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 
