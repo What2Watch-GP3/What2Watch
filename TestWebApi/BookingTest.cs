@@ -9,7 +9,7 @@ using WebApi.DTOs;
 
 namespace TestBookingWebApi
 {
-    class TestBookingWebApi
+    class BookingTest
     {
         private BookingController _testBookingWebApi;
 

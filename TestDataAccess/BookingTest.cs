@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace TestDataAccess.Tests
 {
-    class TestConfirmBooking
+    class BookingTest
     {
         private BookingDataAccess _bookingDataAccess;
         [SetUp]
