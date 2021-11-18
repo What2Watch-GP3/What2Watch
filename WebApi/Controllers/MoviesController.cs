@@ -1,6 +1,5 @@
 ﻿using DataAccess.DataAccess;
 using DataAccess.Interfaces;
-using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs;
-using WebApi.DTOs.Converters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,16 +16,16 @@ namespace WebApi.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class MovieController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         IMovieDataAccess _movieDataAccess;
 
-        public MovieController(IConfiguration configuration)
+        public MoviesController(IConfiguration configuration)
         {
             _movieDataAccess = new MovieDataAccess(configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public MovieController(IMovieDataAccess movieDataAccess)
+        public MoviesController(IMovieDataAccess movieDataAccess)
         {
             _movieDataAccess = movieDataAccess;
         }
@@ -36,44 +34,31 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
-            var movies = await _movieDataAccess.GetAllAsync();
-            var movieDtos = DtoConverter<Movie, MovieDto>.FromList(movies);
-            return Ok(movieDtos);
+            /*IEnumerable <MovieDto> movieCollection = new [] {
+                new MovieDto { Id = 5, Title = "10", Duration = 10 },
+                new MovieDto { Id = 5, Title = "10", Duration = 10 },
+                new MovieDto { Id = 5, Title = "10", Duration = 10 }
+            };*/
+            //return Ok();
+            return Ok(Enumerable.Empty<MovieDto>());
         }
+      
 
         // GET: api/<MovieController>
         [HttpGet("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
-            IEnumerable<Movie> matchingMovies;
-            IEnumerable<MovieDto> matchingMovieDtos;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                matchingMovies = await _movieDataAccess.GetListByPartOfNameAsync(searchString);
-            }
-            else
-            {
-                matchingMovies = await _movieDataAccess.GetAllAsync();
-            }
-            matchingMovieDtos = DtoConverter<Movie, MovieDto>.FromList(matchingMovies);
-            return Ok(matchingMovieDtos);
+            throw new NotImplementedException();
         }
 
         // GET api/<MovieController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MovieDto>> GetByIdAsync(int id)
         {
-            var movie = await _movieDataAccess.GetByIdAsync(id);
-            if(movie == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                var movieDto = DtoConverter<Movie, MovieDto>.From(movie);
-                return Ok(movieDto); 
-            }
+            return null;
         }
+
+
 
         /* POST api/<MovieController>
         [HttpPost]
@@ -81,7 +66,7 @@ namespace WebApi.Controllers
         {
             
 
-        }
+        }*/
 
         // PUT api/<MovieController>/5
         [HttpPut("{id}")]
@@ -96,6 +81,5 @@ namespace WebApi.Controllers
         {
             throw new NotImplementedException();
         }
-        */
     }
 }

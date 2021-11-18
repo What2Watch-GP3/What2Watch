@@ -17,10 +17,11 @@ namespace TestWebApi
 {
     class MovieTest
     {
-        MovieController _movieController = new MovieController(new MovieStub());
+        MoviesController _movieController = new MoviesController(new MovieStub());
         ObjectResult _objectResult;
 
         [SetUp]
+
         public void Setup()
         {
             _objectResult = null;
@@ -86,5 +87,11 @@ namespace TestWebApi
             Assert.IsTrue(moviesList[0].Title.Contains("Movie"), "Searchphrase was not found");
             Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK (200).");
         }
+
+
+
+
+
+
     }
 }
