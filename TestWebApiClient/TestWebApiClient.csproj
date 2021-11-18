@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StubsClassLibrary\StubsClassLibrary.csproj" />
     <ProjectReference Include="..\WebApiClient\WebApiClient.csproj" />
+    <ProjectReference Include="..\WebApi\WebApi.csproj" />
   </ItemGroup>
 
 </Project>

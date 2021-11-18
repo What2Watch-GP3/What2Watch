@@ -10,11 +10,13 @@ namespace WebApiClient
 {
     public class WhatToWatchApiClient : IWhatToWatchApiClient
     {
-        private RestClient _restClient;
-        public WhatToWatchApiClient(string uri) => _restClient = new RestClient(new Uri(uri));
+        private IRestClient _client;
+        public WhatToWatchApiClient(IRestClient client) => _client = client;
 
+        public async Task<int> CreateBookingAsync(BookingDto booking)
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
         {
+            var response = await _client.RequestAsync<int>(Method.POST, $"booking", booking);
             var response = await _restClient.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies");
 
             if (!response.IsSuccessful) throw new Exception($"Error retreiving all movies. Message was {response.Content}.");
@@ -22,6 +24,11 @@ namespace WebApiClient
             return response.Data;
         }
 
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error creating booking. Message was {response.Content}");
+            }
+            return response.Data;
         public async Task<IEnumerable<CinemaDto>> GetCinemaListByMovieIdAsync(int movieId)
         {
             var response = await _restClient.RequestAsync<IEnumerable<CinemaDto>>(Method.GET, $"cinemas?movieId={movieId}");
@@ -31,8 +38,10 @@ namespace WebApiClient
             return response.Data;
         }
 
+        public async Task<BookingDto> GetBookingByIdAsync(int id)
         public async Task<MovieDto> GetMovieByIdAsync(int id)
         {
+            var response = await _client.RequestAsync<BookingDto>(Method.GET, $"booking/{id}");
             var response = await _restClient.RequestAsync<MovieDto>(Method.GET, $"movies/{id}");
 
             if (!response.IsSuccessful) throw new Exception($"Error getting a movie with id {id}. Message was {response.Content}.");
@@ -40,6 +49,11 @@ namespace WebApiClient
             return response.Data;
         }
 
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
+            }
+            return response.Data;
         public async Task<IEnumerable<MovieDto>> GetMovieListByPartOfNameAsync(string searchString)
         {
             var response = await _restClient.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies?search={searchString}");
