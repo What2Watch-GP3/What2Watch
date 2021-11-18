@@ -10,12 +10,12 @@ namespace TestBookingWebApi
 {
     class BookingTest
     {
-        private BookingController _testBookingWebApi;
+        private BookingsController _testBookingWebApi;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
-            _testBookingWebApi = new BookingController(new BookingStubs());
+            _testBookingWebApi = new BookingsController(new BookingStubs());
         }
 
         [Test]

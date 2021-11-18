@@ -11,12 +11,14 @@ namespace TestWebApiClient
     {
 
         private IWhatToWatchApiClient _webApiClient;
+        private IWhatToWatchApiClient _webApiIdClient;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
             BookingDto bookingDto = new BookingDto() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = bookingDto });
+            _webApiIdClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = 1 });
         }
 
         [Test]
@@ -35,7 +37,7 @@ namespace TestWebApiClient
             // Arrange
             BookingDto bookingToCreate = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             // Act
-            int actualId = await _webApiClient.CreateBookingAsync(bookingToCreate);
+            int actualId = await _webApiIdClient.CreateBookingAsync(bookingToCreate);
             // Assert
             Assert.AreEqual(actualId, 1, "Failed to create booking with id 1");
         }

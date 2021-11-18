@@ -1,4 +1,5 @@
 ﻿using DataAccess.DataAccess;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using NUnit.Framework;
 using System;
@@ -11,61 +12,41 @@ namespace TestDataAccess
 {
     class CinemaTest
     {
-        private CinemaDataAccess _cinemaDataAccess;
+        private ICinemaDataAccess _cinemaDataAccess;
 
-        [SetUp]
-
-        public void Setup()
+        [OneTimeSetUp]
+        public async Task SetUp()
         {
             _cinemaDataAccess = new CinemaDataAccess(Configuration.CONNECTION_STRING_TEST);
         }
 
         [Test]
-        public async Task GettingOneCinemaByIdReturnsRightCinema()
+        public async Task GettingOneCinemaById1ReturnsRightCinema()
         {
-            //arrange
-            Cinema cinema;
             //act
-            cinema = await _cinemaDataAccess.GetByIdAsync(3);
+            var cinema = await _cinemaDataAccess.GetByIdAsync(1);
             //assert
-            Assert.NotNull(cinema, $"No Cinema found by the id 3");
+            Assert.NotNull(cinema, $"No Cinema found by the id 1");
         }
 
         [Test]
-
-        public async Task GettingAllCinemasReturnsListOfMovies()
+        public async Task GettingAllCinemasReturnsListBiggerThan0()
         {
-
-            //arrange
-            IEnumerable<Cinema> cinemas;
-
             //act
-            cinemas = await _cinemaDataAccess.GetAllAsync();
+            var cinemas = await _cinemaDataAccess.GetAllAsync();
 
             //assert
             Assert.IsTrue(cinemas.Count() > 0, "List of cinemas is currently 0");
-        
-
         }
 
         [Test]
         public async Task GettingCinemasByMovieRturnsAListOfCinemas()
         {
-
-            //arrange
-            IEnumerable<Cinema> cinemas;
-
             //act
-            cinemas = await _cinemaDataAccess.GetListByMovieIdAsync(1);
+            var cinemas = await _cinemaDataAccess.GetListByMovieIdAsync(1);
 
             //assert
             Assert.IsTrue(cinemas.Count() > 0, "List of cinemas is currently 0");
-          
         }
-
-
-
-
-
     }
 }

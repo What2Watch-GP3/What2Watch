@@ -14,16 +14,11 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookingController : ControllerBase
+    public class BookingsController : ControllerBase
     {
         IBookingDataAccess _bookingDataAccess;
 
-        public BookingController(IConfiguration configuration)
-        {
-            _bookingDataAccess = new BookingDataAccess(configuration.GetConnectionString("DefaultConnection"));
-        }
-
-        public BookingController(IBookingDataAccess bookingDataAccess)
+        public BookingsController(IBookingDataAccess bookingDataAccess)
         {
             _bookingDataAccess = bookingDataAccess;
         }
