@@ -7,7 +7,7 @@ using WebApiClient.DTOs;
 
 namespace WebApiClient
 {
-    interface IWhatToWatchApiClient
+    public interface IWhatToWatchApiClient
     {
         Task<int> CreateBookingAsync(BookingDto booking);
         Task<BookingDto> GetBookingByIdAsync(int id);

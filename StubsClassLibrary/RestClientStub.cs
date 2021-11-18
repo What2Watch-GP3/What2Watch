@@ -15,9 +15,12 @@ using System.Threading.Tasks;
 
 namespace StubsClassLibrary
 {
-    class RestClientStub : IRestClient
+    public class RestClientStub : IRestClient
     {
         public object ResponseData { get; set; }
+
+        public RestClientStub() : base() { }
+
         public Task<IRestResponse> ExecuteAsync(IRestRequest request, Method httpMethod, CancellationToken cancellationToken = default)
         {
             IRestResponse response = new RestResponse()
