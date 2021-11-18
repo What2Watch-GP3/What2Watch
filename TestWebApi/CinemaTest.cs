@@ -13,13 +13,19 @@ namespace TestWebApi
 {
     class CinemaTest
     {
-        CinemasController _cinemaController = new CinemasController(new CinemaStub());
+        CinemasController _cinemaController; 
         ObjectResult _objectResult;
 
         [SetUp]
-        public void Setup()
+        public async Task SetUp()
         {
             _objectResult = null;
+        }
+
+        [OneTimeSetUp]
+        public async Task OneTimeSetup()
+        {
+            _cinemaController = new CinemasController(new CinemaStub());
         }
 
         [Test]
@@ -37,9 +43,5 @@ namespace TestWebApi
             Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK(200)");
             Assert.IsTrue(cinemas.Count() > 0, "List is currently 0");
         }
-
-        
-
-
     }
 }
