@@ -13,29 +13,49 @@ namespace WebApiClient
         private RestClient _restClient;
         public WhatToWatchApiClient(string uri) => _restClient = new RestClient(new Uri(uri));
 
-        public Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
+        public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
         {
-            throw new NotImplementedException();
+            var response = await _restClient.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies");
+
+            if (!response.IsSuccessful) throw new Exception($"Error retreiving all movies. Message was {response.Content}.");
+
+            return response.Data;
         }
 
-        public Task<IEnumerable<CinemaDto>> GetCinemaListByMovieIdAsync(int movieId)
+        public async Task<IEnumerable<CinemaDto>> GetCinemaListByMovieIdAsync(int movieId)
         {
-            throw new NotImplementedException();
+            var response = await _restClient.RequestAsync<IEnumerable<CinemaDto>>(Method.GET, $"cinemas?movieId={movieId}");
+
+            if (!response.IsSuccessful) throw new Exception($"Error retreiving cinemas giving shows for a movie with id {movieId}. Message was {response.Content}.");
+
+            return response.Data;
         }
 
-        public Task<MovieDto> GetMovieByIdAsync(int id)
+        public async Task<MovieDto> GetMovieByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var response = await _restClient.RequestAsync<MovieDto>(Method.GET, $"movies/{id}");
+
+            if (!response.IsSuccessful) throw new Exception($"Error getting a movie with id {id}. Message was {response.Content}.");
+
+            return response.Data;
         }
 
-        public Task<IEnumerable<MovieDto>> GetMovieListByPartOfNameAsync(string searchString)
+        public async Task<IEnumerable<MovieDto>> GetMovieListByPartOfNameAsync(string searchString)
         {
-            throw new NotImplementedException();
+            var response = await _restClient.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies?search={searchString}");
+
+            if (!response.IsSuccessful) throw new Exception($"Error searching movies by part of name with searchString {searchString}. Message was {response.Content}.");
+
+            return response.Data;
         }
 
-        public Task<IEnumerable<ShowDto>> GetShowListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
+        public async Task<IEnumerable<ShowDto>> GetShowListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
-            throw new NotImplementedException();
+            var response = await _restClient.RequestAsync<IEnumerable<ShowDto>>(Method.GET, $"shows?movieId={movieId}&cinemaId={cinemaId}");
+
+            if (!response.IsSuccessful) throw new Exception($"Error retreiving shows based on movieId {movieId} and cinemaId {cinemaId}. Message was {response.Content}.");
+
+            return response.Data;
         }
     }
 }
