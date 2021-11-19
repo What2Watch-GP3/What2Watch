@@ -18,9 +18,9 @@ namespace WebSite.Controllers
         }
 
         // GET: BookingsController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            return View(await _client.GetBookingByIdAsync(id));
         }
 
         // GET: BookingsController/Create
