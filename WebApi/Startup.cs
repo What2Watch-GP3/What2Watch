@@ -28,7 +28,12 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             //TODO: compare with transient
-            services.AddScoped<IBookingDataAccess>((cs) => DataAccessFactory.GetDataAccess<IBookingDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IBookingDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IMovieDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ICinemaDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IShowDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

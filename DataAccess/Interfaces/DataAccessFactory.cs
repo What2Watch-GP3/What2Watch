@@ -20,10 +20,7 @@ namespace DataAccess.Interfaces
             //return (T)Activator.CreateInstance(typeof(T), connectionstring);
 
             throw new ArgumentException($"Unknown type {typeof(T).FullName}");
-
-
         }
-
     }
 }
 
