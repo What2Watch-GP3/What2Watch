@@ -20,11 +20,6 @@ namespace WebApi.Controllers
     {
         IShowDataAccess _showDataAccess;
 
-        public ShowsController(IConfiguration configuration)
-        {
-            _showDataAccess = new ShowDataAccess(configuration.GetConnectionString("DefaultConnection")); ;
-        }
-
         public ShowsController(IShowDataAccess showDataAccess)
         {
             _showDataAccess = showDataAccess;

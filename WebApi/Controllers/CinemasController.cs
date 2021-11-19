@@ -20,11 +20,6 @@ namespace WebApi.Controllers
     {
         ICinemaDataAccess _cinemaDataAccess;
 
-        public CinemasController(IConfiguration configuration)
-        {
-            _cinemaDataAccess = new CinemaDataAccess(configuration.GetConnectionString("DefaultConnection"));
-        }
-
         public CinemasController(ICinemaDataAccess cinemaDataAccess)
         {
             _cinemaDataAccess = cinemaDataAccess;

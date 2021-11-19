@@ -22,11 +22,6 @@ namespace WebApi.Controllers
     {
         IMovieDataAccess _movieDataAccess;
 
-        public MoviesController(IConfiguration configuration)
-        {
-            _movieDataAccess = new MovieDataAccess(configuration.GetConnectionString("DefaultConnection"));
-        }
-
         public MoviesController(IMovieDataAccess movieDataAccess)
         {
             _movieDataAccess = movieDataAccess;
