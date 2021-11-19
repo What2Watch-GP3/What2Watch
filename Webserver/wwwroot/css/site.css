@@ -12,10 +12,53 @@ h1 {
     color: white;
 }
 
+.background-image {
+    background-image: url("../pics/film.jpg");
+   
+
+    background-size: cover;
+
+    
+}
+
+
+header {
+    width: 100%;
+}
+
+
 
 a {
-  color: #0366d6;
+  color: white;
   text-decoration:none;
+}
+a:hover {
+    color:lightgray;
+    text-decoration:none;
+}
+
+
+a:active {
+     color: lightgray;
+     text-decoration: none;
+ }
+
+
+.bg-black {
+    background-color:#222629;
+
+    
+}
+
+.bg-grey {
+    background-color: #474B4F;
+    opacity:0.8;
+    
+}
+
+.bg-lightgrey {
+    background-color: #6B6E70;
+    opacity: 0.8;
 }
 
 .btn-primary {

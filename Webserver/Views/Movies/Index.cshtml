@@ -4,10 +4,10 @@
     ViewData["Title"] = "Movies";
 }
 
-<h1>All Movies</h1>
+<h1 class="text-light">All Movies</h1>
 
 
-<table class="table table-hover">
+<table class="table table-hover table-bordered bg-lightgrey text-light">
     <thead>
         <tr>
             
@@ -17,7 +17,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-            <th></th>
+           
         </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@
         {
             
             <tr >
-                <td class="table-row">
+                <td class="table-row text-white">
                     @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
                 </td>
                 <td>
