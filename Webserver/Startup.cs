@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RestSharp;
+using WebApiClient;
 
 namespace Webserver
 {
@@ -18,6 +20,7 @@ namespace Webserver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IWhatToWatchApiClient>((webApiClient) => new WhatToWatchApiClient(new RestClient(Configuration["WebApiURI"])));
             services.AddControllersWithViews();
         }
 
