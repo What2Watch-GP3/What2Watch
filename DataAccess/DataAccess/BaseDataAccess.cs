@@ -69,7 +69,7 @@ namespace DataAccess.DataAccess
             try
             {
                 using var connection = CreateConnection();
-                return await connection.QuerySingleAsync<T>(command, new { Id=id });
+                return await connection.QueryFirstOrDefaultAsync<T>(command, new { Id=id });
             }
             catch (Exception ex)
             {
