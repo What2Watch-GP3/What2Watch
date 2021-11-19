@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApiClient.DTOs.MovieDto>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h1>All Movies</h1>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            
+            <tr >
+                <td class="table-row">
+                    @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration ) minutes
+                </td>
+               
+            </tr>
+            }
+        </tbody>
+</table>

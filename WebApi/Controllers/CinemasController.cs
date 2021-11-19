@@ -27,9 +27,16 @@ namespace WebApi.Controllers
 
 
         // GET: api/<CinemaController>
-        [HttpGet("{movieId}")]
-        public async Task<ActionResult<IEnumerable<CinemaDto>>> GetListByMovieIdAsync(int movieId)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CinemaDto>>> GetListByMovieIdAsync([FromQuery]int movieId)
         {
+            
+            
+            if(movieId==0)
+            {
+                throw new Exception("There is no ID");
+                //Get all Cinemas
+            }
             var cinemas = await _cinemaDataAccess.GetListByMovieIdAsync(movieId);
             var cinemaDtos = DtoConverter<Cinema, CinemaDto>.FromList(cinemas);
             return Ok(cinemaDtos);

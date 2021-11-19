@@ -8,8 +8,14 @@ a.navbar-brand {
 }
 
 /* Provide sufficient contrast against white background */
+h1 {
+    color: white;
+}
+
+
 a {
   color: #0366d6;
+  text-decoration:none;
 }
 
 .btn-primary {
@@ -62,10 +68,15 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+.table-row {
+    text-decoration: none;
 }
