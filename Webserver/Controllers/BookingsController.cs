@@ -23,16 +23,16 @@ namespace WebSite.Controllers
             return View(await _client.GetBookingByIdAsync(id));
         }
 
-        // GET: BookingsController/Create
-        public ActionResult Create()
+        // GET: BookingsController/Confirm
+        public async Task<ActionResult> Confirm()
         {
-            return View();
+            return View(await _client.GetBookingByIdAsync(1));
         }
 
         // POST: BookingsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync(BookingDto booking)
+        public async Task<ActionResult> ConfirmAsync(BookingDto booking)
         {
             try
             {
