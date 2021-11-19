@@ -13,13 +13,19 @@ namespace TestWebApi
 {
     class ShowTest
     {
-        ShowController _showController = new ShowController(new ShowStub());
+        ShowsController _showController;
         ObjectResult _objectResult;
 
         [SetUp]
-        public void Setup()
+        public async Task SetUp()
         {
             _objectResult = null;
+        }
+
+        [OneTimeSetUp]
+        public async Task OneTimeSetUp()
+        {
+            _showController = new ShowsController(new ShowStub());
         }
 
         [Test]

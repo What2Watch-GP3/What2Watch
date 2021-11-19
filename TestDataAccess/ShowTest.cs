@@ -1,4 +1,5 @@
 ﻿using DataAccess.DataAccess;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using NUnit.Framework;
 using System;
@@ -11,39 +12,29 @@ namespace TestDataAccess
 {
     class ShowTest
     {
+        private IShowDataAccess _showDataAccess;
 
-        private ShowDataAccess _showDataAccess;
+        [OneTimeSetUp]
 
-
-        [SetUp]
-
-        public void Setup()
+        public async Task SetUp()
         {
             _showDataAccess = new ShowDataAccess(Configuration.CONNECTION_STRING_TEST);
-           
         }
 
         [Test]
-
-        public async Task GettingOneShowByIdReturnsAShow()
+        public async Task GettingOneShowById1ReturnsAShow()
         {
-            //arrange
-            Show show;
             //act
-            show = await _showDataAccess.GetByIdAsync(3);
+            var show = await _showDataAccess.GetByIdAsync(1);
             //assert
-            Assert.NotNull(show, $"No Show found by the id 3");
-
+            Assert.NotNull(show, $"No Show found by the id 1");
         }
 
         [Test]
-        public async Task GettingAListOfShowsByMovieAndCinemaReturnsListOfShows()
+        public async Task GettingAListOfShowsByMovieAndCinemaReturnsListBiggerThan0()
         {
-            //arrange
-            IEnumerable<Show> shows;
-
             //act
-            shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(1,3);
+            var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(1,1);
 
             //assert
             Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");

@@ -1,5 +1,6 @@
 ﻿using DataAccess.DataAccess;
 using DataAccess.Interfaces;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs;
+using WebApi.DTOs.Converters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -32,7 +34,16 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShowDto>>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
-            return Ok(Enumerable.Empty<ShowDto>());
+            var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(movieId, cinemaId);
+            if (shows.Count() < 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var showDtos = DtoConverter<Show, ShowDto>.FromList(shows);
+                return Ok(showDtos);
+            }
         }
 
         /*

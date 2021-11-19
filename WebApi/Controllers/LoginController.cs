@@ -19,16 +19,10 @@ namespace WebApi.Controllers
     public class LoginController : ControllerBase
     {
         private IUserDataAccess _userDataAccess;
-
-        public LoginController(IConfiguration configuration)
-        {
-           _userDataAccess = new UserDataAccess(configuration.GetConnectionString("DefaultConnection"));
-        }
         public LoginController(IUserDataAccess userDataAccess)
         {
             _userDataAccess = userDataAccess;
         }
-
         // POST api/<LoginController>
         [HttpPost]
         public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)

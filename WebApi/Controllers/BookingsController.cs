@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 using DataAccess.DataAccess;
 using DataAccess.Interfaces;
@@ -14,27 +14,21 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookingController : ControllerBase
+    public class BookingsController : ControllerBase
     {
-
         IBookingDataAccess _bookingDataAccess;
 
-        public BookingController(IConfiguration configuration)
-        {
-            _bookingDataAccess = new BookingDataAccess(configuration.GetConnectionString("DefaultConnection"));
-        }
-
-        public BookingController(IBookingDataAccess bookingDataAccess)
+        public BookingsController(IBookingDataAccess bookingDataAccess)
         {
             _bookingDataAccess = bookingDataAccess;
         }
 
-        // GET: api/<BookingController>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookingDto>>> GetAllAsync()
-        {
-            return null;
-        }
+        //// GET: api/<BookingController>
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<BookingDto>>> GetAllAsync()
+        //{
+        //    return null;
+        //}
 
         // GET api/<BookingController>/5
         [HttpGet("{id}")]
@@ -59,21 +53,20 @@ namespace WebApi.Controllers
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 
-        // PUT api/<BookingController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> PutAsync(int id, [FromBody] BookingDto value)
-        {
-            //var r = DtoConverter<Booking, BookingDto>.From(value);
-            //if (!await _bookingDataAccess.UpdateAsync(r)) { return NotFound(); }
-            //else { return Ok(); }
-            return null;
-        }
+        //// PUT api/<BookingController>/5
+        //[HttpPut("{id}")]
+        //public async Task<ActionResult> PutAsync(int id, [FromBody] BookingDto value)
+        //{
+        //    var r = DtoConverter<Booking, BookingDto>.From(value);
+        //    if (!await _bookingDataAccess.UpdateAsync(r)) { return NotFound(); }
+        //    else { return Ok(); }
+        //}
 
-        // DELETE api/<BookingController>/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
-        {
-            return null;
-        }
+        //// DELETE api/<BookingController>/5
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult> DeleteAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -1,39 +1,45 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApiClient;
 using StubsClassLibrary;
-using WebApi.DTOs.Converters;
-using DataAccess.Model;
 using WebApiClient.DTOs;
 
 namespace TestWebApiClient
 {
     class BookingTest
     {
-        private IWhatToWatchApiClient _webApiClient;
 
-        [SetUp]
-        public async Task Setup()
+        private IWhatToWatchApiClient _webApiClient;
+        private IWhatToWatchApiClient _webApiIdClient;
+
+        [OneTimeSetUp]
+        public async Task OneTimeSetUp()
         {
-            BookingDto bookingDto = new BookingDto() { Id = 3, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
+            BookingDto bookingDto = new BookingDto() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = bookingDto });
+            _webApiIdClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = 1 });
         }
 
         [Test]
-        public async Task TestGetBookingById3()
+        public async Task TestGetBookingById1()
         {
-            BookingDto booking = await _webApiClient.GetBookingByIdAsync(3);
-            Assert.AreEqual(booking.Id, 3, "Recieved booking wasn't with id 3");
+            // Arrange - In OneTimeSetUp
+            // Act
+            BookingDto actualBookingDto = await _webApiClient.GetBookingByIdAsync(1);
+            // Assert
+            Assert.AreEqual(actualBookingDto.Id, 1, "Recieved booking wasn't with id 1");
         }
 
         [Test]
         public async Task TestCreateBooking()
         {
-            Assert.Fail("Not implemented");
+            // Arrange
+            BookingDto bookingToCreate = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
+            // Act
+            int actualId = await _webApiIdClient.CreateBookingAsync(bookingToCreate);
+            // Assert
+            Assert.AreEqual(actualId, 1, "Failed to create booking with id 1");
         }
     }
 }

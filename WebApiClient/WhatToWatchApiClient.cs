@@ -19,9 +19,8 @@ namespace WebApiClient
 
             return response.Data;
         }
-
             
-        public async Task<IEnumerable<CinemaDto>> GetCinemaListByMovieIdAsync(int movieId)
+        public async Task<IEnumerable<CinemaDto>> GetCinemasByMovieIdAsync(int movieId)
         {
             var response = await _client.RequestAsync<IEnumerable<CinemaDto>>(Method.GET, $"cinemas?movieId={movieId}");
 
@@ -39,8 +38,7 @@ namespace WebApiClient
             return response.Data;
         }
 
-
-        public async Task<IEnumerable<MovieDto>> GetMovieListByPartOfNameAsync(string searchString)
+        public async Task<IEnumerable<MovieDto>> GetMoviesByPartOfNameAsync(string searchString)
         {
             var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies?search={searchString}");
 
@@ -49,7 +47,7 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<IEnumerable<ShowDto>> GetShowListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
+        public async Task<IEnumerable<ShowDto>> GetShowsByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
             var response = await _client.RequestAsync<IEnumerable<ShowDto>>(Method.GET, $"shows?movieId={movieId}&cinemaId={cinemaId}");
 
@@ -57,6 +55,7 @@ namespace WebApiClient
 
             return response.Data;
         }
+
         public async Task<int> CreateBookingAsync(BookingDto booking)
         {
             var response = await _client.RequestAsync<int>(Method.POST, $"booking", booking);
@@ -65,6 +64,7 @@ namespace WebApiClient
 
             return response.Data;
         }
+
         public async Task<BookingDto> GetBookingByIdAsync(int id)
         {
             var response = await _client.RequestAsync<BookingDto>(Method.GET, $"booking/{id}");
