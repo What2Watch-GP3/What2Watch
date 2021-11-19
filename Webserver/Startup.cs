@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RestSharp;
+using WebApiClient;
 
 namespace Webserver
 {
@@ -19,6 +21,7 @@ namespace Webserver
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //TODO get from appsettings
             services.AddScoped<IWhatToWatchApiClient>(w2wClient => new WhatToWatchApiClient(new RestClient("https://localhost:44328/api")));
         }
 
