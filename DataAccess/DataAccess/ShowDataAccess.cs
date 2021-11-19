@@ -1,4 +1,5 @@
-﻿using DataAccess.Interfaces;
+﻿using Dapper;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,23 @@ namespace DataAccess.DataAccess
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
-            throw new NotImplementedException();
+            IEnumerable<Show> shows;
+            string command = "SELECT Show.id, Show.start_time FROM Show " +
+                "LEFT JOIN[Movie] ON Show.movie_id = Movie.id " +
+                "LEFT JOIN[Room] ON Room.id = Show.room_id " +
+                "LEFT JOIN[Cinema] ON Cinema.id = Room.cinema_id " +
+                "WHERE Movie.id = @MovieId AND Cinema.id = @CinemaId";
+            try
+            {
+                using var connection = CreateConnection();
+                shows = await connection.QueryAsync<Show>(command, new {MovieId = movieId, CinemaId = cinemaId  });
+
+                return shows;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error . Error message: {ex.Message}", ex);
+            }
         }
     }
 }
