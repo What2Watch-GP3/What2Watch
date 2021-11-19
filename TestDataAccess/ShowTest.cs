@@ -25,16 +25,16 @@ namespace TestDataAccess
         public async Task GettingOneShowById1ReturnsAShow()
         {
             //act
-            var show = await _showDataAccess.GetByIdAsync(3);
+            var show = await _showDataAccess.GetByIdAsync(1);
             //assert
-            Assert.NotNull(show, $"No Show found by the id 3");
+            Assert.NotNull(show, $"No Show found by the id 1");
         }
 
         [Test]
         public async Task GettingAListOfShowsByMovieAndCinemaReturnsListBiggerThan0()
         {
             //act
-            var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(1,3);
+            var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(1,1);
 
             //assert
             Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");
