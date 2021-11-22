@@ -6,43 +6,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 
-
 namespace WebSite.Controllers
 {
-   
     [Route("[controller]")]
-    public class CinemasController : Controller
+    public class ShowsController : Controller
     {
-        // GET: CinemasController
 
         IWhatToWatchApiClient _client;
-        
-
-        public CinemasController(IWhatToWatchApiClient client)
+        public ShowsController(IWhatToWatchApiClient client)
         {
             _client = client;
         }
+
+        // GET: ShowsController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: CinemasController/Details/5
-     
-       [HttpGet]
-        public async Task<ActionResult> Cinemas(int movieId)
+        // GET: ShowsController/Details/5
+        [HttpGet]
+        public async Task <ActionResult> Shows(int movieId, int cinemaId)
         {
-            TempData["movieId"] = movieId;
-            return View(await  _client.GetCinemasByMovieIdAsync(movieId));
+            return View(await _client.GetShowsByMovieAndCinemaIdAsync(movieId,cinemaId));
         }
 
-        // GET: CinemasController/Create
+       
+
+        // GET: ShowsController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CinemasController/Create
+        // POST: ShowsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -57,13 +54,13 @@ namespace WebSite.Controllers
             }
         }
 
-        // GET: CinemasController/Edit/5
+        // GET: ShowsController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CinemasController/Edit/5
+        // POST: ShowsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -78,13 +75,13 @@ namespace WebSite.Controllers
             }
         }
 
-        // GET: CinemasController/Delete/5
+        // GET: ShowsController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CinemasController/Delete/5
+        // POST: ShowsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

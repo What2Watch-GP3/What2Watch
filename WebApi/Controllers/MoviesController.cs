@@ -38,7 +38,7 @@ namespace WebApi.Controllers
       
 
         // GET: api/<MovieController>
-        [HttpGet("{searchString}")]
+        [HttpPost("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
             IEnumerable<Movie> matchingMovies;

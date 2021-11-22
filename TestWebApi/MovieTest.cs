@@ -78,13 +78,13 @@ namespace TestWebApi
         public async Task GettingMovieListOfMoviesContainsSearchString()
         {
             //act
-            var movieResult = (await _movieController.GetListByPartOfNameAsync("Movie")).Result;
+            var movieResult = (await _movieController.GetListByPartOfNameAsync("2")).Result;
             _objectResult = (ObjectResult)movieResult;
             var movies = ((IEnumerable<MovieDto>)_objectResult.Value).ToList();
 
             //assert
             Assert.IsTrue(movies.Count() > 0, "List of movies is currently 0");
-            Assert.IsTrue(movies[0].Title.Contains("Movie"), "Searchphrase was not found");
+            Assert.IsTrue(movies[0].Title.Contains("2"), "Searchphrase was not found");
             Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK (200).");
         }
 

@@ -7,32 +7,62 @@
 <h1 class="text-light">All Movies</h1>
 
 
+<form asp-controller="Movies" asp-action="Search" method="get">
+    <p>
+        <input type="text" name="search" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+
 <table class="table table-hover table-bordered bg-lightgrey text-light">
     <thead>
         <tr>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-           
+
         </tr>
     </thead>
+
+
     <tbody>
         @foreach (var item in Model)
         {
-            
-            <tr >
+         
+
+            <tr>
                 <td class="table-row text-white">
                     @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Duration ) minutes
+                    @Html.DisplayFor(modelItem => item.Duration) minutes
                 </td>
-               
+
             </tr>
-            }
-        </tbody>
+        }
+    </tbody>
+
+
+
+
+    <!--<tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td class="table-row text-white">
+                    @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration) minutes
+                </td>
+
+            </tr>
+        }
+    </tbody>-->
 </table>

@@ -9,6 +9,7 @@ using WebApiClient;
 
 namespace WebSite.Controllers
 {
+    [Route("[controller]")]
     public class MoviesController : Controller
     {
         IWhatToWatchApiClient _client;
@@ -36,6 +37,18 @@ namespace WebSite.Controllers
             return View(await _client.GetAllMoviesAsync());
         }
 
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult> Search(string search)
+        {
+            ViewData["CurrentFilter"] = search;
+  
+            var movies = await _client.GetMoviesByPartOfNameAsync(search);
+            return View("Index",movies);
+   
+        }
+
+        /*
         // GET: MoviesController/Create
         public ActionResult Create()
         {
@@ -97,6 +110,6 @@ namespace WebSite.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }
