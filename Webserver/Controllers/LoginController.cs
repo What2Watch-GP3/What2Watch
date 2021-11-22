@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -15,39 +20,102 @@ namespace WebSite.Controllers
     public class LoginController : Controller
     {
         private IWhatToWatchApiClient _webApiClient;
-        public LoginController(IWhatToWatchApiClient whatToWatchApi)
+        private const double EXPIRY_DURATION_MINUTES = 30;
+        private string _generatedToken = null;
+        private IConfiguration _config;
+
+
+        public LoginController(IConfiguration config, IWhatToWatchApiClient whatToWatchApi)
         {
+            _config = config;
             _webApiClient = whatToWatchApi;
         }
         // GET: LoginController
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login()
         {
             return View();
         }
-
-        // GET: LoginController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: LoginController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: LoginController/Create
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public Task<ActionResult> Login([FromForm] UserDto loginInfo, [FromQuery] string returnUrl)
-        {
-            if ((String.IsNullOrEmpty(loginInfo.Email))&& (String.IsNullOrEmpty(loginInfo.Password)))
+        public async Task<IActionResult> Login([FromForm] UserDto loginInfo, [FromQuery] string returnUrl)
+         {
+            if ((String.IsNullOrEmpty(loginInfo.Email)) && (String.IsNullOrEmpty(loginInfo.Password)))
             {
-
-            }    
+                ViewBag.ErrorMessage = "Login fields are not filled out";
+            }
+            else
+            {
+                UserDto userDto = await _webApiClient.LoginAsync(loginInfo);
+                if (userDto.Id!=0)
+                {
+                    ViewBag.ErrorMessage = "User email or password is wrong";
+                }
+                else 
+                {
+                    _generatedToken = BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), userDto);
+                    if (_generatedToken != null)
+                    {
+                        if (!String.IsNullOrEmpty(returnUrl))
+                        {
+                            return RedirectToAction(returnUrl);
+                        }
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        //TODO: consider changing the "error" to smth more descriptive
+                        ViewBag.ErrorMessage = "Error";
+                    }
+                }
+            }
             return null;
+        }
+
+        //TODO: export these methods to an external static class for JWT handling.
+        public string BuildToken(string key, string issuer, UserDto user)
+        {
+            //TODO: add roles 
+            var claims = new[] {
+                new Claim("user_id", user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+            };
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+            var tokenDescriptor = new JwtSecurityToken(issuer, issuer, claims,
+                expires: DateTime.Now.AddMinutes(EXPIRY_DURATION_MINUTES), signingCredentials: credentials);
+            return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+        }
+
+        public bool IsTokenValid(string key, string issuer, string token)
+        {
+            var mySecret = Encoding.UTF8.GetBytes(key);
+            var mySecurityKey = new SymmetricSecurityKey(mySecret);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                //TODO: implement checking Issuer and Audience
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidIssuer = issuer,
+                    ValidAudience = issuer,
+                    IssuerSigningKey = mySecurityKey,
+                }, out SecurityToken validatedToken);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

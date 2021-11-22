@@ -27,6 +27,7 @@ namespace Webserver
             services.AddScoped<IWhatToWatchApiClient>((webApiClient) => new WhatToWatchApiClient(new RestClient(Configuration["WebApiURI"])));
             services.AddControllersWithViews();
             services.AddScoped<IWhatToWatchApiClient>((webApiClient) => new WhatToWatchApiClient(new RestClient(Configuration["WebApiURI"])));
+            services.AddSession();
             //JWT Usage
             services.AddAuthentication(auth =>
             {
@@ -62,6 +63,7 @@ namespace Webserver
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
             //JWT Usage
             app.Use(async (context, next) =>
             {
@@ -72,6 +74,7 @@ namespace Webserver
                 }
                 await next();
             });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
