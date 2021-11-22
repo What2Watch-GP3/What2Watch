@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -26,19 +27,31 @@ namespace WebSite.Controllers
         // GET: BookingsController/Confirm
         public async Task<ActionResult> Confirm()
         {
-            return View(await _client.GetBookingByIdAsync(1));
+            //TODO Implement actual values instead of hardcoded
+            TempData["SeatIds"] = new List<int>() { 1, 2, 3 };
+            TempData["TotalPrice"] = 40m;
+            TempData["Date"] = DateTime.Now;
+            return View();
         }
 
         // POST: BookingsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ConfirmAsync(BookingDto booking)
+        public async Task<ActionResult> Confirm(string answer)
         {
             try
             {
-                if (await _client.CreateBookingAsync(booking) > 0)
+                if(answer == "Decline")
                 {
-                    TempData["Message"] = $"Booking for {booking.Date} has been confirmed.";
+                    return RedirectToAction(nameof(Index), "Home");
+                }
+
+                //TODO Implement getting the seat ids instead of hardcode
+                BookingDto bookings = new() { SeatIds = new List<int>() { 1, 2, 3 }, ShowId = 1 };
+                int id = await _client.ConfirmBookingAsync(bookings);
+                if (id > 0)
+                {
+                    ViewBag.Message = $"Bookings with id {id} has been created";
                     return RedirectToAction(nameof(Index), "Home");
                 }
                 else

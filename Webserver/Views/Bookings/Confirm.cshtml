@@ -1,39 +1,33 @@
 ﻿@model WebApiClient.DTOs.BookingDto
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Confirm";
 }
 
-<h1>Create</h1>
-
-<h4>BookingDto</h4>
+<h1>Confirm Booking</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <span>@ViewBag.ErrorMessage</span>
-        <form asp-action="Confirm Booking">
-            <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TotalPrice" class="control-label"></label>
-                <input asp-for="TotalPrice" class="form-control" />
-                @Html.DisplayNameFor(model => model.TotalPrice)
+                <label>: @TempData["TotalPrice"] </label>
                 <span asp-validation-for="TotalPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                @Html.DisplayNameFor(model => model.Date)
+                <label>: @TempData["Date"] </label>
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Confirm" class="btn btn-primary" />
+                <input type="submit" name="answer " value="Confirm" class="btn btn-primary" />
+                <input type="submit" name="answer" value="Decline" class="btn btn-danger" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

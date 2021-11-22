@@ -56,7 +56,7 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<int> CreateBookingAsync(BookingDto booking)
+        public async Task<int> ConfirmBookingAsync(BookingDto booking)
         {
             var response = await _client.RequestAsync<int>(Method.POST, $"bookings", booking);
 

@@ -37,7 +37,7 @@ namespace TestWebApiClient
             // Arrange
             BookingDto bookingToCreate = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             // Act
-            int actualId = await _webApiIdClient.CreateBookingAsync(bookingToCreate);
+            int actualId = await _webApiIdClient.ConfirmBookingAsync(bookingToCreate);
             // Assert
             Assert.AreEqual(actualId, 1, "Failed to create booking with id 1");
         }
