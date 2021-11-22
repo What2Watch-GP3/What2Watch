@@ -38,7 +38,7 @@ namespace WebApi.Controllers
       
 
         // GET: api/<MovieController>
-        [HttpPost("{searchString}")]
+        [HttpGet("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
             IEnumerable<Movie> matchingMovies;
@@ -55,6 +55,7 @@ namespace WebApi.Controllers
             return Ok(matchingMovieDtos);
         }
 
+        /*
         // GET api/<MovieController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MovieDto>> GetByIdAsync(int id)
@@ -73,7 +74,7 @@ namespace WebApi.Controllers
 
 
 
-        /* POST api/<MovieController>
+         POST api/<MovieController>
         [HttpPost]
         public async Task<ActionResult<int>> CreateAsync([FromBody] MovieDto movie)
         {
@@ -81,21 +82,21 @@ namespace WebApi.Controllers
 
         }*/
 
-            /*
-        // PUT api/<MovieController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateAsync(int id, [FromBody] MovieDto movie)
-        {
-            throw new NotImplementedException();
-        }
+        /*
+    // PUT api/<MovieController>/5
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateAsync(int id, [FromBody] MovieDto movie)
+    {
+        throw new NotImplementedException();
+    }
 
-        // DELETE api/<MovieController>/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-            */
+    // DELETE api/<MovieController>/5
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+        */
     }
 
 }

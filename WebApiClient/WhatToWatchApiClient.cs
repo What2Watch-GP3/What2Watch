@@ -40,7 +40,7 @@ namespace WebApiClient
 
         public async Task<IEnumerable<MovieDto>> GetMoviesByPartOfNameAsync(string searchString)
         {
-            var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies/search?search={searchString}");
+            var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies/{searchString}");
 
             if (!response.IsSuccessful) throw new Exception($"Error searching movies by part of name with searchString {searchString}. Message was {response.Content}.");
 

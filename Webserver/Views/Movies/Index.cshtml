@@ -7,12 +7,14 @@
 <h1 class="text-light">All Movies</h1>
 
 
-<form asp-controller="Movies" asp-action="Search" method="get">
+<form asp-controller="Movies" asp-action="Movies" >
     <p>
-        <input type="text" name="search" value="@ViewData["CurrentFilter"]" />
+        <input id="search" type="text" name="search" value="@ViewData["CurrentFilter"]" />
+      
         <input type="submit" value="Search" />
     </p>
 </form>
+
 
 
 <table class="table table-hover table-bordered bg-lightgrey text-light">

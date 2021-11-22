@@ -9,7 +9,7 @@ using WebApiClient;
 
 namespace WebSite.Controllers
 {
-    [Route("[controller]")]
+    //[Route("[controller]")]
     public class MoviesController : Controller
     {
         IWhatToWatchApiClient _client;
@@ -38,13 +38,13 @@ namespace WebSite.Controllers
         }
 
         [HttpGet]
-        [Route("search")]
-        public async Task<ActionResult> Search(string search)
+        [Route("[controller]/{search}")]
+        public async Task<ActionResult> Movies(string search)
         {
             ViewData["CurrentFilter"] = search;
   
             var movies = await _client.GetMoviesByPartOfNameAsync(search);
-            return View("Index",movies);
+            return View("Index", movies);
    
         }
 
