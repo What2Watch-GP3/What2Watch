@@ -49,7 +49,7 @@ namespace WebSite.Controllers
             else
             {
                 UserDto userDto = await _webApiClient.LoginAsync(loginInfo);
-                if (userDto.Id!=0)
+                if (userDto.Id == 0)
                 {
                     ViewBag.ErrorMessage = "User email or password is wrong";
                 }

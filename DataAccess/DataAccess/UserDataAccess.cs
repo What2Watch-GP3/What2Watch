@@ -20,12 +20,12 @@ namespace DataAccess.DataAccess
         {
             try
             {
-                var query = "SELECT id, password_hash_salt WHERE email=@Email";
+                var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
                 using var connection = CreateConnection();
                 var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = user.Email });
-                if (BCryptTool.VerifyPassword(user.Password, userTuple.Password_hash_salt))
+                if (BCryptTool.VerifyPassword(user.Password, userTuple.password_hash_salt))
                 {
-                    return userTuple.Id;
+                    return userTuple.id;
                 }
                 return -1;
             }
@@ -38,7 +38,7 @@ namespace DataAccess.DataAccess
     }
     internal class UserTuple
     {
-        public int Id;
-        public string Password_hash_salt;
+        public int id;
+        public string password_hash_salt;
     }
 }
