@@ -7,13 +7,14 @@
 <h1 class="text-light">All Movies</h1>
 
 
-<form asp-controller="Movies" asp-action="Movies" >
+<form asp-controller="Movies" asp-action="Movies" method="get">
     <p>
         <input id="search" type="text" name="search" value="@ViewData["CurrentFilter"]" />
-      
+
         <input type="submit" value="Search" />
     </p>
 </form>
+
 
 
 
@@ -35,7 +36,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-         
+
 
             <tr>
                 <td class="table-row text-white">

@@ -9,7 +9,7 @@ using WebApiClient;
 
 namespace WebSite.Controllers
 {
-    //[Route("[controller]")]
+    [Route("[controller]")]
     public class MoviesController : Controller
     {
         IWhatToWatchApiClient _client;
@@ -32,12 +32,21 @@ namespace WebSite.Controllers
 
         // GET: MoviesController/Details/5
         [HttpGet]
-        public async Task<ActionResult> Index()
+        [Route("{search?}")]
+        public async Task<ActionResult> Index(string search)
         {
-            return View(await _client.GetAllMoviesAsync());
+            if (String.IsNullOrEmpty(search))
+            {
+                return View(await _client.GetAllMoviesAsync());
+            }
+            else
+            {
+                return View(await _client.GetMoviesByPartOfNameAsync(search));
+            }
         }
 
-        [HttpGet]
+        //TODO: possibly delete
+        /*[HttpGet]
         [Route("[controller]/{search}")]
         public async Task<ActionResult> Movies(string search)
         {
@@ -46,7 +55,7 @@ namespace WebSite.Controllers
             var movies = await _client.GetMoviesByPartOfNameAsync(search);
             return View("Index", movies);
    
-        }
+        }*/
 
         /*
         // GET: MoviesController/Create
