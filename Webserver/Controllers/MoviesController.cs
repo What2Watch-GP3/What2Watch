@@ -35,12 +35,14 @@ namespace WebSite.Controllers
         [Route("{search?}")]
         public async Task<ActionResult> Index(string search)
         {
-            if (String.IsNullOrEmpty(search))
+            if (string.IsNullOrEmpty(search))
             {
+                ViewBag.TextValue = "";
                 return View(await _client.GetAllMoviesAsync());
             }
             else
             {
+                ViewBag.TextValue = search;
                 return View(await _client.GetMoviesByPartOfNameAsync(search));
             }
         }
