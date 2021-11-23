@@ -51,7 +51,6 @@ namespace WebSite.Controllers
                 int id = await _client.ConfirmBookingAsync(bookings);
                 if (id > 0)
                 {
-                    ViewBag.Message = $"Bookings with id {id} has been created";
                     return RedirectToAction(nameof(Index), "Home");
                 }
                 else
