@@ -31,13 +31,32 @@ namespace DesktopClientWinforms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.currentPagePanel = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
+            // 
+            // currentPagePanel
+            // 
+            this.currentPagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.currentPagePanel.Location = new System.Drawing.Point(0, 0);
+            this.currentPagePanel.Name = "currentPagePanel";
+            this.currentPagePanel.Size = new System.Drawing.Size(938, 525);
+            this.currentPagePanel.TabIndex = 0;
+            // 
+            // DesktopClientForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(938, 525);
+            this.Controls.Add(this.currentPagePanel);
+            this.Name = "DesktopClientForm";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private Panel currentPagePanel;
     }
 }
 
