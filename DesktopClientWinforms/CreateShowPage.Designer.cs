@@ -31,13 +31,13 @@ namespace DesktopClientWinforms
         {
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.btnCreateShow = new System.Windows.Forms.Button();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.txtMovieId = new System.Windows.Forms.TextBox();
-            this.lblMovieId = new System.Windows.Forms.Label();
             this.txtRoomId = new System.Windows.Forms.TextBox();
             this.lblRoomId = new System.Windows.Forms.Label();
+            this.txtMovieId = new System.Windows.Forms.TextBox();
+            this.lblMovieId = new System.Windows.Forms.Label();
             this.datePicker = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.backgroundPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +68,52 @@ namespace DesktopClientWinforms
             this.btnCreateShow.UseVisualStyleBackColor = true;
             this.btnCreateShow.Click += new System.EventHandler(this.btnCreateShow_Click);
             // 
+            // txtRoomId
+            // 
+            this.txtRoomId.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtRoomId.Location = new System.Drawing.Point(0, 134);
+            this.txtRoomId.Name = "txtRoomId";
+            this.txtRoomId.Size = new System.Drawing.Size(867, 27);
+            this.txtRoomId.TabIndex = 9;
+            this.txtRoomId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRoomId_KeyPress);
+            // 
+            // lblRoomId
+            // 
+            this.lblRoomId.AutoSize = true;
+            this.lblRoomId.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRoomId.Location = new System.Drawing.Point(0, 114);
+            this.lblRoomId.Name = "lblRoomId";
+            this.lblRoomId.Size = new System.Drawing.Size(69, 20);
+            this.lblRoomId.TabIndex = 8;
+            this.lblRoomId.Text = "Room Id:";
+            // 
+            // txtMovieId
+            // 
+            this.txtMovieId.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtMovieId.Location = new System.Drawing.Point(0, 87);
+            this.txtMovieId.Name = "txtMovieId";
+            this.txtMovieId.Size = new System.Drawing.Size(867, 27);
+            this.txtMovieId.TabIndex = 7;
+            this.txtMovieId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMovieId_KeyPress);
+            // 
+            // lblMovieId
+            // 
+            this.lblMovieId.AutoSize = true;
+            this.lblMovieId.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblMovieId.Location = new System.Drawing.Point(0, 67);
+            this.lblMovieId.Name = "lblMovieId";
+            this.lblMovieId.Size = new System.Drawing.Size(70, 20);
+            this.lblMovieId.TabIndex = 6;
+            this.lblMovieId.Text = "Movie Id:";
+            // 
+            // datePicker
+            // 
+            this.datePicker.Dock = System.Windows.Forms.DockStyle.Top;
+            this.datePicker.Location = new System.Drawing.Point(0, 40);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.Size = new System.Drawing.Size(867, 27);
+            this.datePicker.TabIndex = 10;
+            // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
@@ -87,50 +133,6 @@ namespace DesktopClientWinforms
             this.lblTitle.Size = new System.Drawing.Size(92, 20);
             this.lblTitle.TabIndex = 4;
             this.lblTitle.Text = "Create Show";
-            // 
-            // txtMovieId
-            // 
-            this.txtMovieId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtMovieId.Location = new System.Drawing.Point(0, 87);
-            this.txtMovieId.Name = "txtMovieId";
-            this.txtMovieId.Size = new System.Drawing.Size(867, 27);
-            this.txtMovieId.TabIndex = 7;
-            // 
-            // lblMovieId
-            // 
-            this.lblMovieId.AutoSize = true;
-            this.lblMovieId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblMovieId.Location = new System.Drawing.Point(0, 67);
-            this.lblMovieId.Name = "lblMovieId";
-            this.lblMovieId.Size = new System.Drawing.Size(70, 20);
-            this.lblMovieId.TabIndex = 6;
-            this.lblMovieId.Text = "Movie Id:";
-            // 
-            // txtRoomId
-            // 
-            this.txtRoomId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtRoomId.Location = new System.Drawing.Point(0, 134);
-            this.txtRoomId.Name = "txtRoomId";
-            this.txtRoomId.Size = new System.Drawing.Size(867, 27);
-            this.txtRoomId.TabIndex = 9;
-            // 
-            // lblRoomId
-            // 
-            this.lblRoomId.AutoSize = true;
-            this.lblRoomId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblRoomId.Location = new System.Drawing.Point(0, 114);
-            this.lblRoomId.Name = "lblRoomId";
-            this.lblRoomId.Size = new System.Drawing.Size(69, 20);
-            this.lblRoomId.TabIndex = 8;
-            this.lblRoomId.Text = "Room Id:";
-            // 
-            // datePicker
-            // 
-            this.datePicker.Dock = System.Windows.Forms.DockStyle.Top;
-            this.datePicker.Location = new System.Drawing.Point(0, 40);
-            this.datePicker.Name = "datePicker";
-            this.datePicker.Size = new System.Drawing.Size(867, 27);
-            this.datePicker.TabIndex = 10;
             // 
             // CreateShowPage
             // 

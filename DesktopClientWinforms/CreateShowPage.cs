@@ -34,5 +34,15 @@ namespace DesktopClientWinforms
         {
             
         }
+
+        private void txtRoomId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtMovieId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }
