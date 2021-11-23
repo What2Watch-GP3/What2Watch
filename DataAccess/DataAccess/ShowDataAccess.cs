@@ -3,25 +3,20 @@ using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
 {
     public class ShowDataAccess : BaseDataAccess<Show>, IShowDataAccess
     {
-
-        public ShowDataAccess(string connectionString) : base(connectionString)
+        public ShowDataAccess(string connectionString) : base(connectionString) 
         {
-
+            Values = new List<string> { "start_time", "StartTime" };
         }
-        
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
-            IEnumerable<Show> shows;
-            string command = "SELECT Show.id, Show.start_time FROM Show " +
+            string command = "SELECT Show.id, Show.start_time AS StartTime FROM Show " +
                 "LEFT JOIN[Movie] ON Show.movie_id = Movie.id " +
                 "LEFT JOIN[Room] ON Room.id = Show.room_id " +
                 "LEFT JOIN[Cinema] ON Cinema.id = Room.cinema_id " +
@@ -29,9 +24,7 @@ namespace DataAccess.DataAccess
             try
             {
                 using var connection = CreateConnection();
-                shows = await connection.QueryAsync<Show>(command, new {MovieId = movieId, CinemaId = cinemaId  });
-
-                return shows;
+                return await connection.QueryAsync<Show>(command, new {MovieId = movieId, CinemaId = cinemaId  });
             }
             catch (Exception ex)
             {
