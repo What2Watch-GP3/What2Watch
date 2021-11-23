@@ -37,10 +37,12 @@ namespace WebSite.Controllers
         {
             if (String.IsNullOrEmpty(search))
             {
+                ViewBag.TextValue = "a";
                 return View(await _client.GetAllMoviesAsync());
             }
             else
             {
+                ViewBag.TextValue = search;
                 return View(await _client.GetMoviesByPartOfNameAsync(search));
             }
         }
