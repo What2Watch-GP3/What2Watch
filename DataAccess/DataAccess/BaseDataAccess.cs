@@ -30,7 +30,7 @@ namespace DataAccess.DataAccess
         }
         protected IDbConnection CreateConnection() => new SqlConnection(_connectionstring);
         protected string TableName { get; set; }
-        // RawValues = total_price, date
+        // Values = total_price, date
         protected IEnumerable<string> Values { get; set; }
         // RawValues = TotalPrice, Date
         protected IEnumerable<string> RawValues;
