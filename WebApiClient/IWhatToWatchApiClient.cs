@@ -13,5 +13,6 @@ namespace WebApiClient
         Task<IEnumerable<ShowDto>> GetShowsByMovieAndCinemaIdAsync(int movieId, int cinemaId);
         Task<int> ConfirmBookingAsync(BookingDto booking);
         Task<BookingDto> GetBookingByIdAsync(int id);
+        Task<UserDto> LoginAsync(UserDto userDto);
     }
 }
