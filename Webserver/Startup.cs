@@ -22,6 +22,7 @@ namespace Webserver
         {
             services.AddScoped<IWhatToWatchApiClient>((webApiClient) => new WhatToWatchApiClient(new RestClient(Configuration["WebApiURI"])));
             services.AddControllersWithViews();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
