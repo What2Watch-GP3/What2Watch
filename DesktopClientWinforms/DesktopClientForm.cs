@@ -17,12 +17,10 @@ namespace DesktopClientWinforms
 
         private Size _formSize;
         private int _borderSize;
-        private WhatToWatchApiClient _client;
 
         public DesktopClientForm()
         {
             InitializeComponent();
-            //_client = client; TODO pass as parameter
             _borderSize = 2;
         }
 
@@ -53,7 +51,7 @@ namespace DesktopClientWinforms
 
         private void OnLoad()
         {
-            CreateShowPage createShowPage = new();
+            CreateShowPage createShowPage = new CreateShowPage();
             createShowPage.Dock = DockStyle.Fill;
             currentPagePanel.Controls.Add(createShowPage);
             Padding = new(_borderSize);

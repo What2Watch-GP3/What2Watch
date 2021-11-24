@@ -132,9 +132,11 @@ namespace DesktopClientWinforms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.ClientSize = new System.Drawing.Size(938, 525);
             this.Controls.Add(this.TitleBarPanel);
             this.Controls.Add(this.currentPagePanel);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.Name = "DesktopClientForm";
             this.Text = "What2Watch";
             this.Load += new System.EventHandler(this.DesktopClientForm_Load);

@@ -8,14 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DesktopApiClient;
+using DesktopApiClient.DTOs;
 
 namespace DesktopClientWinforms
 {
     public partial class CreateShowPage : UserControl
     {
-        private WhatToWatchApiClient _client;
+        private IWhatToWatchApiClient _client;
 
-        public CreateShowPage(WhatToWatchApiClient client)
+        public CreateShowPage(IWhatToWatchApiClient client)
         {
             _client = client;
         }
@@ -32,7 +33,19 @@ namespace DesktopClientWinforms
 
         private void CreateShow()
         {
-            //TODO call desktop api client to create the show
+            ShowDto show = new ShowDto() 
+            { 
+                StartTime = datePicker.Value,
+                RoomId = int.Parse(txtRoomId.Text),
+                MovieId = int.Parse(txtMovieId.Text)
+            };
+            _client.CreateShowAsync(show);
+        }
+
+        private void OnLoad()
+        {
+            datePicker.CalendarMonthBackground = Color.FromArgb(60,60,65);
+            datePicker.CalendarTitleBackColor = Color.FromArgb(40,40,50);
         }
 
         private void txtRoomId_KeyPress(object sender, KeyPressEventArgs e)
@@ -43,6 +56,11 @@ namespace DesktopClientWinforms
         private void txtMovieId_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !(char.IsDigit(e.KeyChar));
+        }
+
+        private void CreateShowPage_Load(object sender, EventArgs e)
+        {
+            OnLoad();
         }
     }
 }
