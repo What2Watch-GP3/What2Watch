@@ -4,6 +4,7 @@ using DataAccess.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace TestDataAccess
 
             //assert
             Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");
-            Assert.AreEqual(expectedStartTime, shows[0].StartTime.ToString(), "The time was wrong.");
+            Assert.AreEqual(expectedStartTime, shows[0].StartTime.ToString("G", CultureInfo.CreateSpecificCulture("de-DE")), "The time was wrong.");
         }
     }
 }
