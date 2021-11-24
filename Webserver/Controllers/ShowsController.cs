@@ -28,6 +28,9 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task <ActionResult> Shows(int movieId, int cinemaId)
         {
+
+            TempData["cinemaId"] = cinemaId;
+            TempData["movieId"] = movieId;
             return View(await _client.GetShowsByMovieAndCinemaIdAsync(movieId,cinemaId));
         }
 

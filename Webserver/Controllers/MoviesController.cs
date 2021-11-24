@@ -1,6 +1,7 @@
 ﻿using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,12 @@ namespace WebSite.Controllers
         {
             if (string.IsNullOrEmpty(search))
             {
+
+                var movies = await _client.GetAllMoviesAsync();
                 ViewBag.TextValue = "";
-                return View(await _client.GetAllMoviesAsync());
+                var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
+                TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
+                return View(movies);
             }
             else
             {

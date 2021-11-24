@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,15 @@ namespace WebSite.Controllers
         }
 
         // GET: CinemasController/Details/5
-     
-       [HttpGet]
+
+        [HttpGet]
         public async Task<ActionResult> Cinemas(int movieId)
         {
+            var cinemas = await _client.GetCinemasByMovieIdAsync(movieId);
             TempData["movieId"] = movieId;
-            return View(await  _client.GetCinemasByMovieIdAsync(movieId));
+            var nameDictionary = cinemas.ToDictionary(cinema => cinema.Id, cinema => cinema.Name);
+            TempData["nameDictionary"] = JsonConvert.SerializeObject(nameDictionary);
+            return View(cinemas);
         }
 
         // GET: CinemasController/Create

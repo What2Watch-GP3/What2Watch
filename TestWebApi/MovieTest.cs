@@ -58,6 +58,7 @@ namespace TestWebApi
             //if an empty status is sent back, then we need to test for a StatusCodeResult(which inheritantly has OKResult, NotFOundResult, etc. no value)
         }
 
+        /*
         [Test]
         public async Task GettingOneMovieById2ReturnsRightMovie()
         {
@@ -72,7 +73,7 @@ namespace TestWebApi
             //assert
             Assert.IsTrue(movie.Id == 2, "The correct movie with id 2 wasn't found");
             Assert.AreEqual(200, _objectResult.StatusCode, "Status was not OK (200).");
-        }
+        }*/
 
         [Test]
         public async Task GettingMovieListOfMoviesContainsSearchString()
