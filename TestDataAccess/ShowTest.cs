@@ -35,11 +35,11 @@ namespace TestDataAccess
         {
             //act
             var shows = (await _showDataAccess.GetListByMovieAndCinemaIdAsync(1, 1)).ToList();
-            string expectedStartTime = "2021-11-17 18:00:00";
+            string expectedStartTime = "17.11.2021 18:00:00";
 
             //assert
             Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");
-            Assert.AreEqual(expectedStartTime, shows[0].StartTime, "The time was wrong.");
+            Assert.AreEqual(expectedStartTime, shows[0].StartTime.ToString(), "The time was wrong.");
         }
     }
 }
