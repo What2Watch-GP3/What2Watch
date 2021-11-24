@@ -32,17 +32,17 @@ namespace DesktopClientWinforms
 
         private void CreateShow()
         {
-            
+            //TODO call desktop api client to create the show
         }
 
         private void txtRoomId_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            e.Handled = !(char.IsDigit(e.KeyChar));
         }
 
         private void txtMovieId_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            e.Handled = !(char.IsDigit(e.KeyChar));
         }
     }
 }

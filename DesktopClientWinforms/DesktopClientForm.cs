@@ -17,5 +17,11 @@ namespace DesktopClientWinforms
             InitializeComponent();
         }
 
+        private void DesktopClientForm_Load(object sender, EventArgs e)
+        {
+            CreateShowPage createShowPage = new();
+            createShowPage.Dock = DockStyle.Fill;
+            currentPagePanel.Controls.Add(createShowPage);
+        }
     }
 }

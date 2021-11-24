@@ -50,6 +50,7 @@ namespace DesktopClientWinforms
             this.Controls.Add(this.currentPagePanel);
             this.Name = "DesktopClientForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.DesktopClientForm_Load);
             this.ResumeLayout(false);
 
         }
