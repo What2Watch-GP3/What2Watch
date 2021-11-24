@@ -14,26 +14,25 @@ namespace TestWebApiClient
     {
         private WhatToWatchApiClient _webApiClient;
         private UserDto userDto;
-        private UserDto responseUserDto;
+
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
             //arrange
             userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
-            responseUserDto = new UserDto() {Id = 1, Email = "test@user.dk", Password = "password1234" };
-            _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = responseUserDto });
+            int responseUserId = 1;
+            _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = responseUserId });
         }
 
         [Test]
         public async Task TestLoginUserDtoGetsAnId()
         {
             //act
-
-           var userDtoId = await _webApiClient.LoginAsync(userDto);
+           var userDto = await _webApiClient.LoginAsync(this.userDto);
 
             //assert
-            Assert.That(userDtoId, Is.InstanceOf<UserDto>(), "User object was not from instance userDto");
-            Assert.AreEqual(1, userDtoId.Id);
+            Assert.That(userDto, Is.InstanceOf<UserDto>(), "User object was not from instance userDto");
+            Assert.AreEqual(1, userDto.Id);
         }
     }
 }

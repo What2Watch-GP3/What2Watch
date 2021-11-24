@@ -37,57 +37,54 @@ namespace WebSite.Controllers
             return View();
         }
         // POST: LoginController/Create
+        //TODO: check if we need all these attributes
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromForm] UserDto loginInfo, [FromQuery] string returnUrl)
          {
-            if ((String.IsNullOrEmpty(loginInfo.Email)) && (String.IsNullOrEmpty(loginInfo.Password)))
+
+            UserDto userDto = await _webApiClient.LoginAsync(loginInfo);
+
+            if (userDto.Id == -1)
             {
-                ViewBag.ErrorMessage = "Login fields are not filled out";
+                ViewBag.ErrorMessage = "Wrong User email or Password";
             }
-            else
+            else 
             {
-                UserDto userDto = await _webApiClient.LoginAsync(loginInfo);
-                if (userDto.Id == 0)
+                _generatedToken = BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), _config["Jwt:Audience"].ToString(), userDto);
+                if (_generatedToken != null)
                 {
-                    ViewBag.ErrorMessage = "User email or password is wrong";
+                    if (!String.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToAction(returnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                else 
+                else
                 {
-                    _generatedToken = BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), userDto);
-                    if (_generatedToken != null)
-                    {
-                        if (!String.IsNullOrEmpty(returnUrl))
-                        {
-                            return RedirectToAction(returnUrl);
-                        }
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        //TODO: consider changing the "error" to smth more descriptive
-                        ViewBag.ErrorMessage = "Error";
-                    }
+                    //TODO: consider changing the "error" to smth more descriptive
+                    ViewBag.ErrorMessage = "Error logging in";
                 }
             }
-            return null;
+            return View();
         }
 
         //TODO: export these methods to an external static class for JWT handling.
-        public string BuildToken(string key, string issuer, UserDto user)
+        public string BuildToken(string key, string issuer, string audience, UserDto user)
         {
-            //TODO: add roles 
+            //TODO: add roles
             var claims = new[] {
                 new Claim("user_id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, "Admin"),
+                //new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-            var tokenDescriptor = new JwtSecurityToken(issuer, issuer, claims,
+            var tokenDescriptor = new JwtSecurityToken(issuer, audience, claims,
                 expires: DateTime.Now.AddMinutes(EXPIRY_DURATION_MINUTES), signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }

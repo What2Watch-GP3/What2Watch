@@ -32,7 +32,8 @@ namespace DataAccess.DataAccess
             catch(Exception ex)
             {
                 //TODO: throw a more specific exception
-                throw new Exception(ex.Message, ex);
+                return -1;
+                //throw new Exception(ex.Message, ex);
             }
         }
     }
@@ -41,4 +42,5 @@ namespace DataAccess.DataAccess
         public int id;
         public string password_hash_salt;
     }
+
 }

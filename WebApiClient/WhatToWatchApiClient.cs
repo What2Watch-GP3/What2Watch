@@ -76,9 +76,10 @@ namespace WebApiClient
 
         public async Task<UserDto> LoginAsync(UserDto userDto)
         {
-           var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
+            var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
             if (!response.IsSuccessful)
             {
+                //TODO: based on response statuscode, do smth
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
             }
             userDto.Id = (int)response.Data;

@@ -28,8 +28,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)
         {
            var user = DtoConverter<UserDto, User>.From(userDto);
-            //!tier -> object/dto
-            //tier -> 
+
            return Ok(await _userDataAccess.LoginAsync(user));
         }
     }
