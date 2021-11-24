@@ -78,14 +78,16 @@ namespace DesktopClientWinforms
             // 
             this.btnMinimise.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnMinimise.FlatAppearance.BorderSize = 0;
+            this.btnMinimise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMinimise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMinimise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinimise.Location = new System.Drawing.Point(818, 0);
-            this.btnMinimise.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btnMinimise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinimise.Name = "btnMinimise";
             this.btnMinimise.Padding = new System.Windows.Forms.Padding(3, 0, 0, 2);
             this.btnMinimise.Size = new System.Drawing.Size(40, 40);
             this.btnMinimise.TabIndex = 2;
+            this.btnMinimise.TabStop = false;
             this.btnMinimise.Text = "🗕";
             this.btnMinimise.UseVisualStyleBackColor = true;
             this.btnMinimise.Click += new System.EventHandler(this.btnMinimise_Click);
@@ -94,14 +96,16 @@ namespace DesktopClientWinforms
             // 
             this.btnMaximise.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnMaximise.FlatAppearance.BorderSize = 0;
+            this.btnMaximise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMaximise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMaximise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaximise.Location = new System.Drawing.Point(858, 0);
-            this.btnMaximise.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btnMaximise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMaximise.Name = "btnMaximise";
             this.btnMaximise.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnMaximise.Size = new System.Drawing.Size(40, 40);
             this.btnMaximise.TabIndex = 1;
+            this.btnMaximise.TabStop = false;
             this.btnMaximise.Text = "🗗";
             this.btnMaximise.UseVisualStyleBackColor = true;
             this.btnMaximise.Click += new System.EventHandler(this.btnMaximise_Click);
@@ -110,14 +114,16 @@ namespace DesktopClientWinforms
             // 
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Crimson;
             this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Location = new System.Drawing.Point(898, 0);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
             this.btnExit.Name = "btnExit";
             this.btnExit.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
             this.btnExit.Size = new System.Drawing.Size(40, 40);
             this.btnExit.TabIndex = 0;
+            this.btnExit.TabStop = false;
             this.btnExit.Text = "✕";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
