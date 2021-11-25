@@ -1,9 +1,6 @@
-﻿using DataAccess.DataAccess;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +27,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<ShowDto>>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
             var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(movieId, cinemaId);
-            if (shows.Count() == 0) //TODO: IsNullOrEmpty
+            if (!shows.Any()) //TODO: IsNullOrEmpty
             {
                 return NotFound();
             }
@@ -41,6 +38,23 @@ namespace WebApi.Controllers
             }
         }
 
+        //POST api/<ShowController>
+        [HttpPost]
+        public async Task<ActionResult<int>> CreateShowAsync([FromBody] ShowDto showDto)
+        {
+            if (showDto != null)
+            {
+                var show = DtoConverter<ShowDto, Show>.From(showDto);
+                var showId = await _showDataAccess.CreateAsync(show);
+                return Ok(showId);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+
         /*
         // GET api/<ShowController>/5
         [HttpGet("{id}")]
@@ -49,11 +63,7 @@ namespace WebApi.Controllers
             return "value";
         }
 
-        // POST api/<ShowController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+      
 
         // PUT api/<ShowController>/5
         [HttpPut("{id}")]

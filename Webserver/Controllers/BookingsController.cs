@@ -11,7 +11,6 @@ namespace WebSite.Controllers
 {
     public class BookingsController : Controller
     {
-
         private IWhatToWatchApiClient _client;
 
         public BookingsController(IWhatToWatchApiClient client)
@@ -44,7 +43,7 @@ namespace WebSite.Controllers
         {
             try
             {
-                if(answer == "Decline")
+                if (answer == "Decline")
                 {
                     return RedirectToAction(nameof(Index), "Movies");
                 }

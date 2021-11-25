@@ -2,9 +2,6 @@
 using DataAccess.Interfaces;
 using DataAccess.Authentication;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Models;
 
@@ -29,7 +26,7 @@ namespace DataAccess.DataAccess
                 }
                 return -1;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //TODO: throw a more specific exception
                 return -1;

@@ -3,7 +3,6 @@ using StubsClassLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -15,7 +14,7 @@ namespace TestWebApiClient
         private IWhatToWatchApiClient _stubsClient;
 
         [OneTimeSetUp]
-        public async Task OneTimeSetUp()
+        public void OneTimeSetUp()
         {
             ShowDto show = new ShowDto() { Id = 1, StartTime = DateTime.Now };
             IEnumerable<ShowDto> showDtos = new List<ShowDto>() { show };
@@ -26,11 +25,12 @@ namespace TestWebApiClient
         [Test]
         public async Task GettingShowsBasedOnMovieIdAndCinemaIdReturnsListOfShowsBiggerThan0()
         {
-            //act
+            //Arrange
+            //Act
             var shows = await _stubsClient.GetShowsByMovieAndCinemaIdAsync(1, 1);
 
-            //assert
-            Assert.IsTrue(shows.Count() > 0, "The list of shows is empty.");
+            //Assert
+            Assert.IsTrue(shows.Any(), "The list of shows is empty.");
         }
     }
 }

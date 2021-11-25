@@ -9,7 +9,12 @@ namespace DataAccess.DataAccess
 {
     public class ShowDataAccess : BaseDataAccess<Show>, IShowDataAccess
     {
-        public ShowDataAccess(string connectionString) : base(connectionString) {}
+
+        public ShowDataAccess(string connectionString) : base(connectionString)
+        {
+            Values = new List<string> { "start_time", "movie_id", "room_id" };
+        }
+        
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
@@ -21,7 +26,7 @@ namespace DataAccess.DataAccess
             try
             {
                 using var connection = CreateConnection();
-                return await connection.QueryAsync<Show>(command, new {MovieId = movieId, CinemaId = cinemaId  });
+                return await connection.QueryAsync<Show>(command, new { MovieId = movieId, CinemaId = cinemaId });
             }
             catch (Exception ex)
             {

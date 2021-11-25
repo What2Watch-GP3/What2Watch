@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WebApiClient.DTOs.MovieDto>
 
-@{          
+@{
     ViewData["Title"] = "Movies";
 }
 
@@ -11,14 +11,22 @@
         <p>
             <div>
                 <input class="form-control" id="search" type="text" name="search" size="40" placeholder="Search for a movie" value=@ViewBag.TextValue>
-              
             </div>
             <!--<input class="btn btn-primary" type="submit" value="Search" />-->
         </p>
     </form>
-    </div>
+</div>
 
+<table class="table table-hover table-bordered bg-lightgrey text-light">
+    <thead>
+        <tr>
 
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
 
     <table class="table table-hover table-bordered">
         <thead>

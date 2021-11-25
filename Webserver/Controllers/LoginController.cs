@@ -12,7 +12,6 @@ using WebApiClient.DTOs;
 
 namespace WebSite.Controllers
 {
-
     [Route("[controller]")]
     public class LoginController : Controller
     {
@@ -20,7 +19,6 @@ namespace WebSite.Controllers
         private const double EXPIRY_DURATION_MINUTES = 30;
         private string _generatedToken = null;
         private IConfiguration _config;
-
 
         public LoginController(IConfiguration config, IWhatToWatchApiClient whatToWatchApi)
         {
@@ -40,7 +38,7 @@ namespace WebSite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromForm] UserDto loginInfo, [FromQuery] string returnUrl)
-         {
+        {
 
             UserDto userDto = await _webApiClient.LoginAsync(loginInfo);
 
@@ -48,7 +46,7 @@ namespace WebSite.Controllers
             {
                 ViewBag.ErrorMessage = "Wrong User email or Password";
             }
-            else 
+            else
             {
                 _generatedToken = BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), _config["Jwt:Audience"].ToString(), userDto);
                 if (_generatedToken != null)
@@ -80,7 +78,6 @@ namespace WebSite.Controllers
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new JwtSecurityToken(issuer, audience, claims,
                 expires: DateTime.Now.AddMinutes(EXPIRY_DURATION_MINUTES), signingCredentials: credentials);
@@ -91,7 +88,6 @@ namespace WebSite.Controllers
         {
             var mySecret = Encoding.UTF8.GetBytes(key);
             var mySecurityKey = new SymmetricSecurityKey(mySecret);
-
             var tokenHandler = new JwtSecurityTokenHandler();
             try
             {

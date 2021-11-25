@@ -1,17 +1,13 @@
-﻿using DataAccess.DataAccess;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs;
 using WebApi.DTOs.Converters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -19,20 +15,16 @@ namespace WebApi.Controllers
     public class CinemasController : ControllerBase
     {
         ICinemaDataAccess _cinemaDataAccess;
-
         public CinemasController(ICinemaDataAccess cinemaDataAccess)
         {
             _cinemaDataAccess = cinemaDataAccess;
         }
 
-
         // GET: api/<CinemaController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CinemaDto>>> GetListByMovieIdAsync([FromQuery]int movieId)
+        public async Task<ActionResult<IEnumerable<CinemaDto>>> GetListByMovieIdAsync([FromQuery] int movieId)
         {
-            
-            
-            if(movieId==0)
+            if (movieId == 0)
             {
                 throw new Exception("There is no ID");
                 //Get all Cinemas
