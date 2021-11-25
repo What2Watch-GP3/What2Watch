@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\StubsClassLibrary\StubsClassLibrary.csproj" />
   </ItemGroup>
 
 </Project>
