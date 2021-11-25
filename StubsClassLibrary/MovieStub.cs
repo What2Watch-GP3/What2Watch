@@ -1,6 +1,5 @@
 ﻿using DataAccess.Interfaces;
 using DataAccess.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,7 +24,6 @@ namespace StubsClassLibrary
             Movie movie3 = new Movie() { Id = 3, Title = "Movie3", Duration = 90 };
             IEnumerable<Movie> movies = new List<Movie>() { movie,movie2,movie3};
             
-            
             return await Task.FromResult<IEnumerable<Movie>>(movies);
         }
 
@@ -43,7 +41,6 @@ namespace StubsClassLibrary
             Movie movie3 = new Movie() { Id = 3, Title = $"{searchString} Movie3", Duration = 90 };
 
             IEnumerable<Movie> movies = new List<Movie>() { movie, movie2, movie3 };
-
 
             return await Task.FromResult<IEnumerable<Movie>>(movies);
         }

@@ -6,18 +6,15 @@
     <title>@ViewData["Title"] - What2Watch</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-   
 
 </head>
-<body class="background-image" >
+<body class="background-image">
     <header class="bg-black">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3 " style="margin-bottom: 0 !important;">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/pics/logo.png" height="30" class="d-inline-block align-top" alt="">
-
                 </a>
-
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,7 +33,7 @@
         </nav>
 
     </header>
-    @if (@ViewBag.ErrorMessage!= null)
+    @if (@ViewBag.ErrorMessage != null)
     {
         <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center;">
             @ViewBag.ErrorMessage

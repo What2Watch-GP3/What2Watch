@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WebApiClient.DTOs.MovieDto>
 
-@{          
+@{
     ViewData["Title"] = "Movies";
 }
 
@@ -11,42 +11,37 @@
         <p>
             <div>
                 <input class="form-control" id="search" type="text" name="search" size="40" placeholder="Search for a movie" value=@ViewBag.TextValue>
-              
             </div>
             <!--<input class="btn btn-primary" type="submit" value="Search" />-->
         </p>
     </form>
-    </div>
+</div>
 
+<table class="table table-hover table-bordered bg-lightgrey text-light">
+    <thead>
+        <tr>
 
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
 
-    <table class="table table-hover table-bordered bg-lightgrey text-light">
-        <thead>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Duration)
-                </th>
-
+                <td class="table-row text-white">
+                    @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration) minutes
+                </td>
             </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model)
-            {
-
-                <tr>
-                    <td class="table-row text-white">
-                        @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Duration) minutes
-                    </td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

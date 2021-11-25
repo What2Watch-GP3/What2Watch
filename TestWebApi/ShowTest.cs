@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using StubsClassLibrary;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApi.Controllers;
 using WebApi.DTOs;
@@ -17,13 +15,13 @@ namespace TestWebApi
         ObjectResult _objectResult;
 
         [SetUp]
-        public async Task SetUp()
+        public void SetUp()
         {
             _objectResult = null;
         }
 
         [OneTimeSetUp]
-        public async Task OneTimeSetUp()
+        public void OneTimeSetUp()
         {
             _showController = new ShowsController(new ShowStub());
         }
@@ -31,17 +29,17 @@ namespace TestWebApi
         [Test]
         public async Task GettingShowsByCinemaId1AndMovieId1ReturnsListOfShowsBiggerThan0()
         {
-            //arrange
+            //Arrange
             IEnumerable<ShowDto> shows;
 
-            //act
+            //Act
             var showResult = (await _showController.GetListByMovieAndCinemaIdAsync(1, 1)).Result;
             _objectResult = (ObjectResult)showResult;
             shows = (IEnumerable<ShowDto>)_objectResult.Value;
 
-            //assert
+            //Assert
             Assert.AreEqual(200, _objectResult.StatusCode, "Status coda was not OK (200).");
-            Assert.IsTrue(shows.Count() > 0, "The List is empty.");
+            Assert.IsTrue(shows.Any(), "The List is empty.");
         }
     }
 }

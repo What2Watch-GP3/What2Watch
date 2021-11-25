@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DesktopApiClient
+﻿namespace DesktopApiClient
 {
     public interface IWhatToWatchApiClient
     {

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ namespace WebSite.Controllers
 {
     public class BookingsController : Controller
     {
-
         private IWhatToWatchApiClient _client;
 
         public BookingsController(IWhatToWatchApiClient client)
@@ -18,14 +16,15 @@ namespace WebSite.Controllers
             _client = client;
         }
 
-        // GET: BookingsController/Details/5
+        //GET: BookingsController/Details/5
         public async Task<ActionResult> Details(int id)
         {
             return View(await _client.GetBookingByIdAsync(id));
         }
 
-        // GET: BookingsController/Confirm
-        public async Task<ActionResult> Confirm()
+        //GET: BookingsController/Confirm
+        //TODO: Review the return value when the method is implemented
+        public ActionResult Confirm()
         {
             //TODO Implement actual values instead of hardcoded
             TempData["SeatIds"] = new List<int>() { 1, 2, 3 };
@@ -41,7 +40,7 @@ namespace WebSite.Controllers
         {
             try
             {
-                if(answer == "Decline")
+                if (answer == "Decline")
                 {
                     return RedirectToAction(nameof(Index), "Home");
                 }

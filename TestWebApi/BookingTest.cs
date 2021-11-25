@@ -13,7 +13,7 @@ namespace TestBookingWebApi
         private BookingsController _testBookingWebApi;
 
         [OneTimeSetUp]
-        public async Task OneTimeSetUp()
+        public void OneTimeSetUp()
         {
             _testBookingWebApi = new BookingsController(new BookingStubs());
         }
@@ -21,12 +21,12 @@ namespace TestBookingWebApi
         [Test]
         public async Task GetBookingById3Async()
         {
-            // Arrange - In OneTimeSetUp
-            // Act
+            //Arrange - In OneTimeSetUp
+            //Act
             var actionResult = (await _testBookingWebApi.GetByIdAsync(3)).Result;
             if (actionResult is ObjectResult objRes)
             {
-                // Assert
+                //Assert
                 Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
 
                 Booking booking = (Booking)objRes.Value;
@@ -34,7 +34,7 @@ namespace TestBookingWebApi
             }
             else if (actionResult is StatusCodeResult scr)
             {
-                // Assert
+                //Assert
                 Assert.AreEqual(200, scr.StatusCode);
             }
         }

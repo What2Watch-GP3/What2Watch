@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.DataAccess;
 using DataAccess.Interfaces;
 using DataAccess.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using WebApi.DTOs;
-using WebApi.DTOs.Converters;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+//For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -49,9 +46,9 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> PostAsync(BookingDto value)
         {
-            //TODO Add implementations instead of hardcode
+            //TODO: Add implementations instead of hardcode
             //Probably get the show's time and a price based on the seats as well
-            if(!SeatsAreAvailable(value.SeatIds) || !ShowIsValid(value.ShowId))
+            if (!SeatsAreAvailable(value.SeatIds) || !ShowIsValid(value.ShowId))
             {
                 return NotFound();
             }
@@ -59,7 +56,7 @@ namespace WebApi.Controllers
             DateTime showTime = DateTime.Now;
 
             //var booking = DtoConverter<BookingDto, Booking>.From(value);
-            Booking booking = new() { Id = value.Id, TotalPrice =  price, Date = showTime };
+            Booking booking = new() { Id = value.Id, TotalPrice = price, Date = showTime };
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 

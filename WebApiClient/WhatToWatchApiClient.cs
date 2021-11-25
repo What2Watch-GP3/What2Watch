@@ -12,14 +12,14 @@ namespace WebApiClient
         public WhatToWatchApiClient(IRestClient client) => _client = client;
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
-        { 
+        {
             var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies");
 
             if (!response.IsSuccessful) throw new Exception($"Error retreiving all movies. Message was {response.Content}.");
 
             return response.Data;
         }
-            
+
         public async Task<IEnumerable<CinemaDto>> GetCinemasByMovieIdAsync(int movieId)
         {
             var response = await _client.RequestAsync<IEnumerable<CinemaDto>>(Method.GET, $"cinemas?movieId={movieId}");

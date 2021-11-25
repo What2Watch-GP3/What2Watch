@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 
@@ -11,7 +8,6 @@ namespace WebSite.Controllers
     [Route("[controller]")]
     public class ShowsController : Controller
     {
-
         IWhatToWatchApiClient _client;
         public ShowsController(IWhatToWatchApiClient client)
         {
@@ -26,17 +22,14 @@ namespace WebSite.Controllers
 
         // GET: ShowsController/Details/5
         [HttpGet]
-        public async Task <ActionResult> Shows(int movieId, int cinemaId)
+        public async Task<ActionResult> Shows(int movieId, int cinemaId)
         {
-
             TempData["cinemaId"] = cinemaId;
             TempData["movieId"] = movieId;
-            return View(await _client.GetShowsByMovieAndCinemaIdAsync(movieId,cinemaId));
+            return View(await _client.GetShowsByMovieAndCinemaIdAsync(movieId, cinemaId));
         }
 
-       
-
-        // GET: ShowsController/Create
+        /* GET: ShowsController/Create
         public ActionResult Create()
         {
             return View();
@@ -97,6 +90,6 @@ namespace WebSite.Controllers
             {
                 return View();
             }
-        }
+        } */
     }
 }

@@ -3,19 +3,14 @@ using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
 {
     public class CinemaDataAccess : BaseDataAccess<Cinema>, ICinemaDataAccess
     {
-
         public CinemaDataAccess(string connectionString) : base(connectionString)
         {
-            //Values = new List<string> { "id", "name" };
-
         }
         public async Task<IEnumerable<Cinema>> GetListByMovieIdAsync(int movieId)
         {
@@ -27,7 +22,7 @@ namespace DataAccess.DataAccess
             try
             {
                 using var connection = CreateConnection();
-                return await connection.QueryAsync<Cinema>( command, new {MovieId = movieId });
+                return await connection.QueryAsync<Cinema>(command, new { MovieId = movieId });
             }
             catch (Exception ex)
             {

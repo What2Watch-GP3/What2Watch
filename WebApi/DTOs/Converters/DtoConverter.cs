@@ -16,4 +16,4 @@ namespace WebApi.DTOs.Converters
         public static U From(T sourceObject) => mapper.Map<T, U>(sourceObject);
         public static IEnumerable<U> FromList(IEnumerable<T> sourceList) => sourceList.ToList().Select(obj => From(obj));
     }
-} 
+}

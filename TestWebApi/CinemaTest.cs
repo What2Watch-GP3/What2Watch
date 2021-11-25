@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApi.Controllers;
 using StubsClassLibrary;
@@ -17,13 +15,13 @@ namespace TestWebApi
         ObjectResult _objectResult;
 
         [SetUp]
-        public async Task SetUp()
+        public void SetUp()
         {
             _objectResult = null;
         }
 
         [OneTimeSetUp]
-        public async Task OneTimeSetup()
+        public void OneTimeSetup()
         {
             _cinemaController = new CinemasController(new CinemaStub());
         }
@@ -31,17 +29,17 @@ namespace TestWebApi
         [Test]
         public async Task GettingCinemasByMovieIdReturnsListBiggerThan0()
         {
-            //arrange
+            //Arrange
             IEnumerable<CinemaDto> cinemas;
 
-            //act
+            //Act
             var cinemaResult = (await _cinemaController.GetListByMovieIdAsync(1)).Result;
             _objectResult = (ObjectResult)cinemaResult;
             cinemas = (IEnumerable<CinemaDto>)_objectResult.Value;
 
-            //assert
+            //Assert
             Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK(200)");
-            Assert.IsTrue(cinemas.Count() > 0, "List is currently 0");
+            Assert.IsTrue(cinemas.Any(), "List is currently 0");
         }
     }
 }

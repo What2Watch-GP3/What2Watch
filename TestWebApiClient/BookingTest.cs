@@ -13,7 +13,7 @@ namespace TestWebApiClient
         private IWhatToWatchApiClient _webApiIdClient;
 
         [OneTimeSetUp]
-        public async Task OneTimeSetUp()
+        public void OneTimeSetUp()
         {
             BookingDto bookingDto = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = bookingDto });
@@ -23,21 +23,24 @@ namespace TestWebApiClient
         [Test]
         public async Task TestGetBookingById1()
         {
-            // Arrange - In OneTimeSetUp
-            // Act
+            //Arrange - In OneTimeSetUp
+            //Act
             BookingDto actualBookingDto = await _webApiClient.GetBookingByIdAsync(1);
-            // Assert
+
+            //Assert
             Assert.AreEqual(1, actualBookingDto.Id, "Recieved booking wasn't with id 1");
         }
 
         [Test]
         public async Task TestCreateBooking()
         {
-            // Arrange
+            //Arrange
             BookingDto bookingToCreate = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
-            // Act
+
+            //Act
             int actualId = await _webApiIdClient.ConfirmBookingAsync(bookingToCreate);
-            // Assert
+
+            //Assert
             Assert.AreEqual(1, actualId, "Failed to create booking with id 1");
         }
     }

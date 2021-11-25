@@ -18,7 +18,7 @@ namespace DataAccess.DataAccess
         private string ValueParameters => string.Join(", ", RawValues.ToList().Select(property => $"@{property.Trim()}"));
         // ValueUpdates = "total_price=@total_price, date=@date"
         private string ValueUpdates => string.Join(", ", RawValues.ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
-        
+
         protected BaseDataAccess(string connectionstring)
         {
             // Sets TableName to the class' name e.g. 'TableName = "Booking"'
@@ -69,7 +69,7 @@ namespace DataAccess.DataAccess
             try
             {
                 using var connection = CreateConnection();
-                return await connection.QueryFirstOrDefaultAsync<T>(command, new { Id=id });
+                return await connection.QueryFirstOrDefaultAsync<T>(command, new { Id = id });
             }
             catch (Exception ex)
             {

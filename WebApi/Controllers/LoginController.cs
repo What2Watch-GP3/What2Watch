@@ -1,10 +1,5 @@
-﻿using DataAccess.DataAccess;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs;
 using DataAccess.Models;
@@ -27,9 +22,9 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)
         {
-           var user = DtoConverter<UserDto, User>.From(userDto);
+            var user = DtoConverter<UserDto, User>.From(userDto);
 
-           return Ok(await _userDataAccess.LoginAsync(user));
+            return Ok(await _userDataAccess.LoginAsync(user));
         }
     }
 }

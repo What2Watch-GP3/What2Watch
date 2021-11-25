@@ -1,21 +1,14 @@
-﻿using DataAccess.DataAccess;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApi.DTOs;
 using WebApi.DTOs.Converters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebApi.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class MoviesController : ControllerBase
@@ -29,13 +22,12 @@ namespace WebApi.Controllers
 
         // GET: api/<MovieController>
         [HttpGet]
-        public async Task <ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
             var movies = await _movieDataAccess.GetAllAsync();
             var movieDtos = DtoConverter<Movie, MovieDto>.FromList(movies);
             return Ok(movieDtos);
         }
-      
 
         // GET: api/<MovieController>
         [HttpGet("{searchString}")]
@@ -72,14 +64,10 @@ namespace WebApi.Controllers
             }
         }
 
-
-
          POST api/<MovieController>
         [HttpPost]
         public async Task<ActionResult<int>> CreateAsync([FromBody] MovieDto movie)
-        {
-            
-
+        {      
         }*/
 
         /*

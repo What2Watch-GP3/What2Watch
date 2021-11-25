@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<WebApiClient.DTOs.CinemaDto>
 
-
-
-
 @{
     ViewData["Title"] = "List";
     int movieId = (int)TempData["movieId"];
     Dictionary<int, string> titleDictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
-
 
 <h1>Cinemas showing movie: @titleDictionary[movieId].ToString() </h1>
 <!--Return ToString??-->
@@ -17,23 +13,18 @@
 <table class=" table table-hover table-bordered bg-grey text-light ">
     <thead>
         <tr>
-           
-
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-
                 <td>
                     @Html.ActionLink(item.Name, "Shows", "Shows", new { movieId = TempData["movieId"], cinemaId = item.Id })
                 </td>
-                
             </tr>
         }
     </tbody>

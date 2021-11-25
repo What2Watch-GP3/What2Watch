@@ -1,9 +1,6 @@
-﻿using DataAccess.DataAccess;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +27,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<ShowDto>>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
             var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(movieId, cinemaId);
-            if (shows.Count() == 0) //TODO: IsNullOrEmpty
+            if (!shows.Any()) //TODO: IsNullOrEmpty
             {
                 return NotFound();
             }

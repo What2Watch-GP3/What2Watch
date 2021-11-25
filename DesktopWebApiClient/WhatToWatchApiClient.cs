@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DesktopApiClient;
-using RestSharp;
+﻿using RestSharp;
 
 namespace DesktopApiClient
 {
@@ -10,6 +6,5 @@ namespace DesktopApiClient
     {
         private IRestClient _client;
         public WhatToWatchApiClient(IRestClient client) => _client = client;
-
     }
 }

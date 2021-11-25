@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace DataAccess.Model
+﻿namespace DataAccess.Model
 {
     public class Ticket
     {
         public Ticket()
         {
-
         }
     }
 }

@@ -1,9 +1,5 @@
-﻿using DataAccess.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
@@ -20,18 +16,7 @@ namespace WebSite.Controllers
             _client = client;
         }
 
-        // GET: MoviesController
-        /*
-        public ActionResult Index()
-        {
-
-            return RedirectToRoute;
-        }*/
-
-        // GET: MoviesController/Details/5
-        
-
-        // GET: MoviesController/Details/5
+        //GET: MoviesController/Details/5
         [HttpGet]
         [Route("{search?}")]
         public async Task<ActionResult> Index(string search)
@@ -51,18 +36,6 @@ namespace WebSite.Controllers
                 return View(await _client.GetMoviesByPartOfNameAsync(search));
             }
         }
-
-        //TODO: possibly delete
-        /*[HttpGet]
-        [Route("[controller]/{search}")]
-        public async Task<ActionResult> Movies(string search)
-        {
-            ViewData["CurrentFilter"] = search;
-  
-            var movies = await _client.GetMoviesByPartOfNameAsync(search);
-            return View("Index", movies);
-   
-        }*/
 
         /*
         // GET: MoviesController/Create

@@ -3,8 +3,6 @@ using DataAccess.Interfaces;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
@@ -12,13 +10,8 @@ namespace DataAccess.DataAccess
     public class MovieDataAccess : BaseDataAccess<Movie>, IMovieDataAccess
 
     {
-      
-
-        public MovieDataAccess(string connectionString): base(connectionString)
+        public MovieDataAccess(string connectionString) : base(connectionString)
         {
-
-
-           
         }
 
         public async Task<IEnumerable<Movie>> GetListByPartOfNameAsync(string searchString)
@@ -28,7 +21,7 @@ namespace DataAccess.DataAccess
             try
             {
                 using var connection = CreateConnection();
-                movies=await connection.QueryAsync<Movie>(command, new { SearchString =$"%{searchString}%" });
+                movies = await connection.QueryAsync<Movie>(command, new { SearchString = $"%{searchString}%" });
 
                 return movies;
             }
