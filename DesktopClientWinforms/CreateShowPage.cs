@@ -29,7 +29,7 @@ namespace DesktopClientWinforms
 
         private void CreateShow()
         {
-            ShowDto show = new ShowDto() 
+            ShowDto show = new() 
             { 
                 StartTime = datePicker.Value,
                 RoomId = int.Parse(txtRoomId.Text),

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace DesktopClientWinforms
 {
@@ -24,17 +25,16 @@ namespace DesktopClientWinforms
             var services = new ServiceCollection();
             ConfigureServices(services);
 
-            using (ServiceProvider serviceProvider = services.BuildServiceProvider())
-            {
-                var desktopClientForm = serviceProvider.GetRequiredService<DesktopClientForm>();
-                Application.Run(desktopClientForm);
-            }
+            using ServiceProvider serviceProvider = services.BuildServiceProvider();
+            var desktopClientForm = serviceProvider.GetRequiredService<DesktopClientForm>();
+            Application.Run(desktopClientForm);
         }
 
         private static void ConfigureServices(ServiceCollection services)
         {
-            services.AddSingleton();
-            //services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IBookingDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            string webApiUri = ConfigurationManager.ConnectionStrings["webApiUri"].ConnectionString;
+            services.AddSingleton((desktopApiClient) => DesktopApiClientFactory.GetDesktopApiClient<IWhatToWatchApiClient>(webApiUri));
+            services.AddScoped<DesktopClientForm>();
         }
     }
 }
