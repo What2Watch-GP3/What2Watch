@@ -9,7 +9,12 @@ namespace DataAccess.DataAccess
 {
     public class ShowDataAccess : BaseDataAccess<Show>, IShowDataAccess
     {
-        public ShowDataAccess(string connectionString) : base(connectionString) { }
+
+        public ShowDataAccess(string connectionString) : base(connectionString)
+        {
+            Values = new List<string> { "start_time", "movie_id", "room_id" };
+        }
+        
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {

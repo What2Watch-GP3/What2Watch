@@ -42,5 +42,16 @@ namespace TestDataAccess
             Assert.IsTrue(shows.Count > 0, "List of shows is currently 0");
             Assert.AreEqual(expectedStartTime, shows[0].StartTime.ToString("G", CultureInfo.CreateSpecificCulture("de-DE")), "The time was wrong.");
         }
+
+        [Test]
+        public async Task InsertingShowInDatabaseReturningId()
+        {
+            //arrange
+            Show show = new() { StartTime = DateTime.Now, MovieId = 1, RoomId = 1 };
+            //act
+            int actualId = await _showDataAccess.CreateAsync(show);
+            //assert
+            Assert.IsTrue(actualId > 0, $"Created Show returned wrong id {actualId}");
+        }
     }
 }
