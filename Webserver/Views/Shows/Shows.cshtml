@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApiClient.DTOs.ShowDto>
+
+@{
+    ViewData["Title"] = "Shows";
+    int cinemaId =(int) TempData["cinemaId"];
+
+    var nameDictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["nameDictionary"].ToString());
+    
+}
+
+<h1>Shows @nameDictionary[cinemaId]  </h1>
+
+
+<table class="table table-hover table-bordered bg-grey text-light">
+    <thead>
+        <tr>
+            <th>
+                Starttime
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

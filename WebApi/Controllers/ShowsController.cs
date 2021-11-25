@@ -20,11 +20,6 @@ namespace WebApi.Controllers
     {
         IShowDataAccess _showDataAccess;
 
-        public ShowsController(IConfiguration configuration)
-        {
-            _showDataAccess = new ShowDataAccess(configuration.GetConnectionString("DefaultConnection")); ;
-        }
-
         public ShowsController(IShowDataAccess showDataAccess)
         {
             _showDataAccess = showDataAccess;
@@ -35,7 +30,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<ShowDto>>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
             var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(movieId, cinemaId);
-            if (shows.Count() < 0)
+            if (shows.Count() == 0) //TODO: IsNullOrEmpty
             {
                 return NotFound();
             }

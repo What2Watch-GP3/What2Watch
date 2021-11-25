@@ -9,14 +9,13 @@ namespace TestWebApiClient
 {
     class BookingTest
     {
-
         private IWhatToWatchApiClient _webApiClient;
         private IWhatToWatchApiClient _webApiIdClient;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
-            BookingDto bookingDto = new BookingDto() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
+            BookingDto bookingDto = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = bookingDto });
             _webApiIdClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = 1 });
         }
@@ -28,7 +27,7 @@ namespace TestWebApiClient
             // Act
             BookingDto actualBookingDto = await _webApiClient.GetBookingByIdAsync(1);
             // Assert
-            Assert.AreEqual(actualBookingDto.Id, 1, "Recieved booking wasn't with id 1");
+            Assert.AreEqual(1, actualBookingDto.Id, "Recieved booking wasn't with id 1");
         }
 
         [Test]
@@ -37,9 +36,9 @@ namespace TestWebApiClient
             // Arrange
             BookingDto bookingToCreate = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
             // Act
-            int actualId = await _webApiIdClient.CreateBookingAsync(bookingToCreate);
+            int actualId = await _webApiIdClient.ConfirmBookingAsync(bookingToCreate);
             // Assert
-            Assert.AreEqual(actualId, 1, "Failed to create booking with id 1");
+            Assert.AreEqual(1, actualId, "Failed to create booking with id 1");
         }
     }
 }

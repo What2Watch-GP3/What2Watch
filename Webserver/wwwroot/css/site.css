@@ -8,8 +8,58 @@ a.navbar-brand {
 }
 
 /* Provide sufficient contrast against white background */
+h1 {
+    color: white;
+}
+
+.background-image {
+    background-image: url("../pics/film.jpg");
+   
+
+    background-size: cover;
+
+    
+}
+
+
+header {
+    width: 100%;
+}
+
+
+
 a {
-  color: #0366d6;
+  color: white;
+  text-decoration:none;
+}
+a:hover {
+    color:lightgray;
+    text-decoration:none;
+}
+
+
+a:active {
+     color: lightgray;
+     text-decoration: none;
+ }
+
+
+.bg-black {
+    background-color:#222629;
+    opacity:0.9;
+
+    
+}
+
+.bg-grey {
+    background-color: #474B4F;
+    opacity:0.8;
+    
+}
+
+.bg-lightgrey {
+    background-color: #6B6E70;
+    opacity: 0.8;
 }
 
 .btn-primary {
@@ -62,10 +112,22 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+.table-row {
+    text-decoration: none;
+}
+
+
+/* ASP form changes
+-------------------------------------------------- */
+.control-label {
+    color: white !important;
 }

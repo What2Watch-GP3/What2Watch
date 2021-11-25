@@ -40,7 +40,7 @@ namespace WebApiClient
 
         public async Task<IEnumerable<MovieDto>> GetMoviesByPartOfNameAsync(string searchString)
         {
-            var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies?search={searchString}");
+            var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies/{searchString}");
 
             if (!response.IsSuccessful) throw new Exception($"Error searching movies by part of name with searchString {searchString}. Message was {response.Content}.");
 
@@ -56,9 +56,9 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<int> CreateBookingAsync(BookingDto booking)
+        public async Task<int> ConfirmBookingAsync(BookingDto booking)
         {
-            var response = await _client.RequestAsync<int>(Method.POST, $"booking", booking);
+            var response = await _client.RequestAsync<int>(Method.POST, $"bookings", booking);
 
             if (!response.IsSuccessful) throw new Exception($"Error creating booking. Message was {response.Content}");
 
@@ -67,11 +67,24 @@ namespace WebApiClient
 
         public async Task<BookingDto> GetBookingByIdAsync(int id)
         {
-            var response = await _client.RequestAsync<BookingDto>(Method.GET, $"booking/{id}");
+            var response = await _client.RequestAsync<BookingDto>(Method.GET, $"bookings/{id}");
 
             if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
 
             return response.Data;
+        }
+
+        public async Task<UserDto> LoginAsync(UserDto userDto)
+        {
+            var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
+            if (!response.IsSuccessful)
+            {
+                //TODO: based on response statuscode, do smth
+                throw new Exception($"Error login in for userDto email={userDto.Email}");
+            }
+            userDto.Id = (int)response.Data;
+            userDto.Password = "";
+            return userDto;
         }
     }
 }

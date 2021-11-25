@@ -30,7 +30,7 @@ namespace TestBookingWebApi
                 Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
 
                 Booking booking = (Booking)objRes.Value;
-                Assert.AreEqual(booking.Id, 3, "Booking id 3 was not recieved");
+                Assert.AreEqual(3, booking.Id, "Booking id 3 was not recieved");
             }
             else if (actionResult is StatusCodeResult scr)
             {
@@ -52,8 +52,7 @@ namespace TestBookingWebApi
                 Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
 
                 int bookingId = (int) objRes.Value;
-                Assert.AreEqual(bookingId, newBooking.Id, "Booking wasn't created");
-
+                Assert.AreEqual(newBooking.Id, bookingId, "Booking wasn't created");
             }
             else if (idActionResult is StatusCodeResult scr)
             {

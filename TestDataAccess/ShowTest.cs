@@ -4,6 +4,7 @@ using DataAccess.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,13 +32,15 @@ namespace TestDataAccess
         }
 
         [Test]
-        public async Task GettingAListOfShowsByMovieAndCinemaReturnsListBiggerThan0()
+        public async Task GettingAListOfShowsByMovieAndCinemaReturnsListBiggerThan0WithCorrectDate()
         {
             //act
-            var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(1,1);
+            var shows = (await _showDataAccess.GetListByMovieAndCinemaIdAsync(1, 1)).ToList();
+            string expectedStartTime = "17.11.2021 18:00:00";
 
             //assert
             Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");
+            Assert.AreEqual(expectedStartTime, shows[0].StartTime.ToString("G", CultureInfo.CreateSpecificCulture("de-DE")), "The time was wrong.");
         }
 
         [Test]
