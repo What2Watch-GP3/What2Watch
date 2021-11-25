@@ -46,6 +46,23 @@ namespace WebApi.Controllers
             }
         }
 
+        //POST api/<ShowController>
+        [HttpPost]
+        public async Task<ActionResult<int>> CreateShowAsync([FromBody] ShowDto showDto)
+        {
+            if (showDto != null)
+            {
+                var show = DtoConverter<ShowDto, Show>.From(showDto);
+                var showId = await _showDataAccess.CreateAsync(show);
+                return Ok(showId);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+
         /*
         // GET api/<ShowController>/5
         [HttpGet("{id}")]
@@ -54,11 +71,7 @@ namespace WebApi.Controllers
             return "value";
         }
 
-        // POST api/<ShowController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+      
 
         // PUT api/<ShowController>/5
         [HttpPut("{id}")]

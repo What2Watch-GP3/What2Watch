@@ -24,11 +24,11 @@ namespace TestDesktopApiClient
         public async Task CreatedShowIdIsReturned()
         {
             //act
-            ShowDto show = new ShowDto() { Id = 1, StartTime = DateTime.Now };
+            ShowDto show = new ShowDto() { StartTime = DateTime.Now, RoomId = 1,MovieId = 1 };
             var showId = await _stubsClient.CreateShowAsync(show);
 
             //assert
-            Assert.AreEqual(1, showId, "Returned Show id was not the same");
+            Assert.IsTrue(showId > 0, $"Wrong show id returned, was {showId}");
         }
     }
 }

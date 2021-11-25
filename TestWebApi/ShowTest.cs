@@ -43,5 +43,33 @@ namespace TestWebApi
             Assert.AreEqual(200, _objectResult.StatusCode, "Status coda was not OK (200).");
             Assert.IsTrue(shows.Count() > 0, "The List is empty.");
         }
+
+        [Test]
+        public async Task CreatingShowGettingTheRightStatusCode()
+        {
+            //arrange
+            ShowDto show = null;
+            //act
+            var showResult = (await _showController.CreateShowAsync(show)).Result;
+            _objectResult = (ObjectResult)showResult;
+            int showId = (int)_objectResult.Value;
+            //assert
+            Assert.AreEqual(400, _objectResult.StatusCode, "Status coda was not BadRequest (400).");
+            Assert.IsTrue(showId > 0, $"Returned id was not more than 0. It was {showId}");
+        }
+
+        [Test]
+        public async Task CreatingShowWithNullShowDtoGivesBadRequestResponse()
+        {
+            //arrange
+            ShowDto show = new() { StartTime = DateTime.Now, MovieId = 1, RoomId = 1 };
+            //act
+            var showResult = (await _showController.CreateShowAsync(show)).Result;
+            _objectResult = (ObjectResult)showResult;
+            int showId = (int)_objectResult.Value;
+            //assert
+            Assert.AreEqual(200, _objectResult.StatusCode, "Status coda was not OK (200).");
+            Assert.IsTrue(showId > 0, $"Returned id was not more than 0. It was {showId}");
+        }
     }
 }

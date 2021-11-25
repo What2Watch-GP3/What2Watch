@@ -14,7 +14,7 @@ namespace DataAccess.DataAccess
 
         public ShowDataAccess(string connectionString) : base(connectionString)
         {
-
+            Values = new List<string> { "start_time", "movie_id", "room_id" };
         }
         
 

@@ -18,12 +18,8 @@ namespace DesktopClientWinforms
 
         public CreateShowPage(IWhatToWatchApiClient client)
         {
-            _client = client;
-        }
-
-        public CreateShowPage()
-        {
             InitializeComponent();
+            _client = client;
         }
 
         private void btnCreateShow_Click(object sender, EventArgs e)

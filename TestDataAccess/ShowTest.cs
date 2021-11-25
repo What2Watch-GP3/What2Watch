@@ -39,5 +39,16 @@ namespace TestDataAccess
             //assert
             Assert.IsTrue(shows.Count() > 0, "List of shows is currently 0");
         }
+
+        [Test]
+        public async Task InsertingShowInDatabaseReturningId()
+        {
+            //arrange
+            Show show = new() { StartTime = DateTime.Now, MovieId = 1, RoomId = 1 };
+            //act
+            int actualId = await _showDataAccess.CreateAsync(show);
+            //assert
+            Assert.IsTrue(actualId > 0, $"Created Show returned wrong id {actualId}");
+        }
     }
 }
