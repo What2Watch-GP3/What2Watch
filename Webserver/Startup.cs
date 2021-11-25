@@ -26,7 +26,7 @@ namespace Webserver
         {
             services.AddControllersWithViews();
             services.AddMemoryCache();
-            services.AddScoped<IWhatToWatchApiClient>((webApiClient) => new WhatToWatchApiClient(new RestClient(Configuration["WebApiURI"])));
+            services.AddSingleton((webApiClient) => WebApiClientFactory.GetWebApiClient<IWhatToWatchApiClient>(Configuration["WebApiURI"]));
             services.AddSession();
             //JWT Usage
             services.AddAuthentication(auth =>

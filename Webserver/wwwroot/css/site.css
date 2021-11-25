@@ -124,3 +124,10 @@ body {
 .table-row {
     text-decoration: none;
 }
+
+
+/* ASP form changes
+-------------------------------------------------- */
+.control-label {
+    color: white !important;
+}
