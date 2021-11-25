@@ -10,7 +10,7 @@ using WebApiClient;
 
 namespace WebSite.Controllers
 {
-    [Route("[controller]")]
+    //[Route("{Movies?}")]
     public class MoviesController : Controller
     {
         IWhatToWatchApiClient _client;
@@ -19,21 +19,21 @@ namespace WebSite.Controllers
         {
             _client = client;
         }
-
-        // GET: MoviesController
-        /*
-        public ActionResult Index()
-        {
-
-            return RedirectToRoute;
-        }*/
-
-        // GET: MoviesController/Details/5
-        
-
-        // GET: MoviesController/Details/5
+        //Get method for the Index page
         [HttpGet]
-        [Route("{search?}")]
+        public async Task<ActionResult> Index()
+        {
+            var movies = await _client.GetAllMoviesAsync();
+            ViewBag.TextValue = "";
+            var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
+            TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
+            return View(movies);
+        }
+
+        //Get method for movies/ or movies/{string} or movies?search={string}
+        //or if you hit the search bar both in index and in movies/
+        [HttpGet]
+        [Route("[controller]/{search?}")]
         public async Task<ActionResult> Index(string search)
         {
             if (string.IsNullOrEmpty(search))
