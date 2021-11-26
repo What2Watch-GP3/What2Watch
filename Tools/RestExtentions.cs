@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using RestSharp;
+﻿using RestSharp;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace WebApiClient
+namespace Tools
 {
-    static class RestExtentions
+    public static class RestExtentions
     {
         public static async Task<IRestResponse<T>> RequestAsync<T>(this IRestClient client, Method method, string resource = null, object body = null)
         {
