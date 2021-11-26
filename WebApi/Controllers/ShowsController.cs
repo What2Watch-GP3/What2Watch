@@ -26,6 +26,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShowDto>>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
+
+
             var shows = await _showDataAccess.GetListByMovieAndCinemaIdAsync(movieId, cinemaId);
             if (!shows.Any()) //TODO: IsNullOrEmpty
             {

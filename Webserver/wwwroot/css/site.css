@@ -8,41 +8,37 @@ a.navbar-brand {
 }
 
 /* Provide sufficient contrast against white background */
-/*h1 {
-    color: white;
+h1 {
+    padding-top: 5%;
 }
 
-.background-image {
-    background-image: url("../pics/film.jpg");
-   
 
-    background-size: cover;
-
-    
-}
-*/
 
 header {
     width: 100%;
 }
 
 
-/*
 a {
-  color: white;
-  text-decoration:none;
-}
-a:hover {
-    color:lightgray;
+    color:black;
     text-decoration:none;
+}
+
+a:hover {
+    color:dimgray;
+    text-decoration:none;
+}
+
+td:hover {
+   cursor:pointer;
 }
 
 
 a:active {
-     color: lightgray;
-     text-decoration: none;
- }
-    */
+    color: dimgray;
+    text-decoration: none;
+}
+    
 
 .bg-black {
     background-color:#222629;

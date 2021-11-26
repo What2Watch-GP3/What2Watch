@@ -1,13 +1,14 @@
-﻿@model IEnumerable<WebApiClient.DTOs.ShowDto>
+﻿@using WebApiClient.DTOs
+@model dynamic
 
 @{
     ViewData["Title"] = "Shows";
-    int cinemaId = (int)TempData["cinemaId"];
-
-    var nameDictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["nameDictionary"].ToString());
+    IEnumerable<WebApiClient.DTOs.ShowDto> shows = Model.Shows;
+    string cinemaName = Model.CinemaName;
+    string movieTitle = Model.MovieTitle;
 }
 
-<h1>Shows @nameDictionary[cinemaId]  </h1>
+<h1>Shows in @cinemaName for @movieTitle </h1>
 
 
 <table class="table table-hover table-bordered">
@@ -18,8 +19,8 @@
             </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
+    <tbody class="clickable-table">
+        @foreach (var item in shows)
         {
             <tr>
                 <td>

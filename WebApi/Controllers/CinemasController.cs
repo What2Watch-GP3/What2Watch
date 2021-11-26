@@ -34,14 +34,25 @@ namespace WebApi.Controllers
             return Ok(cinemaDtos);
         }
 
-        /*
+        
         // GET api/<CinemaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<CinemaDto>> GetCinemaById(int id)
         {
-            return "value";
+            var cinema = await _cinemaDataAccess.GetByIdAsync(id);
+            if (cinema == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var cinemaDto = DtoConverter<Cinema, CinemaDto>.From(cinema);
+                return Ok(cinemaDto);
+            }
         }
 
+
+        /*
         // POST api/<CinemaController>
         [HttpPost]
         public void Post([FromBody] string value)
