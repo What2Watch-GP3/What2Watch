@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesktopApiClient.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,9 @@ namespace DesktopApiClient.DTOs
         public DateTime StartTime { get; set; }
         public int RoomId { get; set; }
         public int MovieId { get; set; }
+        public Language DubLanguage { get; set; }
+        public Language SubtitlesLanguage { get; set; }
+        public GraphicType GraphicType { get; set; }
+        public SoundType SoundType { get; set; }
     }
 }

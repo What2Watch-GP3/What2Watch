@@ -12,7 +12,7 @@ namespace DataAccess.DataAccess
 
         public ShowDataAccess(string connectionString) : base(connectionString)
         {
-            Values = new List<string> { "start_time", "movie_id", "room_id" };
+            Values = new List<string> { "start_time", "movie_id", "room_id", "dub_language", "subtitles_language", "graphic_type", "sound_type" };
         }
         
 
