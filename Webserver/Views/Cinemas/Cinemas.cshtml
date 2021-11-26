@@ -1,12 +1,13 @@
-﻿@model IEnumerable<WebApiClient.DTOs.CinemaDto>
+﻿@using WebApiClient.DTOs
+@model dynamic
 
 @{
     ViewData["Title"] = "List";
-    int movieId = (int)TempData["movieId"];
-    Dictionary<int, string> titleDictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
+    IEnumerable<WebApiClient.DTOs.CinemaDto> cinemas = Model.Cinemas;
+    int movieId = Model.MovieId;
 }
 
-<h1>Cinemas showing movie: @titleDictionary[movieId].ToString() </h1>
+<h1>Cinemas showing movie: @Model.MovieTitle </h1>
 <!--Return ToString??-->
 
 
@@ -14,16 +15,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Cinemas
             </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
+    <tbody class="clickable-table">
+        @foreach (var item in cinemas)
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.Name, "Shows", "Shows", new { movieId = TempData["movieId"], cinemaId = item.Id })
+                    @Html.ActionLink(item.Name, "Shows", "Shows", new { movieId = movieId, cinemaId = item.Id })
                 </td>
             </tr>
         }

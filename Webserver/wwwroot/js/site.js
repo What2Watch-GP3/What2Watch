@@ -14,22 +14,23 @@ $(document).ready(function () {
     });
 
     //grabs the movie table and the a href from the table cell and applies it to the whole cell.
-    if (document.getElementById("movies-table") != null)
+    */
+    if (document.getElementsByClassName("clickable-table") != null)
     {
-        const rows = document.getElementById("movies-table").children;
+        const rows = document.getElementsByClassName("clickable-table")[0].children;
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-            //console.log(row);
-            //console.log(row.children[0].children[0].getAttribute("href"));
+            console.log(row);
+            console.log(row.children[0].children[0].getAttribute("href"));
             //console.log(row.firstChild.children().find('a').attr("href"));
 
             row.addEventListener("click", () => {
                 window.location.href = "" + row.children[0].children[0].getAttribute("href");
             });
-            row.
+
         }
     }
-    */
+    
 }
 
 );

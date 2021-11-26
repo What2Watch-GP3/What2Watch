@@ -86,5 +86,14 @@ namespace WebApiClient
             userDto.Password = "";
             return userDto;
         }
+
+        public async Task <CinemaDto> GetCinemaByIdAsync(int cinemaId)
+        {
+            var response = await _client.RequestAsync<CinemaDto>(Method.GET, $"cinemas/{cinemaId}");
+
+            if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {cinemaId}. Message was {response.Content}");
+
+            return response.Data;
+        }
     }
 }

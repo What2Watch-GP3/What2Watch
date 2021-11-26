@@ -47,9 +47,9 @@ namespace WebApi.Controllers
             return Ok(matchingMovieDtos);
         }
 
-        /*
+        
         // GET api/<MovieController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<MovieDto>> GetByIdAsync(int id)
         {
             var movie = await _movieDataAccess.GetByIdAsync(id);
@@ -64,6 +64,7 @@ namespace WebApi.Controllers
             }
         }
 
+        /*
          POST api/<MovieController>
         [HttpPost]
         public async Task<ActionResult<int>> CreateAsync([FromBody] MovieDto movie)
