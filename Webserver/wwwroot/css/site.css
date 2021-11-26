@@ -8,7 +8,7 @@ a.navbar-brand {
 }
 
 /* Provide sufficient contrast against white background */
-h1 {
+/*h1 {
     color: white;
 }
 
@@ -20,14 +20,14 @@ h1 {
 
     
 }
-
+*/
 
 header {
     width: 100%;
 }
 
 
-
+/*
 a {
   color: white;
   text-decoration:none;
@@ -42,7 +42,7 @@ a:active {
      color: lightgray;
      text-decoration: none;
  }
-
+    */
 
 .bg-black {
     background-color:#222629;
@@ -125,9 +125,31 @@ body {
     text-decoration: none;
 }
 
+header {
+    position: relative;
+    z-index: 1;
+}
+
+
 
 /* ASP form changes
 -------------------------------------------------- */
+
+/*
 .control-label {
     color: white !important;
 }
+
+.dropdown-menu a {
+    color: black !important;
+}
+*/
+/*
+#search {
+    z-index: -1;
+    position: relative;
+}*/
+
+
+/* Movies table changes
+-------------------------------------------------- */

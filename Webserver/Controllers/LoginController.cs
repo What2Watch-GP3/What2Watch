@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +28,7 @@ namespace WebSite.Controllers
             _webApiClient = whatToWatchApi;
         }
         // GET: LoginController
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
         {
@@ -59,7 +57,7 @@ namespace WebSite.Controllers
                     {
                         return RedirectToAction(returnUrl);
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Movies");
                 }
                 else
                 {

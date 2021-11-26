@@ -53,7 +53,7 @@ namespace WebSite.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Movies", "Index");
             }
             catch
             {

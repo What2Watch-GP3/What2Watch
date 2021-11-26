@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,14 @@ namespace WebSite.Controllers
         }
 
         // GET: BookingsController/Details/5
+        [HttpGet]
         public async Task<ActionResult> Details(int id)
         {
             return View(await _client.GetBookingByIdAsync(id));
         }
 
         // GET: BookingsController/Confirm
+        [HttpGet]
         public async Task<ActionResult> Confirm()
         {
             //TODO Implement actual values instead of hardcoded
@@ -43,7 +46,7 @@ namespace WebSite.Controllers
             {
                 if(answer == "Decline")
                 {
-                    return RedirectToAction(nameof(Index), "Home");
+                    return RedirectToAction(nameof(Index), "Movies");
                 }
 
                 //TODO Implement getting the seat ids instead of hardcode
@@ -51,7 +54,7 @@ namespace WebSite.Controllers
                 int id = await _client.ConfirmBookingAsync(bookings);
                 if (id > 0)
                 {
-                    return RedirectToAction(nameof(Index), "Home");
+                    return RedirectToAction(nameof(Index), "Movies");
                 }
                 else
                 {
