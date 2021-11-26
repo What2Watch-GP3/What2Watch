@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ namespace WebSite.Controllers
 
         // GET: BookingsController/Details/5
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> Details(int id)
         {
             return View(await _client.GetBookingByIdAsync(id));

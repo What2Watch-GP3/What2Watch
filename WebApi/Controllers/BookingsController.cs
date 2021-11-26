@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.Interfaces;
 using DataAccess.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 
@@ -44,6 +45,7 @@ namespace WebApi.Controllers
 
         // POST api/<BookingController>
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<int>> PostAsync(BookingDto value)
         {
             //TODO: Add implementations instead of hardcode
