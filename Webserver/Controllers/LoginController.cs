@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -16,20 +17,25 @@ namespace WebSite.Controllers
     public class LoginController : Controller
     {
         private IWhatToWatchApiClient _webApiClient;
-        private const double EXPIRY_DURATION_MINUTES = 30;
-        private string _generatedToken = null;
-        private IConfiguration _config;
 
-        public LoginController(IConfiguration config, IWhatToWatchApiClient whatToWatchApi)
+        public LoginController(IWhatToWatchApiClient whatToWatchApi)
         {
-            _config = config;
             _webApiClient = whatToWatchApi;
         }
         // GET: LoginController
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Login()
+        public async Task<ActionResult> LoginAsync([FromQuery] string returnUrl)
         {
+            if (await HasValidTokenAsync())
+            {
+                if (!String.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                return RedirectToAction("Index", "Movies");
+            }
             return View();
         }
         // POST: LoginController/Create
@@ -37,11 +43,25 @@ namespace WebSite.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([FromForm] UserDto loginInfo, [FromQuery] string returnUrl)
+        public async Task<IActionResult> Login([FromForm] UserDto loginInfo, string returnUrl="")
         {
 
-            UserDto userDto = await _webApiClient.LoginAsync(loginInfo);
+            String token = await _webApiClient.LoginAsync(loginInfo);
+            if (!String.IsNullOrEmpty(token))
+            {
+                //Currently the token is saved in the webApi which is a singleton - future improvement. Develop a IRestClient middleware to make it work.
+                //HttpContext.Session.SetString("JWTToken", token);
+                _webApiClient.JWTToken = token;
+                if (!String.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                return RedirectToAction("Index", "Movies");
+            }
 
+            TempData["ErrorMessage"] = "Wrong User email or Password";
+            return View();
+            /*
             if (userDto.Id == -1)
             {
                 ViewBag.ErrorMessage = "Wrong User email or Password";
@@ -63,50 +83,12 @@ namespace WebSite.Controllers
                     ViewBag.ErrorMessage = "Error logging in";
                 }
             }
-            return View();
+            */
         }
-
-        //TODO: export these methods to an external static class for JWT handling.
-        public string BuildToken(string key, string issuer, string audience, UserDto user)
+        private async Task<bool> HasValidTokenAsync()
         {
-            //TODO: add roles
-            var claims = new[] {
-                new Claim("user_id", user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Email),
-                //new Claim(ClaimTypes.Role, "Admin"),
-                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
-            };
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-            var tokenDescriptor = new JwtSecurityToken(issuer, audience, claims,
-                expires: DateTime.Now.AddMinutes(EXPIRY_DURATION_MINUTES), signingCredentials: credentials);
-            return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
-        }
-
-        public bool IsTokenValid(string key, string issuer, string token)
-        {
-            var mySecret = Encoding.UTF8.GetBytes(key);
-            var mySecurityKey = new SymmetricSecurityKey(mySecret);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            try
-            {
-                //TODO: implement checking Issuer and Audience
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidIssuer = issuer,
-                    ValidAudience = issuer,
-                    IssuerSigningKey = mySecurityKey,
-                }, out SecurityToken validatedToken);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
+            return await _webApiClient.HasValidToken();
         }
     }
 }

@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,26 +26,6 @@ namespace Webserver
             services.AddMemoryCache();
             services.AddSingleton((webApiClient) => WebApiClientFactory.GetWebApiClient<IWhatToWatchApiClient>(Configuration["WebApiURI"]));
             services.AddSession();
-            //JWT Usage
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                //auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    //TODO:Make sure to validate Issuer.
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
-            });
         }
 
         //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,17 +42,17 @@ namespace Webserver
                 app.UseHsts();
             }
             app.UseSession();
+
             //JWT Usage
             app.Use(async (context, next) =>
             {
-                var token = context.Session.GetString("Token");
+                var token = context.Session.GetString("JWTToken");
                 if (!string.IsNullOrEmpty(token))
                 {
-                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+                    context.Request.Headers.Add("Authorization", $"Bearer {token}");
                 }
                 await next();
             });
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

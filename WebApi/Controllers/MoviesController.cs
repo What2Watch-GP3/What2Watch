@@ -1,5 +1,7 @@
 ﻿using DataAccess.Interfaces;
 using DataAccess.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,8 +11,8 @@ using WebApi.DTOs.Converters;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class MoviesController : ControllerBase
     {
         IMovieDataAccess _movieDataAccess;
@@ -22,17 +24,32 @@ namespace WebApi.Controllers
 
         // GET: api/<MovieController>
         [HttpGet]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
+            var headers = this.Request;
+            if (headers.Headers.ContainsKey("Authorization"))
+            {
+                headers.Headers.TryGetValue("Authorization", out var temp);
+                var anotherTemp = temp;
+            }
             var movies = await _movieDataAccess.GetAllAsync();
             var movieDtos = DtoConverter<Movie, MovieDto>.FromList(movies);
             return Ok(movieDtos);
         }
 
         // GET: api/<MovieController>
+        [Authorize]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
+            var headers = this.Request.Headers;
+            if (headers.ContainsKey("Authorization"))
+            {
+                headers.TryGetValue("Authorization", out var temp);
+                var anotherTemp = temp;
+            }
             IEnumerable<Movie> matchingMovies;
             IEnumerable<MovieDto> matchingMovieDtos;
             if (!string.IsNullOrEmpty(searchString))

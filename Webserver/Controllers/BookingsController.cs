@@ -19,7 +19,6 @@ namespace WebSite.Controllers
 
         // GET: BookingsController/Details/5
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> Details(int id)
         {
             return View(await _client.GetBookingByIdAsync(id));
@@ -54,6 +53,11 @@ namespace WebSite.Controllers
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(Index), "Movies");
+                }
+                else if (id == -403)
+                {
+                    TempData["ErrorMessage"] = "You are not logged in!";
+                    return RedirectToAction("Login", "Login", new { returnUrl = Request.Path.Value});
                 }
                 else
                 {
