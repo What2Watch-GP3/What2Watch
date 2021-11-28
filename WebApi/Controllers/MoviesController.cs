@@ -39,7 +39,6 @@ namespace WebApi.Controllers
         }
 
         // GET: api/<MovieController>
-        [Authorize]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)

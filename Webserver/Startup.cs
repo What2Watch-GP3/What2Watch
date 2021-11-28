@@ -42,17 +42,6 @@ namespace Webserver
                 app.UseHsts();
             }
             app.UseSession();
-
-            //JWT Usage
-            app.Use(async (context, next) =>
-            {
-                var token = context.Session.GetString("JWTToken");
-                if (!string.IsNullOrEmpty(token))
-                {
-                    context.Request.Headers.Add("Authorization", $"Bearer {token}");
-                }
-                await next();
-            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

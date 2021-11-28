@@ -18,12 +18,16 @@ namespace WebApiClient
                 _jwtToken = value;
                 if (_client != null)
                 { 
-                    _client.AddDefaultParameter("Authorization", $"Bearer {_jwtToken}", ParameterType.HttpHeader);
+                    _client.AddDefaultParameter("X-Access-Token", _jwtToken, ParameterType.Cookie);
                 }
             }
         }
 
-        public WhatToWatchApiClient(IRestClient client) => _client = client;
+        public WhatToWatchApiClient(IRestClient client)
+        {
+            _client = client;
+            _client.CookieContainer = new System.Net.CookieContainer();
+        }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
         {
@@ -99,14 +103,15 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<string> LoginAsync(UserDto userDto)
+        //TODO: Make this return a full UserDto in order to display user details later
+        public async Task<int> LoginAsync(UserDto userDto)
         {
-            var response = await _client.RequestAsync<string>(Method.POST, "login", userDto);
+            var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
             if (!response.IsSuccessful)
             {
                 if ((int)response.StatusCode == 404)
                 {
-                    return "";
+                    return -1;
                 }
                 //TODO: based on response statuscode, do smth
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
@@ -114,8 +119,7 @@ namespace WebApiClient
             //userDto.Id = (int)response.Data;
             //userDto.Password = "";
 
-            //Convert.ToString used as it handles null values.
-            return Convert.ToString(response.Data);
+            return (int)response.Data;
         }
 
         public async Task<bool> HasValidToken()

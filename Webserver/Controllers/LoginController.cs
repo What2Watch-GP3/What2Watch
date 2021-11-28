@@ -46,12 +46,11 @@ namespace WebSite.Controllers
         public async Task<IActionResult> Login([FromForm] UserDto loginInfo, string returnUrl="")
         {
 
-            String token = await _webApiClient.LoginAsync(loginInfo);
-            if (!String.IsNullOrEmpty(token))
+            loginInfo.Id = await _webApiClient.LoginAsync(loginInfo);
+            if (loginInfo.Id > 0)
             {
-                //Currently the token is saved in the webApi which is a singleton - future improvement. Develop a IRestClient middleware to make it work.
-                //HttpContext.Session.SetString("JWTToken", token);
-                _webApiClient.JWTToken = token;
+                //TODO: do smth with user data in order to display it.
+                TempData["UserEmail"] = loginInfo.Email;
                 if (!String.IsNullOrEmpty(returnUrl))
                 {
                     return Redirect(returnUrl);
@@ -61,33 +60,9 @@ namespace WebSite.Controllers
 
             TempData["ErrorMessage"] = "Wrong User email or Password";
             return View();
-            /*
-            if (userDto.Id == -1)
-            {
-                ViewBag.ErrorMessage = "Wrong User email or Password";
-            }
-            else
-            {
-                _generatedToken = BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), _config["Jwt:Audience"].ToString(), userDto);
-                if (_generatedToken != null)
-                {
-                    if (!String.IsNullOrEmpty(returnUrl))
-                    {
-                        return RedirectToAction(returnUrl);
-                    }
-                    return RedirectToAction("Index", "Movies");
-                }
-                else
-                {
-                    //TODO: consider changing the "error" to smth more descriptive
-                    ViewBag.ErrorMessage = "Error logging in";
-                }
-            }
-            */
         }
         private async Task<bool> HasValidTokenAsync()
         {
-
             return await _webApiClient.HasValidToken();
         }
     }

@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,7 +41,12 @@ namespace WebApi.Controllers
             {
                 //Authenticate
                 string jwtToken = GenerateToken(userDto);
-                return Ok(jwtToken);
+
+                Response.Cookies.Append("X-Access-Token", jwtToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                //Response.Cookies.Append("X-Email", user.Email, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                //Response.Cookies.Append("X-Refresh-Token", user.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+
+                return Ok(userDto.Id);
             }
             else
             {
@@ -52,14 +58,15 @@ namespace WebApi.Controllers
         //[Route("validateToken")]
         public async Task<ActionResult<bool>> ValidateTokenAsync()
         {
+            if (!Request.Cookies.TryGetValue("X-Access-Token", out var token))
+            {
+                return false;
+            }
             var mySecret = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
             var mySecurityKey = new SymmetricSecurityKey(mySecret);
             var tokenHandler = new JwtSecurityTokenHandler();
-            Request.Headers.TryGetValue("Authorization", out var traceValue);
             try
             {
-                string token = traceValue;
-                token = token.Replace("Bearer ", "");
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
