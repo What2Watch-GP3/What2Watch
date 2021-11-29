@@ -30,7 +30,7 @@ namespace WebSite.Controllers
         {
             //TODO Implement actual values instead of hardcoded
             TempData["SeatIds"] = new List<int>() { 1, 2, 3 };
-            TempData["TotalPrice"] = 40m;
+            TempData["TotalPrice"] = 40;
             TempData["Date"] = DateTime.Now;
             return View();
         }
