@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -54,6 +53,11 @@ namespace WebSite.Controllers
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(Index), "Movies");
+                }
+                else if (id == -403)
+                {
+                    TempData["ErrorMessage"] = "You are not logged in!";
+                    return RedirectToAction("Login", "Login", new { returnUrl = Request.Path.Value});
                 }
                 else
                 {

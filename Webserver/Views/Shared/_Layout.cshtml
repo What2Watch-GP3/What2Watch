@@ -52,6 +52,16 @@
             </button>
         </div>
     }
+    @if (@TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center;">
+            @TempData["ErrorMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        TempData["ErrorMessage"] = null;
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
