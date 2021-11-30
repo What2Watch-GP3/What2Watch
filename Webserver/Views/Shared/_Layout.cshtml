@@ -36,16 +36,17 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        @if (TempData["UserEmail"] == null)
-                        {
-                            <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                        }
-                        else
-                        {
-                            //<li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                            <li><a class="nav-link" asp-controller="Login" asp-action="Login">@TempData["UserEmail"]</a></li>
-                            TempData.Keep();
-                        }
+                        <!--if (TempData["UserEmail"] == null)
+        {
+        <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+        }
+        else
+        {
+        //
+        <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+        <li><a class="nav-link" asp-controller="Login" asp-action="Login">Hello, @TempData["UserEmail"]</a></li>
+        }-->
+                        <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
 
                     </ul>
                 </div>

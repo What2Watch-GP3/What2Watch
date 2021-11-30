@@ -39,6 +39,7 @@ namespace WebApi.Controllers
             }
             else
             {
+                booking.TotalPrice = 40m;
                 return Ok(booking);
             }
         }

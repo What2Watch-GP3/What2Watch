@@ -46,7 +46,7 @@ namespace Webserver
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
-
+            app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
