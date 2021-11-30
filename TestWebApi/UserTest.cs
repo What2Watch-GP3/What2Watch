@@ -30,7 +30,7 @@ namespace TestWebApi
             //Assert.That(userResult, Is.TypeOf<ObjectResult>(),"User result was not from type object result");
             Assert.That(userResult, Is.InstanceOf<ObjectResult>(), "User result was not from type object result");
             ObjectResult objRes = (ObjectResult)userResult;
-            Assert.AreEqual(1, objRes.Value, "User result was not 1");
+            Assert.AreEqual(2, objRes.Value, "User result was not 1");
         }
     }
 }
