@@ -23,11 +23,11 @@ namespace WebApi.Controllers
         private IUserDataAccess _userDataAccess;
         private IConfiguration _configuration;
 
-        public LoginController(IConfiguration configuration, IUserDataAccess userDataAccess)
+        public LoginController(IUserDataAccess userDataAccess)
         {
-            _configuration = configuration;
             _userDataAccess = userDataAccess;
         }
+
         // POST api/<LoginController>
         [HttpPost]
         public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)

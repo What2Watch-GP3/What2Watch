@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             DateTime showTime = DateTime.Now;
 
             //var booking = DtoConverter<BookingDto, Booking>.From(value);
-            Booking booking = new() { Id = value.Id, total_price = price, Date = showTime };
+            Booking booking = new() { Id = value.Id, TotalPrice = price, Date = showTime };
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 

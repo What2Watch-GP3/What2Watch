@@ -25,11 +25,11 @@ namespace TestWebApiClient
         {
             //Arrange
             //Act
-           var userDto = await _webApiClient.LoginAsync(this.userDto);
+           var userDtoId = await _webApiClient.LoginAsync(this.userDto);
 
             //Assert
-            Assert.That(userDto, Is.InstanceOf<UserDto>(), "User object was not from instance userDto");
-            Assert.AreEqual(1, userDto.Id);
+            //Assert.That(userDto, Is.InstanceOf<UserDto>(), "User object was not from instance userDto");
+            Assert.AreEqual(1, userDtoId);
         }
     }
 }
