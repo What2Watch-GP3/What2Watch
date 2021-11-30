@@ -3,6 +3,7 @@ name: .NETtesting
 on:
   push:
     branches: 
+    - main
     - development
 
 jobs:
