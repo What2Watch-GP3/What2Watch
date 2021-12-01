@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesktopApiClient.Enums
+namespace Tools.Enums
 {
-    public enum Language
+    public enum GraphicType
     {
-        English, Danish, NoLanguage
+        _2D, _3D
     }
 }

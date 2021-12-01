@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApi.Enums
+namespace Tools.Enums
 {
-    public enum GraphicType
+    public enum Language
     {
-        _2D, _3D
+        English, Danish, NoLanguage
     }
 }
