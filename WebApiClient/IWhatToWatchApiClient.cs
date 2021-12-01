@@ -7,7 +7,6 @@ namespace WebApiClient
 {
     public interface IWhatToWatchApiClient
     {
-        public string JWTToken { get; set; }
         Task<IEnumerable<MovieDto>> GetAllMoviesAsync();
         Task<IEnumerable<CinemaDto>> GetCinemasByMovieIdAsync(int movieId);
         Task<MovieDto> GetMovieByIdAsync(int id);

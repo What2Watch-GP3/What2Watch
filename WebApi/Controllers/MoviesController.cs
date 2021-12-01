@@ -27,12 +27,6 @@ namespace WebApi.Controllers
         //[Authorize]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetAllAsync()
         {
-            var headers = this.Request;
-            if (headers.Headers.ContainsKey("Authorization"))
-            {
-                headers.Headers.TryGetValue("Authorization", out var temp);
-                var anotherTemp = temp;
-            }
             var movies = await _movieDataAccess.GetAllAsync();
             var movieDtos = DtoConverter<Movie, MovieDto>.FromList(movies);
             return Ok(movieDtos);
@@ -43,12 +37,6 @@ namespace WebApi.Controllers
         [HttpGet("{searchString}")]
         public async Task<ActionResult<IEnumerable<MovieDto>>> GetListByPartOfNameAsync(string searchString)
         {
-            var headers = this.Request.Headers;
-            if (headers.ContainsKey("Authorization"))
-            {
-                headers.TryGetValue("Authorization", out var temp);
-                var anotherTemp = temp;
-            }
             IEnumerable<Movie> matchingMovies;
             IEnumerable<MovieDto> matchingMovieDtos;
             if (!string.IsNullOrEmpty(searchString))

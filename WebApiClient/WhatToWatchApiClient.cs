@@ -9,19 +9,6 @@ namespace WebApiClient
     public class WhatToWatchApiClient : IWhatToWatchApiClient
     {
         private IRestClient _client;
-        private string _jwtToken;
-        public string JWTToken
-        {
-            get { return _jwtToken; }
-            set
-            {
-                _jwtToken = value;
-                if (_client != null)
-                { 
-                    _client.AddDefaultParameter("X-Access-Token", _jwtToken, ParameterType.Cookie);
-                }
-            }
-        }
 
         public WhatToWatchApiClient(IRestClient client)
         {

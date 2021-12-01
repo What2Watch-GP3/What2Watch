@@ -15,8 +15,8 @@ namespace DataAccess.DataAccess
     {
         public BookingDataAccess(string connectionstring) : base(connectionstring)
         {
-            //Values = new List<string> { "total_price", "date" };
-            //RawValues = new List<string> { "TotalPrice", "Date" };
+            Values = new List<string> { "total_price", "date" };
+            RawValues = new List<string> { "TotalPrice", "Date" };
         } 
     }
 

@@ -23,8 +23,9 @@ namespace WebApi.Controllers
         private IUserDataAccess _userDataAccess;
         private IConfiguration _configuration;
 
-        public LoginController(IUserDataAccess userDataAccess)
+        public LoginController(IConfiguration configuration, IUserDataAccess userDataAccess)
         {
+            _configuration = configuration;
             _userDataAccess = userDataAccess;
         }
 
@@ -39,13 +40,15 @@ namespace WebApi.Controllers
             userDto.Id = await _userDataAccess.LoginAsync(user);
             if (userDto.Id != -1)
             {
-                //Authenticate
-                string jwtToken = GenerateToken(userDto);
+                if (_configuration!=null)
+                {
+                    //Authenticate
+                    string jwtToken = GenerateToken(userDto);
 
-                Response.Cookies.Append("X-Access-Token", jwtToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationMinutes"])) });
-                //Response.Cookies.Append("X-Email", user.Email, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                //Response.Cookies.Append("X-Refresh-Token", user.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-
+                    Response.Cookies.Append("X-Access-Token", jwtToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationMinutes"])) });
+                    //Response.Cookies.Append("X-Email", user.Email, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    //Response.Cookies.Append("X-Refresh-Token", user.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                }
                 return Ok(userDto.Id);
             }
             else

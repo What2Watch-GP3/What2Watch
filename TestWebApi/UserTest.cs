@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using StubsClassLibrary;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.Controllers;
 using WebApi.DTOs;
@@ -9,15 +11,16 @@ namespace TestWebApi
 {
     class UserTest
     {
-        LoginController _loginController = new LoginController(new UserStub());
+        LoginController _loginController;
         UserDto _userDto;
         ObjectResult _objectResult;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             _objectResult = null;
             _userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
+            _loginController = new(null, new UserStub());
         }
 
         [Test]
@@ -30,7 +33,7 @@ namespace TestWebApi
             //Assert.That(userResult, Is.TypeOf<ObjectResult>(),"User result was not from type object result");
             Assert.That(userResult, Is.InstanceOf<ObjectResult>(), "User result was not from type object result");
             ObjectResult objRes = (ObjectResult)userResult;
-            Assert.AreEqual(3, objRes.Value, "User result was not 1");
+            Assert.AreEqual(1, objRes.Value, "User result was not 1");
         }
     }
 }
