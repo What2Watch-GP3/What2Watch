@@ -1,0 +1,60 @@
+﻿@using WebApiClient.DTOs
+@model dynamic
+
+@{
+    ViewData["Title"] = "Shows";
+    IEnumerable<WebApiClient.DTOs.ShowDto> shows = Model.Shows;
+    string cinemaName = Model.CinemaName;
+    string movieTitle = Model.MovieTitle;
+}
+
+<h1>Shows in @cinemaName for @movieTitle </h1>
+
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Starttime
+            </th>
+            <th>
+                Language
+            </th>
+            <th>
+                Subtitle Language
+            </th>
+            <th>
+                Graphic Type
+            </th>
+            <th>
+                Sound Type
+            </th>
+        </tr>
+    </thead>
+    <tbody class="clickable-table">
+        @foreach (var item in shows)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DubLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraphicType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoundType)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+</div>

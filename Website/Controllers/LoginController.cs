@@ -1,0 +1,69 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using WebApiClient;
+using WebApiClient.DTOs;
+
+namespace WebSite.Controllers
+{
+    [Route("[controller]")]
+    public class LoginController : Controller
+    {
+        private IWhatToWatchApiClient _webApiClient;
+
+        public LoginController(IWhatToWatchApiClient whatToWatchApi)
+        {
+            _webApiClient = whatToWatchApi;
+        }
+        // GET: LoginController
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult> LoginAsync([FromQuery] string returnUrl)
+        {
+            if (await HasValidTokenAsync())
+            {
+                if (!String.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                return RedirectToAction("Index", "Movies");
+            }
+            return View();
+        }
+        // POST: LoginController/Create
+        //TODO: check if we need all these attributes
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([FromForm] UserDto loginInfo, string returnUrl="")
+        {
+
+            loginInfo.Id = await _webApiClient.LoginAsync(loginInfo);
+            if (loginInfo.Id > 0)
+            {
+                //TODO: do smth with user data in order to display it.
+                TempData["UserEmail"] = loginInfo.Email;
+                if (!String.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                return RedirectToAction("Index", "Movies");
+            }
+
+            TempData["ErrorMessage"] = "Wrong User email or Password";
+            return View();
+        }
+        private async Task<bool> HasValidTokenAsync()
+        {
+            return await _webApiClient.HasValidToken();
+        }
+    }
+}

@@ -1,0 +1,35 @@
+﻿@using WebApiClient.DTOs
+@model dynamic
+
+@{
+    ViewData["Title"] = "List";
+    IEnumerable<WebApiClient.DTOs.CinemaDto> cinemas = Model.Cinemas;
+    int movieId = Model.MovieId;
+}
+
+<h1>Cinemas showing movie: @Model.MovieTitle </h1>
+<!--Return ToString??-->
+
+
+<table class=" table table-hover table-bordered" id="cinemas-table">
+    <thead>
+        <tr>
+            <th>
+                Cinemas
+            </th>
+        </tr>
+    </thead>
+    <tbody class="clickable-table">
+        @foreach (var item in cinemas)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Shows", "Shows", new { movieId = movieId, cinemaId = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+</div>
