@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using DesktopApiClient;
 using DesktopApiClient.DTOs;
 using RestSharp;
+using Tools;
 
 namespace DesktopApiClient
 {

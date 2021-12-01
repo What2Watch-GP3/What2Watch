@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using RestSharp;
 using WebApiClient.DTOs;
+using Tools;
 
 namespace WebApiClient
 {
