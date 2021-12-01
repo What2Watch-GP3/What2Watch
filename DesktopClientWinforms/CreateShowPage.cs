@@ -15,9 +15,9 @@ namespace DesktopClientWinforms
 {
     public partial class CreateShowPage : UserControl
     {
-        private IWhatToWatchApiClient _client;
+        private IDesktopApiClient _client;
 
-        public CreateShowPage(IWhatToWatchApiClient client)
+        public CreateShowPage(IDesktopApiClient client)
         {
             InitializeComponent();
             _client = client;

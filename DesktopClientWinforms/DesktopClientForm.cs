@@ -17,9 +17,9 @@ namespace DesktopClientWinforms
 
         private Size _formSize;
         private int _borderSize;
-        private IWhatToWatchApiClient _client;
+        private IDesktopApiClient _client;
 
-        public DesktopClientForm(IWhatToWatchApiClient client)
+        public DesktopClientForm(IDesktopApiClient client)
         {
             InitializeComponent();
             _borderSize = 2;
