@@ -26,6 +26,13 @@ namespace DesktopClientWinforms
         private void btnCreateShow_Click(object sender, EventArgs e)
         {
             CreateShow();
+
+            txtMovieId.Clear();
+            txtRoomId.Clear();
+            comboDub.Text = "";
+            comboGraphic.Text = "";
+            comboSound.Text = "";
+            comboSubtitles.Text = "";
         }
 
         private void CreateShow()
@@ -36,7 +43,7 @@ namespace DesktopClientWinforms
             Enum.TryParse(comboSound.SelectedItem.ToString(), out SoundType soundType);
             ShowDto show = new()
             {
-                StartTime = datePicker.Value,
+                StartTime = datePicker.Value.Date + timePicker.Value.TimeOfDay,
                 RoomId = int.Parse(txtRoomId.Text),
                 MovieId = int.Parse(txtMovieId.Text),
                 DubLanguage = (Language)comboDub.SelectedItem,
@@ -49,8 +56,6 @@ namespace DesktopClientWinforms
 
         private void OnLoad()
         {
-            datePicker.CalendarMonthBackground = Color.FromArgb(60,60,65);
-            datePicker.CalendarTitleBackColor = Color.FromArgb(40,40,50);
             loadLanguageComboBoxes();
             loadSoundComboBox();
             loadGraphicComboBox();
