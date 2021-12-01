@@ -18,7 +18,7 @@ namespace DataAccess.DataAccess
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
-            string command = "SELECT Show.id, Show.start_time AS StartTime, Show.dub_language AS DubLanguage FROM Show " +
+            string command = "SELECT Show.id, Show.start_time AS StartTime, Show.dub_language AS DubLanguage, Show.subtitles_language AS SubtitlesLanguage, Show.graphic_type AS GraphicType, Show.sound_type AS SoundType FROM Show " +
                 "LEFT JOIN[Movie] ON Show.movie_id = Movie.id " +
                 "LEFT JOIN[Room] ON Room.id = Show.room_id " +
                 "LEFT JOIN[Cinema] ON Cinema.id = Room.cinema_id " +
