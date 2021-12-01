@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
-
+using WebApiClient.DTOs;
 
 namespace WebSite.Controllers
 {
@@ -28,11 +31,20 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Cinemas(int movieId)
         {
-            var cinemas = await _client.GetCinemasByMovieIdAsync(movieId);
-            TempData["movieId"] = movieId;
-            var nameDictionary = cinemas.ToDictionary(cinema => cinema.Id, cinema => cinema.Name);
-            TempData["nameDictionary"] = JsonConvert.SerializeObject(nameDictionary);
-            return View(cinemas);
+            IEnumerable<CinemaDto> cinemas = await _client.GetCinemasByMovieIdAsync(movieId);
+            MovieDto movieDto = await _client.GetMovieByIdAsync(movieId);
+            //List<Task> tasks = new()
+            //{
+            //    Task.Run(() => _client.GetCinemasByMovieIdAsync(movieId)),
+            //    Task.Run(() => _client.GetMovieByIdAsync(movieId))
+            //};
+            //await Task.WhenAll(tasks);
+
+            dynamic model = new ExpandoObject();
+            model.Cinemas = cinemas;
+            model.MovieTitle = movieDto.Title;
+            model.MovieId = movieDto.Id;
+            return View(model);
         }
         /*
         // GET: CinemasController/Create

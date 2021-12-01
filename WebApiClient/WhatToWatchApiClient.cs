@@ -9,7 +9,25 @@ namespace WebApiClient
     public class WhatToWatchApiClient : IWhatToWatchApiClient
     {
         private IRestClient _client;
-        public WhatToWatchApiClient(IRestClient client) => _client = client;
+        private string _jwtToken;
+        public string JWTToken
+        {
+            get { return _jwtToken; }
+            set
+            {
+                _jwtToken = value;
+                if (_client != null)
+                { 
+                    _client.AddDefaultParameter("X-Access-Token", _jwtToken, ParameterType.Cookie);
+                }
+            }
+        }
+
+        public WhatToWatchApiClient(IRestClient client)
+        {
+            _client = client;
+            _client.CookieContainer = new System.Net.CookieContainer();
+        }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
         {
@@ -40,6 +58,9 @@ namespace WebApiClient
 
         public async Task<IEnumerable<MovieDto>> GetMoviesByPartOfNameAsync(string searchString)
         {
+            //var bearerToken = HttpContext.Current.Session.GetString("JWTToken");
+            
+            //_client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", bearerToken));
             var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies/{searchString}");
 
             if (!response.IsSuccessful) throw new Exception($"Error searching movies by part of name with searchString {searchString}. Message was {response.Content}.");
@@ -60,7 +81,15 @@ namespace WebApiClient
         {
             var response = await _client.RequestAsync<int>(Method.POST, $"bookings", booking);
 
-            if (!response.IsSuccessful) throw new Exception($"Error creating booking. Message was {response.Content}");
+            //TODO: decide how to be redirected
+            if (!response.IsSuccessful)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    return -403;
+                }
+                throw new Exception($"Error creating booking. Message was {response.Content}");
+            }
 
             return response.Data;
         }
@@ -74,17 +103,47 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<UserDto> LoginAsync(UserDto userDto)
+        //TODO: Make this return a full UserDto in order to display user details later
+        public async Task<int> LoginAsync(UserDto userDto)
         {
             var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
             if (!response.IsSuccessful)
             {
+                if ((int)response.StatusCode == 404)
+                {
+                    return -1;
+                }
                 //TODO: based on response statuscode, do smth
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
             }
-            userDto.Id = (int)response.Data;
-            userDto.Password = "";
-            return userDto;
+            //userDto.Id = (int)response.Data;
+            //userDto.Password = "";
+
+            return (int)response.Data;
+        }
+
+        public async Task<bool> HasValidToken()
+        {
+            var response = await _client.RequestAsync<bool>(Method.GET, "login/validateToken");
+            if (!response.IsSuccessful)
+            {
+                if ((int)response.StatusCode == 404)
+                {
+                    return false;
+                }
+                //TODO: based on response statuscode, do smth
+                throw new Exception($"Error validating token");
+            }
+            return response.Data;
+        }
+
+        public async Task <CinemaDto> GetCinemaByIdAsync(int cinemaId)
+        {
+            var response = await _client.RequestAsync<CinemaDto>(Method.GET, $"cinemas/{cinemaId}");
+
+            if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {cinemaId}. Message was {response.Content}");
+
+            return response.Data;
         }
     }
 }

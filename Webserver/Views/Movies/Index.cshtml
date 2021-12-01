@@ -4,6 +4,7 @@
     ViewData["Title"] = "Movies";
 }
 
+
 <h1 class="text-dark">All Movies</h1>
 
 <div class="input-group mb-3">
@@ -17,19 +18,8 @@
     </form>
 </div>
 
-<table class="table table-hover table-bordered bg-lightgrey text-light">
-    <thead>
-        <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-
     <table class="table table-hover table-bordered">
-        <thead>
+        <thead  >
             <tr>
 
                 <th>
@@ -42,7 +32,7 @@
             </tr>
         </thead>
 
-        <tbody id="movies-table">
+        <tbody class="clickable-table">
             @foreach (var item in Model)
             {
 

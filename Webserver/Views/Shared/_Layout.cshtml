@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
-<body class="" >
+<body  >
     <header class="bg-black">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3 " style="margin-bottom: 0 !important;">
             <div class="container">
@@ -24,9 +24,6 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Movies" asp-action="Index">Movies</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                                 Bookings
@@ -37,6 +34,19 @@
                                 <li><a class="nav-link" asp-controller="Bookings" asp-action="Details" asp-route-id="4">Details</a></li>
                             </ul>
                         </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (TempData["UserEmail"] == null)
+                        {
+                            <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                        }
+                        else
+                        {
+                            //<li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                            <li><a class="nav-link" asp-controller="Login" asp-action="Login">@TempData["UserEmail"]</a></li>
+                            TempData.Keep();
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -52,13 +62,26 @@
             </button>
         </div>
     }
+    @if (@TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="text-align: center;">
+            @TempData["ErrorMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        TempData["ErrorMessage"] = null;
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    
+    <footer class="border-top footer text-muted bg-black">
+        <div class="container">
+            What2Watch
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

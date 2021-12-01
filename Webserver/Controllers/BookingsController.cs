@@ -19,7 +19,6 @@ namespace WebSite.Controllers
 
         // GET: BookingsController/Details/5
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> Details(int id)
         {
             return View(await _client.GetBookingByIdAsync(id));
@@ -31,7 +30,7 @@ namespace WebSite.Controllers
         {
             //TODO Implement actual values instead of hardcoded
             TempData["SeatIds"] = new List<int>() { 1, 2, 3 };
-            TempData["TotalPrice"] = 40m;
+            TempData["TotalPrice"] = 40;
             TempData["Date"] = DateTime.Now;
             return View();
         }
@@ -54,6 +53,11 @@ namespace WebSite.Controllers
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(Index), "Movies");
+                }
+                else if (id == -403)
+                {
+                    TempData["ErrorMessage"] = "You are not logged in!";
+                    return RedirectToAction("Login", "Login", new { returnUrl = Request.Path.Value});
                 }
                 else
                 {

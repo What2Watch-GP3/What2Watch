@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using WebApiClient;
+using WebApiClient.DTOs;
 
 namespace WebSite.Controllers
 {
@@ -24,9 +27,14 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Shows(int movieId, int cinemaId)
         {
-            TempData["cinemaId"] = cinemaId;
-            TempData["movieId"] = movieId;
-            return View(await _client.GetShowsByMovieAndCinemaIdAsync(movieId, cinemaId));
+            MovieDto movie = await _client.GetMovieByIdAsync(movieId);
+            CinemaDto cinema = await _client.GetCinemaByIdAsync(cinemaId);
+            IEnumerable<ShowDto> shows = await _client.GetShowsByMovieAndCinemaIdAsync(movieId, cinemaId);
+            dynamic model = new ExpandoObject();
+            model.MovieTitle = movie.Title;
+            model.CinemaName = cinema.Name;
+            model.Shows = shows;
+            return View(model);
         }
 
         /* GET: ShowsController/Create

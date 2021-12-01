@@ -20,9 +20,10 @@ namespace WebSite.Controllers
         public async Task<ActionResult> Index()
         {
             var movies = await _client.GetAllMoviesAsync();
+            
             ViewBag.TextValue = "";
-            var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
-            TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
+            //var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
+            //TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
             return View(movies);
         }
 
