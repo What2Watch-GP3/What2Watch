@@ -49,7 +49,7 @@ namespace TestDataAccess
         public async Task InsertingShowInDatabaseReturningId()
         {
             //arrange
-            Show show = new() { StartTime = DateTime.Now, MovieId = 1, RoomId = 1 };
+            Show show = new() { StartTime = DateTime.Now, MovieId = 1, RoomId = 1, DubLanguage="English", SubtitlesLanguage="English", GraphicType="_2D", SoundType="iMax"};
             //act
             int actualId = await _showDataAccess.CreateAsync(show);
             //assert
