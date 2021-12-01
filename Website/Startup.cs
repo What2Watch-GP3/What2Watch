@@ -24,7 +24,7 @@ namespace Webserver
         {
             services.AddControllersWithViews();
             services.AddMemoryCache();
-            services.AddSingleton((webApiClient) => WebApiClientFactory.GetWebApiClient<IWhatToWatchApiClient>(Configuration["WebApiURI"]));
+            services.AddSingleton((webApiClient) => WebApiClientFactory.GetWebApiClient<IWebApiClient>(Configuration["WebApiURI"]));
             services.AddSession();
         }
 

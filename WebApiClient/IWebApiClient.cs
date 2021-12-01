@@ -5,7 +5,7 @@ using WebApiClient.DTOs;
 
 namespace WebApiClient
 {
-    public interface IWhatToWatchApiClient
+    public interface IWebApiClient
     {
         Task<IEnumerable<MovieDto>> GetAllMoviesAsync();
         Task<IEnumerable<CinemaDto>> GetCinemasByMovieIdAsync(int movieId);

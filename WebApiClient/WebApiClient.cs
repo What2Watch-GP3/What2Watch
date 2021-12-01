@@ -7,11 +7,11 @@ using Tools;
 
 namespace WebApiClient
 {
-    public class WhatToWatchApiClient : IWhatToWatchApiClient
+    public class WebApiClient : IWebApiClient
     {
         private IRestClient _client;
 
-        public WhatToWatchApiClient(IRestClient client)
+        public WebApiClient(IRestClient client)
         {
             _client = client;
             _client.CookieContainer = new System.Net.CookieContainer();

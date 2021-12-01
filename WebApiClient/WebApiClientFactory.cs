@@ -10,7 +10,7 @@ namespace WebApiClient
         {
             switch (typeof(T).Name)
             {
-                case "IWhatToWatchApiClient": return new WhatToWatchApiClient(new RestClient(connectionstring)) as T;
+                case "IWebApiClient": return new WebApiClient(new RestClient(connectionstring)) as T;
                 default: break;
             }
             //return (T)Activator.CreateInstance(typeof(T), connectionstring);

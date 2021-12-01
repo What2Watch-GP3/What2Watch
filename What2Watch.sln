@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesktopClient", "DesktopCli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopClientWinforms", "DesktopClientWinforms\DesktopClientWinforms.csproj", "{33C546EA-82A7-4C25-8B3A-EB7F84D5CFAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSite", "Webserver\WebSite.csproj", "{5012EB99-76CA-44F2-B762-076D47B43C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSite", "Website\WebSite.csproj", "{5012EB99-76CA-44F2-B762-076D47B43C34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{D751B1EE-4859-448C-B455-755A223C0C8B}"
 EndProject
