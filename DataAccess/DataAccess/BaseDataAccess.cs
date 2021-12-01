@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Dapper;
 using System;
 using DataAccess.Interfaces;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace DataAccess.DataAccess
 {
@@ -27,6 +29,16 @@ namespace DataAccess.DataAccess
             RawValues = typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
             Values = RawValues;
             _connectionstring = connectionstring;
+            var map = new CustomPropertyTypeMap(typeof(T),
+                        (type, columnName) => type.GetProperties().FirstOrDefault(prop => GetDescriptionFromAttribute(prop) == columnName.ToLower()));
+            Dapper.SqlMapper.SetTypeMap(typeof(T), map);
+            var map2 = new CustomPropertyTypeMap(typeof(T),
+            (type, columnName) => type.GetProperties().FirstOrDefault(prop =>
+            {
+                if (prop == null) return false;
+                var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(prop, typeof(DescriptionAttribute), false);
+                return (attrib?.Description ?? prop.Name).ToLower() == columnName.ToLower();
+            }));
         }
         protected IDbConnection CreateConnection() => new SqlConnection(_connectionstring);
         protected string TableName { get; set; }
@@ -47,6 +59,13 @@ namespace DataAccess.DataAccess
             {
                 throw new Exception($"Error during async creation of '{typeof(T).Name}'!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nValueNames: {ValueNames}\nCommand: {command}", ex);
             }
+        }
+
+        static string GetDescriptionFromAttribute(MemberInfo member)
+        {
+            if (member == null) return null;
+            var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(member, typeof(DescriptionAttribute), false);
+            return (attrib?.Description ?? member.Name).ToLower();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
