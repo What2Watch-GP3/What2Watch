@@ -4,8 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Website' " />
-
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Webserver' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
