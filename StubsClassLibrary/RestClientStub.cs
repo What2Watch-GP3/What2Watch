@@ -45,8 +45,10 @@ namespace StubsClassLibrary
             return Task.FromResult(response);
         }
 
+        public CookieContainer CookieContainer { get => new CookieContainer(); set => new CookieContainer(); }
+
         #region Properties
-        public CookieContainer CookieContainer { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        
         public bool AutomaticDecompression { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int? MaxRedirects { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string UserAgent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
