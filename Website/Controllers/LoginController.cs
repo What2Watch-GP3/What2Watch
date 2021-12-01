@@ -16,9 +16,9 @@ namespace WebSite.Controllers
     [Route("[controller]")]
     public class LoginController : Controller
     {
-        private IWhatToWatchApiClient _webApiClient;
+        private IWebApiClient _webApiClient;
 
-        public LoginController(IWhatToWatchApiClient whatToWatchApi)
+        public LoginController(IWebApiClient whatToWatchApi)
         {
             _webApiClient = whatToWatchApi;
         }

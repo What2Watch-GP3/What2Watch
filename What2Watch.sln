@@ -17,23 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesktopClient", "DesktopCli
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "WebApi", "WebApi\WebApi.csproj", "{4D671BC8-9888-4B2F-9028-D969D9140A77}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "TestWebsite", "TestWebsite\TestWebsite.csproj", "{5CA86B0A-F929-401A-B4AF-3C12CA390E39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebsite", "TestWebsite\TestWebsite.csproj", "{5CA86B0A-F929-401A-B4AF-3C12CA390E39}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "TestWebApi", "TestWebApi\TestWebApi.csproj", "{5B7F1AD5-74F5-48E7-BF80-6B3AB879DF00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApi", "TestWebApi\TestWebApi.csproj", "{5B7F1AD5-74F5-48E7-BF80-6B3AB879DF00}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "StubsClassLibrary", "StubsClassLibrary\StubsClassLibrary.csproj", "{3676B8FD-C363-47C6-8D8E-300AB50558BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StubsClassLibrary", "StubsClassLibrary\StubsClassLibrary.csproj", "{3676B8FD-C363-47C6-8D8E-300AB50558BD}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "TestWebApiClient", "TestWebApiClient\TestWebApiClient.csproj", "{68EB56A6-A4B0-48E9-A1D7-3A30FFFE162A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApiClient", "TestWebApiClient\TestWebApiClient.csproj", "{68EB56A6-A4B0-48E9-A1D7-3A30FFFE162A}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "TestDesktopApiClient", "TestDesktopApiClient\TestDesktopApiClient.csproj", "{B04B9394-E8D8-471B-93AB-17A7A8C8DC27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDesktopApiClient", "TestDesktopApiClient\TestDesktopApiClient.csproj", "{B04B9394-E8D8-471B-93AB-17A7A8C8DC27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "Website\WebSite.csproj", "{6BE0B0B7-F2DE-4583-9F13-8BF4E4E0F90D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiClient", "WebApiClient\WebApiClient.csproj", "{A2A6BF67-3A76-4896-BCFD-617B9EAEEDE6}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "DesktopClientWinforms", "DesktopClientWinforms\DesktopClientWinforms.csproj", "{A59F71E3-8DB8-4D2B-B325-A2BADD40C020}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientWinforms", "DesktopClientWinforms\DesktopClientWinforms.csproj", "{A59F71E3-8DB8-4D2B-B325-A2BADD40C020}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "DesktopApiClient", "DesktopWebApiClient\DesktopApiClient.csproj", "{7B96E007-8B70-418F-906E-CF22F4A54941}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopApiClient", "DesktopWebApiClient\DesktopApiClient.csproj", "{7B96E007-8B70-418F-906E-CF22F4A54941}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{23E9AE2F-7F9F-44E9-9F5C-0248876C1400}"
 EndProject

@@ -30,7 +30,7 @@ namespace DesktopClientWinforms
         private static void ConfigureServices(ServiceCollection services)
         {
             string webApiUri = ConfigurationManager.ConnectionStrings["webApiUri"].ConnectionString;
-            services.AddSingleton((desktopApiClient) => DesktopApiClientFactory.GetDesktopApiClient<IWhatToWatchApiClient>(webApiUri));
+            services.AddSingleton((desktopApiClient) => DesktopApiClientFactory.GetDesktopApiClient<IDesktopApiClient>(webApiUri));
             services.AddScoped<DesktopClientForm>();
         }
     }

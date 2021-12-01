@@ -6,10 +6,10 @@ using Tools;
 
 namespace DesktopApiClient
 {
-    public class WhatToWatchApiClient : IWhatToWatchApiClient
+    public class DesktopApiClient : IDesktopApiClient
     {
         private IRestClient _client;
-        public WhatToWatchApiClient(IRestClient client) => _client = client;
+        public DesktopApiClient(IRestClient client) => _client = client;
 
         public async Task<int> CreateShowAsync(ShowDto show)
         {

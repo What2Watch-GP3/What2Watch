@@ -9,9 +9,9 @@ namespace WebSite.Controllers
     //[Route("{Movies?}")]
     public class MoviesController : Controller
     {
-        IWhatToWatchApiClient _client;
+        IWebApiClient _client;
 
-        public MoviesController(IWhatToWatchApiClient client)
+        public MoviesController(IWebApiClient client)
         {
             _client = client;
         }

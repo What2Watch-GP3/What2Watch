@@ -10,7 +10,7 @@ namespace TestWebApiClient
 {
     class CinemaTest
     {
-        private IWhatToWatchApiClient _stubsClient;
+        private IWebApiClient _stubsClient;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -18,7 +18,7 @@ namespace TestWebApiClient
             CinemaDto cinema = new CinemaDto() { Id = 1, Name = "Testema" };
             IEnumerable<CinemaDto> cinemaDtos = new List<CinemaDto>() { cinema };
 
-            _stubsClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = cinemaDtos });
+            _stubsClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = cinemaDtos });
         }
 
         [Test]

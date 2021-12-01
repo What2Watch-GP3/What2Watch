@@ -16,9 +16,9 @@ namespace WebSite.Controllers
     public class CinemasController : Controller
     {
         // GET: CinemasController
-        IWhatToWatchApiClient _client;
+        IWebApiClient _client;
 
-        public CinemasController(IWhatToWatchApiClient client)
+        public CinemasController(IWebApiClient client)
         {
             _client = client;
         }

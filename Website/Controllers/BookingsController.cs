@@ -10,9 +10,9 @@ namespace WebSite.Controllers
 {
     public class BookingsController : Controller
     {
-        private IWhatToWatchApiClient _client;
+        private IWebApiClient _client;
 
-        public BookingsController(IWhatToWatchApiClient client)
+        public BookingsController(IWebApiClient client)
         {
             _client = client;
         }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DesktopApiClient
 {
-    public interface IWhatToWatchApiClient
+    public interface IDesktopApiClient
     {
         Task<int> CreateShowAsync(ShowDto show);
     }

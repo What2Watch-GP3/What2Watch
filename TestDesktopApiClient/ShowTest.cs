@@ -12,12 +12,12 @@ namespace TestDesktopApiClient
 {
     class ShowTest
     {
-        private IWhatToWatchApiClient _stubsClient;
+        private IDesktopApiClient _stubsClient;
 
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
-            _stubsClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = 1 });
+            _stubsClient = new DesktopApiClient.DesktopApiClient(new RestClientStub() { ResponseData = 1 });
         }
 
         [Test]

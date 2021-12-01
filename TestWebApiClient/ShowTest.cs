@@ -11,7 +11,7 @@ namespace TestWebApiClient
 {
     class ShowTest
     {
-        private IWhatToWatchApiClient _stubsClient;
+        private IWebApiClient _stubsClient;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -19,7 +19,7 @@ namespace TestWebApiClient
             ShowDto show = new ShowDto() { Id = 1, StartTime = DateTime.Now };
             IEnumerable<ShowDto> showDtos = new List<ShowDto>() { show };
 
-            _stubsClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = showDtos });
+            _stubsClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = showDtos });
         }
 
         [Test]

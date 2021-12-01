@@ -9,15 +9,15 @@ namespace TestWebApiClient
 {
     class BookingTest
     {
-        private IWhatToWatchApiClient _webApiClient;
-        private IWhatToWatchApiClient _webApiIdClient;
+        private IWebApiClient _webApiClient;
+        private IWebApiClient _webApiIdClient;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             BookingDto bookingDto = new() { Id = 1, TotalPrice = 30, Date = new DateTime(2021, 6, 10) };
-            _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = bookingDto });
-            _webApiIdClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = 1 });
+            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = bookingDto });
+            _webApiIdClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = 1 });
         }
 
         [Test]

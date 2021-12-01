@@ -11,8 +11,8 @@ namespace WebSite.Controllers
     [Route("[controller]")]
     public class ShowsController : Controller
     {
-        IWhatToWatchApiClient _client;
-        public ShowsController(IWhatToWatchApiClient client)
+        IWebApiClient _client;
+        public ShowsController(IWebApiClient client)
         {
             _client = client;
         }

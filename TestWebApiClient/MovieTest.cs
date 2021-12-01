@@ -10,8 +10,8 @@ namespace TestWebApiClient
 {
     public class MovieTest
     {
-        private IWhatToWatchApiClient _stubClient;
-        private IWhatToWatchApiClient _stubsClient;
+        private IWebApiClient _stubClient;
+        private IWebApiClient _stubsClient;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -19,8 +19,8 @@ namespace TestWebApiClient
             MovieDto movieDto = new MovieDto() { Id = 1, Duration = 90, Title = "Harry Tester: The Testosterone" };
             IEnumerable<MovieDto> movieDtos = new List<MovieDto>() { movieDto };
 
-            _stubClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = movieDto });
-            _stubsClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = movieDtos });
+            _stubClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = movieDto });
+            _stubsClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = movieDtos });
         }
 
         [Test]

@@ -8,7 +8,7 @@ namespace TestWebApiClient
 {
     class UserTest
     {
-        private WhatToWatchApiClient _webApiClient;
+        private IWebApiClient _webApiClient;
         private UserDto userDto;
 
         [OneTimeSetUp]
@@ -17,7 +17,7 @@ namespace TestWebApiClient
             //Arrange
             userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
             int responseUserId = 1;
-            _webApiClient = new WhatToWatchApiClient(new RestClientStub() { ResponseData = responseUserId });
+            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = responseUserId });
         }
 
         [Test]

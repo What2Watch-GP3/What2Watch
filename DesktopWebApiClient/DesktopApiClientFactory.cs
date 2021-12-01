@@ -9,7 +9,7 @@ namespace DesktopApiClient
         {
             switch (typeof(T).Name)
             {
-                case "IWhatToWatchApiClient": return new WhatToWatchApiClient(new RestClient(connectionstring)) as T;
+                case "IWhatToWatchApiClient": return new DesktopApiClient(new RestClient(connectionstring)) as T;
                 default:
                     break;
             }
