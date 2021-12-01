@@ -17,16 +17,40 @@
             <th>
                 Starttime
             </th>
+            <th>
+                Language
+            </th>
+            <th>
+                Subtitle Language
+            </th>
+            <th>
+                Graphic Type
+            </th>
+            <th>
+                Sound Type
+            </th>
         </tr>
     </thead>
     <tbody class="clickable-table">
         @foreach (var item in shows)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DubLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraphicType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoundType)
+            </td>
+        </tr>
         }
     </tbody>
 </table>

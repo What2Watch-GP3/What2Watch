@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DesktopApiClient;
 using DesktopApiClient.DTOs;
+using Tools.Enums;
 
 namespace DesktopClientWinforms
 {
@@ -29,11 +30,19 @@ namespace DesktopClientWinforms
 
         private void CreateShow()
         {
-            ShowDto show = new() 
-            { 
+            Enum.TryParse(comboDub.SelectedItem.ToString(), out Language dubLanguage);
+            Enum.TryParse(comboSubtitles.SelectedItem.ToString(), out Language subLanguage);
+            Enum.TryParse(comboGraphic.SelectedItem.ToString(), out GraphicType graphicType);
+            Enum.TryParse(comboSound.SelectedItem.ToString(), out SoundType soundType);
+            ShowDto show = new()
+            {
                 StartTime = datePicker.Value,
                 RoomId = int.Parse(txtRoomId.Text),
-                MovieId = int.Parse(txtMovieId.Text)
+                MovieId = int.Parse(txtMovieId.Text),
+                DubLanguage = (Language)comboDub.SelectedItem,
+                SubtitlesLanguage = (Language)comboSubtitles.SelectedItem,
+                GraphicType = (GraphicType)comboGraphic.SelectedItem,
+                SoundType = (SoundType)comboSound.SelectedItem
             };
             _client.CreateShowAsync(show);
         }
@@ -42,7 +51,39 @@ namespace DesktopClientWinforms
         {
             datePicker.CalendarMonthBackground = Color.FromArgb(60,60,65);
             datePicker.CalendarTitleBackColor = Color.FromArgb(40,40,50);
+            loadLanguageComboBoxes();
+            loadSoundComboBox();
+            loadGraphicComboBox();
         }
+
+        private void loadSoundComboBox()
+        {
+            foreach (var soundType in Enum.GetValues(typeof(SoundType)))
+            {
+                comboSound.Items.Add(soundType);
+            }
+        }
+
+        private void loadGraphicComboBox()
+        {
+            foreach (var graphicType in Enum.GetValues(typeof(GraphicType)))
+            {
+                comboGraphic.Items.Add(graphicType);
+            }
+        }
+
+        private void loadLanguageComboBoxes()
+        {
+            foreach(var language in Enum.GetValues(typeof(Language)))
+            {
+                comboSubtitles.Items.Add(language);
+            }
+            foreach (var language in Enum.GetValues(typeof(Language)))
+            {
+                comboDub.Items.Add(language);
+            }
+        }
+        
 
         private void txtRoomId_KeyPress(object sender, KeyPressEventArgs e)
         {

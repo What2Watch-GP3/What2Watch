@@ -12,13 +12,13 @@ namespace DataAccess.DataAccess
 
         public ShowDataAccess(string connectionString) : base(connectionString)
         {
-            Values = new List<string> { "start_time", "movie_id", "room_id" };
+            Values = new List<string> { "start_time", "movie_id", "room_id", "dub_language", "subtitles_language", "graphic_type", "sound_type" };
         }
         
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {
-            string command = "SELECT Show.id, Show.start_time AS StartTime FROM Show " +
+            string command = "SELECT Show.id, Show.start_time AS StartTime, Show.dub_language AS DubLanguage, Show.subtitles_language AS SubtitlesLanguage, Show.graphic_type AS GraphicType, Show.sound_type AS SoundType FROM Show " +
                 "LEFT JOIN[Movie] ON Show.movie_id = Movie.id " +
                 "LEFT JOIN[Room] ON Room.id = Show.room_id " +
                 "LEFT JOIN[Cinema] ON Cinema.id = Room.cinema_id " +
