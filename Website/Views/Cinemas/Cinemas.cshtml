@@ -1,10 +1,13 @@
 ﻿@using WebApiClient.DTOs
+@using Newtonsoft.Json;
 @model dynamic
 
 @{
     ViewData["Title"] = "List";
     IEnumerable<WebApiClient.DTOs.CinemaDto> cinemas = Model.Cinemas;
+
     int movieId = Model.MovieId;
+    //Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
 
 <h1>Cinemas showing movie: @Model.MovieTitle </h1>

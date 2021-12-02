@@ -1,4 +1,5 @@
 ﻿@using WebApiClient.DTOs
+@using Newtonsoft.Json;
 @model dynamic
 
 @{
@@ -6,6 +7,11 @@
     IEnumerable<WebApiClient.DTOs.ShowDto> shows = Model.Shows;
     string cinemaName = Model.CinemaName;
     string movieTitle = Model.MovieTitle;
+
+    //int movieId = Model.MovieId;
+
+    //Dictionary<int, string> cinemaNameDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["CinemaNameDictionary"].ToString());
+    //Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
 
 <h1>Shows in @cinemaName for @movieTitle </h1>
@@ -34,23 +40,23 @@
     <tbody class="clickable-table">
         @foreach (var item in shows)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DubLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GraphicType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoundType)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DubLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GraphicType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoundType)
+                </td>
+            </tr>
         }
     </tbody>
 </table>
