@@ -34,6 +34,9 @@ namespace WebSite.Controllers
             //    Task.Run(() => _client.GetMovieByIdAsync(movieId))
             //};
             //await Task.WhenAll(tasks);
+            //var cinemaNameDictionary = cinemas.ToDictionary(cinema => cinema.Id, cinema => cinema.Name);
+            //TempData["CinemaNameDictionary"] = JsonConvert.SerializeObject(cinemaNameDictionary);
+            //TempData.Keep();
 
             dynamic model = new ExpandoObject();
             model.Cinemas = cinemas;
