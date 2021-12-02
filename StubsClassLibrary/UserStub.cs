@@ -8,7 +8,7 @@ namespace StubsClassLibrary
     {
         public async Task<int> LoginAsync(User user)
         {
-            return await Task.FromResult<int>(1);
+            return await Task.FromResult(1);
         }
     }
 }

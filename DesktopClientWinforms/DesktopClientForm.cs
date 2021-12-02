@@ -1,13 +1,7 @@
 ﻿using DesktopApiClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DesktopClientWinforms
@@ -52,8 +46,8 @@ namespace DesktopClientWinforms
         }
 
         private void OnLoad()
-        {//TODO: 
-            CreateShowPage createShowPage = new CreateShowPage(_client);
+        { 
+            CreateShowPage createShowPage = new(_client);
             createShowPage.Dock = DockStyle.Fill;
             currentPagePanel.Controls.Add(createShowPage);
             Padding = new(_borderSize);

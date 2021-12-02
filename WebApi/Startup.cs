@@ -9,10 +9,6 @@ using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
-using System.Collections.Generic;
-using System;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 
 namespace WebApi

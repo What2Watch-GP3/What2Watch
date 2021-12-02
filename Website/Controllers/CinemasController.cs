@@ -1,17 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
 
 namespace WebSite.Controllers
 {
-
     [Route("[controller]")]
     public class CinemasController : Controller
     {
