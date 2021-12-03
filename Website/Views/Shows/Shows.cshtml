@@ -42,7 +42,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
+                    <a asp-controller="Seats" asp-action="Select" method="get">@Html.DisplayFor(modelItem => item.StartTime)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DubLanguage)

@@ -1,0 +1,42 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Seats";
+}
+
+<div class="movie-container">
+    <ul class="showcase">
+        <li>
+            <div class="seat"></div>
+            <small>N/A</small>
+        </li>
+        <li>
+            <div class="seat selected"></div>
+            <small>Selected</small>
+        </li>
+        <li>
+            <div class="seat occupied"></div>
+            <small>Occupied</small>
+        </li>
+    </ul>
+
+    <div class="seat-container">
+        <div class="screen"></div>
+
+        @for (int rows = 0; rows < Model.Rows; rows++)
+        {
+            <div class="row">
+                @for (int seatsInRow = 0; seatsInRow < Model.SeatsInRow; seatsInRow++)
+                {
+                    <div class="seat"></div>
+                }
+            </div>
+        }
+
+        <p class="text">
+            You have selected <span id="count">0</span> seats for the total price of Rs. <span id="total">0</span>
+        </p>
+    </div>
+</div>
+
+
