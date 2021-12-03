@@ -5,16 +5,14 @@
 @{
     ViewData["Title"] = "Shows";
     IEnumerable<WebApiClient.DTOs.ShowDto> shows = Model.Shows;
-    string cinemaName = Model.CinemaName;
-    string movieTitle = Model.MovieTitle;
+    int cinemaId = Model.CinemaId;
+    int movieId = Model.MovieId;
 
-    //int movieId = Model.MovieId;
-
-    //Dictionary<int, string> cinemaNameDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["CinemaNameDictionary"].ToString());
-    //Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
+    Dictionary<int, string> cinemaNameDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["CinemaNameDictionary"].ToString());
+    Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
 
-<h1>Shows in @cinemaName for @movieTitle </h1>
+<h1>Shows in @cinemaNameDictionary[cinemaId] for @titleDictionary[movieId] </h1>
 
 
 <table class="table table-hover table-bordered">

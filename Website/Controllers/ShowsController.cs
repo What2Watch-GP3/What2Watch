@@ -26,13 +26,13 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Shows(int movieId, int cinemaId)
         {
-            MovieDto movie = await _client.GetMovieByIdAsync(movieId);
-            CinemaDto cinema = await _client.GetCinemaByIdAsync(cinemaId);
             IEnumerable<ShowDto> shows = await _client.GetShowsByMovieAndCinemaIdAsync(movieId, cinemaId);
+
             dynamic model = new ExpandoObject();
-            model.MovieTitle = movie.Title;
-            model.CinemaName = cinema.Name;
+            model.MovieId = movieId;
+            model.CinemaId = cinemaId;
             model.Shows = shows;
+
             return View(model);
         }
 

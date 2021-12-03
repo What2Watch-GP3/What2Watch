@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -27,21 +29,18 @@ namespace WebSite.Controllers
         public async Task<ActionResult> Cinemas(int movieId)
         {
             IEnumerable<CinemaDto> cinemas = await _client.GetCinemasByMovieIdAsync(movieId);
-            MovieDto movieDto = await _client.GetMovieByIdAsync(movieId);
-            //List<Task> tasks = new()
-            //{
-            //    Task.Run(() => _client.GetCinemasByMovieIdAsync(movieId)),
-            //    Task.Run(() => _client.GetMovieByIdAsync(movieId))
-            //};
-            //await Task.WhenAll(tasks);
-            //var cinemaNameDictionary = cinemas.ToDictionary(cinema => cinema.Id, cinema => cinema.Name);
-            //TempData["CinemaNameDictionary"] = JsonConvert.SerializeObject(cinemaNameDictionary);
-            //TempData.Keep();
+
+            var cinemaNameDictionary = cinemas.ToDictionary(cinema => cinema.Id, cinema => cinema.Name);
+            TempData["CinemaNameDictionary"] = JsonConvert.SerializeObject(cinemaNameDictionary);
+            TempData.Keep();
 
             dynamic model = new ExpandoObject();
+            //if(model.Cinemas != null)
+
+            //((IDictionary<string, object>)model).Remove("Cinemas");
+            model.Cinemas = 0;
             model.Cinemas = cinemas;
-            model.MovieTitle = movieDto.Title;
-            model.MovieId = movieDto.Id;
+            model.MovieId = movieId;
             return View(model);
         }
         /*
