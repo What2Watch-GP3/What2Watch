@@ -26,7 +26,7 @@
         @for (int rows = 0; rows < Model.Rows; rows++)
         {
             <div class="row">
-                @for (int seatsInRow = 0; seatsInRow < Model.SeatsInRow; seatsInRow++)
+                @for (int seatsPerRow = 0; seatsPerRow < Model.SeatsPerRow; seatsPerRow++)
                 {
                     <div class="seat"></div>
                 }
@@ -34,7 +34,7 @@
         }
 
         <p class="text">
-            You have selected <span id="count">0</span> seats for the total price of Rs. <span id="total">0</span>
+            You have selected <span id="countSpan">0</span> seats for the total price of Rs. <span id="totalSpan">0</span>
         </p>
     </div>
 </div>

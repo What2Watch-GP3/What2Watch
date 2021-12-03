@@ -6,20 +6,29 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApiClient;
 
 namespace WebSite.Controllers
 {
     [Route("[controller]")]
     public class SeatsController : Controller
     {
-        [HttpGet]
-        public async Task<ActionResult> Select()
+        IWebApiClient _client;
+        public SeatsController(IWebApiClient client)
         {
+            _client = client;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Select(int showId)
+        {
+            var room = new { Rows = 8, SeatsPerRow = 10 }; //await _client.GetRoomByShowId(showId);
+ 
             //TODO: implement later
-            dynamic expando = new ExpandoObject();
-            expando.Rows = 8;
-            expando.SeatsInRow = 10;
-            return View(expando);
+            dynamic model = new ExpandoObject();
+            model.Rows = room.Rows;
+            model.SeatsPerRow = room.SeatsPerRow;
+            return View(model);
         }
     }
 }
