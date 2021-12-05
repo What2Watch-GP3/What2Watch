@@ -56,6 +56,26 @@ namespace WebApi.Controllers
             }
         }
 
+        // GET: api/<ShowController>/{id}/room
+        [Route("{id:int}/room")]
+        //[HttpGet("{id:int}/room")]
+        [HttpGet]
+        public async Task<ActionResult<RoomDto>> GetRoomByShowIdAsync(int id)
+        {
+            /*var show = await _showDataAccess.GetRoomByShowIdAsync(id, id);
+            var room = await _roomDataAccess.GetRoomByIdAsync(show.RoomId);
+            if (!room.Any()) //TODO: IsNullOrEmpty
+            {
+                return NotFound();
+            }
+            else
+            {
+                var showDtos = DtoConverter<Show, ShowDto>.FromList(shows);
+                return Ok(showDtos);
+            }*/
+            return Ok(new RoomDto(){});
+        }
+
 
         /*
         // GET api/<ShowController>/5
