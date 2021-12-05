@@ -8,31 +8,8 @@ using DataAccess.Models;
 
 namespace DataAccess.DataAccess
 {
-    public class RoomDataAccess : IRoomDataAccess
+    public class RoomDataAccess : BaseDataAccess<Room>, IRoomDataAccess
     {
-        public Task<int> CreateAsync(Room entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Room>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Room> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UpdateAsync(Room entity)
-        {
-            throw new NotImplementedException();
-        }
+             public RoomDataAccess(string connectionString) : base(connectionString) { }   
     }
 }
