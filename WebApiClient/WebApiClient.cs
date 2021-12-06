@@ -133,5 +133,14 @@ namespace WebApiClient
 
             return response.Data;
         }
+
+        public async Task<int> CreateReservationAsync(ReservationDto reservationDto)
+        {
+            var response = await _client.RequestAsync<int>(Method.POST, $"reservations", reservationDto);
+
+            if (!response.IsSuccessful) throw new Exception($"Error creating reservation. Message was {response.Content}");
+
+            return response.Data;
+        }
     }
 }

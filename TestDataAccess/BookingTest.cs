@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DataAccess.Model;
+using DataAccess.Models;
 using NUnit.Framework;
 using DataAccess.DataAccess;
 
-namespace TestDataAccess.Tests
+namespace TestDataAccess
 {
     class BookingTest
     {
@@ -16,7 +16,7 @@ namespace TestDataAccess.Tests
         {
             _bookingDataAccess = new BookingDataAccess(Configuration.CONNECTION_STRING_TEST);
         }
-        
+
         [OneTimeTearDown]
         public async Task OneTimeTearDown()
         {
@@ -28,7 +28,7 @@ namespace TestDataAccess.Tests
         public async Task TestConfirmBooking()
         {
             //Arrange
-            Booking booking = new() { TotalPrice=11.99M, Date= DateTime.Now };
+            Booking booking = new() { TotalPrice = 11.99M, Date = DateTime.Now };
 
             //Act
             booking.Id = await _bookingDataAccess.CreateAsync(booking);

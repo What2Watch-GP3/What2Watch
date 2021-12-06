@@ -48,7 +48,7 @@ namespace DataAccess.DataAccess
         // RawValues = TotalPrice, Date
         protected IEnumerable<string> RawValues;
 
-        public async Task<int> CreateAsync(T entity)
+        public virtual async Task<int> CreateAsync(T entity)
         {
             string command = $"INSERT INTO [{TableName}] ({ValueNames}) OUTPUT INSERTED.Id VALUES ({ValueParameters});";
             try
@@ -69,7 +69,7 @@ namespace DataAccess.DataAccess
             return (attrib?.Description ?? member.Name).ToLower();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             string command = $"SELECT * FROM [{TableName}];";
             try
@@ -83,7 +83,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             string command = $"SELECT * FROM [{TableName}] WHERE Id=@Id;";
             try
@@ -97,7 +97,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public virtual async Task<bool> DeleteAsync(int id)
         {
             string command = $"DELETE FROM [{TableName}] WHERE Id=@Id;";
             try
@@ -111,7 +111,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public virtual async Task<bool> UpdateAsync(T entity)
         {
             string command = $"UPDATE [{TableName}] SET {ValueUpdates} WHERE Id=@Id;";
             try
