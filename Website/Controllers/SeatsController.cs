@@ -22,13 +22,21 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Select(int showId)
         {
-            var room = new { Rows = 8, SeatsPerRow = 10 }; //await _client.GetRoomByShowId(showId);
+            var room = new { Rows = 8, SeatsPerRow = 10 }; 
+            //await _client.GetRoomByShowId(showId);
  
             //TODO: implement later
             dynamic model = new ExpandoObject();
             model.Rows = room.Rows;
             model.SeatsPerRow = room.SeatsPerRow;
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Reserve()
+        {
+            //TODO: implement instead of hardcode
+            return RedirectToAction("Confirm", "Bookings");
         }
     }
 }
