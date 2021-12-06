@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Model
+﻿namespace DataAccess.Models
 {
     public class Ticket
     {

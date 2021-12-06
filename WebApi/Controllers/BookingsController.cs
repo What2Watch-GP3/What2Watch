@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        IBookingDataAccess _bookingDataAccess;
+        IReservationDataAccess _bookingDataAccess;
 
-        public BookingsController(IBookingDataAccess bookingDataAccess)
+        public BookingsController(IReservationDataAccess bookingDataAccess)
         {
             _bookingDataAccess = bookingDataAccess;
         }
