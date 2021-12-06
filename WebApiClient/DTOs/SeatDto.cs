@@ -8,8 +8,12 @@ namespace WebApiClient.DTOs
 {
     public class SeatDto
     {
-        public int Number { get; set; }
-        public int Row { get; set; }
+        public int Id { get; set; }
+        public int Position { get; set; }
+        public int RowNumber { get; set; }
         public bool IsAvailable { get; set; }
+        public string Type { get; set; }
+        public decimal Price { get; set; }
+    
     }
 }
