@@ -22,8 +22,10 @@ namespace WebSite.Controllers
             var movies = await _client.GetAllMoviesAsync();
             
             ViewBag.TextValue = "";
-            //var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
-            //TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
+            var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
+            TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
+            TempData.Keep();
+
             return View(movies);
         }
 
@@ -40,6 +42,7 @@ namespace WebSite.Controllers
                 ViewBag.TextValue = "";
                 var titleDictionary = movies.ToDictionary(movie => movie.Id, movie => movie.Title);
                 TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
+                TempData.Keep("TitleDictionary");
                 return View(movies);
             }
             else

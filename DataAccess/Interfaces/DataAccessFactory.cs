@@ -17,7 +17,6 @@ namespace DataAccess.Interfaces
                 default:
                     break;
             }
-            //return (T)Activator.CreateInstance(typeof(T), connectionstring);
 
             throw new ArgumentException($"Unknown type {typeof(T).FullName}");
         }

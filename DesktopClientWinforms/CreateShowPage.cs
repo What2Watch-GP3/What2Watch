@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DesktopApiClient;
 using DesktopApiClient.DTOs;
@@ -19,28 +12,12 @@ namespace DesktopClientWinforms
 
         public CreateShowPage(IDesktopApiClient client)
         {
-            InitializeComponent();
             _client = client;
-        }
-
-        private void btnCreateShow_Click(object sender, EventArgs e)
-        {
-            CreateShow();
-
-            txtMovieId.Clear();
-            txtRoomId.Clear();
-            comboDub.Text = "";
-            comboGraphic.Text = "";
-            comboSound.Text = "";
-            comboSubtitles.Text = "";
+            InitializeComponent();
         }
 
         private void CreateShow()
         {
-            Enum.TryParse(comboDub.SelectedItem.ToString(), out Language dubLanguage);
-            Enum.TryParse(comboSubtitles.SelectedItem.ToString(), out Language subLanguage);
-            Enum.TryParse(comboGraphic.SelectedItem.ToString(), out GraphicType graphicType);
-            Enum.TryParse(comboSound.SelectedItem.ToString(), out SoundType soundType);
             ShowDto show = new()
             {
                 StartTime = datePicker.Value.Date + timePicker.Value.TimeOfDay,
@@ -56,12 +33,12 @@ namespace DesktopClientWinforms
 
         private void OnLoad()
         {
-            loadLanguageComboBoxes();
-            loadSoundComboBox();
-            loadGraphicComboBox();
+            LoadLanguageComboBoxes();
+            LoadSoundComboBox();
+            LoadGraphicComboBox();
         }
 
-        private void loadSoundComboBox()
+        private void LoadSoundComboBox()
         {
             foreach (var soundType in Enum.GetValues(typeof(SoundType)))
             {
@@ -69,7 +46,7 @@ namespace DesktopClientWinforms
             }
         }
 
-        private void loadGraphicComboBox()
+        private void LoadGraphicComboBox()
         {
             foreach (var graphicType in Enum.GetValues(typeof(GraphicType)))
             {
@@ -77,7 +54,7 @@ namespace DesktopClientWinforms
             }
         }
 
-        private void loadLanguageComboBoxes()
+        private void LoadLanguageComboBoxes()
         {
             foreach(var language in Enum.GetValues(typeof(Language)))
             {
@@ -88,7 +65,19 @@ namespace DesktopClientWinforms
                 comboDub.Items.Add(language);
             }
         }
-        
+
+        #region Component events
+        private void btnCreateShow_Click(object sender, EventArgs e)
+        {
+            CreateShow();
+
+            txtMovieId.Clear();
+            txtRoomId.Clear();
+            comboDub.Text = "";
+            comboGraphic.Text = "";
+            comboSound.Text = "";
+            comboSubtitles.Text = "";
+        }
 
         private void txtRoomId_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -104,5 +93,6 @@ namespace DesktopClientWinforms
         {
             OnLoad();
         }
+        #endregion
     }
 }

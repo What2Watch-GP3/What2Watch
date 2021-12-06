@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Dapper;
 using System;
 using DataAccess.Interfaces;
-using System.Reflection;
 using System.ComponentModel;
 
 namespace DataAccess.DataAccess
@@ -29,9 +28,8 @@ namespace DataAccess.DataAccess
             RawValues = typeof(T).GetProperties().Where(property => property.Name != "Id").Select(property => property.Name);
             Values = RawValues;
             _connectionstring = connectionstring;
-            /*var map = new CustomPropertyTypeMap(typeof(T),
-                        (type, columnName) => type.GetProperties().FirstOrDefault(prop => GetDescriptionFromAttribute(prop) == columnName.ToLower()));
-            Dapper.SqlMapper.SetTypeMap(typeof(T), map);*/
+            // Map properties with [Description(...)] attribute on the model
+            // TotalPrice => total_price
             var map = new CustomPropertyTypeMap(typeof(T),
             (type, columnName) => type.GetProperties().FirstOrDefault(prop =>
             {
@@ -39,7 +37,7 @@ namespace DataAccess.DataAccess
                 var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(prop, typeof(DescriptionAttribute), false);
                 return (attrib?.Description ?? prop.Name).ToLower() == columnName.ToLower();
             }));
-            Dapper.SqlMapper.SetTypeMap(typeof(T), map);
+            SqlMapper.SetTypeMap(typeof(T), map);
         }
         protected IDbConnection CreateConnection() => new SqlConnection(_connectionstring);
         protected string TableName { get; set; }
@@ -50,6 +48,7 @@ namespace DataAccess.DataAccess
 
         public virtual async Task<int> CreateAsync(T entity)
         {
+                            // INSERT INTO [Booking] (total_price, date) OUTPUT INSERTED.Id VALUES (@TotalPrice, @Date)
             string command = $"INSERT INTO [{TableName}] ({ValueNames}) OUTPUT INSERTED.Id VALUES ({ValueParameters});";
             try
             {
@@ -62,15 +61,9 @@ namespace DataAccess.DataAccess
             }
         }
 
-        static string GetDescriptionFromAttribute(MemberInfo member)
-        {
-            if (member == null) return null;
-            var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(member, typeof(DescriptionAttribute), false);
-            return (attrib?.Description ?? member.Name).ToLower();
-        }
-
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
+                            // SELECT * FROM [Booking];
             string command = $"SELECT * FROM [{TableName}];";
             try
             {
@@ -85,6 +78,7 @@ namespace DataAccess.DataAccess
 
         public virtual async Task<T> GetByIdAsync(int id)
         {
+                            // SELECT * FROM [Booking] WHERE Id=@Id;
             string command = $"SELECT * FROM [{TableName}] WHERE Id=@Id;";
             try
             {
@@ -99,6 +93,7 @@ namespace DataAccess.DataAccess
 
         public virtual async Task<bool> DeleteAsync(int id)
         {
+                            // DELETE FROM [Booking] WHERE Id=@Id;
             string command = $"DELETE FROM [{TableName}] WHERE Id=@Id;";
             try
             {
@@ -113,6 +108,7 @@ namespace DataAccess.DataAccess
 
         public virtual async Task<bool> UpdateAsync(T entity)
         {
+                            // UPDATE [Booking] SET total_price=@total_price, date=@date WHERE Id=@Id;
             string command = $"UPDATE [{TableName}] SET {ValueUpdates} WHERE Id=@Id;";
             try
             {

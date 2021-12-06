@@ -13,10 +13,8 @@ namespace WebApi.DTOs.Converters
             cfg.CreateMap<Language, string>().ConvertUsing(src => src.ToString());
             cfg.CreateMap<GraphicType, string>().ConvertUsing(src => src.ToString());
             cfg.CreateMap<SoundType, string>().ConvertUsing(src => src.ToString());
-
         });
         private static Mapper mapper = new(config);
-     
 
         //      OUTPUT                     <FROM>      <TO>               <SOURCE>
         //var bookingList = DtoConverter<BookingDto, Booking>.FromList(bookingDtoList);
@@ -24,9 +22,5 @@ namespace WebApi.DTOs.Converters
         //var booking = DtoConverter<BookingDto, Booking>.From(bookingDto);
         public static U From(T sourceObject) => mapper.Map<T, U>(sourceObject);
         public static IEnumerable<U> FromList(IEnumerable<T> sourceList) => sourceList.ToList().Select(obj => From(obj));
-
-       
-       
-
     }
 }

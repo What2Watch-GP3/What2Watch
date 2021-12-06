@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using Tools.Enums;
 
 namespace DataAccess.Models
 {
@@ -15,6 +13,4 @@ namespace DataAccess.Models
         public string GraphicType { get; set; }
         public string SoundType { get; set; }
     }
-
-    
 }
