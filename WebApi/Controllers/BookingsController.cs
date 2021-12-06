@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.Interfaces;
-using DataAccess.Model;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
@@ -14,9 +14,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        IReservationDataAccess _bookingDataAccess;
+        IBookingDataAccess _bookingDataAccess;
 
-        public BookingsController(IReservationDataAccess bookingDataAccess)
+        public BookingsController(IBookingDataAccess bookingDataAccess)
         {
             _bookingDataAccess = bookingDataAccess;
         }
