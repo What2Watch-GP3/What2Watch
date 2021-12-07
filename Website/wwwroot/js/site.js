@@ -5,6 +5,15 @@
 //Do some Ajax load of movies
 //Update total price and seats count
 
+$("#form").submit(function (eventObj) {
+    let index = 0;
+    document.querySelectorAll('.row .seat.selected').forEach(seat => {
+        $(this).append('<input type="hidden" name="' + selectedSeats[index] + '" value="' + seat.id + '" /> ');
+        index++;
+    });
+    return true;
+});
+
 $(document).ready(function () {
     const container = document.querySelector('.seat-container');
 
@@ -32,8 +41,6 @@ $(document).ready(function () {
 
         countSpan.innerText = numberOfSeats;
     }
-
-   
     
    // potential code for making the whole table row clickable, not just the movie name.
     //$("#search-test").on("keyup", function () {

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 
@@ -22,9 +20,9 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Select(int showId)
         {
-            var room = new { Rows = 8, SeatsPerRow = 10 }; 
+            var room = new { Rows = 8, SeatsPerRow = 10 };
             //await _client.GetRoomByShowId(showId);
- 
+
             //TODO: implement later
             dynamic model = new ExpandoObject();
             model.Rows = room.Rows;
@@ -33,10 +31,12 @@ namespace WebSite.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Reserve()
+        public async Task<ActionResult> Reserve(IFormCollection selectedSeats)
         {
             //TODO: implement instead of hardcode
             return RedirectToAction("Confirm", "Bookings");
         }
+
+
     }
 }
