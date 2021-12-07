@@ -16,7 +16,7 @@ namespace WebApiClient
         Task <CinemaDto> GetCinemaByIdAsync(int cinemaId);
         Task<int> LoginAsync(UserDto userDto);
         Task<bool> HasValidToken();
-        Task<int> CreateReservationAsync(ReservationDto reservationDto);
+        Task <IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos);
 
     }
 }

@@ -17,18 +17,23 @@ namespace TestWebApiClient
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _stubsClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = 1 });
+            _stubsClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = new List<int>() { 1, 2, 3 } });
         }
 
         [Test]
         public async Task CreatingReservationReturnsCorrectId()
         {
             //Arrange
-            ReservationDto reservationDto = new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 };
+            IEnumerable<ReservationDto> reservationDtos = new List<ReservationDto>()
+            {
+                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
+                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
+                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
+            };
             //Act
-            int reservationId = await _stubsClient.CreateReservationAsync(reservationDto);
+            IEnumerable<int> reservationIds = await _stubsClient.CreateReservationAsync(reservationDtos);
             //Assert
-            Assert.IsTrue(reservationId > 0, $"Returned Id was wrong. Returned Id was {reservationId}.");
-        }
+            Assert.AreEqual(reservationIds.Count(), 3, $"Returned Ids were wrong. Returned Ids were {reservationIds}.");
+            }
     }
 }

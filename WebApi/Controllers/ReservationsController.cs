@@ -1,6 +1,7 @@
 ﻿using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.DTOs;
 using WebApi.DTOs.Converters;
@@ -21,13 +22,13 @@ namespace WebApi.Controllers
 
         // POST api/<ReservationsController>
         [HttpPost]
-        public async Task<ActionResult<int>> CreateAsync([FromBody] ReservationDto reservationDto)
+        public async Task<ActionResult<IEnumerable<int>>> CreateAsync([FromBody] IEnumerable<ReservationDto> reservationDtos)
         {
-            if (reservationDto != null)
+            if (reservationDtos != null)
             {
-                var reservation = DtoConverter<ReservationDto, Reservation>.From(reservationDto);
-                var reservationId = await _reservationDataAccess.CreateAsync(reservation);
-                return Ok(reservationId);
+                var reservations = DtoConverter<ReservationDto, Reservation>.FromList(reservationDtos);
+                var reservationIds = await _reservationDataAccess.CreateAsync(reservations);
+                return Ok(reservationIds);
             }
             else
             {

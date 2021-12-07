@@ -24,11 +24,16 @@ namespace TestDataAccess
         public async Task CreatingAReservationReturnsItsId()
         {
             //Arrange
-            Reservation reservation = new() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 };
+            IEnumerable<Reservation> reservations = new List<Reservation>()
+            {
+                new Reservation() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
+                new Reservation() { TimeStamp = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
+                new Reservation() { TimeStamp = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
+            };
             //Act
-            int reservationId = await _reservationDataAccess.CreateAsync(reservation);
+            IEnumerable<int> reservationIds = await _reservationDataAccess.CreateAsync(reservations);
             //Assert
-            Assert.IsTrue(reservationId > 0, $"Reservation wasn't created. Returned id was {reservationId}");
+            Assert.AreEqual(reservationIds.Count(), 3, $"Reservations weren't created. Returned ids were {reservationIds}");
         }
     }
 }

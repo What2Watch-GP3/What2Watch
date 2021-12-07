@@ -10,9 +10,14 @@ namespace StubsClassLibrary
 {
     public class ReservationStub : IReservationDataAccess
     {
-        public async Task<int> CreateAsync(Reservation entity)
+        public async Task<IEnumerable<int>> CreateAsync(IEnumerable<Reservation> entities)
         {
-            return await Task.FromResult(1);
+            return await Task.FromResult(new List<int>() { 1, 2, 3 });
+        }
+
+        public Task<int> CreateAsync(Reservation entity)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<bool> DeleteAsync(int id)

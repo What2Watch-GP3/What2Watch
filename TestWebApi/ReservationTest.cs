@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using WebApi.Controllers;
 using StubsClassLibrary;
 using WebApi.DTOs;
+using System.Linq;
 using System;
 using DataAccess.Models;
+using System.Collections.Generic;
 
 namespace TestWebApi
 {
@@ -31,25 +33,30 @@ namespace TestWebApi
         public async Task CreatingReservationReturnsId()
         {
             //Arrange
-            ReservationDto reservationDto = new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 };
+            IEnumerable<ReservationDto> reservationDtos = new List<ReservationDto>()
+            {
+                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
+                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
+                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
+            };
 
             //Act
-            var reservationResult = (await _reservationController.CreateAsync(reservationDto)).Result;
+            var reservationResult = (await _reservationController.CreateAsync(reservationDtos)).Result;
             _objectResult = (ObjectResult)reservationResult;
-            int reservationId = (int)_objectResult.Value;
+            IEnumerable<int> reservationIds = (IEnumerable<int>)_objectResult.Value;
 
             //Assert
             Assert.AreEqual(200, _objectResult.StatusCode, "Status coda was not OK (200).");
-            Assert.IsTrue(reservationId > 0, $"Failed to create reservation. Returned id was {reservationId}");
+            Assert.AreEqual(reservationIds.Count(), 3, $"Failed to create reservations. Returned ids were {reservationIds}");
         }
 
         [Test]
         public async Task CreatingReservationWithNullReservationDtoGivesBadRequestResponse()
         {
             //arrange
-            ReservationDto reservation = null;
+            IEnumerable<ReservationDto> reservations = null;
             //act
-            var reservationResult = (await _reservationController.CreateAsync(reservation)).Result;
+            var reservationResult = (await _reservationController.CreateAsync(reservations)).Result;
             StatusCodeResult statusCodeResult = (StatusCodeResult)reservationResult;
             //assert
             Assert.AreEqual(400, statusCodeResult.StatusCode, "Status coda was not BadRequest (400).");

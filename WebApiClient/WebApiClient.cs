@@ -125,7 +125,7 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task <CinemaDto> GetCinemaByIdAsync(int cinemaId)
+        public async Task<CinemaDto> GetCinemaByIdAsync(int cinemaId)
         {
             var response = await _client.RequestAsync<CinemaDto>(Method.GET, $"cinemas/{cinemaId}");
 
@@ -134,9 +134,9 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<int> CreateReservationAsync(ReservationDto reservationDto)
+        public async Task<IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos)
         {
-            var response = await _client.RequestAsync<int>(Method.POST, $"reservations", reservationDto);
+            var response = await _client.RequestAsync<IEnumerable<int>>(Method.POST, $"reservations", reservationDtos);
 
             if (!response.IsSuccessful) throw new Exception($"Error creating reservation. Message was {response.Content}");
 
