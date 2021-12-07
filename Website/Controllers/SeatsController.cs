@@ -31,7 +31,7 @@ namespace WebSite.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Reserve(IFormCollection selectedSeats)
+        public async Task<ActionResult> Reserve(List<string> selectedSeats)
         {
             //TODO: implement instead of hardcode
             return RedirectToAction("Confirm", "Bookings");
