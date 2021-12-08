@@ -14,7 +14,7 @@ namespace DataAccess.DataAccess
         public SeatDataAccess(string connectionString) : base(connectionString)
         {
         }
-        public async Task<IEnumerable<Seat>> GetSeatsByRoomIdAsync(int roomId)
+        public async Task<IEnumerable<Seat>> GetAllByRoomIdAsync(int roomId)
         {            
             string command = $"SELECT * FROM [Seat] WHERE room_id = @Id;";
             try

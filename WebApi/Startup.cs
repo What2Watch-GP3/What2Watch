@@ -32,6 +32,8 @@ namespace WebApi
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ICinemaDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IShowDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IUserDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IRoomDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ISeatDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddScoped<IConfiguration>((config) => Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>

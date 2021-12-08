@@ -76,7 +76,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
                             // SELECT * FROM [Booking] WHERE Id=@Id;
             string command = $"SELECT * FROM [{TableName}] WHERE Id=@Id;";
