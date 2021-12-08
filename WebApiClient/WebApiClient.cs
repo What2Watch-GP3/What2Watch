@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using RestSharp;
 using WebApiClient.DTOs;
 using Tools;
+using System.Linq;
 
 namespace WebApiClient
 {
     public class WebApiClient : IWebApiClient
     {
         private IRestClient _client;
+        private RoomDto _room;
 
         public WebApiClient(IRestClient client)
         {
@@ -125,7 +127,7 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task <CinemaDto> GetCinemaByIdAsync(int cinemaId)
+        public async Task<CinemaDto> GetCinemaByIdAsync(int cinemaId)
         {
             var response = await _client.RequestAsync<CinemaDto>(Method.GET, $"cinemas/{cinemaId}");
 
@@ -140,7 +142,38 @@ namespace WebApiClient
 
             if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
 
+            _room = response.Data;
+
             return response.Data;
         }
+
+        public async Task<IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos)
+        {
+
+            
+            // Map ReservationDto's SeatPosition to _seats's Seat Id
+            foreach(var reservationDto in reservationDtos)
+            {
+                reservationDto.SeatId = GetSeatIdByPosition(reservationDto.SeatPosition);
+            }
+
+            var response = await _client.RequestAsync<IEnumerable<int>>(Method.POST, $"reservations", reservationDtos);
+
+            if (!response.IsSuccessful) throw new Exception($"Error creating reservation. Message was {response.Content}");
+
+            return response.Data;
+        }
+
+        private int GetSeatIdByPosition(string seatPosition)
+        {
+            var positionList = seatPosition.Split("-");
+            int.TryParse(positionList[0], out int row);
+            int.TryParse(positionList[1], out int position);
+
+            int index = (row * _room.Columns) + position;
+
+            return _room.Seats.ToList()[index].Id;
+        }
+
     }
 }
