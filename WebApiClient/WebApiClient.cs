@@ -11,7 +11,7 @@ namespace WebApiClient
     public class WebApiClient : IWebApiClient
     {
         private IRestClient _client;
-        private RoomDto _room;
+        private RoomDto _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 1 }, new SeatDto() { Id = 2 }, new SeatDto() { Id = 3 } }, Name = "Room1", Rows = 10  };
 
         public WebApiClient(IRestClient client)
         {
@@ -142,7 +142,9 @@ namespace WebApiClient
 
             if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
 
-            _room = response.Data;
+
+            
+            //_room = response.Data;
 
             return response.Data;
         }

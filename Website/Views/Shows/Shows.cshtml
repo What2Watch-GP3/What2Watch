@@ -40,9 +40,10 @@
         {
             <tr>
                 <td>
-                    <a asp-controller="Seats" asp-action="Select" method="get">@Html.DisplayFor(modelItem => item.StartTime)</a>
+                    <a asp-controller="Seats" asp-action="Select" method="get" asp-route-showId="@item.Id" >@Html.DisplayFor(modelItem => item.StartTime)</a>
                 </td>
                 <td>
+                   
                     @Html.DisplayFor(modelItem => item.DubLanguage)
                 </td>
                 <td>
