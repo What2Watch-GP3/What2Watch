@@ -14,6 +14,7 @@ namespace DataAccess.Interfaces
                 case "IMovieDataAccess": return new MovieDataAccess(connectionstring) as T;
                 case "IShowDataAccess": return new ShowDataAccess(connectionstring) as T;
                 case "IUserDataAccess": return new UserDataAccess(connectionstring) as T;
+                case "IRoomDataAccess": return new RoomDataAccess(connectionstring) as T;
                 default:
                     break;
             }

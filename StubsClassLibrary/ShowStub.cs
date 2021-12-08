@@ -32,7 +32,7 @@ namespace StubsClassLibrary
 
         public async Task<Show> GetByIdAsync(int id)
         {
-            Show show = new Show() { Id = 1, StartTime = DateTime.Now };
+            Show show = new Show() { Id = 1, StartTime = DateTime.Now, RoomId = 1 };
             return await Task.FromResult(show);
         }
 

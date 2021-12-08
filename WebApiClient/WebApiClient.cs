@@ -134,6 +134,15 @@ namespace WebApiClient
             return response.Data;
         }
 
+        public async Task<RoomDto> GetRoomByShowIdAsync(int id)
+        {
+            var response = await _client.RequestAsync<RoomDto>(Method.GET, $"shows/{id}/room");
+
+            if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
+
+            return response.Data;
+        }
+
         public async Task<IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos)
         {
 
