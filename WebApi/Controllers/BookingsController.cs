@@ -48,7 +48,7 @@ namespace WebApi.Controllers
         [Authorize]
         public async Task<ActionResult<int>> PostAsync(BookingDto value)
         {
-            //TODO: Add implementations instead of hardcode
+            //TODO: Change SeatIds list to a list of tickets, where we check each seat for availability
             //Probably get the show's time and a price based on the seats as well
             if (!SeatsAreAvailable(value.SeatIds) || !ShowIsValid(value.ShowId))
             {
