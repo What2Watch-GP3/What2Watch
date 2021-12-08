@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         {
             Show show = await _showDataAccess.GetByIdAsync(showId);
             Room room = await _roomDataAccess.GetByIdAsync(show.RoomId);
-            room.Seats = await _seatDataAccess.GetAllByRoomAsync(show.RoomId);
+            room.Seats = await _seatDataAccess.GetAllByRoomIdAsync(show.RoomId);
             if (show == null || room == null || room.Seats == null)
             {
                 return NotFound();
