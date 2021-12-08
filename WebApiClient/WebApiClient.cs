@@ -136,6 +136,8 @@ namespace WebApiClient
 
         public async Task<IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos)
         {
+
+
             var response = await _client.RequestAsync<IEnumerable<int>>(Method.POST, $"reservations", reservationDtos);
 
             if (!response.IsSuccessful) throw new Exception($"Error creating reservation. Message was {response.Content}");

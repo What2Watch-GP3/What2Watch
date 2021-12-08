@@ -35,9 +35,9 @@ namespace TestWebApi
             //Arrange
             IEnumerable<ReservationDto> reservationDtos = new List<ReservationDto>()
             {
-                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
-                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
-                new ReservationDto() { TimeStamp = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
+                new ReservationDto() { CreationTime = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
+                new ReservationDto() { CreationTime = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
+                new ReservationDto() { CreationTime = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
             };
 
             //Act

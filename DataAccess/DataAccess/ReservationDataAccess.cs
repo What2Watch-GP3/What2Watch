@@ -12,14 +12,14 @@ namespace DataAccess.DataAccess
     {
         public ReservationDataAccess(string connectionstring) : base(connectionstring)
         {
-            Values = new List<string> { "time_stamp", "user_id", "seat_id", "show_id" };
-            RawValues = new List<string> { "TimeStamp", "UserId", "SeatId", "ShowId" };
+            Values = new List<string> { "creation_time", "user_id", "seat_id", "show_id" };
+            RawValues = new List<string> { "CreationTime", "UserId", "SeatId", "ShowId" };
         } 
 
         // Overload of the CreateAsync method from BaseDataAccess to accept and return IEnumerables
         public async Task<IEnumerable<int>> CreateAsync(IEnumerable<Reservation> reservations)
         {
-            string command = $"INSERT INTO [Reservation] (time_stamp, seat_id, show_id, user_id) OUTPUT INSERTED.Id VALUES (@TimeStamp, @SeatId, @ShowId, @UserId);";
+            string command = $"INSERT INTO [Reservation] (creation_time, seat_id, show_id, user_id) OUTPUT INSERTED.Id VALUES (@CreationTime, @SeatId, @ShowId, @UserId);";
             try
             {
                 List<int> listOfIds = new();

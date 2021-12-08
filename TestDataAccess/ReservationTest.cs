@@ -26,9 +26,9 @@ namespace TestDataAccess
             //Arrange
             IEnumerable<Reservation> reservations = new List<Reservation>()
             {
-                new Reservation() { TimeStamp = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
-                new Reservation() { TimeStamp = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
-                new Reservation() { TimeStamp = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
+                new Reservation() { CreationTime= DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
+                new Reservation() { CreationTime = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
+                new Reservation() { CreationTime = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
             };
             //Act
             IEnumerable<int> reservationIds = await _reservationDataAccess.CreateAsync(reservations);
