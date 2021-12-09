@@ -32,6 +32,7 @@ namespace DataAccess.DataAccess
                         bool isCreated = await connection.ExecuteAsync(command, reservation, transaction) > 0;
                         if(!isCreated)
                         {
+                            transaction.Rollback();
                             return false;
                         }
                     }
