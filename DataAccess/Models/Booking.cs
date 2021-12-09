@@ -1,7 +1,7 @@
-﻿using System;
+﻿ using System;
 using System.ComponentModel;
 
-namespace DataAccess.Model
+namespace DataAccess.Models
 {
     public class Booking
     {

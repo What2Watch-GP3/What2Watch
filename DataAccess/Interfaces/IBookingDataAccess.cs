@@ -1,4 +1,4 @@
-﻿using DataAccess.Model;
+﻿using DataAccess.Models;
 
 namespace DataAccess.Interfaces
 {

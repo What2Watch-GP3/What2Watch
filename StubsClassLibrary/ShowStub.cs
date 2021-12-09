@@ -32,8 +32,13 @@ namespace StubsClassLibrary
 
         public async Task<Show> GetByIdAsync(int id)
         {
-            Show show = new Show() { Id = 1, StartTime = DateTime.Now };
+            Show show = new Show() { Id = 1, StartTime = DateTime.Now, RoomId = 1 };
             return await Task.FromResult(show);
+        }
+
+        public Task<Show> GetByShowIdAsync(int showId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)

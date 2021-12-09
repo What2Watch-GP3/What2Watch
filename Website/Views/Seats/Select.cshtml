@@ -19,24 +19,28 @@
             <small>Occupied</small>
         </li>
     </ul>
+    <form asp-controller="Seats" asp-action="Reserve" method="POST" id="form">
+        <div class="seat-container">
+            <div class="screen"></div>
 
-    <div class="seat-container">
-        <div class="screen"></div>
+            @for (int rows = 0; rows < Model.Rows; rows++)
+            {
+                <div class="row">
+                    @for (int collumn = 0; collumn < Model.SeatsPerRow; collumn++)
+                    {
+                        <div class="seat" id="@rows-@collumn"></div>
+                    }
+                </div>
+            }
 
-        @for (int rows = 0; rows < Model.Rows; rows++)
-        {
-            <div class="row">
-                @for (int seatsPerRow = 0; seatsPerRow < Model.SeatsPerRow; seatsPerRow++)
-                {
-                    <div class="seat"></div>
-                }
-            </div>
-        }
+            <p class="text">
+                You have selected <span id="countSpan">0</span> seats for the total price of <span id="totalSpan">0</span> DKK
+            </p>
+            <button class="btn btn-primary" type="submit">Reserve</button>
 
-        <p class="text">
-            You have selected <span id="countSpan">0</span> seats for the total price of Rs. <span id="totalSpan">0</span>
-        </p>
-    </div>
+
+        </div>
+    </form>
 </div>
-
+   
 

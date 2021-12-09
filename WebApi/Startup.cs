@@ -27,11 +27,14 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             //TODO: compare with transient
-            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IBookingDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IReservationDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IMovieDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ICinemaDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IShowDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IUserDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IBookingDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IRoomDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ISeatDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddScoped<IConfiguration>((config) => Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>

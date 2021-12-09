@@ -4,17 +4,21 @@ using System.Threading.Tasks;
 using RestSharp;
 using WebApiClient.DTOs;
 using Tools;
+using System.Linq;
 
 namespace WebApiClient
 {
     public class WebApiClient : IWebApiClient
     {
         private IRestClient _client;
+        private RoomDto _room;
 
         public WebApiClient(IRestClient client)
         {
             _client = client;
             _client.CookieContainer = new System.Net.CookieContainer();
+
+            _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 4 }, new SeatDto() { Id = 6 }, new SeatDto() { Id = 7 } }, Name = "Room1", Rows = 10 };
         }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
@@ -125,7 +129,7 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task <CinemaDto> GetCinemaByIdAsync(int cinemaId)
+        public async Task<CinemaDto> GetCinemaByIdAsync(int cinemaId)
         {
             var response = await _client.RequestAsync<CinemaDto>(Method.GET, $"cinemas/{cinemaId}");
 
@@ -133,5 +137,47 @@ namespace WebApiClient
 
             return response.Data;
         }
+
+        public async Task<RoomDto> GetRoomByShowIdAsync(int id)
+        {
+            var response = await _client.RequestAsync<RoomDto>(Method.GET, $"shows/{id}/room");
+
+            if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
+
+
+            
+            //_room = response.Data;
+
+            return response.Data;
+        }
+
+        public async Task<IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos)
+        {
+
+            
+            // Map ReservationDto's SeatPosition to _seats's Seat Id
+            foreach(var reservationDto in reservationDtos)
+            {
+                reservationDto.SeatId = GetSeatIdByPosition(reservationDto.SeatPosition);
+            }
+
+            var response = await _client.RequestAsync<IEnumerable<int>>(Method.POST, $"reservations", reservationDtos);
+
+            if (!response.IsSuccessful) throw new Exception($"Error creating reservation. Message was {response.Content}");
+
+            return response.Data;
+        }
+
+        private int GetSeatIdByPosition(string seatPosition)
+        {
+            var positionList = seatPosition.Split("-");
+            int.TryParse(positionList[0], out int row);
+            int.TryParse(positionList[1], out int position);
+
+            int index = (row * _room.Columns) + position;
+
+            return _room.Seats.ToList()[index].Id;
+        }
+
     }
 }

@@ -64,7 +64,7 @@ namespace DataAccess.DataAccess
         // RawValues = TotalPrice, Date
         protected IEnumerable<string> RawValues;
 
-        public async Task<int> CreateAsync(T entity)
+        public virtual async Task<int> CreateAsync(T entity)
         {
                             // INSERT INTO [Booking] (total_price, date) OUTPUT INSERTED.Id VALUES (@TotalPrice, @Date)
             string command = $"INSERT INTO [{TableName}] ({ValueNames}) OUTPUT INSERTED.Id VALUES ({ValueParameters});";
@@ -79,7 +79,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
                             // SELECT * FROM [Booking];
             string command = $"SELECT * FROM [{TableName}];";
@@ -94,7 +94,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
                             // SELECT * FROM [Booking] WHERE Id=@Id;
             string command = $"SELECT * FROM [{TableName}] WHERE Id=@Id;";
@@ -109,7 +109,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public virtual async Task<bool> DeleteAsync(int id)
         {
                             // DELETE FROM [Booking] WHERE Id=@Id;
             string command = $"DELETE FROM [{TableName}] WHERE Id=@Id;";
@@ -124,7 +124,7 @@ namespace DataAccess.DataAccess
             }
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public virtual async Task<bool> UpdateAsync(T entity)
         {
                             // UPDATE [Booking] SET total_price=@total_price, date=@date WHERE Id=@Id;
             string command = $"UPDATE [{TableName}] SET {ValueUpdates} WHERE Id=@Id;";

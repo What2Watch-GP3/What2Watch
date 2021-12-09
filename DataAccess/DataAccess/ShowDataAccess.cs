@@ -14,7 +14,11 @@ namespace DataAccess.DataAccess
         {
             Values = new List<string> { "start_time", "movie_id", "room_id", "dub_language", "subtitles_language", "graphic_type", "sound_type" };
         }
-        
+
+        public Task<Show> GetByShowIdAsync(int showId)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<IEnumerable<Show>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId)
         {

@@ -1,13 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
 
 namespace DataAccess.Models
 {
-    public class Ticket 
+    public class Reservation
     {
         public int Id { get; set; }
-        [Description("Seat_Id")]
+        public DateTime CreationTime { get; set; }
         public int SeatId { get; set; }
-        [Description("Show_Id")]
         public int ShowId { get; set; }
+        public int UserId { get; set; }
     }
 }

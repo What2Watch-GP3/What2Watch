@@ -1,4 +1,4 @@
-﻿using DataAccess.Model;
+﻿using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using StubsClassLibrary;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WebApi.Controllers;
 using WebApi.DTOs;
 
-namespace TestBookingWebApi
+namespace TestWebApi
 {
     class BookingTest
     {
@@ -51,7 +51,7 @@ namespace TestBookingWebApi
                 // Assert
                 Assert.AreEqual(200, objRes.StatusCode, "Status code returned was not 200");
 
-                int bookingId = (int) objRes.Value;
+                int bookingId = (int)objRes.Value;
                 Assert.AreEqual(newBooking.Id, bookingId, "Booking wasn't created");
             }
             else if (idActionResult is StatusCodeResult scr)

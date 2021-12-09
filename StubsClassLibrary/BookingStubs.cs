@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.Model;
+using DataAccess.Models;
 using DataAccess.Interfaces;
 
 namespace StubsClassLibrary
