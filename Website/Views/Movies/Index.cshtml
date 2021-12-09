@@ -18,33 +18,31 @@
     </form>
 </div>
 
-    <table class="table table-hover table-bordered">
-        <thead  >
-            <tr>
+<div class="row row-cols-1 row-cols-md-3 g-4">
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Duration)
-                </th>
+    @foreach (var item in Model)
+    {
 
-            </tr>
-        </thead>
-
-        <tbody class="clickable-table">
-            @foreach (var item in Model)
-            {
-
-                <tr>
-                    <td class="table-row text-white">
-                        @Html.ActionLink(item.Title, "Cinemas", "Cinemas", new { movieId = item.Id })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Duration) minutes
-                    </td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="col-lg-4 col-md-6 col-12">
+            <div class="card mb-3 ripple" onclick="location.href='@Url.Action("Cinemas", "Cinemas" , new { movieId=@item.Id })'">
+                <div class="row g-0">
+                    <div class="col-4">
+                        @{string imgSourcePath = $"pics/{@item.Title}.jpg";}
+                        <img src="@imgSourcePath"
+                             class="card-img-top"
+                             style="height: 100%;"
+                             alt="@item.Title" />
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">
+                                Duration: @item.Duration minutes
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    }
+</div>

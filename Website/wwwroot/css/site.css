@@ -149,3 +149,14 @@ header {
 
 /* Movies table changes
 -------------------------------------------------- */
+img{
+    max-height: 200px;
+}
+.card {
+    cursor: pointer;
+    
+}
+
+.card:hover {
+    box-shadow: 0 0 2px 1px rgba(255, 163, 26, 0.5);
+}
