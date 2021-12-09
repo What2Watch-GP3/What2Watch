@@ -10,6 +10,7 @@ namespace DataAccess.DataAccess
 {
     public class RoomDataAccess : BaseDataAccess<Room>, IRoomDataAccess
     {
-             public RoomDataAccess(string connectionString) : base(connectionString) { }   
+             public RoomDataAccess(string connectionString) : base(connectionString) { }
+             
     }
 }

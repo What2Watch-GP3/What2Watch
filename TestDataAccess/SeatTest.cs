@@ -21,14 +21,14 @@ namespace TestDataAccess
         }
 
         [Test]
-        public async Task GettingOneShowById1ReturnsAShow()
+        public async Task GettingSeatsByRoomIdReturnsAListOfSeatsBiggerThan0()
         {
             //Arrange
             //Act
             var seats = await _seatDataAccess.GetByIdAsync(1);
 
             //Assert
-            Assert.NotNull(show, $"No Show found by the id 1");
+            Assert.IsNotEmpty(seats, $"The list of seats based on the room id 1 was empty.");
         }
     }
 }

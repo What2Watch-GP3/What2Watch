@@ -27,7 +27,7 @@ namespace TestDataAccess
             var room = await _roomDataAccess.GetByIdAsync(1);
 
             //Assert
-            Assert.IsNotEmpty(room.Seats, $"No seats found in Room Id 1");
+            Assert.IsNotNull(room, $"Room with id 1 was not found.");
         }
     }
 }

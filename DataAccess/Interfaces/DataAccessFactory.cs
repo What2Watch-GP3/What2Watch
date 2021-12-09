@@ -5,17 +5,17 @@ namespace DataAccess.Interfaces
 {
     public class DataAccessFactory
     {
-        public static T GetDataAccess<T>(string connectionstring) where T : class
+        public static T GetDataAccess<T>(string connectionString) where T : class
         {
             switch (typeof(T).Name)
             {
-                case "IBookingDataAccess": return new BookingDataAccess(connectionstring) as T;
-                case "ICinemaDataAccess": return new CinemaDataAccess(connectionstring) as T;
-                case "IMovieDataAccess": return new MovieDataAccess(connectionstring) as T;
-                case "IShowDataAccess": return new ShowDataAccess(connectionstring) as T;
-                case "IUserDataAccess": return new UserDataAccess(connectionstring) as T;
-                case "IRoomDataAccess": return new RoomDataAccess(connectionstring) as T;
-                case "IReservationDataAccess": return new ReservationDataAccess(connectionstring) as T;
+                case "IBookingDataAccess": return new BookingDataAccess(connectionString) as T;
+                case "ICinemaDataAccess": return new CinemaDataAccess(connectionString) as T;
+                case "IMovieDataAccess": return new MovieDataAccess(connectionString) as T;
+                case "IShowDataAccess": return new ShowDataAccess(connectionString) as T;
+                case "IUserDataAccess": return new UserDataAccess(connectionString) as T;
+                case "IRoomDataAccess": return new RoomDataAccess(connectionString) as T;
+                case "ISeatDataAccess": return new SeatDataAccess(connectionString) as T;
                 default:
                     break;
             }
