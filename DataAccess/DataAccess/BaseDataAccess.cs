@@ -7,6 +7,7 @@ using Dapper;
 using System;
 using DataAccess.Interfaces;
 using System.ComponentModel;
+using System.Text;
 
 namespace DataAccess.DataAccess
 {
@@ -18,7 +19,24 @@ namespace DataAccess.DataAccess
         // ValueParameters = "@total_price, @date"
         private string ValueParameters => string.Join(", ", RawValues.ToList().Select(property => $"@{property.Trim()}"));
         // ValueUpdates = "total_price=@total_price, date=@date"
-        private string ValueUpdates => string.Join(", ", RawValues.ToList().Select(property => $"{property.Trim()}=@{property.Trim()}"));
+        private string ValueUpdates
+        {
+            get
+            {
+                StringBuilder values = new StringBuilder();
+                var valuesList = Values.ToList();
+                var rawValueList = RawValues.ToList();
+
+                for(int index = 0; index < Values.Count(); index++)
+                {
+                    values.Append($"{valuesList[index]}=@{rawValueList[index]},");
+                }
+                values.Length--;
+                return values.ToString();
+            }
+        }
+
+        
 
         protected BaseDataAccess(string connectionstring)
         {
