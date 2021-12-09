@@ -16,6 +16,7 @@ namespace StubsClassLibrary
 {
     public class RestClientStub : IRestClient
     {
+        public CookieContainer CookieContainer { get => new CookieContainer(); set => new CookieContainer(); }
         public object ResponseData { get; set; }
 
         public RestClientStub() : base() { }
@@ -44,8 +45,6 @@ namespace StubsClassLibrary
             };
             return Task.FromResult(response);
         }
-
-        public CookieContainer CookieContainer { get => new CookieContainer(); set => new CookieContainer(); }
 
         #region Properties
         

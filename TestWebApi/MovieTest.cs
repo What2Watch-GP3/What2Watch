@@ -83,11 +83,5 @@ namespace TestWebApi
             Assert.IsTrue(movies[0].Title.Contains("2"), "Searchphrase was not found");
             Assert.AreEqual(200, _objectResult.StatusCode, "Status code was not OK (200).");
         }
-
-
-
-
-
-
     }
 }

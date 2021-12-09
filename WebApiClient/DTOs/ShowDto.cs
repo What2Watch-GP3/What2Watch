@@ -14,9 +14,5 @@ namespace WebApiClient.DTOs
         public Language SubtitlesLanguage { get; set; }
         public GraphicType GraphicType { get; set; }
         public SoundType SoundType { get; set; }
-
-
-
-
     }
 }

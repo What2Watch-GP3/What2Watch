@@ -1,14 +1,18 @@
 ﻿@using WebApiClient.DTOs
+@using Newtonsoft.Json;
 @model dynamic
 
 @{
     ViewData["Title"] = "Shows";
     IEnumerable<WebApiClient.DTOs.ShowDto> shows = Model.Shows;
-    string cinemaName = Model.CinemaName;
-    string movieTitle = Model.MovieTitle;
+    int cinemaId = Model.CinemaId;
+    int movieId = Model.MovieId;
+
+    Dictionary<int, string> cinemaNameDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["CinemaNameDictionary"].ToString());
+    Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
 
-<h1>Shows in @cinemaName for @movieTitle </h1>
+<h1>Shows in @cinemaNameDictionary[cinemaId] for @titleDictionary[movieId] </h1>
 
 
 <table class="table table-hover table-bordered">
@@ -34,23 +38,23 @@
     <tbody class="clickable-table">
         @foreach (var item in shows)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DubLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GraphicType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoundType)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <a asp-controller="Seats" asp-action="Select" method="get">@Html.DisplayFor(modelItem => item.StartTime)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DubLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GraphicType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoundType)
+                </td>
+            </tr>
         }
     </tbody>
 </table>

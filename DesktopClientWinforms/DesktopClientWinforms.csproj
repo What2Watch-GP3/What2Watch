@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DesktopWebApiClient\DesktopApiClient.csproj">
-      <ReferenceSourceTarget></ReferenceSourceTarget>
-    </ProjectReference>
+    <ProjectReference Include="..\DesktopWebApiClient\DesktopApiClient.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,9 +9,7 @@ namespace DataAccess.DataAccess
 {
     public class CinemaDataAccess : BaseDataAccess<Cinema>, ICinemaDataAccess
     {
-        public CinemaDataAccess(string connectionString) : base(connectionString)
-        {
-        }
+        public CinemaDataAccess(string connectionString) : base(connectionString) { }
         public async Task<IEnumerable<Cinema>> GetListByMovieIdAsync(int movieId)
         {
             string command = "SELECT DISTINCT Cinema.id, Cinema.[name] FROM Cinema " +

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DataAccess.Interfaces;
 using DataAccess.Authentication;
-using System;
 using System.Threading.Tasks;
 using DataAccess.Models;
 
@@ -9,9 +8,7 @@ namespace DataAccess.DataAccess
 {
     public class UserDataAccess : BaseDataAccess<UserDataAccess>, IUserDataAccess
     {
-        public UserDataAccess(string connectionstring) : base(connectionstring)
-        {
-        }
+        public UserDataAccess(string connectionstring) : base(connectionstring) { }
 
         public async Task<int> LoginAsync(User user)
         {
@@ -19,14 +16,14 @@ namespace DataAccess.DataAccess
             {
                 var query = "SELECT id, password_hash_salt FROM [User] WHERE email=@Email";
                 using var connection = CreateConnection();
-                var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { Email = user.Email });
+                var userTuple = await connection.QuerySingleAsync<UserTuple>(query, new { user.Email });
                 if (BCryptTool.VerifyPassword(user.Password, userTuple.password_hash_salt))
                 {
                     return userTuple.id;
                 }
                 return -1;
             }
-            catch (Exception ex)
+            catch
             {
                 //TODO: throw a more specific exception
                 return -1;

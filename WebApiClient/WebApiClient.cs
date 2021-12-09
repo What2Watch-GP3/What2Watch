@@ -107,7 +107,7 @@ namespace WebApiClient
             //userDto.Id = (int)response.Data;
             //userDto.Password = "";
 
-            return (int)response.Data;
+            return response.Data;
         }
 
         public async Task<bool> HasValidToken()
