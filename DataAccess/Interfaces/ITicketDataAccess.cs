@@ -9,7 +9,7 @@ namespace DataAccess.Interfaces
 {
     public interface ITicketDataAccess : IBaseDataAccess<Ticket>
     {
-        //Task<IEnumerable<Ticket>> GetListByMovieAndCinemaIdAsync(int movieId, int cinemaId);
-        Task<Ticket> GetByTicketIdAsync(int showId);
+        Task<IEnumerable<Ticket>> GetTicketsByShowIdAsync(int showId);
+
     }
 }

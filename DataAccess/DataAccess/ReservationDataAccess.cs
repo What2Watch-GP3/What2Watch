@@ -48,5 +48,10 @@ namespace DataAccess.DataAccess
                 throw new Exception($"Error during establishing connection. Message was '{ex.Message}'", ex);
             }
         }
+
+        public async Task<IEnumerable<Reservation>> GetReservationsByShowIdAsync(int showId)
+        {
+            
+        }
     }
 }

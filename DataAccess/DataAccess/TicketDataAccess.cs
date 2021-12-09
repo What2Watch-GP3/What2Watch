@@ -13,27 +13,17 @@ namespace DataAccess.DataAccess
     {
         public TicketDataAccess(string connectionString) : base(connectionString) { }
 
-        public Task<Ticket> GetByTicketIdAsync(int showId)
+        public async Task<IEnumerable<Ticket>> GetTicketsByShowIdAsync(int showId)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Ticket>> GetListTicketsIdAsync(int movieId)
-        {
-            string command = "SELECT DISTINCT Cinema.id, Cinema.[name] FROM Cinema " +
-                "LEFT JOIN [Room] ON Cinema.id = Room.cinema_id " +
-                "LEFT JOIN [Show] ON Room.id = Show.room_id " +
-                "LEFT JOIN [Movie] ON Show.movie_id = Movie.id " +
-                "WHERE Movie.id = @MovieId";
+            string command = "SELECT * FROM Ticket WHERE Show_id=@Showid";
             try
             {
                 using var connection = CreateConnection();
-                //return await connection.QueryAsync<Ticket>(command, new { TicketId = ticketId });
-                return null;
+                return await connection.QueryAsync<Ticket>(command, new { ShowId = showId });
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error getting List of Cinemas by selected Movie id {movieId}. Error: {ex.Message}", ex);
+                throw new Exception($"Error getting List of Tickets by selected Show id {showId}. Error: {ex.Message}", ex);
             }
         }
     }
