@@ -25,7 +25,7 @@ namespace TestDataAccess
         {
             //Arrange
             //Act
-            var seats = await _seatDataAccess.GetByIdAsync(1);
+            var seats = await _seatDataAccess.GetAllByRoomIdAsync(1);
 
             //Assert
             Assert.IsNotEmpty(seats, $"The list of seats based on the room id 1 was empty.");
