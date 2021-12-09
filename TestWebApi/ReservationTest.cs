@@ -42,12 +42,13 @@ namespace TestWebApi
 
             //Act
             var reservationResult = (await _reservationController.CreateAsync(reservationDtos)).Result;
+
             _objectResult = (ObjectResult)reservationResult;
-            IEnumerable<int> reservationIds = (IEnumerable<int>)_objectResult.Value;
+            bool isConfirmed = (bool)_objectResult.Value;
 
             //Assert
             Assert.AreEqual(200, _objectResult.StatusCode, "Status coda was not OK (200).");
-            Assert.AreEqual(reservationIds.Count(), 3, $"Failed to create reservations. Returned ids were {reservationIds}");
+            Assert.IsTrue(isConfirmed, $"Failed to create reservations.");
         }
 
         [Test]
