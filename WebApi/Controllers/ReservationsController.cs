@@ -22,13 +22,13 @@ namespace WebApi.Controllers
 
         // POST api/<ReservationsController>
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<int>>> CreateAsync([FromBody] IEnumerable<ReservationDto> reservationDtos)
+        public async Task<ActionResult<bool>> CreateAsync([FromBody] IEnumerable<ReservationDto> reservationDtos)
         {
             if (reservationDtos != null)
             {
                 var reservations = DtoConverter<ReservationDto, Reservation>.FromList(reservationDtos);
-                var reservationIds = await _reservationDataAccess.CreateAsync(reservations);
-                return Ok(reservationIds);
+                bool isConfirmed = await _reservationDataAccess.CreateAsync(reservations);
+                return Ok(isConfirmed);
             }
             else
             {

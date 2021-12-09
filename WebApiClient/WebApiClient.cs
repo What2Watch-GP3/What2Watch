@@ -17,6 +17,8 @@ namespace WebApiClient
         {
             _client = client;
             _client.CookieContainer = new System.Net.CookieContainer();
+
+            _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 4 }, new SeatDto() { Id = 6 }, new SeatDto() { Id = 7 } }, Name = "Room1", Rows = 10 };
         }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
@@ -142,7 +144,9 @@ namespace WebApiClient
 
             if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
 
-            _room = response.Data;
+
+            
+            //_room = response.Data;
 
             return response.Data;
         }

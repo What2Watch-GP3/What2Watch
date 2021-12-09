@@ -6,7 +6,7 @@ namespace DataAccess.Interfaces
 {
     public interface IReservationDataAccess : IBaseDataAccess<Reservation>
     {
-        Task<IEnumerable<int>> CreateAsync(IEnumerable<Reservation> reservations);
-        Task<IEnumerable<Reservation>> GetReservationsByShowIdAsync(int showId);
+        Task<bool> CreateAsync(IEnumerable<Reservation> reservations);
+        Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId);
     }
 }

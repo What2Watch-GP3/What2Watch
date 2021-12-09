@@ -16,6 +16,7 @@ namespace DataAccess.Interfaces
                 case "IUserDataAccess": return new UserDataAccess(connectionString) as T;
                 case "IRoomDataAccess": return new RoomDataAccess(connectionString) as T;
                 case "ISeatDataAccess": return new SeatDataAccess(connectionString) as T;
+                case "IReservationDataAccess": return new ReservationDataAccess(connectionString) as T;
                 default:
                     break;
             }

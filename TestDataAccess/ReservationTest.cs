@@ -21,6 +21,15 @@ namespace TestDataAccess
             _reservationDataAccess = new ReservationDataAccess(Configuration.CONNECTION_STRING_TEST);
         }
 
+        [OneTimeTearDown]
+        public void OneTimTearDown()
+        {
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,1);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,2);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,3);
+        }
+
+
         [Test]
         [Order(1)]
         public async Task CreatingAReservationReturnsItsId()
@@ -33,9 +42,9 @@ namespace TestDataAccess
                 new Reservation() { CreationTime = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
             };
             //Act
-            IEnumerable<int> reservationIds = await _reservationDataAccess.CreateAsync(reservations);
+            bool isCreated = await _reservationDataAccess.CreateAsync(reservations);
             //Assert
-            Assert.AreEqual(reservationIds.Count(), 3, $"Reservations weren't created. Returned ids were {reservationIds}");
+            Assert.IsTrue(isCreated, $"Reservations weren't created.");
         }
 
         [Test]

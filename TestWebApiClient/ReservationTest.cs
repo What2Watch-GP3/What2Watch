@@ -26,9 +26,9 @@ namespace TestWebApiClient
             //Arrange
             IEnumerable<ReservationDto> reservationDtos = new List<ReservationDto>()
             {
-                new ReservationDto() { CreationTime = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 },
-                new ReservationDto() { CreationTime = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
-                new ReservationDto() { CreationTime = DateTime.Now, SeatId = 3, ShowId = 1, UserId = 1 }
+                new ReservationDto() { CreationTime = DateTime.Now, SeatPosition = "0-0", ShowId = 4, UserId = 1 },
+                new ReservationDto() { CreationTime = DateTime.Now, SeatPosition = "0-1", ShowId = 4, UserId = 1 },
+                new ReservationDto() { CreationTime = DateTime.Now, SeatPosition = "0-2", ShowId = 4, UserId = 1 }
             };
             //Act
             IEnumerable<int> reservationIds = await _stubsClient.CreateReservationAsync(reservationDtos);
