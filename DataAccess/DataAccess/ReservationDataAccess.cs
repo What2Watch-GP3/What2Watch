@@ -17,13 +17,11 @@ namespace DataAccess.DataAccess
         } 
 
         // Overload of the CreateAsync method from BaseDataAccess to accept and return IEnumerables
-        public async Task<IEnumerable<int>> CreateAsync(IEnumerable<Reservation> reservations)
+        public async Task<bool> CreateAsync(IEnumerable<Reservation> reservations)
         {
-            string command = $"INSERT INTO [Reservation] (creation_time, seat_id, show_id, user_id) OUTPUT INSERTED.Id VALUES (@CreationTime, @SeatId, @ShowId, @UserId);";
+            string command = $"INSERT INTO [Reservation] (creation_time, seat_id, show_id, user_id) VALUES (@CreationTime, @SeatId, @ShowId, @UserId);";
             try
             {
-                List<int> listOfIds = new();
-                int reservationId = 0;
                 using var connection = CreateConnection();
                 connection.Open();
                 using var transaction = connection.BeginTransaction(IsolationLevel.RepeatableRead);
@@ -31,21 +29,38 @@ namespace DataAccess.DataAccess
                 {
                     foreach (Reservation reservation in reservations) 
                     { 
-                        reservationId = await connection.QuerySingleAsync<int>(command, reservation, transaction);
-                        listOfIds.Add(reservationId);
+                        bool isCreated = await connection.ExecuteAsync(command, reservation, transaction) > 0;
+                        if(!isCreated)
+                        {
+                            return false;
+                        }
                     }
                     transaction.Commit();
-                    return listOfIds;
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    throw new Exception($"Error during async creation of 'Reservation' with id '{reservationId}'!\nMessage was: '{ex.Message}'\nTable Name: Reservation\nCommand: {command}", ex);
+                    throw new Exception($"Error during async creation of 'Reservation'!\nMessage was: '{ex.Message}'\nTable Name: Reservation\nCommand: {command}", ex);
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error during establishing connection. Message was '{ex.Message}'", ex);
+            }
+        }
+
+        public async Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId)
+        {
+            string command = $"DELETE FROM [{TableName}] WHERE seat_id=@SeatId AND show_id=@ShowId ;";
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.ExecuteAsync(command, new { SeatId = seatId, ShowId=showId  }) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error during async deletion of reservation with Seat-Id:{seatId} and Show-Id:{showId}!\nMessage was: '{ex.Message}'\nTable Name: {TableName}\nCommand: {command}", ex);
             }
         }
     }

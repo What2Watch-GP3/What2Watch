@@ -10,9 +10,9 @@ namespace StubsClassLibrary
 {
     public class ReservationStub : IReservationDataAccess
     {
-        public async Task<IEnumerable<int>> CreateAsync(IEnumerable<Reservation> entities)
+        public async Task<bool> CreateAsync(IEnumerable<Reservation> reservations)
         {
-            return await Task.FromResult(new List<int>() { 1, 2, 3 });
+            return await Task.FromResult(true);
         }
 
         public Task<int> CreateAsync(Reservation entity)
@@ -21,6 +21,11 @@ namespace StubsClassLibrary
         }
 
         public Task<bool> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId)
         {
             throw new NotImplementedException();
         }
