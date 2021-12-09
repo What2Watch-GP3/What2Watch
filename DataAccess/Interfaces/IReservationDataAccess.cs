@@ -8,5 +8,6 @@ namespace DataAccess.Interfaces
     {
         Task<bool> CreateAsync(IEnumerable<Reservation> reservations);
         Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId);
+        Task<IEnumerable<Reservation>> GetReservationsByShowIdAsync(int showId);
     }
 }

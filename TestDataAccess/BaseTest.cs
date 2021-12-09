@@ -1,6 +1,6 @@
 ﻿using DataAccess.DataAccess;
 using DataAccess.Interfaces;
-using DataAccess.Model;
+using DataAccess.Models;
 using NUnit.Framework;
 using System;
 using System.Linq;

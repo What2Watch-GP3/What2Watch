@@ -62,6 +62,7 @@ namespace DataAccess.DataAccess
             {
                 throw new Exception($"Error getting List of Tickets by selected Show id {showId}. Error: {ex.Message}", ex);
             }
+        }
         public async Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId)
         {
             string command = $"DELETE FROM [{TableName}] WHERE seat_id=@SeatId AND show_id=@ShowId ;";

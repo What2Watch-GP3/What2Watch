@@ -22,11 +22,11 @@ namespace TestDataAccess
         }
 
         [OneTimeTearDown]
-        public void OneTimTearDown()
+        public void OneTimeTearDown()
         {
             _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,1);
-            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,2);
             _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,3);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,2);
         }
 
 
@@ -46,7 +46,7 @@ namespace TestDataAccess
             //Assert
             Assert.IsTrue(isCreated, $"Reservations weren't created.");
         }
-
+        
         [Test]
         [Order(2)]
         public async Task GetReservationsByShowId1()
@@ -56,15 +56,6 @@ namespace TestDataAccess
 
             //ASSERT
             Assert.IsNotEmpty(reservations, $"No reservations returned. Show id was 1");
-        }
-
-        [TearDown]
-        public async Task TearDown()
-        {
-            foreach (var reservation in reservations)
-            {
-                await _reservationDataAccess.DeleteAsync(reservation.Id);
-            }
         }
     }
 }
