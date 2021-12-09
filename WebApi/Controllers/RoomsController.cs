@@ -28,16 +28,16 @@ namespace WebApi.Controllers
         {
             Show show = await _showDataAccess.GetByIdAsync(showId);
             Room room = await _roomDataAccess.GetByIdAsync(show.RoomId);
-            room.Seats = await _seatDataAccess.GetAllByRoomIdAsync(show.RoomId);
-            if (show == null || room == null || room.Seats == null)
+            IEnumerable<Seat> seats = await _seatDataAccess.GetAllByRoomIdAsync(show.RoomId);
+            if (show == null || room == null || seats == null)
             {
                 return NotFound();
             }
             else
             {
                 RoomDto roomDto = DtoConverter<Room, RoomDto>.From(room);
-                IEnumerable<SeatDto> seats = DtoConverter<Seat, SeatDto>.FromList(room.Seats);
-                roomDto.Seats = seats;
+                IEnumerable<SeatDto> seatsDto = DtoConverter<Seat, SeatDto>.FromList(seats);
+                roomDto.Seats = seatsDto;
                 return Ok(roomDto);
             }
         }
