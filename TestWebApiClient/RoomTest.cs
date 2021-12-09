@@ -20,9 +20,9 @@ namespace TestWebApiClient
         {
             //Arrange
             //IEnumerable<SeatDto> Seats = IEnumerable.Empty<SeatDto>();
-            IEnumerable<SeatDto> Seats = new List<SeatDto>(){   new SeatDto() { Number = 1, Row = 1, IsAvailable = true },
-                                                                new SeatDto() { Number = 3, Row = 1, IsAvailable = true },
-                                                                new SeatDto() { Number = 5, Row = 1, IsAvailable = false }};
+            IEnumerable<SeatDto> Seats = new List<SeatDto>(){   new SeatDto() { Position = 1, RowNumber = 1, IsAvailable = true },
+                                                                new SeatDto() { Position = 3, RowNumber = 1, IsAvailable = true },
+                                                                new SeatDto() { Position = 5, RowNumber = 1, IsAvailable = false }};
             RoomDto roomDto = new() { Id = 1, Name = "Room 1",Rows = 8, Columns = 10, Seats = Seats };
             _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = roomDto });
             //_webApiIdClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = 1 });
