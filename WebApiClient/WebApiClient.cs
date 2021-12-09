@@ -11,7 +11,7 @@ namespace WebApiClient
     public class WebApiClient : IWebApiClient
     {
         private IRestClient _client;
-        private RoomDto _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 1 }, new SeatDto() { Id = 2 }, new SeatDto() { Id = 3 } }, Name = "Room1", Rows = 10  };
+        private RoomDto _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 4 }, new SeatDto() { Id = 6 }, new SeatDto() { Id = 7 } }, Name = "Room1", Rows = 10  };
 
         public WebApiClient(IRestClient client)
         {
