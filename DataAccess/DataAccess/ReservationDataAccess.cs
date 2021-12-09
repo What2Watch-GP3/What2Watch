@@ -51,7 +51,16 @@ namespace DataAccess.DataAccess
 
         public async Task<IEnumerable<Reservation>> GetReservationsByShowIdAsync(int showId)
         {
-            
+            string command = "SELECT * FROM Reservation WHERE Show_id=@Showid";
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.QueryAsync<Reservation>(command, new { ShowId = showId });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting List of Tickets by selected Show id {showId}. Error: {ex.Message}", ex);
+            }
         }
     }
 }
