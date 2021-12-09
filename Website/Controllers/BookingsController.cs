@@ -28,9 +28,10 @@ namespace WebSite.Controllers
         public async Task<ActionResult> Confirm()
         {
             //TODO Implement actual values instead of hardcoded
-            TempData["SeatIds"] = new List<int>() { 1, 2, 3 };
+            var reservations = (IEnumerable<ReservationDto>) TempData["Reservations"];
             TempData["TotalPrice"] = 40;
             TempData["Date"] = DateTime.Now;
+
             return View();
         }
 
@@ -47,7 +48,7 @@ namespace WebSite.Controllers
                 }
 
                 //TODO Implement getting the seat ids instead of hardcode
-                BookingDto bookings = new() { SeatIds = new List<int>() { 1, 2, 3 }, ShowId = 1 };
+                BookingDto bookings = new() { ReservationIds = new List<int>() { 1, 2, 3 }, ShowId = 1 };
                 int id = await _client.ConfirmBookingAsync(bookings);
                 if (id > 0)
                 {
@@ -55,7 +56,7 @@ namespace WebSite.Controllers
                 }
                 else if (id == -403)
                 {
-                    TempData["ErrorMessage"] = "You are not logged in!";
+                    ViewBag.ErrorMessage = "You are not logged in!";
                     return RedirectToAction("Login", "Login", new { returnUrl = Request.Path.Value});
                 }
                 else

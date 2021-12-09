@@ -10,7 +10,7 @@ namespace WebApiClient.DTOs
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
         [Required]
-        public IEnumerable<int> SeatIds { get; set; }
+        public IEnumerable<int> ReservationIds { get; set; }
         [Required]
         public int ShowId { get; set; }
     }

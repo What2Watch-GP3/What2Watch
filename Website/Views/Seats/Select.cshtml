@@ -26,9 +26,9 @@
             @for (int rows = 0; rows < Model.Rows; rows++)
             {
                 <div class="row">
-                    @for (int collumn = 0; collumn < Model.SeatsPerRow; collumn++)
+                    @for (int column = 0; column < Model.SeatsPerRow; column++)
                     {
-                        <div class="seat" id="@rows-@collumn"></div>
+                        <div class="seat" id="@rows-@column"></div>
                     }
                 </div>
             }
@@ -42,5 +42,65 @@
         </div>
     </form>
 </div>
-   
 
+@section Scripts
+{
+    <script>
+        // Event for form submition with id #`form`
+        // Goes trough all rows, then seats that are selected and adds a hidden input with
+        // the id of that seat as value. This way te form submition can see them and add them as well
+        $("#form").submit(function (eventObj) {
+            let index = 0;
+            document.querySelectorAll('.row .seat.selected').forEach(seat => {
+                // This line adds the hidden inputs
+                // the name is important. It's used to map it to what the c# Action recives
+                // It looks like selectedSeats[0] because `selectedSeats` is a List<string> as
+                // parameter on the Action
+                $(this).append('<input type="hidden" name="selectedSeats[' + index + ']" value="' + seat.id + '" /> ');
+                index++;
+            });
+            return true;
+        });
+
+        // Updates the selected seats <p> and increased the numberOfSeats count
+        function updateSelectedCount() {
+            const numberOfSeats = document.querySelectorAll('.row .seat.selected').length;
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetTotalPrice")",
+                dataType: "text",
+                success: function (totalPrice) {
+                    totalSpan.innerText = totalPrice;
+                },
+                error: function () {
+                    alert('ero');
+                };
+            });
+
+            countSpan.innerText = numberOfSeats;
+        }
+
+
+        $(document).ready(function () {
+            alert('i want to go home please')
+            const container = document.querySelector('.seat-container');
+
+            //Seat click event
+            if (container != null) {
+                container.addEventListener('click', e => {
+                    if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+                        e.target.classList.toggle('selected');
+                        if (document.querySelectorAll('.row .seat.selected').length <= 8) {
+                            updateSelectedCount();
+                        }
+                        else {
+                            e.target.classList.toggle('selected');
+                            alert('you mofo thats enough of fucking seats okay');
+                        }
+                    }
+                });
+            }
+        }
+        );
+    </script>
+}

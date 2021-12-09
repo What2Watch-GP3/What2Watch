@@ -50,7 +50,7 @@ namespace WebApi.Controllers
         {
             //TODO: Change SeatIds list to a list of tickets, where we check each seat for availability
             //Probably get the show's time and a price based on the seats as well
-            if (!SeatsAreAvailable(value.SeatIds) || !ShowIsValid(value.ShowId))
+            if (!SeatsAreAvailable(value.ReservationIds) || !ShowIsValid(value.ShowId))
             {
                 return NotFound();
             }

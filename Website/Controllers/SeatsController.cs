@@ -49,8 +49,17 @@ namespace WebSite.Controllers
                 };
                 reservationDtos.Add(reservation);
             }
+            TempData["Reservations"] = reservationDtos.Select(reservation => reservation.Id);
             await _client.CreateReservationAsync(reservationDtos);
             return RedirectToAction("Confirm", "Bookings");
+        }
+
+        [HttpGet]
+        public ActionResult<decimal> GetTotalPrice()
+        {
+            return View();
+            //TODO: GetTotalPrice( list of seat ids )
+           //return Ok(_client.GetTotalPrice());
         }
     }
 }

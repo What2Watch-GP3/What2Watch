@@ -179,5 +179,6 @@ namespace WebApiClient
             return _room.Seats.ToList()[index].Id;
         }
 
+        public decimal GetTotalPrice(IEnumerable<int> seatIds) => _room.Seats.ToList().Where(seat => seatIds.Any(id => id == seat.Id)).Sum(seats => seats.Price);
     }
 }
