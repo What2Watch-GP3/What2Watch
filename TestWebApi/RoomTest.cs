@@ -25,7 +25,7 @@ namespace TestWebApi
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _roomController = new RoomsController(new RoomStub(),new SeatStub(), new ShowStub(), new TicketStub());
+            _roomController = new RoomsController(new RoomStub(),new SeatStub(), new ShowStub(), new TicketStub(), new ReservationStub());
         }
 
         [Test]

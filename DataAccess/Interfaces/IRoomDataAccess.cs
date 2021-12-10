@@ -9,6 +9,7 @@ namespace DataAccess.Interfaces
 {
     public interface IRoomDataAccess : IBaseDataAccess<Room>
     {
+        
 
     }
 }
