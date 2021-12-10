@@ -1,5 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+/*Color scheme changes*/
+.bg-black{
+    background-color: #292929!important;
+}
+
+.text-not-pornhub{
+    color: #ffa31a;
+}
+
 
 a.navbar-brand {
   white-space: normal;
@@ -58,11 +67,17 @@ a:active {
     opacity: 0.8;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.btn-confirm {
+    color: #ffa31a;
+    font-weight: bold;
+    border-color: #ffa31a;
 }
+
+    .btn-confirm:hover {
+        color: #1c1c1c;
+        background-color: #ffa31a;
+        border-color: #ffa31a;
+    }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
@@ -107,6 +122,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: #1c1c1c;
 }
 
 
@@ -181,7 +197,7 @@ header {
 }
 
 .seat {
-    background-color: #333;
+    background-color: #808080;
     height: 1.3em;
     width: 1.5rem;
     margin: 3px;
@@ -190,7 +206,7 @@ header {
 }
 
 .selected {
-    background-color: #0081cb;
+    background-color: #ffffff;
 }
 
 .occupied {
@@ -243,7 +259,7 @@ header {
 }
 
 .screen {
-    background: #333;
+    background: #808080;
     height: 70px;
     width: 70%;
     margin: 15px 0;
@@ -253,10 +269,11 @@ header {
 
 p.text {
     margin: 40px 0;
+    color: #ffffff;
 }
 
     p.text span {
-        color: #0081cb;
-        font-weight: 600;
+        color: #ffa31a;
+        font-weight: bold;
         box-sizing: content-box;
     }
