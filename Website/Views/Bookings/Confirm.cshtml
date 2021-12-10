@@ -1,5 +1,4 @@
-﻿@model WebApiClient.DTOs.BookingDto
-
+﻿@model dynamic
 @{
     ViewData["Title"] = "Confirm";
 }
@@ -10,18 +9,7 @@
     <div class="col-md-4">
         <span>@ViewBag.ErrorMessage</span>
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TotalPrice" class="control-label"></label>
-                <label>: @TempData["TotalPrice"] </label>
-                <span asp-validation-for="TotalPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <label>: @TempData["Date"] </label>
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-
+            
             <div class="form-group">
                 <input type="submit" name="answer " value="Confirm" class="btn btn-primary" />
                 <input type="submit" name="answer" value="Decline" class="btn btn-danger" />

@@ -8,7 +8,7 @@ namespace WebApi.DTOs
         public int Id { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
-        public IEnumerable<int> ReservationIds { get; set; }
+        public int UserId { get; set; }
         public int ShowId { get; set; }
     }
 }

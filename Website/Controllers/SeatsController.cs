@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -22,9 +23,9 @@ namespace WebSite.Controllers
 
         [HttpGet]
         [Route("showId:int")]
-        public async Task<ActionResult> Select(int showId)
+        public async Task<ActionResult> Select(int showId, DateTime showStartTime)
         {
-            TempData["showId"] = showId;
+            TempData["ShowId"] = showId;
             var room = new { Rows = 8, SeatsPerRow = 10 };
             //await _client.GetRoomByShowId(showId);
 
@@ -45,12 +46,11 @@ namespace WebSite.Controllers
                 {
                     CreationTime = DateTime.Now,
                     SeatPosition = seatPosition,
-                    ShowId = (int)TempData["showId"],
+                    ShowId = (int)TempData.Peek("ShowId"),
                     UserId = 1 //TODO: maybe this: this.User.Claims.First(claim => claim.Type == "UserId").Value;
                 };
                 reservationDtos.Add(reservation);
             }
-            TempData["Reservations"] = reservationDtos.Select(reservation => reservation.Id);
             await _client.CreateReservationAsync(reservationDtos);
             return RedirectToAction("Confirm", "Bookings");
         }
@@ -58,6 +58,7 @@ namespace WebSite.Controllers
         [HttpGet]
         public ActionResult<decimal> GetTotalPrice(IEnumerable<string> seatPositions)
         {
+             TempData["SelectedSeatPositions"] = JsonConvert.SerializeObject(seatPositions);
              return Ok(_client.GetTotalPrice(seatPositions));
         }
     }

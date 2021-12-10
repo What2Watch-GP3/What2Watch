@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Tools.Enums;
 
-namespace WebApi.DTOs.Converters
+namespace Tools.Converters
 {
     public static class DtoConverter<T, U>
     {

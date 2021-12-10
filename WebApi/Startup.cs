@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using DataAccess.Models;
+using System;
 
 namespace WebApi
 {

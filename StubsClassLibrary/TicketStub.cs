@@ -35,10 +35,10 @@ namespace StubsClassLibrary
         {
 
                 return await Task.FromResult(new List<Ticket>(){
-                new Ticket() { Id = 1, SeatId = 2, ShowId= 1 },
-                new Ticket() { Id = 2, SeatId = 3, ShowId= 1 },
-                new Ticket() { Id = 3, SeatId = 4, ShowId= 1 },
-                new Ticket() { Id = 4, SeatId = 5, ShowId= 1 }
+                new Ticket() { SeatId = 2, ShowId= 1 },
+                new Ticket() { SeatId = 3, ShowId= 1 },
+                new Ticket() { SeatId = 4, ShowId= 1 },
+                new Ticket() { SeatId = 5, ShowId= 1 }
         });
             
         }

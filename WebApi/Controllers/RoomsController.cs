@@ -6,8 +6,8 @@ using AutoMapper.Configuration;
 using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using Tools.Converters;
 using WebApi.DTOs;
-using WebApi.DTOs.Converters;
 
 namespace WebApi.Controllers
 {

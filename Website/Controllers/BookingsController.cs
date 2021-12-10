@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -27,12 +29,11 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Confirm()
         {
-            //TODO Implement actual values instead of hardcoded
-            var reservations = (IEnumerable<ReservationDto>) TempData["Reservations"];
-            TempData["TotalPrice"] = 40;
-            TempData["Date"] = DateTime.Now;
+            dynamic model = new ExpandoObject();
 
-            return View();
+            model.TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()));
+            model.Date = _client.GetShowById((int)TempData.Peek("ShowId")).StartTime;
+            return View(model);
         }
 
         // POST: BookingsController/Create
@@ -48,7 +49,14 @@ namespace WebSite.Controllers
                 }
 
                 //TODO Implement getting the seat ids instead of hardcode
-                BookingDto bookings = new() { ReservationIds = new List<int>() { 1, 2, 3 }, ShowId = 1 };
+                BookingDto bookings = new()
+                {
+                    TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData["SelectedSeatPositions"].ToString())),
+                    Date = DateTime.Now,
+                    ShowId = (int)TempData["ShowId"],
+                    UserId = 1 //TODO: maybe this: this.User.Claims.First(claim => claim.Type == "UserId").Value;
+                };
+                
                 int id = await _client.ConfirmBookingAsync(bookings);
                 if (id > 0)
                 {

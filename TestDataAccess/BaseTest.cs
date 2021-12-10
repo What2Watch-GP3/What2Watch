@@ -24,7 +24,7 @@ namespace TestDataAccess
         public async Task CreateAnObject()
         {
             //Arrange
-            Booking randomObject = new Booking() { TotalPrice = 190M, Date = DateTime.Now};
+            Booking randomObject = new Booking() { TotalPrice = 190M, Date = DateTime.Now, UserId = 1};
 
             //Act
             _lastCreatedId = await _randomDataAccess.CreateAsync(randomObject);

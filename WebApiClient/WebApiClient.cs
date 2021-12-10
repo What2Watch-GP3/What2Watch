@@ -12,6 +12,7 @@ namespace WebApiClient
     {
         private IRestClient _client;
         private RoomDto _room;
+        private IEnumerable<ShowDto> _shows;
 
         public WebApiClient(IRestClient client)
         {
@@ -65,6 +66,8 @@ namespace WebApiClient
             var response = await _client.RequestAsync<IEnumerable<ShowDto>>(Method.GET, $"shows?movieId={movieId}&cinemaId={cinemaId}");
 
             if (!response.IsSuccessful) throw new Exception($"Error retreiving shows based on movieId {movieId} and cinemaId {cinemaId}. Message was {response.Content}.");
+
+            _shows = response.Data;
 
             return response.Data;
         }
@@ -168,6 +171,8 @@ namespace WebApiClient
             return response.Data;
         }
 
+        public decimal GetTotalPrice(IEnumerable<string> seatPosition) => _room.Seats.ToList().Where(seat => seatPosition.Any(position => GetSeatIdByPosition(position) == seat.Id)).Sum(seats => seats.Price);
+        
         private int GetSeatIdByPosition(string seatPosition)
         {
             var positionList = seatPosition.Split("-");
@@ -179,6 +184,9 @@ namespace WebApiClient
             return _room.Seats.ToList()[index].Id;
         }
 
-        public decimal GetTotalPrice(IEnumerable<string> seatPosition) => _room.Seats.ToList().Where(seat => seatPosition.Any(position => GetSeatIdByPosition(position) == seat.Id)).Sum(seats => seats.Price);
+        public ShowDto GetShowById(int showId)
+        {
+            return _shows.First(show => show.Id == showId);
+        }
     }
 }

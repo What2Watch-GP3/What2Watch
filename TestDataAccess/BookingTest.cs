@@ -28,7 +28,7 @@ namespace TestDataAccess
         public async Task TestConfirmBooking()
         {
             //Arrange
-            Booking booking = new() { TotalPrice = 11.99M, Date = DateTime.Now };
+            Booking booking = new() { TotalPrice = 11.99M, Date = DateTime.Now, UserId =1 };
 
             //Act
             booking.Id = await _bookingDataAccess.CreateAsync(booking);

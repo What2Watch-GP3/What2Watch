@@ -5,6 +5,7 @@ using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tools.Converters;
 using WebApi.DTOs;
 
 //For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -50,15 +51,13 @@ namespace WebApi.Controllers
         {
             //TODO: Change SeatIds list to a list of tickets, where we check each seat for availability
             //Probably get the show's time and a price based on the seats as well
-            if (!SeatsAreAvailable(value.ReservationIds) || !ShowIsValid(value.ShowId))
-            {
-                return NotFound();
-            }
-            decimal price = 40m;
-            DateTime showTime = DateTime.Now;
 
-            //var booking = DtoConverter<BookingDto, Booking>.From(value);
-            Booking booking = new() { Id = value.Id, TotalPrice = price, Date = showTime };
+            //TODO: Get Reservations from UserId na check seat Availability
+            //if (!SeatsAreAvailable(value.ReservationIds) || !ShowIsValid(value.ShowId))
+            //{
+            //    return NotFound();
+            //}
+            Booking booking = DtoConverter<BookingDto, Booking>.From(value);
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 

@@ -1,4 +1,5 @@
-﻿ using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace DataAccess.Models
@@ -9,5 +10,6 @@ namespace DataAccess.Models
         [Description("total_price")]
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
+        public int UserId { get; set; }
     }
 }
