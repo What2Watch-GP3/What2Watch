@@ -11,6 +11,8 @@ using WebApi.DTOs.Converters;
 
 namespace WebApi.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class RoomsController : ControllerBase
     {
         private IRoomDataAccess _roomDataAccess;
@@ -25,8 +27,9 @@ namespace WebApi.Controllers
             _showDataAccess = showDataAccess;
             _ticketDataAccess = ticketDataAccess;
         }
+
         [HttpGet]
-        public async Task<ActionResult<RoomDto>> GetByShowIdAsync(int showId)
+        public async Task<ActionResult<RoomDto>> GetByShowIdAsync([FromQuery] int showId)
         {
             Show show = await _showDataAccess.GetByIdAsync(showId);
             Room room = await _roomDataAccess.GetByIdAsync(show.RoomId);
@@ -38,9 +41,9 @@ namespace WebApi.Controllers
             }
             else
             {
+
                 RoomDto roomDto = DtoConverter<Room, RoomDto>.From(room);
                 IEnumerable<SeatDto> seatsDto = DtoConverter<Seat, SeatDto>.FromList(seats);
-                
                 roomDto.Seats = seatsDto;
                 return Ok(roomDto);
             }

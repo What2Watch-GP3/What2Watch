@@ -35,6 +35,7 @@ namespace WebApi
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IBookingDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<IRoomDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ISeatDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped((dataAccess) => DataAccessFactory.GetDataAccess<ITicketDataAccess>(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddScoped<IConfiguration>((config) => Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
