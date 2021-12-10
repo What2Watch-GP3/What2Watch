@@ -6,17 +6,17 @@
     <!--TODO: Implement if statement to check if user is logged in-->
 <h1 class="text-not-pornhub">Login</h1>
 <hr />
-<div class="row">
+<div>
     <div class="col-md-4">
         <form asp-action="Login" asp-route-returnurl="@returnUrl">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label white-text"></label>
                 <input asp-for="Email" class="form-control" type="email" required />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
+                <label asp-for="Password" class="control-label white-text"></label>
                 <input asp-for="Password" class="form-control" type="password" required />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
@@ -27,7 +27,7 @@
     </div>
 </div>
 <div>
-    <a asp-controller="Movies" asp-action="">Back to Home</a>
+    <a class="white-text"asp-controller="Movies" asp-action="">Back to Home</a>
 </div>
 
 @section Scripts {
