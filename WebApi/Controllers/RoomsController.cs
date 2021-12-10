@@ -50,8 +50,8 @@ namespace WebApi.Controllers
                 RoomDto roomDto = DtoConverter<Room, RoomDto>.From(room);
                 IEnumerable<SeatDto> seatsDto = DtoConverter<Seat, SeatDto>.FromList(seats).ToList();
                 
-                seatsDto.ToList().Where(seat => tickets.Any(ticket => ticket.SeatId == seat.Id)).ToList().ForEach(seat => seat.IsReserved = true);
-                seatsDto.ToList().Where(seat => reservations.Any(reservation => reservation.SeatId == seat.Id)).ToList().ForEach(seat => seat.IsReserved = true);
+                seatsDto.ToList().Where(seat => tickets.Any(ticket => ticket.SeatId == seat.Id)).ToList().ForEach(seat => seat.IsOccupied = true);
+                seatsDto.ToList().Where(seat => reservations.Any(reservation => reservation.SeatId == seat.Id)).ToList().ForEach(seat => seat.IsOccupied = true);
 
                 roomDto.Seats = seatsDto;
                 return Ok(roomDto);

@@ -1,4 +1,6 @@
-﻿namespace DataAccess.Models
+﻿using System.ComponentModel;
+
+namespace DataAccess.Models
 {
     public class User
     {

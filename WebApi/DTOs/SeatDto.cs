@@ -10,7 +10,7 @@ namespace WebApi.DTOs
         public int Id { get; set; }
         public int Position { get; set; }
         public int RowNumber { get; set; }
-        public bool IsReserved { get; set; }
+        public bool IsOccupied { get; set; }
         public string Type { get; set; }
         public decimal Price { get; set; }
     }
