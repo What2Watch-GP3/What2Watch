@@ -30,8 +30,9 @@ namespace WebApi.Controllers
             _reservationDataAccess = reservationDataAccess;
         }
 
+        [Route("{showId:int}")]
         [HttpGet]
-        public async Task<ActionResult<RoomDto>> GetByShowIdAsync([FromQuery] int showId)
+        public async Task<ActionResult<RoomDto>> GetByShowIdAsync(int showId)
         {
             Show show = await _showDataAccess.GetByIdAsync(showId);
             Room room = await _roomDataAccess.GetByIdAsync(show.RoomId);
@@ -47,12 +48,14 @@ namespace WebApi.Controllers
             {
 
                 RoomDto roomDto = DtoConverter<Room, RoomDto>.From(room);
-                IEnumerable<SeatDto> seatsDto = DtoConverter<Seat, SeatDto>.FromList(seats);
-                roomDto.Seats = seatsDto;
+                IEnumerable<SeatDto> seatsDto = DtoConverter<Seat, SeatDto>.FromList(seats).ToList();
+                
+                seatsDto.ToList().Where(seat => tickets.Any(ticket => ticket.SeatId == seat.Id)).ToList().ForEach(seat => seat.IsReserved = true);
+                seatsDto.ToList().Where(seat => reservations.Any(reservation => reservation.SeatId == seat.Id)).ToList().ForEach(seat => seat.IsReserved = true);
 
+                roomDto.Seats = seatsDto;
                 return Ok(roomDto);
             }
         }
-    
     }
 }

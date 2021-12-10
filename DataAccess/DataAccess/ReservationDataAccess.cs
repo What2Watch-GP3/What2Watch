@@ -52,7 +52,7 @@ namespace DataAccess.DataAccess
 
         public async Task<IEnumerable<Reservation>> GetReservationsByShowIdAsync(int showId)
         {
-            string command = "SELECT * FROM Reservation WHERE Show_id=@Showid";
+            string command = "SELECT * FROM Reservation WHERE show_id=@ShowId";
             try
             {
                 using var connection = CreateConnection();

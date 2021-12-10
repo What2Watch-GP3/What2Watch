@@ -13,7 +13,6 @@ namespace DataAccess.Models
         public int Position { get; set; }
         [Description("row_number")]
         public int RowNumber { get; set; }
-        public bool IsAvailable { get; set; }
         public string Type { get; set; }
         public decimal Price { get; set; }
     }

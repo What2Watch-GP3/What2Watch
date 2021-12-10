@@ -22,5 +22,14 @@ namespace WebApi.DTOs.Converters
         //var booking = DtoConverter<BookingDto, Booking>.From(bookingDto);
         public static U From(T sourceObject) => mapper.Map<T, U>(sourceObject);
         public static IEnumerable<U> FromList(IEnumerable<T> sourceList) => sourceList.ToList().Select(obj => From(obj));
+        //public static IEnumerable<U> FromList(IEnumerable<T> sourceList)
+        //{
+        //    List<U> returnList = new List<U>();
+        //    foreach (T sourceObject in sourceList)
+        //    {
+        //        returnList.Add(From(sourceObject));
+        //    }
+        //    return returnList;
+        //}
     }
 }

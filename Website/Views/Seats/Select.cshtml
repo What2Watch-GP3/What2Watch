@@ -25,12 +25,21 @@
 
             @for (int rows = 0; rows < Model.Rows; rows++)
             {
-                <div class="row">
-                    @for (int collumn = 0; collumn < Model.SeatsPerRow; collumn++)
-                    {
-                        <div class="seat" id="@rows-@collumn"></div>
-                    }
-                </div>
+        <div class="row">
+            @{var seats = Model.Seats.ToArray();
+            }
+            @for (int column = 0; column < Model.Columns; column++)
+            {
+                @if (seats[rows * Model.Columns + column].IsReserved)
+                {
+                    <div class="seat occupied" id="@rows-@column"></div>
+                }
+                else
+                {
+                    <div class="seat" id="@rows-@column"></div>
+                }
+            }
+        </div>
             }
 
             <p class="text">

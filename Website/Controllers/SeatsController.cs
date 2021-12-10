@@ -24,14 +24,9 @@ namespace WebSite.Controllers
         public async Task<ActionResult> Select(int showId)
         {
             TempData["showId"] = showId;
-            var room = new { Rows = 8, SeatsPerRow = 10 };
-            //await _client.GetRoomByShowId(showId);
+            var room = await _client.GetRoomByShowIdAsync(showId);
 
-            //TODO: implement later
-            dynamic model = new ExpandoObject();
-            model.Rows = room.Rows;
-            model.SeatsPerRow = room.SeatsPerRow;
-            return View(model);
+            return View(room);
         }
 
         [HttpPost]
