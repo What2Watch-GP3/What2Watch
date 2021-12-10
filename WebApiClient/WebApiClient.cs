@@ -11,7 +11,7 @@ namespace WebApiClient
     public class WebApiClient : IWebApiClient
     {
         private IRestClient _client;
-        private RoomDto _room;
+        public RoomDto _room;
         private IEnumerable<ShowDto> _shows;
 
         public WebApiClient(IRestClient client)
@@ -169,6 +169,10 @@ namespace WebApiClient
         
         private int GetSeatIdByPosition(string seatPosition)
         {
+            if(_room == null)
+            {
+                return -1;
+            }
             var positionList = seatPosition.Split("-");
             int.TryParse(positionList[0], out int row);
             int.TryParse(positionList[1], out int position);

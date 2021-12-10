@@ -25,7 +25,7 @@ namespace WebSite.Controllers
         [Route("showId:int")]
         public async Task<ActionResult> Select(int showId, DateTime showStartTime)
         {
-            TempData["showId"] = showId;
+            TempData["ShowId"] = showId;
             var room = await _client.GetRoomByShowIdAsync(showId);
 
             return View(room);
