@@ -51,6 +51,19 @@ namespace DataAccess.DataAccess
             }
         }
 
+        public async Task<IEnumerable<Reservation>> GetReservationsByShowIdAsync(int showId)
+        {
+            string command = "SELECT * FROM Reservation WHERE show_id=@ShowId";
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.QueryAsync<Reservation>(command, new { ShowId = showId });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting List of Tickets by selected Show id {showId}. Error: {ex.Message}", ex);
+            }
+        }
         public async Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId)
         {
             string command = $"DELETE FROM [{TableName}] WHERE seat_id=@SeatId AND show_id=@ShowId ;";

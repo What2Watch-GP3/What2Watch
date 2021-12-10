@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace DataAccess.Models
 {
@@ -6,7 +7,9 @@ namespace DataAccess.Models
     {
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
+        [Description("movie_id")]
         public int MovieId { get; set; }
+        [Description("room_id")]
         public int RoomId { get; set; }
         public string DubLanguage { get; set; }
         public string SubtitlesLanguage { get; set; }

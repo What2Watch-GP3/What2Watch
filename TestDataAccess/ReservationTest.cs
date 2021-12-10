@@ -13,6 +13,7 @@ namespace TestDataAccess
     class ReservationTest
     {
         private IReservationDataAccess _reservationDataAccess;
+        private IEnumerable<Reservation> reservations = null;
 
         [OneTimeSetUp]
         public void SetUp()
@@ -21,15 +22,16 @@ namespace TestDataAccess
         }
 
         [OneTimeTearDown]
-        public void OneTimTearDown()
+        public void OneTimeTearDown()
         {
             _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,1);
-            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,2);
             _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,3);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,2);
         }
 
 
         [Test]
+        [Order(1)]
         public async Task CreatingAReservationReturnsItsId()
         {
             //Arrange
@@ -44,7 +46,16 @@ namespace TestDataAccess
             //Assert
             Assert.IsTrue(isCreated, $"Reservations weren't created.");
         }
-
         
+        [Test]
+        [Order(2)]
+        public async Task GetReservationsByShowId1()
+        {
+            //act
+            reservations = await _reservationDataAccess.GetReservationsByShowIdAsync(1);
+
+            //ASSERT
+            Assert.IsNotEmpty(reservations, $"No reservations returned. Show id was 1");
+        }
     }
 }

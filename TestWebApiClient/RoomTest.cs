@@ -20,9 +20,9 @@ namespace TestWebApiClient
         {
             //Arrange
             //IEnumerable<SeatDto> Seats = IEnumerable.Empty<SeatDto>();
-            IEnumerable<SeatDto> Seats = new List<SeatDto>(){   new SeatDto() { Position = 1, RowNumber = 1, IsAvailable = true },
-                                                                new SeatDto() { Position = 3, RowNumber = 1, IsAvailable = true },
-                                                                new SeatDto() { Position = 5, RowNumber = 1, IsAvailable = false }};
+            IEnumerable<SeatDto> Seats = new List<SeatDto>(){   new SeatDto() { Position = 1, RowNumber = 1, IsOccupied = true },
+                                                                new SeatDto() { Position = 3, RowNumber = 1, IsOccupied = true },
+                                                                new SeatDto() { Position = 5, RowNumber = 1, IsOccupied = false }};
             RoomDto roomDto = new() { Id = 1, Name = "Room 1",Rows = 8, Columns = 10, Seats = Seats };
             _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = roomDto });
             //_webApiIdClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = 1 });
@@ -48,9 +48,9 @@ namespace TestWebApiClient
             IEnumerable<SeatDto> actualSeats = actualRoomDto.Seats;
 
             //Assert
-            Assert.AreEqual(true, actualSeats.ToList()[0].IsAvailable, "Failed to check with id 1 | Availability failed");
-            Assert.AreEqual(true, actualSeats.ToList()[1].IsAvailable, "Failed to check with id 1 | Availability failed");
-            Assert.AreEqual(false, actualSeats.ToList()[2].IsAvailable, "Failed to check with id 1 | Availability failed");
+            Assert.AreEqual(true, actualSeats.ToList()[0].IsOccupied, "Failed to check with id 1 | Availability failed");
+            Assert.AreEqual(true, actualSeats.ToList()[1].IsOccupied, "Failed to check with id 1 | Availability failed");
+            Assert.AreEqual(false, actualSeats.ToList()[2].IsOccupied, "Failed to check with id 1 | Availability failed");
         }
     }
 }

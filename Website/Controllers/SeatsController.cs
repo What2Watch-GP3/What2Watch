@@ -25,15 +25,10 @@ namespace WebSite.Controllers
         [Route("showId:int")]
         public async Task<ActionResult> Select(int showId, DateTime showStartTime)
         {
-            TempData["ShowId"] = showId;
-            var room = new { Rows = 8, SeatsPerRow = 10 };
-            //await _client.GetRoomByShowId(showId);
+            TempData["showId"] = showId;
+            var room = await _client.GetRoomByShowIdAsync(showId);
 
-            //TODO: implement later
-            dynamic model = new ExpandoObject();
-            model.Rows = room.Rows;
-            model.SeatsPerRow = room.SeatsPerRow;
-            return View(model);
+            return View(room);
         }
 
         [HttpPost]

@@ -18,8 +18,6 @@ namespace WebApiClient
         {
             _client = client;
             _client.CookieContainer = new System.Net.CookieContainer();
-
-            _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 4, Price=10m }, new SeatDto() { Id = 6, Price = 10m }, new SeatDto() { Id = 7, Price = 10m } }, Name = "Room1", Rows = 10 };
         }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
@@ -85,7 +83,6 @@ namespace WebApiClient
                 }
                 throw new Exception($"Error creating booking. Message was {response.Content}");
             }
-
             return response.Data;
         }
 
@@ -141,16 +138,13 @@ namespace WebApiClient
             return response.Data;
         }
 
-        public async Task<RoomDto> GetRoomByShowIdAsync(int id)
+        public async Task<RoomDto> GetRoomByShowIdAsync(int showId)
         {
-            var response = await _client.RequestAsync<RoomDto>(Method.GET, $"shows/{id}/room");
+            var response = await _client.RequestAsync<RoomDto>(Method.GET, $"rooms/{showId}");
 
-            if (!response.IsSuccessful) throw new Exception($"Error getting booking with id {id}. Message was {response.Content}");
+            if (!response.IsSuccessful) throw new Exception($"Error showing the room with showId {showId}. Message was {response.Content}");
 
-
-            
-            //_room = response.Data;
-
+            _room = response.Data;
             return response.Data;
         }
 

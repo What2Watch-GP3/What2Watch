@@ -8,7 +8,7 @@
     <ul class="showcase">
         <li>
             <div class="seat"></div>
-            <small>N/A</small>
+            <small>Available</small>
         </li>
         <li>
             <div class="seat selected"></div>
@@ -25,18 +25,27 @@
 
             @for (int rows = 0; rows < Model.Rows; rows++)
             {
-                <div class="row">
-                    @for (int column = 0; column < Model.SeatsPerRow; column++)
-                    {
-                        <div class="seat" id="@rows-@column"></div>
-                    }
-                </div>
+        <div class="row">
+            @{var seats = Model.Seats.ToArray();
+            }
+            @for (int column = 0; column < Model.Columns; column++)
+            {
+                @if (seats[rows * Model.Columns + column].IsOccupied)
+                {
+                    <div class="seat occupied" id="@rows-@column"></div>
+                }
+                else
+                {
+                    <div class="seat" id="@rows-@column"></div>
+                }
+            }
+        </div>
             }
 
             <p class="text">
                 You have selected <span id="countSpan">0</span> seats for the total price of <span id="totalSpan">0</span> DKK
             </p>
-            <button class="btn btn-primary" type="submit">Reserve</button>
+            <button class="btn btn-confirm" type="submit">Reserve</button>
 
 
         </div>
