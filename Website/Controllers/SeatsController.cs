@@ -21,6 +21,7 @@ namespace WebSite.Controllers
         }
 
         [HttpGet]
+        [Route("showId:int")]
         public async Task<ActionResult> Select(int showId)
         {
             TempData["showId"] = showId;
@@ -55,11 +56,9 @@ namespace WebSite.Controllers
         }
 
         [HttpGet]
-        public ActionResult<decimal> GetTotalPrice()
+        public ActionResult<decimal> GetTotalPrice(IEnumerable<string> seatPositions)
         {
-            return View();
-            //TODO: GetTotalPrice( list of seat ids )
-           //return Ok(_client.GetTotalPrice());
+             return Ok(_client.GetTotalPrice(seatPositions));
         }
     }
 }

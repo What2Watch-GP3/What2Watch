@@ -65,16 +65,29 @@
         // Updates the selected seats <p> and increased the numberOfSeats count
         function updateSelectedCount() {
             const numberOfSeats = document.querySelectorAll('.row .seat.selected').length;
+            const seatPositions = [];
+            document.querySelectorAll('.row .seat.selected').forEach((seat) => {
+                console.log(seat.id)
+                seatPositions.push(seat.id);
+            });
+
+            //console.log(seatPositionsList)
+            //seats = JSON.stringify({ 'seatPositions': seatPositionsList });
+
             $.ajax({
                 type: "GET",
                 url: "@Url.Action("GetTotalPrice")",
+                //contentType: 'application/json',
+                data: { 'seatPositions': seatPositions },
                 dataType: "text",
+                traditional: true,
                 success: function (totalPrice) {
+                    console.log(totalPrice);
                     totalSpan.innerText = totalPrice;
                 },
                 error: function () {
-                    alert('ero');
-                };
+                    alert('Something went wrong!');
+                },
             });
 
             countSpan.innerText = numberOfSeats;

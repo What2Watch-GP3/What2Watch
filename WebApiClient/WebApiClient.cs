@@ -18,7 +18,7 @@ namespace WebApiClient
             _client = client;
             _client.CookieContainer = new System.Net.CookieContainer();
 
-            _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 4 }, new SeatDto() { Id = 6 }, new SeatDto() { Id = 7 } }, Name = "Room1", Rows = 10 };
+            _room = new RoomDto() { Columns = 10, Seats = new List<SeatDto>() { new SeatDto() { Id = 4, Price=10m }, new SeatDto() { Id = 6, Price = 10m }, new SeatDto() { Id = 7, Price = 10m } }, Name = "Room1", Rows = 10 };
         }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
@@ -179,6 +179,6 @@ namespace WebApiClient
             return _room.Seats.ToList()[index].Id;
         }
 
-        public decimal GetTotalPrice(IEnumerable<int> seatIds) => _room.Seats.ToList().Where(seat => seatIds.Any(id => id == seat.Id)).Sum(seats => seats.Price);
+        public decimal GetTotalPrice(IEnumerable<string> seatPosition) => _room.Seats.ToList().Where(seat => seatPosition.Any(position => GetSeatIdByPosition(position) == seat.Id)).Sum(seats => seats.Price);
     }
 }
