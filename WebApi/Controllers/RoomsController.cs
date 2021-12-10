@@ -19,13 +19,15 @@ namespace WebApi.Controllers
         private ISeatDataAccess _seatDataAccess;
         private IShowDataAccess _showDataAccess;
         private ITicketDataAccess _ticketDataAccess;
+        private IReservationDataAccess _reservationDataAccess;
 
-        public RoomsController(IRoomDataAccess roomDataAccess, ISeatDataAccess seatDataAccess, IShowDataAccess showDataAccess, ITicketDataAccess ticketDataAccess)
+        public RoomsController(IRoomDataAccess roomDataAccess, ISeatDataAccess seatDataAccess, IShowDataAccess showDataAccess, ITicketDataAccess ticketDataAccess, IReservationDataAccess reservationDataAccess)
         {
             _roomDataAccess = roomDataAccess;
             _seatDataAccess = seatDataAccess;
             _showDataAccess = showDataAccess;
             _ticketDataAccess = ticketDataAccess;
+            _reservationDataAccess = reservationDataAccess;
         }
 
         [HttpGet]
@@ -35,6 +37,8 @@ namespace WebApi.Controllers
             Room room = await _roomDataAccess.GetByIdAsync(show.RoomId);
             IEnumerable<Seat> seats = await _seatDataAccess.GetAllByRoomIdAsync(show.RoomId);
             IEnumerable<Ticket> tickets = await _ticketDataAccess.GetTicketsByShowIdAsync(showId);
+            IEnumerable<Reservation> reservations = await _reservationDataAccess.GetReservationsByShowIdAsync(showId);
+
             if (show == null || room == null || seats == null)
             {
                 return NotFound();
@@ -45,6 +49,7 @@ namespace WebApi.Controllers
                 RoomDto roomDto = DtoConverter<Room, RoomDto>.From(room);
                 IEnumerable<SeatDto> seatsDto = DtoConverter<Seat, SeatDto>.FromList(seats);
                 roomDto.Seats = seatsDto;
+
                 return Ok(roomDto);
             }
         }
