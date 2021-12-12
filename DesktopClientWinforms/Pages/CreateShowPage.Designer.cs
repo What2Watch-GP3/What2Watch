@@ -56,6 +56,7 @@ namespace DesktopClientWinforms.Pages
             // 
             // backgroundPanel
             // 
+            this.backgroundPanel.AutoScroll = true;
             this.backgroundPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.backgroundPanel.Controls.Add(this.btnCreateShow);
             this.backgroundPanel.Controls.Add(this.comboSound);
@@ -78,7 +79,7 @@ namespace DesktopClientWinforms.Pages
             this.backgroundPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.backgroundPanel.Location = new System.Drawing.Point(0, 0);
             this.backgroundPanel.Name = "backgroundPanel";
-            this.backgroundPanel.Size = new System.Drawing.Size(1042, 553);
+            this.backgroundPanel.Size = new System.Drawing.Size(901, 540);
             this.backgroundPanel.TabIndex = 0;
             // 
             // btnCreateShow
@@ -89,7 +90,7 @@ namespace DesktopClientWinforms.Pages
             this.btnCreateShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateShow.Location = new System.Drawing.Point(0, 493);
             this.btnCreateShow.Name = "btnCreateShow";
-            this.btnCreateShow.Size = new System.Drawing.Size(1042, 45);
+            this.btnCreateShow.Size = new System.Drawing.Size(901, 45);
             this.btnCreateShow.TabIndex = 5;
             this.btnCreateShow.Text = "Create";
             this.btnCreateShow.UseVisualStyleBackColor = false;
@@ -109,7 +110,7 @@ namespace DesktopClientWinforms.Pages
             this.comboSound.FormattingEnabled = true;
             this.comboSound.Location = new System.Drawing.Point(0, 455);
             this.comboSound.Name = "comboSound";
-            this.comboSound.Size = new System.Drawing.Size(1042, 38);
+            this.comboSound.Size = new System.Drawing.Size(901, 38);
             this.comboSound.TabIndex = 18;
             // 
             // lblSound
@@ -136,7 +137,7 @@ namespace DesktopClientWinforms.Pages
             this.comboGraphic.FormattingEnabled = true;
             this.comboGraphic.Location = new System.Drawing.Point(0, 387);
             this.comboGraphic.Name = "comboGraphic";
-            this.comboGraphic.Size = new System.Drawing.Size(1042, 38);
+            this.comboGraphic.Size = new System.Drawing.Size(901, 38);
             this.comboGraphic.TabIndex = 16;
             // 
             // lblGraphic
@@ -163,7 +164,7 @@ namespace DesktopClientWinforms.Pages
             this.comboSubtitles.FormattingEnabled = true;
             this.comboSubtitles.Location = new System.Drawing.Point(0, 319);
             this.comboSubtitles.Name = "comboSubtitles";
-            this.comboSubtitles.Size = new System.Drawing.Size(1042, 38);
+            this.comboSubtitles.Size = new System.Drawing.Size(901, 38);
             this.comboSubtitles.TabIndex = 13;
             // 
             // lblSub
@@ -190,7 +191,7 @@ namespace DesktopClientWinforms.Pages
             this.comboDub.FormattingEnabled = true;
             this.comboDub.Location = new System.Drawing.Point(0, 251);
             this.comboDub.Name = "comboDub";
-            this.comboDub.Size = new System.Drawing.Size(1042, 38);
+            this.comboDub.Size = new System.Drawing.Size(901, 38);
             this.comboDub.TabIndex = 12;
             // 
             // lblDubLanguage
@@ -211,7 +212,7 @@ namespace DesktopClientWinforms.Pages
             this.txtRoomId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.txtRoomId.Location = new System.Drawing.Point(0, 193);
             this.txtRoomId.Name = "txtRoomId";
-            this.txtRoomId.Size = new System.Drawing.Size(1042, 28);
+            this.txtRoomId.Size = new System.Drawing.Size(901, 28);
             this.txtRoomId.TabIndex = 9;
             this.txtRoomId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRoomId_KeyPress);
             // 
@@ -239,7 +240,7 @@ namespace DesktopClientWinforms.Pages
             this.comboMovies.FormattingEnabled = true;
             this.comboMovies.Location = new System.Drawing.Point(0, 125);
             this.comboMovies.Name = "comboMovies";
-            this.comboMovies.Size = new System.Drawing.Size(1042, 38);
+            this.comboMovies.Size = new System.Drawing.Size(901, 38);
             this.comboMovies.TabIndex = 20;
             // 
             // lblMovie
@@ -259,22 +260,26 @@ namespace DesktopClientWinforms.Pages
             this.datePickePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.datePickePanel.Location = new System.Drawing.Point(0, 60);
             this.datePickePanel.Name = "datePickePanel";
-            this.datePickePanel.Size = new System.Drawing.Size(1042, 35);
+            this.datePickePanel.Size = new System.Drawing.Size(901, 35);
             this.datePickePanel.TabIndex = 19;
             // 
             // datePicker
             // 
-            this.datePicker.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.datePicker.BorderColor = System.Drawing.Color.Empty;
             this.datePicker.BorderSize = 0;
             this.datePicker.CalendarIcon = global::DesktopClientWinforms.Properties.Resources.clockWhite;
+            this.datePicker.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.datePicker.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(32)))));
+            this.datePicker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.datePicker.CalendarTrailingForeColor = System.Drawing.Color.Red;
             this.datePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datePicker.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.datePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.datePicker.Location = new System.Drawing.Point(485, 0);
+            this.datePicker.Location = new System.Drawing.Point(456, 0);
             this.datePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.datePicker.Name = "datePicker";
             this.datePicker.ShowUpDown = true;
-            this.datePicker.Size = new System.Drawing.Size(557, 35);
+            this.datePicker.Size = new System.Drawing.Size(445, 35);
             this.datePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.datePicker.TabIndex = 10;
             this.datePicker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
@@ -284,12 +289,17 @@ namespace DesktopClientWinforms.Pages
             this.timePicker.BorderColor = System.Drawing.Color.Transparent;
             this.timePicker.BorderSize = 0;
             this.timePicker.CalendarIcon = global::DesktopClientWinforms.Properties.Resources.calendarWhite;
+            this.timePicker.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.timePicker.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(32)))));
+            this.timePicker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.timePicker.CalendarTrailingForeColor = System.Drawing.Color.Red;
             this.timePicker.Dock = System.Windows.Forms.DockStyle.Left;
             this.timePicker.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.timePicker.Location = new System.Drawing.Point(0, 0);
+            this.timePicker.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.timePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.timePicker.Name = "timePicker";
-            this.timePicker.Size = new System.Drawing.Size(485, 35);
+            this.timePicker.Size = new System.Drawing.Size(456, 35);
             this.timePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.timePicker.TabIndex = 11;
             this.timePicker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
@@ -318,10 +328,11 @@ namespace DesktopClientWinforms.Pages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.backgroundPanel);
-            this.MinimumSize = new System.Drawing.Size(620, 540);
+            this.MinimumSize = new System.Drawing.Size(640, 340);
             this.Name = "CreateShowPage";
-            this.Size = new System.Drawing.Size(1042, 553);
+            this.Size = new System.Drawing.Size(901, 540);
             this.Load += new System.EventHandler(this.CreateShowPage_Load);
             this.backgroundPanel.ResumeLayout(false);
             this.backgroundPanel.PerformLayout();

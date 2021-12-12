@@ -151,7 +151,7 @@ namespace DesktopClientWinforms
             this.Controls.Add(this.currentPagePanel);
             this.Controls.Add(this.TitleBarPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.MinimumSize = new System.Drawing.Size(660, 580);
+            this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "DesktopClientForm";
             this.Text = "Admin Panel";
             this.Load += new System.EventHandler(this.DesktopClientForm_Load);
