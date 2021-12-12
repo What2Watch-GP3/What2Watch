@@ -11,8 +11,6 @@ namespace DataAccess.Models
         public int ShowId { get; set; }
         [Description("creation_time")]
         public DateTime CreationTime { get; set; }
-        [Description("booking_id")]
-        public int BookingId { get; set; }
 
     }
 }

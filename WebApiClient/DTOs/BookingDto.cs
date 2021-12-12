@@ -13,5 +13,6 @@ namespace WebApiClient.DTOs
         public int UserId { get; set; }
         [Required]
         public int ShowId { get; set; }
+        public IEnumerable<int> TicketIds { get; set; }
     }
 }

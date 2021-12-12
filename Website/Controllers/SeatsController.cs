@@ -49,8 +49,8 @@ namespace WebSite.Controllers
                 reservationDtos.Add(reservation);
             }
             //TODO:uncomment after implementation of next screen.
-            //await _client.CreateReservationAsync(reservationDtos);
-            return RedirectToAction("Confirm", "Bookings", reservationDtos);
+            await _client.CreateReservationAsync(reservationDtos);
+            return RedirectToAction("Confirm", "Bookings", new { reservationDtos = reservationDtos });
         }
 
         [HttpGet]

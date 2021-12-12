@@ -35,6 +35,9 @@ namespace WebSite.Controllers
 
             model.TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()));
             model.Date = _client.GetShowById((int)TempData.Peek("ShowId")).StartTime;
+            model.Reservations = reservationDtos;
+            TempData["reservations"] = JsonConvert.SerializeObject(reservationDtos);
+
             return View(model);
         }
 
@@ -50,16 +53,18 @@ namespace WebSite.Controllers
                     return RedirectToAction(nameof(Index), "Movies");
                 }
 
+                var reservationDtos = JsonConvert.DeserializeObject<IEnumerable<ReservationDto>>(TempData["reservations"].ToString());
                 //TODO Implement getting the seat ids instead of hardcode
-                BookingDto bookings = new()
+                BookingDto booking = new()
                 {
-                    TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData["SelectedSeatPositions"].ToString())),
+                    TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(reservationDtos.ToList().Select(res => res.SeatId).ToList())),
                     Date = DateTime.Now,
-                    ShowId = (int)TempData["ShowId"],
-                    UserId = User.Identity.Name != null ? Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "user-id").Value) : 0
+                    ShowId = reservationDtos.ToList().FirstOrDefault().ShowId,
+                    UserId = User.Identity.Name != null ? Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "user-id").Value) : 0,
+                    TicketIds = reservationDtos.ToList().Select(reservation => reservation.Id).ToList()
                 };
                 
-                int id = await _client.ConfirmBookingAsync(bookings);
+                int id = await _client.ConfirmBookingAsync(booking);
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(Index), "Movies");

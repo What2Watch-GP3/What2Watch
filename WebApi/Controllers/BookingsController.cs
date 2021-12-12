@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Interfaces;
 using DataAccess.Models;
@@ -16,10 +17,12 @@ namespace WebApi.Controllers
     public class BookingsController : ControllerBase
     {
         IBookingDataAccess _bookingDataAccess;
+        IReservationDataAccess _reservationDataAccess;
 
-        public BookingsController(IBookingDataAccess bookingDataAccess)
+        public BookingsController(IBookingDataAccess bookingDataAccess, IReservationDataAccess reservationDataAccess)
         {
             _bookingDataAccess = bookingDataAccess;
+            _reservationDataAccess = reservationDataAccess;
         }
 
         //// GET: api/<BookingController>
@@ -51,13 +54,22 @@ namespace WebApi.Controllers
         {
             //TODO: Change SeatIds list to a list of tickets, where we check each seat for availability
             //Probably get the show's time and a price based on the seats as well
+            //List<Ticket> tickets = new ();
+
+            Booking booking = DtoConverter<BookingDto, Booking>.From(value);
+            //TODO: check if foreach or linq with select works better.
+            /*foreach (int ticketId in value.TicketIds)
+            {
+                tickets.Add(await _ticketDataAccess.GetByIdAsync(ticketId));
+            }*/
+            var reservations = value.TicketIds.ToList().Select(async ticketId => await _reservationDataAccess.GetByIdAsync(ticketId)).ToList();
+            booking.Tickets = DtoConverter<Reservation, Ticket>.FromList(await Task.WhenAll(reservations));
 
             //TODO: Get Reservations from UserId na check seat Availability
             //if (!SeatsAreAvailable(value.ReservationIds) || !ShowIsValid(value.ShowId))
             //{
             //    return NotFound();
             //}
-            Booking booking = DtoConverter<BookingDto, Booking>.From(value);
             return Ok(await _bookingDataAccess.CreateAsync(booking));
         }
 

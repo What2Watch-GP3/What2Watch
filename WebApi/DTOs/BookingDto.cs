@@ -10,5 +10,6 @@ namespace WebApi.DTOs
         public DateTime Date { get; set; }
         public int UserId { get; set; }
         public int ShowId { get; set; }
+        public IEnumerable<int> TicketIds { get; set; }
     }
 }

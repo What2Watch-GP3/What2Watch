@@ -11,5 +11,6 @@ namespace DataAccess.Models
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
+        public IEnumerable<Ticket> Tickets { get; set; }
     }
 }
