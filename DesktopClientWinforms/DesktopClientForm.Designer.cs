@@ -33,24 +33,28 @@ namespace DesktopClientWinforms
         {
             this.currentPagePanel = new System.Windows.Forms.Panel();
             this.TitleBarPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnMinimise = new System.Windows.Forms.Button();
             this.btnMaximise = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.TitleBarPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // currentPagePanel
             // 
+            this.currentPagePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(32)))));
             this.currentPagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.currentPagePanel.Location = new System.Drawing.Point(0, 0);
+            this.currentPagePanel.Location = new System.Drawing.Point(0, 40);
             this.currentPagePanel.Name = "currentPagePanel";
-            this.currentPagePanel.Size = new System.Drawing.Size(938, 525);
+            this.currentPagePanel.Size = new System.Drawing.Size(938, 493);
             this.currentPagePanel.TabIndex = 0;
             // 
             // TitleBarPanel
             // 
             this.TitleBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.TitleBarPanel.Controls.Add(this.pictureBox1);
             this.TitleBarPanel.Controls.Add(this.lblTitle);
             this.TitleBarPanel.Controls.Add(this.btnMinimise);
             this.TitleBarPanel.Controls.Add(this.btnMaximise);
@@ -64,11 +68,21 @@ namespace DesktopClientWinforms
             this.TitleBarPanel.TabIndex = 0;
             this.TitleBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DesktopClientWinforms.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(101, 39);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.Location = new System.Drawing.Point(47, 8);
+            this.lblTitle.Location = new System.Drawing.Point(110, 8);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(58, 25);
             this.lblTitle.TabIndex = 3;
@@ -133,15 +147,17 @@ namespace DesktopClientWinforms
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.ClientSize = new System.Drawing.Size(938, 525);
-            this.Controls.Add(this.TitleBarPanel);
+            this.ClientSize = new System.Drawing.Size(938, 533);
             this.Controls.Add(this.currentPagePanel);
+            this.Controls.Add(this.TitleBarPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.MinimumSize = new System.Drawing.Size(660, 580);
             this.Name = "DesktopClientForm";
-            this.Text = "What2Watch";
+            this.Text = "Admin Panel";
             this.Load += new System.EventHandler(this.DesktopClientForm_Load);
             this.TitleBarPanel.ResumeLayout(false);
             this.TitleBarPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -154,6 +170,7 @@ namespace DesktopClientWinforms
         private Button btnMaximise;
         private Button btnExit;
         private Label lblTitle;
+        private PictureBox pictureBox1;
     }
 }
 

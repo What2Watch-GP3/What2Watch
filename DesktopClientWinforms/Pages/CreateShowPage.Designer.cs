@@ -78,7 +78,7 @@ namespace DesktopClientWinforms.Pages
             this.backgroundPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.backgroundPanel.Location = new System.Drawing.Point(0, 0);
             this.backgroundPanel.Name = "backgroundPanel";
-            this.backgroundPanel.Size = new System.Drawing.Size(867, 528);
+            this.backgroundPanel.Size = new System.Drawing.Size(1042, 553);
             this.backgroundPanel.TabIndex = 0;
             // 
             // btnCreateShow
@@ -89,7 +89,7 @@ namespace DesktopClientWinforms.Pages
             this.btnCreateShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateShow.Location = new System.Drawing.Point(0, 493);
             this.btnCreateShow.Name = "btnCreateShow";
-            this.btnCreateShow.Size = new System.Drawing.Size(867, 45);
+            this.btnCreateShow.Size = new System.Drawing.Size(1042, 45);
             this.btnCreateShow.TabIndex = 5;
             this.btnCreateShow.Text = "Create";
             this.btnCreateShow.UseVisualStyleBackColor = false;
@@ -97,7 +97,7 @@ namespace DesktopClientWinforms.Pages
             // 
             // comboSound
             // 
-            this.comboSound.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboSound.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboSound.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboSound.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboSound.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
@@ -109,7 +109,7 @@ namespace DesktopClientWinforms.Pages
             this.comboSound.FormattingEnabled = true;
             this.comboSound.Location = new System.Drawing.Point(0, 455);
             this.comboSound.Name = "comboSound";
-            this.comboSound.Size = new System.Drawing.Size(867, 38);
+            this.comboSound.Size = new System.Drawing.Size(1042, 38);
             this.comboSound.TabIndex = 18;
             // 
             // lblSound
@@ -124,7 +124,7 @@ namespace DesktopClientWinforms.Pages
             // 
             // comboGraphic
             // 
-            this.comboGraphic.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboGraphic.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboGraphic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboGraphic.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboGraphic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
@@ -136,7 +136,7 @@ namespace DesktopClientWinforms.Pages
             this.comboGraphic.FormattingEnabled = true;
             this.comboGraphic.Location = new System.Drawing.Point(0, 387);
             this.comboGraphic.Name = "comboGraphic";
-            this.comboGraphic.Size = new System.Drawing.Size(867, 38);
+            this.comboGraphic.Size = new System.Drawing.Size(1042, 38);
             this.comboGraphic.TabIndex = 16;
             // 
             // lblGraphic
@@ -151,7 +151,7 @@ namespace DesktopClientWinforms.Pages
             // 
             // comboSubtitles
             // 
-            this.comboSubtitles.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboSubtitles.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboSubtitles.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboSubtitles.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboSubtitles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
@@ -163,7 +163,7 @@ namespace DesktopClientWinforms.Pages
             this.comboSubtitles.FormattingEnabled = true;
             this.comboSubtitles.Location = new System.Drawing.Point(0, 319);
             this.comboSubtitles.Name = "comboSubtitles";
-            this.comboSubtitles.Size = new System.Drawing.Size(867, 38);
+            this.comboSubtitles.Size = new System.Drawing.Size(1042, 38);
             this.comboSubtitles.TabIndex = 13;
             // 
             // lblSub
@@ -178,7 +178,7 @@ namespace DesktopClientWinforms.Pages
             // 
             // comboDub
             // 
-            this.comboDub.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboDub.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboDub.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboDub.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboDub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
@@ -190,7 +190,7 @@ namespace DesktopClientWinforms.Pages
             this.comboDub.FormattingEnabled = true;
             this.comboDub.Location = new System.Drawing.Point(0, 251);
             this.comboDub.Name = "comboDub";
-            this.comboDub.Size = new System.Drawing.Size(867, 38);
+            this.comboDub.Size = new System.Drawing.Size(1042, 38);
             this.comboDub.TabIndex = 12;
             // 
             // lblDubLanguage
@@ -211,7 +211,7 @@ namespace DesktopClientWinforms.Pages
             this.txtRoomId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.txtRoomId.Location = new System.Drawing.Point(0, 193);
             this.txtRoomId.Name = "txtRoomId";
-            this.txtRoomId.Size = new System.Drawing.Size(867, 28);
+            this.txtRoomId.Size = new System.Drawing.Size(1042, 28);
             this.txtRoomId.TabIndex = 9;
             this.txtRoomId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRoomId_KeyPress);
             // 
@@ -227,7 +227,7 @@ namespace DesktopClientWinforms.Pages
             // 
             // comboMovies
             // 
-            this.comboMovies.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboMovies.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboMovies.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboMovies.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
@@ -235,11 +235,11 @@ namespace DesktopClientWinforms.Pages
             this.comboMovies.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
             this.comboMovies.Dock = System.Windows.Forms.DockStyle.Top;
             this.comboMovies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboMovies.ForeColor = System.Drawing.SystemColors.Window;
+            this.comboMovies.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboMovies.FormattingEnabled = true;
             this.comboMovies.Location = new System.Drawing.Point(0, 125);
             this.comboMovies.Name = "comboMovies";
-            this.comboMovies.Size = new System.Drawing.Size(867, 38);
+            this.comboMovies.Size = new System.Drawing.Size(1042, 38);
             this.comboMovies.TabIndex = 20;
             // 
             // lblMovie
@@ -259,7 +259,7 @@ namespace DesktopClientWinforms.Pages
             this.datePickePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.datePickePanel.Location = new System.Drawing.Point(0, 60);
             this.datePickePanel.Name = "datePickePanel";
-            this.datePickePanel.Size = new System.Drawing.Size(867, 35);
+            this.datePickePanel.Size = new System.Drawing.Size(1042, 35);
             this.datePickePanel.TabIndex = 19;
             // 
             // datePicker
@@ -274,10 +274,10 @@ namespace DesktopClientWinforms.Pages
             this.datePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.datePicker.Name = "datePicker";
             this.datePicker.ShowUpDown = true;
-            this.datePicker.Size = new System.Drawing.Size(382, 35);
+            this.datePicker.Size = new System.Drawing.Size(557, 35);
             this.datePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.datePicker.TabIndex = 10;
-            this.datePicker.TextColor = System.Drawing.Color.White;
+            this.datePicker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             // 
             // timePicker
             // 
@@ -292,7 +292,7 @@ namespace DesktopClientWinforms.Pages
             this.timePicker.Size = new System.Drawing.Size(485, 35);
             this.timePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.timePicker.TabIndex = 11;
-            this.timePicker.TextColor = System.Drawing.Color.White;
+            this.timePicker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             // 
             // lblDate
             // 
@@ -319,8 +319,9 @@ namespace DesktopClientWinforms.Pages
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.backgroundPanel);
+            this.MinimumSize = new System.Drawing.Size(620, 540);
             this.Name = "CreateShowPage";
-            this.Size = new System.Drawing.Size(867, 528);
+            this.Size = new System.Drawing.Size(1042, 553);
             this.Load += new System.EventHandler(this.CreateShowPage_Load);
             this.backgroundPanel.ResumeLayout(false);
             this.backgroundPanel.PerformLayout();
