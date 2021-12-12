@@ -207,6 +207,7 @@ header {
 
 .selected {
     background-color: #ffffff;
+    transform: scale(1.2);
 }
 
 .occupied {
@@ -262,6 +263,7 @@ header {
     background: #808080;
     height: 70px;
     width: 70%;
+    max-width: 271px;
     margin: 15px 0;
     transform: rotateX(-45deg);
     box-shadow: 0 3px 10px rgba(3,3, 3, 0.7);
