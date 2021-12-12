@@ -5,6 +5,6 @@ namespace DataAccess.Interfaces
 {
     public interface IUserDataAccess
     {
-        Task<int> LoginAsync(User user);
+        Task<User> LoginAsync(User user);
     }
 }

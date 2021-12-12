@@ -5,6 +5,7 @@ using RestSharp;
 using WebApiClient.DTOs;
 using Tools;
 using System.Linq;
+using System.Net;
 
 namespace WebApiClient
 {
@@ -17,7 +18,7 @@ namespace WebApiClient
         public WebApiClient(IRestClient client)
         {
             _client = client;
-            _client.CookieContainer = new System.Net.CookieContainer();
+            _client.CookieContainer = new CookieContainer();
         }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
@@ -49,8 +50,6 @@ namespace WebApiClient
 
         public async Task<IEnumerable<MovieDto>> GetMoviesByPartOfNameAsync(string searchString)
         {
-            //var bearerToken = HttpContext.Current.Session.GetString("JWTToken");
-            
             //_client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", bearerToken));
             var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies/{searchString}");
 
@@ -96,18 +95,25 @@ namespace WebApiClient
         }
 
         //TODO: Make this return a full UserDto in order to display user details later
-        public async Task<int> LoginAsync(UserDto userDto)
+        public async Task<UserDto> LoginAsync(UserDto userDto)
         {
-            var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
+            var response = await _client.RequestAsync<UserDto>(Method.POST, "login", userDto);
             if (!response.IsSuccessful)
             {
                 if ((int)response.StatusCode == 404)
                 {
-                    return -1;
+                    return null;
                 }
                 //TODO: based on response statuscode, do smth
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
             }
+            userDto = response.Data;
+            if (response.Cookies != null)
+            {
+                var sessionCookie = response.Cookies.SingleOrDefault(x => x.Name == "X-Access-Token");
+                userDto.Password = sessionCookie.Value;
+            }
+
             //userDto.Id = (int)response.Data;
             //userDto.Password = "";
 
@@ -185,6 +191,11 @@ namespace WebApiClient
         public ShowDto GetShowById(int showId)
         {
             return _shows.First(show => show.Id == showId);
+        }
+
+        public void Logout()
+        {
+            _client.CookieContainer = new CookieContainer();
         }
     }
 }

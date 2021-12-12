@@ -68,16 +68,16 @@ a:active {
 }
 
 .btn-confirm {
-    color: #ffa31a;
+    color: #ffa31a !important;
     font-weight: bold;
-    border-color: #ffa31a;
+    border: solid #ffa31a 1px !important;
 }
 
-    .btn-confirm:hover {
-        color: #1c1c1c;
-        background-color: #ffa31a;
-        border-color: #ffa31a;
-    }
+.btn-confirm:hover {
+    color: #1c1c1c !important;
+    background-color: #ffa31a;
+    border-color: #ffa31a;
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
@@ -176,16 +176,16 @@ header {
     flex-direction: column
 }
 
-    .movie-container select {
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        border: 0;
-        padding: 5px 15px;
-        margin-bottom: 40px;
-        font-size: 14px;
-        border-radius: 5px;
-    }
+.movie-container select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 5px 15px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+}
 
 .seat-container {
     perspective: 1000px;
@@ -241,16 +241,16 @@ header {
     color: #777;
 }
 
-    .showcase li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 10px;
-    }
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
 
-        .showcase li small {
-            margin-left: 2px;
-        }
+.showcase li small {
+    margin-left: 2px;
+}
 
 .row {
     display: flex;

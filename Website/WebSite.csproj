@@ -9,10 +9,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="bootstrap" Version="5.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\WebApiClient\WebApiClient.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="bootstrap" />
   </ItemGroup>
 </Project>
