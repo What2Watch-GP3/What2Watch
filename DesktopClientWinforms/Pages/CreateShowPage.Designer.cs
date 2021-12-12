@@ -1,5 +1,7 @@
-﻿
-namespace DesktopClientWinforms
+﻿using DesktopClientWinforms.Components;
+using System.Windows.Forms;
+
+namespace DesktopClientWinforms.Pages
 {
     partial class CreateShowPage
     {
@@ -31,21 +33,21 @@ namespace DesktopClientWinforms
         {
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.btnCreateShow = new System.Windows.Forms.Button();
-            this.comboSound = new System.Windows.Forms.ComboBox();
+            this.comboSound = new DesktopClientWinforms.Components.FlatComboBox();
             this.lblSound = new System.Windows.Forms.Label();
-            this.comboGraphic = new System.Windows.Forms.ComboBox();
+            this.comboGraphic = new DesktopClientWinforms.Components.FlatComboBox();
             this.lblGraphic = new System.Windows.Forms.Label();
-            this.comboSubtitles = new System.Windows.Forms.ComboBox();
+            this.comboSubtitles = new DesktopClientWinforms.Components.FlatComboBox();
             this.lblSub = new System.Windows.Forms.Label();
-            this.comboDub = new System.Windows.Forms.ComboBox();
+            this.comboDub = new DesktopClientWinforms.Components.FlatComboBox();
             this.lblDubLanguage = new System.Windows.Forms.Label();
             this.txtRoomId = new System.Windows.Forms.TextBox();
             this.lblRoomId = new System.Windows.Forms.Label();
-            this.txtMovieId = new System.Windows.Forms.TextBox();
-            this.lblMovieId = new System.Windows.Forms.Label();
+            this.comboMovies = new DesktopClientWinforms.Components.FlatComboBox();
+            this.lblMovie = new System.Windows.Forms.Label();
             this.datePickePanel = new System.Windows.Forms.Panel();
-            this.datePicker = new System.Windows.Forms.DateTimePicker();
-            this.timePicker = new System.Windows.Forms.DateTimePicker();
+            this.datePicker = new DesktopClientWinforms.Components.FlatDatePicker();
+            this.timePicker = new DesktopClientWinforms.Components.FlatDatePicker();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.backgroundPanel.SuspendLayout();
@@ -66,8 +68,8 @@ namespace DesktopClientWinforms
             this.backgroundPanel.Controls.Add(this.lblDubLanguage);
             this.backgroundPanel.Controls.Add(this.txtRoomId);
             this.backgroundPanel.Controls.Add(this.lblRoomId);
-            this.backgroundPanel.Controls.Add(this.txtMovieId);
-            this.backgroundPanel.Controls.Add(this.lblMovieId);
+            this.backgroundPanel.Controls.Add(this.comboMovies);
+            this.backgroundPanel.Controls.Add(this.lblMovie);
             this.backgroundPanel.Controls.Add(this.datePickePanel);
             this.backgroundPanel.Controls.Add(this.lblDate);
             this.backgroundPanel.Controls.Add(this.lblTitle);
@@ -85,7 +87,7 @@ namespace DesktopClientWinforms
             this.btnCreateShow.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnCreateShow.FlatAppearance.BorderSize = 0;
             this.btnCreateShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreateShow.Location = new System.Drawing.Point(0, 483);
+            this.btnCreateShow.Location = new System.Drawing.Point(0, 493);
             this.btnCreateShow.Name = "btnCreateShow";
             this.btnCreateShow.Size = new System.Drawing.Size(867, 45);
             this.btnCreateShow.TabIndex = 5;
@@ -95,12 +97,17 @@ namespace DesktopClientWinforms
             // 
             // comboSound
             // 
+            this.comboSound.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboSound.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboSound.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboSound.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.comboSound.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.comboSound.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
             this.comboSound.Dock = System.Windows.Forms.DockStyle.Top;
             this.comboSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboSound.ForeColor = System.Drawing.SystemColors.Window;
             this.comboSound.FormattingEnabled = true;
-            this.comboSound.Location = new System.Drawing.Point(0, 445);
+            this.comboSound.Location = new System.Drawing.Point(0, 455);
             this.comboSound.Name = "comboSound";
             this.comboSound.Size = new System.Drawing.Size(867, 38);
             this.comboSound.TabIndex = 18;
@@ -109,7 +116,7 @@ namespace DesktopClientWinforms
             // 
             this.lblSound.AutoSize = true;
             this.lblSound.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSound.Location = new System.Drawing.Point(0, 415);
+            this.lblSound.Location = new System.Drawing.Point(0, 425);
             this.lblSound.Name = "lblSound";
             this.lblSound.Size = new System.Drawing.Size(126, 30);
             this.lblSound.TabIndex = 17;
@@ -117,12 +124,17 @@ namespace DesktopClientWinforms
             // 
             // comboGraphic
             // 
+            this.comboGraphic.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboGraphic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboGraphic.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboGraphic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.comboGraphic.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.comboGraphic.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
             this.comboGraphic.Dock = System.Windows.Forms.DockStyle.Top;
             this.comboGraphic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboGraphic.ForeColor = System.Drawing.SystemColors.Window;
             this.comboGraphic.FormattingEnabled = true;
-            this.comboGraphic.Location = new System.Drawing.Point(0, 377);
+            this.comboGraphic.Location = new System.Drawing.Point(0, 387);
             this.comboGraphic.Name = "comboGraphic";
             this.comboGraphic.Size = new System.Drawing.Size(867, 38);
             this.comboGraphic.TabIndex = 16;
@@ -131,7 +143,7 @@ namespace DesktopClientWinforms
             // 
             this.lblGraphic.AutoSize = true;
             this.lblGraphic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblGraphic.Location = new System.Drawing.Point(0, 347);
+            this.lblGraphic.Location = new System.Drawing.Point(0, 357);
             this.lblGraphic.Name = "lblGraphic";
             this.lblGraphic.Size = new System.Drawing.Size(138, 30);
             this.lblGraphic.TabIndex = 15;
@@ -139,12 +151,17 @@ namespace DesktopClientWinforms
             // 
             // comboSubtitles
             // 
+            this.comboSubtitles.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboSubtitles.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboSubtitles.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboSubtitles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.comboSubtitles.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.comboSubtitles.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
             this.comboSubtitles.Dock = System.Windows.Forms.DockStyle.Top;
             this.comboSubtitles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboSubtitles.ForeColor = System.Drawing.SystemColors.Window;
             this.comboSubtitles.FormattingEnabled = true;
-            this.comboSubtitles.Location = new System.Drawing.Point(0, 309);
+            this.comboSubtitles.Location = new System.Drawing.Point(0, 319);
             this.comboSubtitles.Name = "comboSubtitles";
             this.comboSubtitles.Size = new System.Drawing.Size(867, 38);
             this.comboSubtitles.TabIndex = 13;
@@ -153,7 +170,7 @@ namespace DesktopClientWinforms
             // 
             this.lblSub.AutoSize = true;
             this.lblSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSub.Location = new System.Drawing.Point(0, 279);
+            this.lblSub.Location = new System.Drawing.Point(0, 289);
             this.lblSub.Name = "lblSub";
             this.lblSub.Size = new System.Drawing.Size(194, 30);
             this.lblSub.TabIndex = 14;
@@ -161,12 +178,17 @@ namespace DesktopClientWinforms
             // 
             // comboDub
             // 
+            this.comboDub.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboDub.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboDub.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboDub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.comboDub.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.comboDub.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
             this.comboDub.Dock = System.Windows.Forms.DockStyle.Top;
             this.comboDub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboDub.ForeColor = System.Drawing.SystemColors.Window;
             this.comboDub.FormattingEnabled = true;
-            this.comboDub.Location = new System.Drawing.Point(0, 241);
+            this.comboDub.Location = new System.Drawing.Point(0, 251);
             this.comboDub.Name = "comboDub";
             this.comboDub.Size = new System.Drawing.Size(867, 38);
             this.comboDub.TabIndex = 12;
@@ -175,7 +197,7 @@ namespace DesktopClientWinforms
             // 
             this.lblDubLanguage.AutoSize = true;
             this.lblDubLanguage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDubLanguage.Location = new System.Drawing.Point(0, 211);
+            this.lblDubLanguage.Location = new System.Drawing.Point(0, 221);
             this.lblDubLanguage.Name = "lblDubLanguage";
             this.lblDubLanguage.Size = new System.Drawing.Size(154, 30);
             this.lblDubLanguage.TabIndex = 11;
@@ -187,7 +209,7 @@ namespace DesktopClientWinforms
             this.txtRoomId.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRoomId.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtRoomId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.txtRoomId.Location = new System.Drawing.Point(0, 183);
+            this.txtRoomId.Location = new System.Drawing.Point(0, 193);
             this.txtRoomId.Name = "txtRoomId";
             this.txtRoomId.Size = new System.Drawing.Size(867, 28);
             this.txtRoomId.TabIndex = 9;
@@ -197,33 +219,38 @@ namespace DesktopClientWinforms
             // 
             this.lblRoomId.AutoSize = true;
             this.lblRoomId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblRoomId.Location = new System.Drawing.Point(0, 153);
+            this.lblRoomId.Location = new System.Drawing.Point(0, 163);
             this.lblRoomId.Name = "lblRoomId";
             this.lblRoomId.Size = new System.Drawing.Size(96, 30);
             this.lblRoomId.TabIndex = 8;
             this.lblRoomId.Text = "Room Id:";
             // 
-            // txtMovieId
+            // comboMovies
             // 
-            this.txtMovieId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.txtMovieId.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMovieId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtMovieId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.txtMovieId.Location = new System.Drawing.Point(0, 125);
-            this.txtMovieId.Name = "txtMovieId";
-            this.txtMovieId.Size = new System.Drawing.Size(867, 28);
-            this.txtMovieId.TabIndex = 7;
-            this.txtMovieId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMovieId_KeyPress);
+            this.comboMovies.ArrowColor = System.Drawing.SystemColors.Window;
+            this.comboMovies.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboMovies.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboMovies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.comboMovies.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.comboMovies.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
+            this.comboMovies.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboMovies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboMovies.ForeColor = System.Drawing.SystemColors.Window;
+            this.comboMovies.FormattingEnabled = true;
+            this.comboMovies.Location = new System.Drawing.Point(0, 125);
+            this.comboMovies.Name = "comboMovies";
+            this.comboMovies.Size = new System.Drawing.Size(867, 38);
+            this.comboMovies.TabIndex = 20;
             // 
-            // lblMovieId
+            // lblMovie
             // 
-            this.lblMovieId.AutoSize = true;
-            this.lblMovieId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblMovieId.Location = new System.Drawing.Point(0, 95);
-            this.lblMovieId.Name = "lblMovieId";
-            this.lblMovieId.Size = new System.Drawing.Size(99, 30);
-            this.lblMovieId.TabIndex = 6;
-            this.lblMovieId.Text = "Movie Id:";
+            this.lblMovie.AutoSize = true;
+            this.lblMovie.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblMovie.Location = new System.Drawing.Point(0, 95);
+            this.lblMovie.Name = "lblMovie";
+            this.lblMovie.Size = new System.Drawing.Size(75, 30);
+            this.lblMovie.TabIndex = 6;
+            this.lblMovie.Text = "Movie:";
             // 
             // datePickePanel
             // 
@@ -237,27 +264,35 @@ namespace DesktopClientWinforms
             // 
             // datePicker
             // 
-            this.datePicker.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.datePicker.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.datePicker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.datePicker.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.datePicker.BorderSize = 0;
+            this.datePicker.CalendarIcon = global::DesktopClientWinforms.Properties.Resources.clockWhite;
             this.datePicker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.datePicker.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.datePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.datePicker.Location = new System.Drawing.Point(485, 0);
+            this.datePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.datePicker.Name = "datePicker";
             this.datePicker.ShowUpDown = true;
             this.datePicker.Size = new System.Drawing.Size(382, 35);
+            this.datePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.datePicker.TabIndex = 10;
+            this.datePicker.TextColor = System.Drawing.Color.White;
             // 
             // timePicker
             // 
-            this.timePicker.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.timePicker.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.timePicker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.timePicker.BorderColor = System.Drawing.Color.Transparent;
+            this.timePicker.BorderSize = 0;
+            this.timePicker.CalendarIcon = global::DesktopClientWinforms.Properties.Resources.calendarWhite;
             this.timePicker.Dock = System.Windows.Forms.DockStyle.Left;
+            this.timePicker.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.timePicker.Location = new System.Drawing.Point(0, 0);
+            this.timePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.timePicker.Name = "timePicker";
             this.timePicker.Size = new System.Drawing.Size(485, 35);
+            this.timePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.timePicker.TabIndex = 11;
+            this.timePicker.TextColor = System.Drawing.Color.White;
             // 
             // lblDate
             // 
@@ -296,24 +331,24 @@ namespace DesktopClientWinforms
 
         #endregion
 
-        private System.Windows.Forms.Panel backgroundPanel;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.Button btnCreateShow;
-        private System.Windows.Forms.TextBox txtRoomId;
-        private System.Windows.Forms.Label lblRoomId;
-        private System.Windows.Forms.TextBox txtMovieId;
-        private System.Windows.Forms.Label lblMovieId;
-        private System.Windows.Forms.DateTimePicker datePicker;
-        private System.Windows.Forms.ComboBox comboDub;
-        private System.Windows.Forms.Label lblDubLanguage;
-        private System.Windows.Forms.Label lblSub;
-        private System.Windows.Forms.ComboBox comboSubtitles;
-        private System.Windows.Forms.ComboBox comboSound;
-        private System.Windows.Forms.Label lblSound;
-        private System.Windows.Forms.ComboBox comboGraphic;
-        private System.Windows.Forms.Label lblGraphic;
-        private System.Windows.Forms.Panel datePickePanel;
-        private System.Windows.Forms.DateTimePicker timePicker;
+        private Panel backgroundPanel;
+        private Label lblTitle;
+        private Label lblDate;
+        private Button btnCreateShow;
+        private TextBox txtRoomId;
+        private Label lblRoomId;
+        private Label lblMovie;
+        private FlatDatePicker datePicker;
+        private FlatComboBox comboDub;
+        private Label lblDubLanguage;
+        private Label lblSub;
+        private FlatComboBox comboSubtitles;
+        private FlatComboBox comboSound;
+        private Label lblSound;
+        private FlatComboBox comboGraphic;
+        private Label lblGraphic;
+        private Panel datePickePanel;
+        private FlatDatePicker timePicker;
+        private FlatComboBox comboMovies;
     }
 }

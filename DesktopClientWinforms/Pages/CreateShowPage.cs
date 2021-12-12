@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DesktopApiClient;
 using DesktopApiClient.DTOs;
 using Tools.Enums;
 
-namespace DesktopClientWinforms
+namespace DesktopClientWinforms.Pages
 {
     public partial class CreateShowPage : UserControl
     {
@@ -22,7 +25,7 @@ namespace DesktopClientWinforms
             {
                 StartTime = datePicker.Value.Date + timePicker.Value.TimeOfDay,
                 RoomId = int.Parse(txtRoomId.Text),
-                MovieId = int.Parse(txtMovieId.Text),
+                MovieId = ((MovieDto)comboMovies.SelectedItem).Id,
                 DubLanguage = (Language)comboDub.SelectedItem,
                 SubtitlesLanguage = (Language)comboSubtitles.SelectedItem,
                 GraphicType = (GraphicType)comboGraphic.SelectedItem,
@@ -31,11 +34,18 @@ namespace DesktopClientWinforms
             _client.CreateShowAsync(show);
         }
 
-        private void OnLoad()
+        private async Task OnLoad()
         {
             LoadLanguageComboBoxes();
             LoadSoundComboBox();
             LoadGraphicComboBox();
+            await LoadAllMoviesComboBox();
+        }
+
+        private async Task LoadAllMoviesComboBox()
+        {
+            comboMovies.DataSource = await _client.GetAllMoviesAsync();
+            
         }
 
         private void LoadSoundComboBox()
@@ -59,9 +69,6 @@ namespace DesktopClientWinforms
             foreach(var language in Enum.GetValues(typeof(Language)))
             {
                 comboSubtitles.Items.Add(language);
-            }
-            foreach (var language in Enum.GetValues(typeof(Language)))
-            {
                 comboDub.Items.Add(language);
             }
         }
@@ -71,7 +78,7 @@ namespace DesktopClientWinforms
         {
             CreateShow();
 
-            txtMovieId.Clear();
+            comboMovies.Text = "";
             txtRoomId.Clear();
             comboDub.Text = "";
             comboGraphic.Text = "";
@@ -89,9 +96,9 @@ namespace DesktopClientWinforms
             e.Handled = !(char.IsDigit(e.KeyChar));
         }
 
-        private void CreateShowPage_Load(object sender, EventArgs e)
+        private async void CreateShowPage_Load(object sender, EventArgs e)
         {
-            OnLoad();
+            await OnLoad();
         }
         #endregion
     }
