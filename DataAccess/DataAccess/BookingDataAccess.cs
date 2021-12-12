@@ -33,10 +33,16 @@ namespace DataAccess.DataAccess
                     // Turn Reservation Objects into Ticket Objects
                     IEnumerable<Ticket> tickets = DtoConverter<Reservation, Ticket>.FromList(reservations);
 
+                    // Put Booking DB
+                    command = $"INSERT INTO [Booking] (total_price, date, user_id) OUTPUT INSERTED.Id VALUES (@TotalPrice, @Date, @UserId);";
+                    int bookingId = await connection.QuerySingleAsync<int>(command, new { TotalPrice = entity.TotalPrice, Date = entity.Date, UserId = entity.UserId }, transaction);
+
+
                     // Put Tickets in DB
-                    command = $"INSERT INTO [Ticket] (creation_time, seat_id, show_id, user_id) VALUES (@CreationTime, @SeatId, @ShowId, @UserId);";
+                    command = $"INSERT INTO [Ticket] (creation_time, seat_id, show_id, booking_id) VALUES (@CreationTime, @SeatId, @ShowId, @BookingId);";
                     foreach (Ticket ticket in tickets)
                     {
+                        ticket.BookingId = bookingId;
                         bool isCreated = await connection.ExecuteAsync(command, ticket, transaction) > 0;
                         if (!isCreated)
                         {
@@ -44,10 +50,6 @@ namespace DataAccess.DataAccess
                             return -1;
                         }
                     }
-                    
-                    // Put Booking DB
-                    command = $"INSERT INTO [Booking] (total_price, date, user_id) OUTPUT INSERTED.Id VALUES (@TotalPrice, @Date, @UserId);";
-                    int bookingId = await connection.QuerySingleAsync<int>(command, new { TotalPrice = entity.TotalPrice, Date = entity.Date, UserId = entity.UserId }, transaction);
                     
                     // Delete Reservations
                     command = $"DELETE FROM [Reservation] WHERE seat_id=@SeatId AND show_id=@ShowId;";

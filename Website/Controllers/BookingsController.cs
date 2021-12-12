@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -26,8 +27,9 @@ namespace WebSite.Controllers
         }
 
         // GET: BookingsController/Confirm
+        //TODO: consider adding a collection of reservationDTOs as a parameter
         [HttpGet]
-        public async Task<ActionResult> Confirm()
+        public async Task<ActionResult> Confirm(IEnumerable<ReservationDto> reservationDtos)
         {
             dynamic model = new ExpandoObject();
 
@@ -54,7 +56,7 @@ namespace WebSite.Controllers
                     TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData["SelectedSeatPositions"].ToString())),
                     Date = DateTime.Now,
                     ShowId = (int)TempData["ShowId"],
-                    UserId = 1 //TODO: maybe this: this.User.Claims.First(claim => claim.Type == "UserId").Value;
+                    UserId = User.Identity.Name != null ? Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "user-id").Value) : 0
                 };
                 
                 int id = await _client.ConfirmBookingAsync(bookings);
