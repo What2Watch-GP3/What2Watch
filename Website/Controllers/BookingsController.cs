@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,15 @@ namespace WebSite.Controllers
         // GET: BookingsController/Confirm
         //TODO: consider adding a collection of reservationDTOs as a parameter
         [HttpGet]
-        public async Task<ActionResult> Confirm(IEnumerable<ReservationDto> reservationDtos)
+        [Authorize]
+        public async Task<ActionResult> Confirm(IEnumerable<ReservationDto>? reservationDtos)
         {
             dynamic model = new ExpandoObject();
 
+            
             model.TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()));
             model.Date = _client.GetShowById((int)TempData.Peek("ShowId")).StartTime;
             model.Reservations = reservationDtos;
-
             return View(model);
         }
 

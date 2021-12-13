@@ -15,8 +15,8 @@ namespace TestWebApiClient
         public void OneTimeSetUp()
         {
             //Arrange
-            _userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
-            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = new UserDto() { Id = 1, Email = "test@user.dk", Password = "password1234" } });
+            _userDto = new UserDto() { Id = 1, Email = "test@user.dk", Password = "password1234" };
+            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = userDto });
         }
 
         [Test]
@@ -24,11 +24,11 @@ namespace TestWebApiClient
         {
             //Arrange
             //Act
-            UserDto userDto = await _webApiClient.LoginAsync(_userDto);
+           var userDto = await _webApiClient.LoginAsync(_userDto);
 
             //Assert
-            //Assert.That(userDto, Is.InstanceOf<UserDto>(), "User object was not from instance userDto");
-            Assert.AreEqual(1, userDto.Id);
+            Assert.That(userDto, Is.InstanceOf<UserDto>(), "User was not from instance userDto");
+            Assert.AreEqual(1, userDto.Id, "Returned id was not 1");
         }
     }
 }

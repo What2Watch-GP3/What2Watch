@@ -108,9 +108,9 @@ namespace WebApiClient
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
             }
             userDto = response.Data;
-            if (response.Cookies != null)
+            var sessionCookie = response.Cookies.SingleOrDefault(x => x.Name == "X-Access-Token");
+            if (sessionCookie != null)
             {
-                var sessionCookie = response.Cookies.SingleOrDefault(x => x.Name == "X-Access-Token");
                 userDto.Password = sessionCookie.Value;
             }
 
@@ -196,6 +196,11 @@ namespace WebApiClient
         public void Logout()
         {
             _client.CookieContainer = new CookieContainer();
+        }
+
+        public void addToken(string value)
+        {
+            _client.AddDefaultParameter("X-Access-Token", value, ParameterType.Cookie);
         }
     }
 }

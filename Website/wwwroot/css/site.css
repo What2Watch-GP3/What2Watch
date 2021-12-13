@@ -22,6 +22,14 @@ h1 {
 }
 
 
+/* implementing custom divider*/
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgba(255, 163, 26, 1);
+}
+
 
 header {
     width: 100%;
@@ -71,12 +79,14 @@ a:active {
     color: #ffa31a !important;
     font-weight: bold;
     border: solid #ffa31a 1px !important;
+    cursor: pointer;
 }
 
 .btn-confirm:hover {
     color: #1c1c1c !important;
     background-color: #ffa31a;
     border-color: #ffa31a;
+    cursor: pointer;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -236,10 +246,9 @@ header {
     display: flex;
     justify-content: space-between;
     list-style-type: none;
-    background: rgba(0,0,0,0.1);
     padding: 5px 10px;
     border-radius: 5px;
-    color: #777;
+    color: #FFFFFF;
 }
 
 .showcase li {
@@ -285,9 +294,24 @@ img{
 }
 .card {
     cursor: pointer;
-    
+    background-color: rgba(255,255,255,0.15) !important;
 }
 
 .card:hover {
-    box-shadow: 0 0 2px 1px rgba(255, 163, 26, 0.5);
+    box-shadow: 0 0 2px 1px rgba(255, 168, 26, 0.5);
+}
+
+#search {
+    color: #FFA31A;
+    background-color: rgba(255,255,255,0.15);
+    border: 1px solid #FFA31A;
+}
+
+#search:focus {
+    background-color: rgba(255,255,255,0.15);
+}
+
+#search::placeholder {
+    color: rgba(255, 168, 26, 0.5);
+    opacity: 1; /* Firefox */
 }

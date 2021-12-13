@@ -20,7 +20,7 @@ namespace TestWebApi
         public void Setup()
         {
             _objectResult = null;
-            _userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
+            _userDto = new UserDto() {Email = "test@user.dk", Password = "password1234" };
             _loginController = new(null, new UserStub());
         }
 

@@ -10,29 +10,27 @@
     Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
 
-<h1 class="text-not-pornhub">Cinemas showing movie: @titleDictionary[movieId] </h1>
-<!--Return ToString??-->
-
-
-<table class=" table table-hover table-bordered" id="cinemas-table">
-    <thead>
-        <tr>
-            <th>
-                Cinemas
-            </th>
-        </tr>
-    </thead>
-    <tbody class="clickable-table">
-        @foreach (var item in cinemas)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(item.Name, "Shows", "Shows", new { movieId = movieId, cinemaId = item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h1 class="text-not-pornhub">Cinemas showing movie: <span class="text-white">@titleDictionary[movieId]</span> </h1>
+<hr/>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in cinemas)
+    {
+        <div class="col-lg-4 col-md-4 col-12">
+            <div class="card mb-3 ripple" onclick="location.href='@Url.Action("Shows", "Shows" , new { movieId = movieId, cinemaId = item.Id  })'">
+                <div class="row g-0">
+                    <div class="col-12">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-white">
+                                <b>@item.Name</b>
+                            </h5>
+                            <div href="#" class="btn btn-confirm btn-block">Select</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 <div>
-    <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+    <a href="javascript:void(0);" onclick="history.go(-1);" class="text-not-pornhub">Go Back</a>
 </div>

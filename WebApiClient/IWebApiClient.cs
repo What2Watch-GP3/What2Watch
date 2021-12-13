@@ -20,6 +20,7 @@ namespace WebApiClient
         Task <IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos);
         decimal GetTotalPrice(IEnumerable<string> seatPositions);
         ShowDto GetShowById(int showId);
+        void addToken(string value);
         void Logout();
     }
 }

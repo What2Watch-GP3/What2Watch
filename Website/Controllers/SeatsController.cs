@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
@@ -22,8 +23,8 @@ namespace WebSite.Controllers
         }
 
         [HttpGet]
-        [Route("showId:int")]
-        public async Task<ActionResult> Select(int showId, DateTime showStartTime)
+        [Route("[action]")]
+        public async Task<ActionResult> Select([FromQuery]int showId, [FromQuery] DateTime showStartTime)
         {
             TempData["ShowId"] = showId;
             var room = await _client.GetRoomByShowIdAsync(showId);
@@ -31,9 +32,11 @@ namespace WebSite.Controllers
             return View(room);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Reserve(IEnumerable<string> selectedSeats)
         {
+            _client.addToken(User.Claims.FirstOrDefault(claim => claim.Type == "access-token").Value);
             List<ReservationDto> reservationDtos = new();
             foreach (var seatPosition in selectedSeats)
             {

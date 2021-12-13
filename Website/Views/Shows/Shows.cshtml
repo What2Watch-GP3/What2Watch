@@ -12,54 +12,37 @@
     Dictionary<int, string> titleDictionary = JsonConvert.DeserializeObject<Dictionary<int, string>>(TempData["TitleDictionary"].ToString());
 }
 
-<h1>Shows in @cinemaNameDictionary[cinemaId] for @titleDictionary[movieId] </h1>
+<h1 class="text-not-pornhub">Shows in @cinemaNameDictionary[cinemaId] for @titleDictionary[movieId] </h1>
+<hr />
+<div class="row row-cols-1 row-cols-md-3 g-4">
 
+    @foreach (var item in shows)
+    {
 
-<table class="table table-hover table-bordered">
-    <thead>
-        <tr>
-            <th>
-                Starttime
-            </th>
-            <th>
-                Language
-            </th>
-            <th>
-                Subtitle Language
-            </th>
-            <th>
-                Graphic Type
-            </th>
-            <th>
-                Sound Type
-            </th>
-        </tr>
-    </thead>
-    <tbody class="clickable-table">
-        @foreach (var item in shows)
-        {
-            <tr>
-                <td>
-                    <a asp-controller="Seats" asp-action="Select" method="get" asp-route-showId="@item.Id">@Html.DisplayFor(modelItem => item.StartTime)</a>
-                </td>
-                <td>
-                   
-                    @Html.DisplayFor(modelItem => item.DubLanguage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubtitlesLanguage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GraphicType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SoundType)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+        <div class="col-lg-3 col-md-4 col-12">
+            <div class="card mb-3 ripple" onclick="location.href='@Url.Action("Select", "Seats" , new { showId=@item.Id, showStartTime = @item.StartTime })'">
+                <div class="row g-0">
+                    <div class="col-12">
+                        <div class="card-body text-center text-not-pornhub">
+                            <p class="card-text text-white">
+                                <b>@item.StartTime.ToString().Remove(@item.StartTime.ToString().Length-3)</b>
+                            </p>
+                            <p class="card-text">
+                                Language: @item.DubLanguage
+                            </p>
+                            <p class="card-text">
+                                Subtitles: @item.SubtitlesLanguage
+                            </p>
+                            <p class="card-text">
+                                Type: @item.GraphicType.ToString().Substring(1), @item.SoundType
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 <div>
-    <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+    <a href="javascript:void(0);" onclick="history.go(-1);:" class="text-not-pornhub">Go Back</a>
 </div>

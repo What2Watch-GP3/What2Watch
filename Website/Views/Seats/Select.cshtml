@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Seats";
 }
-
+<h1 class="text-not-pornhub">Select Seats</h1>
+<hr />
 <div class="movie-container">
     <ul class="showcase">
         <li>
@@ -104,7 +105,7 @@
 
 
         $(document).ready(function () {
-            alert('i want to go home please')
+
             const container = document.querySelector('.seat-container');
 
             //Seat click event
@@ -117,7 +118,7 @@
                         }
                         else {
                             e.target.classList.toggle('selected');
-                            alert('you mofo thats enough of fucking seats okay');
+                            alert('Avast Ye! You shant carry more bounty!');
                         }
                     }
                 });

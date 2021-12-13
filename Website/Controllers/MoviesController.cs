@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace WebSite.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
+            if (HttpContext.User != null && HttpContext.User.Identity != null && HttpContext.User.Identity.IsAuthenticated)
+            {
+                var claim = HttpContext.User.Claims.FirstOrDefault(claim => claim.Type.Equals("access-token")).Value;
+                _client.addToken(claim.ToString());
+            }
             var movies = await _client.GetAllMoviesAsync();
             
             ViewBag.TextValue = "";
@@ -37,6 +43,11 @@ namespace WebSite.Controllers
                 TempData.Keep();
             }
             return View(movies);
+        }
+
+        private object FirstOrDefault(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
         }
 
         //Get method for movies/ or movies/{string} or movies?search={string}

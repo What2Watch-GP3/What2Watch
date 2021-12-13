@@ -17,6 +17,7 @@
         </p>
     </form>
 </div>
+<hr/>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -26,19 +27,20 @@
     <div class="col-lg-4 col-md-6 col-12">
             <div class="card mb-3 ripple" onclick="location.href='@Url.Action("Cinemas", "Cinemas" , new { movieId=@item.Id })'">
                 <div class="row g-0">
-                    <div class="col-4">
+                    <div class="col-5">
                         @{string imgSourcePath = $"pics/{@item.Title}.jpg";}
                         <img src="@imgSourcePath"
                              class="card-img-top"
                              style="height: 100%;"
                              alt="@item.Title" />
                     </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Title</h5>
+                    <div class="col-7">
+                        <div class="card-body text-not-pornhub">
+                            <h5 class="card-title text-white">@item.Title</h5>
                             <p class="card-text">
-                                Duration: @item.Duration minutes
+                                Duration: @item.Duration min.
                             </p>
+                            <div href="#" class="btn btn-confirm btn-block">Select</div>
                         </div>
                     </div>
                 </div>
