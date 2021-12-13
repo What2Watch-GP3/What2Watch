@@ -34,7 +34,7 @@ namespace DesktopClientWinforms.Pages
                 Email = txtEmail.Text,
                 Password = txtPassword.Text
             };
-            userDto.Id = await _client.LoginAsync(userDto);
+            userDto = await _client.LoginAsync(userDto);
             if (userDto.Id > 0)
             {
                 HomePage homePage = new HomePage(_client, _parent);

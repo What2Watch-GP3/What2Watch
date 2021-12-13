@@ -31,19 +31,21 @@ namespace DesktopApiClient
         }
 
         //TODO: Make this return a full UserDto in order to display user details later
-        public async Task<int> LoginAsync(UserDto userDto)
+        public async Task<UserDto> LoginAsync(UserDto userDto)
         {
-            var response = await _client.RequestAsync<int>(Method.POST, "login", userDto);
+            var response = await _client.RequestAsync<UserDto>(Method.POST, "login", userDto);
             if (!response.IsSuccessful)
             {
                 if ((int)response.StatusCode == 404)
                 {
-                    return -1;
+                    return null;
                 }
                 //TODO: based on response statuscode, do smth
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
             }
-
+            // TODO: Ignore password in a better way
+            userDto.Password = "";
+            userDto = response.Data;
             return response.Data;
         }
     }
