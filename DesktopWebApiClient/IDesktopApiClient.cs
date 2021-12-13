@@ -8,5 +8,6 @@ namespace DesktopApiClient
     {
         Task<int> CreateShowAsync(ShowDto show);
         Task<IEnumerable<MovieDto>> GetAllMoviesAsync();
+        Task<int> LoginAsync(UserDto userDto);
     }
 }

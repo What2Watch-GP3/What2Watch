@@ -48,9 +48,9 @@ namespace DesktopClientWinforms
 
         private void OnLoad()
         { 
-            CreateShowPage createShowPage = new(_client);
-            createShowPage.Dock = DockStyle.Fill;
-            currentPagePanel.Controls.Add(createShowPage);
+            LoginPage loginPage = new(_client, currentPagePanel);
+            loginPage.Dock = DockStyle.Fill;
+            currentPagePanel.Controls.Add(loginPage);
             Padding = new(_borderSize);
             lblTitle.Text = Text;
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
