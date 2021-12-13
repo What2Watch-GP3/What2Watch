@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace DesktopClientWinforms
 {
@@ -73,7 +74,16 @@ namespace DesktopClientWinforms
                     break;
             }
         }
+        private void PageChanged()
+        {
+            IButtonControl buttonControl = currentPagePanel.Controls.OfType<IPage>().FirstOrDefault().AcceptButton;
 
+            if (buttonControl != null)
+            {
+                AcceptButton = buttonControl;
+            }
+           
+        }
         #region Control Events
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
@@ -83,6 +93,7 @@ namespace DesktopClientWinforms
                 SendMessage(Handle, 0x112, 0xf012, 0);
             }
         }
+        private void currentPagePanel_ControlAdded(object sender, ControlEventArgs e) => PageChanged();
         private void OnForm_Resize(object sender, EventArgs e) => AdjustForm();
         private void DesktopClientForm_Load(object sender, EventArgs e) => OnLoad();
         private void btnExit_Click(object sender, EventArgs e) => Exit();
@@ -193,6 +204,6 @@ namespace DesktopClientWinforms
                 return cp;
             }
         }
-        #endregion
+        #endregion 
     }
 }

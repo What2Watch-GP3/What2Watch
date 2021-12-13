@@ -11,10 +11,12 @@ using System.Windows.Forms;
 
 namespace DesktopClientWinforms.Pages
 {
-    public partial class HomePage : UserControl
+    public partial class HomePage : UserControl, IPage
     {
         private IDesktopApiClient _client;
         private Panel _parent;
+
+        public IButtonControl AcceptButton { get; set; }
 
         public HomePage(IDesktopApiClient client, Panel parent)
         {

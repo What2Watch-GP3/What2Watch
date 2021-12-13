@@ -9,14 +9,17 @@ using Tools.Enums;
 
 namespace DesktopClientWinforms.Pages
 {
-    public partial class CreateShowPage : UserControl
+    public partial class CreateShowPage : UserControl, IPage
     {
         private IDesktopApiClient _client;
+
+        public IButtonControl AcceptButton { get; set; }
 
         public CreateShowPage(IDesktopApiClient client)
         {
             _client = client;
             InitializeComponent();
+            AcceptButton = btnCreateShow;
         }
 
         private void CreateShow()
@@ -32,6 +35,8 @@ namespace DesktopClientWinforms.Pages
                 SoundType = (SoundType)comboSound.SelectedItem
             };
             _client.CreateShowAsync(show);
+            tooltipSuccess.Show("Show created successully", btnCreateShow, 3000);
+
         }
 
         private async Task OnLoad()
@@ -99,6 +104,12 @@ namespace DesktopClientWinforms.Pages
         private async void CreateShowPage_Load(object sender, EventArgs e)
         {
             await OnLoad();
+        }
+        private void tooltipSuccess_Draw(object sender, DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
         }
         #endregion
     }

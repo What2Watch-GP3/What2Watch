@@ -128,12 +128,13 @@ namespace DesktopClientWinforms.Pages
             // 
             // errorLabel
             // 
-            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.errorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.errorLabel.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.errorLabel.ForeColor = System.Drawing.Color.Maroon;
-            this.errorLabel.Location = new System.Drawing.Point(226, 4);
+            this.errorLabel.Location = new System.Drawing.Point(0, 0);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(376, 35);
+            this.errorLabel.Size = new System.Drawing.Size(800, 43);
             this.errorLabel.TabIndex = 0;
             this.errorLabel.Text = "Wrong User email or password";
             this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,7 +152,6 @@ namespace DesktopClientWinforms.Pages
             this.inputPanel.ResumeLayout(false);
             this.inputPanel.PerformLayout();
             this.errorPanel.ResumeLayout(false);
-            this.errorPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }

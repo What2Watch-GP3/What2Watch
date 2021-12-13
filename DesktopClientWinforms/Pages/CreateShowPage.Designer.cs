@@ -31,6 +31,7 @@ namespace DesktopClientWinforms.Pages
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.btnCreateShow = new System.Windows.Forms.Button();
             this.comboSound = new DesktopClientWinforms.Components.FlatComboBox();
@@ -50,6 +51,7 @@ namespace DesktopClientWinforms.Pages
             this.timePicker = new DesktopClientWinforms.Components.FlatDatePicker();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.tooltipSuccess = new System.Windows.Forms.ToolTip(this.components);
             this.backgroundPanel.SuspendLayout();
             this.datePickePanel.SuspendLayout();
             this.SuspendLayout();
@@ -78,8 +80,9 @@ namespace DesktopClientWinforms.Pages
             this.backgroundPanel.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.backgroundPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.backgroundPanel.Location = new System.Drawing.Point(0, 0);
+            this.backgroundPanel.Margin = new System.Windows.Forms.Padding(4);
             this.backgroundPanel.Name = "backgroundPanel";
-            this.backgroundPanel.Size = new System.Drawing.Size(901, 540);
+            this.backgroundPanel.Size = new System.Drawing.Size(1126, 675);
             this.backgroundPanel.TabIndex = 0;
             // 
             // btnCreateShow
@@ -88,9 +91,10 @@ namespace DesktopClientWinforms.Pages
             this.btnCreateShow.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnCreateShow.FlatAppearance.BorderSize = 0;
             this.btnCreateShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreateShow.Location = new System.Drawing.Point(0, 493);
+            this.btnCreateShow.Location = new System.Drawing.Point(0, 573);
+            this.btnCreateShow.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateShow.Name = "btnCreateShow";
-            this.btnCreateShow.Size = new System.Drawing.Size(901, 45);
+            this.btnCreateShow.Size = new System.Drawing.Size(1126, 56);
             this.btnCreateShow.TabIndex = 5;
             this.btnCreateShow.Text = "Create";
             this.btnCreateShow.UseVisualStyleBackColor = false;
@@ -108,18 +112,20 @@ namespace DesktopClientWinforms.Pages
             this.comboSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboSound.ForeColor = System.Drawing.SystemColors.Window;
             this.comboSound.FormattingEnabled = true;
-            this.comboSound.Location = new System.Drawing.Point(0, 455);
+            this.comboSound.Location = new System.Drawing.Point(0, 530);
+            this.comboSound.Margin = new System.Windows.Forms.Padding(4);
             this.comboSound.Name = "comboSound";
-            this.comboSound.Size = new System.Drawing.Size(901, 38);
+            this.comboSound.Size = new System.Drawing.Size(1126, 43);
             this.comboSound.TabIndex = 18;
             // 
             // lblSound
             // 
             this.lblSound.AutoSize = true;
             this.lblSound.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSound.Location = new System.Drawing.Point(0, 425);
+            this.lblSound.Location = new System.Drawing.Point(0, 495);
+            this.lblSound.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSound.Name = "lblSound";
-            this.lblSound.Size = new System.Drawing.Size(126, 30);
+            this.lblSound.Size = new System.Drawing.Size(150, 35);
             this.lblSound.TabIndex = 17;
             this.lblSound.Text = "Sound Type:";
             // 
@@ -135,18 +141,20 @@ namespace DesktopClientWinforms.Pages
             this.comboGraphic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboGraphic.ForeColor = System.Drawing.SystemColors.Window;
             this.comboGraphic.FormattingEnabled = true;
-            this.comboGraphic.Location = new System.Drawing.Point(0, 387);
+            this.comboGraphic.Location = new System.Drawing.Point(0, 452);
+            this.comboGraphic.Margin = new System.Windows.Forms.Padding(4);
             this.comboGraphic.Name = "comboGraphic";
-            this.comboGraphic.Size = new System.Drawing.Size(901, 38);
+            this.comboGraphic.Size = new System.Drawing.Size(1126, 43);
             this.comboGraphic.TabIndex = 16;
             // 
             // lblGraphic
             // 
             this.lblGraphic.AutoSize = true;
             this.lblGraphic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblGraphic.Location = new System.Drawing.Point(0, 357);
+            this.lblGraphic.Location = new System.Drawing.Point(0, 417);
+            this.lblGraphic.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGraphic.Name = "lblGraphic";
-            this.lblGraphic.Size = new System.Drawing.Size(138, 30);
+            this.lblGraphic.Size = new System.Drawing.Size(165, 35);
             this.lblGraphic.TabIndex = 15;
             this.lblGraphic.Text = "Graphic Type:";
             // 
@@ -162,18 +170,20 @@ namespace DesktopClientWinforms.Pages
             this.comboSubtitles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboSubtitles.ForeColor = System.Drawing.SystemColors.Window;
             this.comboSubtitles.FormattingEnabled = true;
-            this.comboSubtitles.Location = new System.Drawing.Point(0, 319);
+            this.comboSubtitles.Location = new System.Drawing.Point(0, 374);
+            this.comboSubtitles.Margin = new System.Windows.Forms.Padding(4);
             this.comboSubtitles.Name = "comboSubtitles";
-            this.comboSubtitles.Size = new System.Drawing.Size(901, 38);
+            this.comboSubtitles.Size = new System.Drawing.Size(1126, 43);
             this.comboSubtitles.TabIndex = 13;
             // 
             // lblSub
             // 
             this.lblSub.AutoSize = true;
             this.lblSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSub.Location = new System.Drawing.Point(0, 289);
+            this.lblSub.Location = new System.Drawing.Point(0, 339);
+            this.lblSub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSub.Name = "lblSub";
-            this.lblSub.Size = new System.Drawing.Size(194, 30);
+            this.lblSub.Size = new System.Drawing.Size(230, 35);
             this.lblSub.TabIndex = 14;
             this.lblSub.Text = "Subtitles Language:";
             // 
@@ -189,18 +199,20 @@ namespace DesktopClientWinforms.Pages
             this.comboDub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboDub.ForeColor = System.Drawing.SystemColors.Window;
             this.comboDub.FormattingEnabled = true;
-            this.comboDub.Location = new System.Drawing.Point(0, 251);
+            this.comboDub.Location = new System.Drawing.Point(0, 296);
+            this.comboDub.Margin = new System.Windows.Forms.Padding(4);
             this.comboDub.Name = "comboDub";
-            this.comboDub.Size = new System.Drawing.Size(901, 38);
+            this.comboDub.Size = new System.Drawing.Size(1126, 43);
             this.comboDub.TabIndex = 12;
             // 
             // lblDubLanguage
             // 
             this.lblDubLanguage.AutoSize = true;
             this.lblDubLanguage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDubLanguage.Location = new System.Drawing.Point(0, 221);
+            this.lblDubLanguage.Location = new System.Drawing.Point(0, 261);
+            this.lblDubLanguage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDubLanguage.Name = "lblDubLanguage";
-            this.lblDubLanguage.Size = new System.Drawing.Size(154, 30);
+            this.lblDubLanguage.Size = new System.Drawing.Size(183, 35);
             this.lblDubLanguage.TabIndex = 11;
             this.lblDubLanguage.Text = "Dub Language:";
             // 
@@ -210,9 +222,10 @@ namespace DesktopClientWinforms.Pages
             this.txtRoomId.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRoomId.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtRoomId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.txtRoomId.Location = new System.Drawing.Point(0, 193);
+            this.txtRoomId.Location = new System.Drawing.Point(0, 227);
+            this.txtRoomId.Margin = new System.Windows.Forms.Padding(4);
             this.txtRoomId.Name = "txtRoomId";
-            this.txtRoomId.Size = new System.Drawing.Size(901, 28);
+            this.txtRoomId.Size = new System.Drawing.Size(1126, 34);
             this.txtRoomId.TabIndex = 9;
             this.txtRoomId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRoomId_KeyPress);
             // 
@@ -220,9 +233,10 @@ namespace DesktopClientWinforms.Pages
             // 
             this.lblRoomId.AutoSize = true;
             this.lblRoomId.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblRoomId.Location = new System.Drawing.Point(0, 163);
+            this.lblRoomId.Location = new System.Drawing.Point(0, 192);
+            this.lblRoomId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRoomId.Name = "lblRoomId";
-            this.lblRoomId.Size = new System.Drawing.Size(96, 30);
+            this.lblRoomId.Size = new System.Drawing.Size(115, 35);
             this.lblRoomId.TabIndex = 8;
             this.lblRoomId.Text = "Room Id:";
             // 
@@ -238,18 +252,20 @@ namespace DesktopClientWinforms.Pages
             this.comboMovies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboMovies.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.comboMovies.FormattingEnabled = true;
-            this.comboMovies.Location = new System.Drawing.Point(0, 125);
+            this.comboMovies.Location = new System.Drawing.Point(0, 149);
+            this.comboMovies.Margin = new System.Windows.Forms.Padding(4);
             this.comboMovies.Name = "comboMovies";
-            this.comboMovies.Size = new System.Drawing.Size(901, 38);
+            this.comboMovies.Size = new System.Drawing.Size(1126, 43);
             this.comboMovies.TabIndex = 20;
             // 
             // lblMovie
             // 
             this.lblMovie.AutoSize = true;
             this.lblMovie.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblMovie.Location = new System.Drawing.Point(0, 95);
+            this.lblMovie.Location = new System.Drawing.Point(0, 114);
+            this.lblMovie.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMovie.Name = "lblMovie";
-            this.lblMovie.Size = new System.Drawing.Size(75, 30);
+            this.lblMovie.Size = new System.Drawing.Size(88, 35);
             this.lblMovie.TabIndex = 6;
             this.lblMovie.Text = "Movie:";
             // 
@@ -258,9 +274,10 @@ namespace DesktopClientWinforms.Pages
             this.datePickePanel.Controls.Add(this.datePicker);
             this.datePickePanel.Controls.Add(this.timePicker);
             this.datePickePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.datePickePanel.Location = new System.Drawing.Point(0, 60);
+            this.datePickePanel.Location = new System.Drawing.Point(0, 70);
+            this.datePickePanel.Margin = new System.Windows.Forms.Padding(4);
             this.datePickePanel.Name = "datePickePanel";
-            this.datePickePanel.Size = new System.Drawing.Size(901, 35);
+            this.datePickePanel.Size = new System.Drawing.Size(1126, 44);
             this.datePickePanel.TabIndex = 19;
             // 
             // datePicker
@@ -275,11 +292,12 @@ namespace DesktopClientWinforms.Pages
             this.datePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datePicker.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.datePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.datePicker.Location = new System.Drawing.Point(456, 0);
+            this.datePicker.Location = new System.Drawing.Point(569, 0);
+            this.datePicker.Margin = new System.Windows.Forms.Padding(4);
             this.datePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.datePicker.Name = "datePicker";
             this.datePicker.ShowUpDown = true;
-            this.datePicker.Size = new System.Drawing.Size(445, 35);
+            this.datePicker.Size = new System.Drawing.Size(557, 41);
             this.datePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.datePicker.TabIndex = 10;
             this.datePicker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
@@ -296,10 +314,10 @@ namespace DesktopClientWinforms.Pages
             this.timePicker.Dock = System.Windows.Forms.DockStyle.Left;
             this.timePicker.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.timePicker.Location = new System.Drawing.Point(0, 0);
-            this.timePicker.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.timePicker.Margin = new System.Windows.Forms.Padding(0);
             this.timePicker.MinimumSize = new System.Drawing.Size(4, 35);
             this.timePicker.Name = "timePicker";
-            this.timePicker.Size = new System.Drawing.Size(456, 35);
+            this.timePicker.Size = new System.Drawing.Size(569, 41);
             this.timePicker.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.timePicker.TabIndex = 11;
             this.timePicker.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
@@ -308,9 +326,10 @@ namespace DesktopClientWinforms.Pages
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDate.Location = new System.Drawing.Point(0, 30);
+            this.lblDate.Location = new System.Drawing.Point(0, 35);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(62, 30);
+            this.lblDate.Size = new System.Drawing.Size(72, 35);
             this.lblDate.TabIndex = 0;
             this.lblDate.Text = "Date:";
             // 
@@ -319,20 +338,30 @@ namespace DesktopClientWinforms.Pages
             this.lblTitle.AutoSize = true;
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(129, 30);
+            this.lblTitle.Size = new System.Drawing.Size(153, 35);
             this.lblTitle.TabIndex = 4;
             this.lblTitle.Text = "Create Show";
             // 
+            // tooltipSuccess
+            // 
+            this.tooltipSuccess.BackColor = System.Drawing.Color.PaleGreen;
+            this.tooltipSuccess.ForeColor = System.Drawing.Color.DarkGreen;
+            this.tooltipSuccess.OwnerDraw = true;
+            this.tooltipSuccess.ToolTipTitle = "Success";
+            this.tooltipSuccess.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.tooltipSuccess_Draw);
+            // 
             // CreateShowPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.backgroundPanel);
-            this.MinimumSize = new System.Drawing.Size(640, 340);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(800, 425);
             this.Name = "CreateShowPage";
-            this.Size = new System.Drawing.Size(901, 540);
+            this.Size = new System.Drawing.Size(1126, 675);
             this.Load += new System.EventHandler(this.CreateShowPage_Load);
             this.backgroundPanel.ResumeLayout(false);
             this.backgroundPanel.PerformLayout();
@@ -362,5 +391,6 @@ namespace DesktopClientWinforms.Pages
         private Panel datePickePanel;
         private FlatDatePicker timePicker;
         private FlatComboBox comboMovies;
+        private ToolTip tooltipSuccess;
     }
 }

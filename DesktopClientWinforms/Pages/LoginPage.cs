@@ -12,17 +12,19 @@ using System.Windows.Forms;
 
 namespace DesktopClientWinforms.Pages
 {
-    public partial class LoginPage : UserControl
+    public partial class LoginPage : UserControl, IPage
 
     {
         private IDesktopApiClient _client;
         private Panel _parent;
-        
+        public IButtonControl AcceptButton { get; set; }
+
         public LoginPage(IDesktopApiClient client, Panel parent)
         {
             _parent = parent;
             _client = client;
             InitializeComponent();
+            AcceptButton = btnLogin;
         }
 
         private async Task Login()

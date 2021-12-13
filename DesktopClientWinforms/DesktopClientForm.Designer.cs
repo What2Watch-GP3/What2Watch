@@ -46,14 +46,16 @@ namespace DesktopClientWinforms
             // 
             this.currentPagePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(32)))));
             this.currentPagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.currentPagePanel.Location = new System.Drawing.Point(0, 40);
+            this.currentPagePanel.Location = new System.Drawing.Point(0, 60);
+            this.currentPagePanel.Margin = new System.Windows.Forms.Padding(4);
             this.currentPagePanel.Name = "currentPagePanel";
-            this.currentPagePanel.Size = new System.Drawing.Size(938, 493);
+            this.currentPagePanel.Size = new System.Drawing.Size(1172, 606);
             this.currentPagePanel.TabIndex = 0;
+            this.currentPagePanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.currentPagePanel_ControlAdded);
             // 
             // TitleBarPanel
             // 
-            this.TitleBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.TitleBarPanel.BackColor = System.Drawing.Color.Black;
             this.TitleBarPanel.Controls.Add(this.pictureBox1);
             this.TitleBarPanel.Controls.Add(this.lblTitle);
             this.TitleBarPanel.Controls.Add(this.btnMinimise);
@@ -63,17 +65,19 @@ namespace DesktopClientWinforms
             this.TitleBarPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TitleBarPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.TitleBarPanel.Location = new System.Drawing.Point(0, 0);
+            this.TitleBarPanel.Margin = new System.Windows.Forms.Padding(4);
             this.TitleBarPanel.Name = "TitleBarPanel";
-            this.TitleBarPanel.Size = new System.Drawing.Size(938, 40);
+            this.TitleBarPanel.Size = new System.Drawing.Size(1172, 60);
             this.TitleBarPanel.TabIndex = 0;
             this.TitleBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DesktopClientWinforms.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 1);
+            this.pictureBox1.Location = new System.Drawing.Point(17, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(101, 39);
+            this.pictureBox1.Size = new System.Drawing.Size(126, 49);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -82,9 +86,10 @@ namespace DesktopClientWinforms
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.Location = new System.Drawing.Point(110, 8);
+            this.lblTitle.Location = new System.Drawing.Point(149, 15);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(58, 25);
+            this.lblTitle.Size = new System.Drawing.Size(66, 29);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Title";
             // 
@@ -95,11 +100,11 @@ namespace DesktopClientWinforms
             this.btnMinimise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMinimise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMinimise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimise.Location = new System.Drawing.Point(818, 0);
+            this.btnMinimise.Location = new System.Drawing.Point(977, 0);
             this.btnMinimise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinimise.Name = "btnMinimise";
-            this.btnMinimise.Padding = new System.Windows.Forms.Padding(3, 0, 0, 2);
-            this.btnMinimise.Size = new System.Drawing.Size(40, 40);
+            this.btnMinimise.Padding = new System.Windows.Forms.Padding(4, 0, 0, 2);
+            this.btnMinimise.Size = new System.Drawing.Size(65, 60);
             this.btnMinimise.TabIndex = 2;
             this.btnMinimise.TabStop = false;
             this.btnMinimise.Text = "🗕";
@@ -113,11 +118,11 @@ namespace DesktopClientWinforms
             this.btnMaximise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMaximise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMaximise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMaximise.Location = new System.Drawing.Point(858, 0);
+            this.btnMaximise.Location = new System.Drawing.Point(1042, 0);
             this.btnMaximise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMaximise.Name = "btnMaximise";
-            this.btnMaximise.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.btnMaximise.Size = new System.Drawing.Size(40, 40);
+            this.btnMaximise.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.btnMaximise.Size = new System.Drawing.Size(65, 60);
             this.btnMaximise.TabIndex = 1;
             this.btnMaximise.TabStop = false;
             this.btnMaximise.Text = "🗗";
@@ -131,11 +136,11 @@ namespace DesktopClientWinforms
             this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Crimson;
             this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Location = new System.Drawing.Point(898, 0);
+            this.btnExit.Location = new System.Drawing.Point(1107, 0);
             this.btnExit.Margin = new System.Windows.Forms.Padding(0);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.btnExit.Size = new System.Drawing.Size(40, 40);
+            this.btnExit.Padding = new System.Windows.Forms.Padding(4, 4, 0, 0);
+            this.btnExit.Size = new System.Drawing.Size(65, 60);
             this.btnExit.TabIndex = 0;
             this.btnExit.TabStop = false;
             this.btnExit.Text = "✕";
@@ -144,14 +149,15 @@ namespace DesktopClientWinforms
             // 
             // DesktopClientForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
-            this.ClientSize = new System.Drawing.Size(938, 533);
+            this.ClientSize = new System.Drawing.Size(1172, 666);
             this.Controls.Add(this.currentPagePanel);
             this.Controls.Add(this.TitleBarPanel);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.MinimumSize = new System.Drawing.Size(600, 500);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(744, 611);
             this.Name = "DesktopClientForm";
             this.Text = "Admin Panel";
             this.Load += new System.EventHandler(this.DesktopClientForm_Load);
