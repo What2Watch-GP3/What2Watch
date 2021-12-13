@@ -20,28 +20,25 @@ namespace DataAccess.DataAccess
         // Overload of the CreateAsync method from BaseDataAccess to accept and return IEnumerables
         public async Task<bool> CreateAsync(IEnumerable<Reservation> reservations)
         {
-            string readCommand = "SELECT * FROM [Reservation] WHERE show_id = @ShowId AND seat_id IN @SeatIds;";
-            string command = $"UPDATE [Reservation] SET creation_time = @CreationTime, user_id = @UserId WHERE seat_id = @SeatId AND show_id = @ShowId AND user_id IS NULL;";
+            string command = $"UPDATE [Reservation] SET creation_time = @CreationTime, user_id = @UserId WHERE seat_id IN @SeatIds AND show_id = @ShowId AND user_id IS NULL;";
             try
             {
                 using var connection = CreateConnection();
                 connection.Open();
-                using var transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
+                using var transaction = connection.BeginTransaction(IsolationLevel.RepeatableRead);
                 try
                 {
-                    await connection.ExecuteAsync(readCommand, new { ShowId = reservations.ToList().FirstOrDefault().ShowId, SeatIds = reservations.ToList().Select(res => res.SeatId).ToArray<int>() }, transaction);
-
-                    foreach (Reservation reservation in reservations) 
-                    { 
-                        bool isCreated = await connection.ExecuteAsync(command, reservation, transaction) > 0;
-                        if(!isCreated)
-                        {
-                            transaction.Rollback();
-                            return false;
-                        }
+                    int userId = reservations.FirstOrDefault().UserId;
+                    int showId = reservations.FirstOrDefault().ShowId;
+                    int[] seatIds = reservations.Select(res => res.SeatId).ToArray();
+                    bool isCreated = await connection.ExecuteAsync(command, new { CreationTime=DateTime.Now, UserId = userId, SeatIds = seatIds ,ShowId = showId }, transaction) > 0;
+                    if (!isCreated)
+                    {
+                        transaction.Rollback();
+                        return isCreated;
                     }
                     transaction.Commit();
-                    return true;
+                    return isCreated;
                 }
                 catch (Exception ex)
                 {
@@ -62,7 +59,7 @@ namespace DataAccess.DataAccess
             {
                 using var connection = CreateConnection();
                 connection.Open();
-                using var transaction = connection.BeginTransaction(IsolationLevel.ReadUncommitted);
+                using var transaction = connection.BeginTransaction(IsolationLevel.RepeatableRead);
                 try
                 {
                     return await connection.QueryAsync<Reservation>(command, new { ShowId = showId }, transaction);
