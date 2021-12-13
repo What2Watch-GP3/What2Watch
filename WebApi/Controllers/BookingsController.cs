@@ -62,8 +62,15 @@ namespace WebApi.Controllers
             {
                 tickets.Add(await _ticketDataAccess.GetByIdAsync(ticketId));
             }*/
-            var reservations = value.TicketIds.ToList().Select(async ticketId => await _reservationDataAccess.GetByIdAsync(ticketId)).ToList();
-            booking.Tickets = DtoConverter<Reservation, Ticket>.FromList(await Task.WhenAll(reservations));
+            //var reservations = value.TicketIds.ToList().Select(async ticketId => await _reservationDataAccess.GetByIdAsync(ticketId)).ToList();
+            var reservations = await _reservationDataAccess.GetByUserAndShowIdAsync(value.ShowId, value.UserId);
+
+
+            if ((reservations != null)&&(!reservations.Any()))
+            {
+                return NotFound();
+            }    
+            booking.Tickets = DtoConverter<Reservation, Ticket>.FromList(reservations);
 
             //TODO: Get Reservations from UserId na check seat Availability
             //if (!SeatsAreAvailable(value.ReservationIds) || !ShowIsValid(value.ShowId))

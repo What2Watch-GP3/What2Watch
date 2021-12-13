@@ -36,7 +36,6 @@ namespace WebSite.Controllers
             model.TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()));
             model.Date = _client.GetShowById((int)TempData.Peek("ShowId")).StartTime;
             model.Reservations = reservationDtos;
-            TempData["reservations"] = JsonConvert.SerializeObject(reservationDtos);
 
             return View(model);
         }
@@ -53,15 +52,17 @@ namespace WebSite.Controllers
                     return RedirectToAction(nameof(Index), "Movies");
                 }
 
-                var reservationDtos = JsonConvert.DeserializeObject<IEnumerable<ReservationDto>>(TempData["reservations"].ToString());
+                //var reservationDtos = JsonConvert.DeserializeObject<IEnumerable<ReservationDto>>(TempData["reservations"].ToString());
                 //TODO Implement getting the seat ids instead of hardcode
                 BookingDto booking = new()
                 {
-                    TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(reservationDtos.ToList().Select(res => res.SeatId).ToList())),
+                    TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData["SelectedSeatPositions"].ToString())),
                     Date = DateTime.Now,
-                    ShowId = reservationDtos.ToList().FirstOrDefault().ShowId,
+                    //ShowId = reservationDtos.ToList().FirstOrDefault().ShowId,
+                    ShowId = (int)TempData.Peek("ShowId"),
+                    //TODO: redirect to login page if user is logged in 
                     UserId = User.Identity.Name != null ? Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "user-id").Value) : 0,
-                    TicketIds = reservationDtos.ToList().Select(reservation => reservation.Id).ToList()
+                    //TicketIds = reservationDtos.ToList().Select(reservation => reservation.Id).ToList()
                 };
                 
                 int id = await _client.ConfirmBookingAsync(booking);
@@ -72,7 +73,7 @@ namespace WebSite.Controllers
                 else if (id == -403)
                 {
                     ViewBag.ErrorMessage = "You are not logged in!";
-                    return RedirectToAction("Login", "Login", new { returnUrl = Request.Path.Value});
+                    return RedirectToAction("Login", "Users", new { returnUrl = Request.Path.Value});
                 }
                 else
                 {

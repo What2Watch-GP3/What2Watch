@@ -41,15 +41,15 @@
                     <div class="form-inline my-2 my-lg-0">
                         @if (Context.User.Identity.IsAuthenticated)
                         {
-                            <a class="nav-link text-white" asp-controller="Users" asp-action="Login">Hi, <i class="bi bi-person-fill"></i> @Context.User.Identity.Name  </a>
+                            <a class="nav-link text-white" asp-controller="Users" asp-action="Login"><i class="bi bi-person-fill"></i> @Context.User.Identity.Name  </a>
                             @using (Html.BeginForm("Logout", "Users", FormMethod.Post))
                             {
-                                <button class="nav-link btn btn-confirm btn-sm" type="submit"><i class="bi bi-box-arrow-in-left"></i> Logout</button>
+                                <button class="nav-link btn btn-confirm btn-sm" type="submit"><i class="bi bi-box-arrow-right"></i> Logout</button>
                             }
                         }
                         else
                         {
-                            <a class="nav-link btn btn-confirm btn-sm" asp-controller="Users" asp-action="Login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                            <a class="nav-link btn btn-confirm btn-sm" asp-controller="Users" asp-action="Login"><i class="bi bi-box-arrow-in-left"></i> Login</a>
                         }
                     </div>
                 </div>

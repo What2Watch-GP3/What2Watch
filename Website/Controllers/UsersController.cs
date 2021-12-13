@@ -62,6 +62,7 @@ namespace WebSite.Controllers
                     new Claim(ClaimTypes.Email, userDto.Email),
                     new Claim(ClaimTypes.Name, userDto.Name),
                     new Claim(ClaimTypes.Role, userDto.Role.ToString()),
+                    //Jwt token stored in password from response
                     new Claim("access-token", userDto.Password)
 
                 };
