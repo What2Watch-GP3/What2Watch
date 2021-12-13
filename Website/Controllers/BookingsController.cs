@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.DTOs;
@@ -26,13 +27,16 @@ namespace WebSite.Controllers
         }
 
         // GET: BookingsController/Confirm
+        //TODO: consider adding a collection of reservationDTOs as a parameter
         [HttpGet]
-        public async Task<ActionResult> Confirm()
+        public async Task<ActionResult> Confirm(IEnumerable<ReservationDto> reservationDtos)
         {
             dynamic model = new ExpandoObject();
 
             model.TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()));
             model.Date = _client.GetShowById((int)TempData.Peek("ShowId")).StartTime;
+            model.Reservations = reservationDtos;
+
             return View(model);
         }
 
@@ -48,16 +52,20 @@ namespace WebSite.Controllers
                     return RedirectToAction(nameof(Index), "Movies");
                 }
 
+                //var reservationDtos = JsonConvert.DeserializeObject<IEnumerable<ReservationDto>>(TempData["reservations"].ToString());
                 //TODO Implement getting the seat ids instead of hardcode
-                BookingDto bookings = new()
+                BookingDto booking = new()
                 {
                     TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData["SelectedSeatPositions"].ToString())),
                     Date = DateTime.Now,
-                    ShowId = (int)TempData["ShowId"],
-                    UserId = 1 //TODO: maybe this: this.User.Claims.First(claim => claim.Type == "UserId").Value;
+                    //ShowId = reservationDtos.ToList().FirstOrDefault().ShowId,
+                    ShowId = (int)TempData.Peek("ShowId"),
+                    //TODO: redirect to login page if user is logged in 
+                    UserId = User.Identity.Name != null ? Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "user-id").Value) : 0,
+                    //TicketIds = reservationDtos.ToList().Select(reservation => reservation.Id).ToList()
                 };
                 
-                int id = await _client.ConfirmBookingAsync(bookings);
+                int id = await _client.ConfirmBookingAsync(booking);
                 if (id > 0)
                 {
                     return RedirectToAction(nameof(Index), "Movies");
@@ -65,7 +73,7 @@ namespace WebSite.Controllers
                 else if (id == -403)
                 {
                     ViewBag.ErrorMessage = "You are not logged in!";
-                    return RedirectToAction("Login", "Login", new { returnUrl = Request.Path.Value});
+                    return RedirectToAction("Login", "Users", new { returnUrl = Request.Path.Value});
                 }
                 else
                 {

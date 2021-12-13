@@ -14,12 +14,12 @@ namespace WebApiClient
         Task<int> ConfirmBookingAsync(BookingDto booking);
         Task<BookingDto> GetBookingByIdAsync(int id);
         Task <CinemaDto> GetCinemaByIdAsync(int cinemaId);
-        Task<int> LoginAsync(UserDto userDto);
+        Task<UserDto> LoginAsync(UserDto userDto);
         Task<bool> HasValidToken();
         Task<RoomDto> GetRoomByShowIdAsync(int showId);
         Task <IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos);
         decimal GetTotalPrice(IEnumerable<string> seatPositions);
         ShowDto GetShowById(int showId);
-
+        void Logout();
     }
 }

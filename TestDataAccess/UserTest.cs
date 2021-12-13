@@ -22,12 +22,12 @@ namespace TestDataAccess
         {
             //Arrange
             //Act
-            var userID = await _userDataAccess.LoginAsync(
+            var user = await _userDataAccess.LoginAsync(
                 new User(){
                 Email = "test@user.dk", Password = "password1234"});
 
             //Assert
-            Assert.AreEqual(1, userID,"User ID was not found");
+            Assert.AreEqual(1, user.Id,"User ID was not found");
 
         }
 
@@ -36,14 +36,14 @@ namespace TestDataAccess
         {
             //Arrange
             //Act
-            var userID = await _userDataAccess.LoginAsync(
+            var user = await _userDataAccess.LoginAsync(
                 new User()
                 {
                     Email = "test@user.dk",
                     Password = "password12345"
                });
             //Assert
-            Assert.AreEqual(-1, userID, "User ID was not -1");
+            Assert.IsNull(user, "User was not not null");
 
         }
 

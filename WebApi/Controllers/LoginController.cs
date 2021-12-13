@@ -31,13 +31,14 @@ namespace WebApi.Controllers
 
         // POST api/<LoginController>
         [HttpPost]
-        public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)
+        public async Task<ActionResult<UserDto>> PostAsync([FromBody] UserDto userDto)
         {
 
 
             var user = DtoConverter<UserDto, User>.From(userDto);
             //Authorize
-            userDto.Id = await _userDataAccess.LoginAsync(user);
+            var returnedUser = await _userDataAccess.LoginAsync(user);
+            userDto = DtoConverter<User, UserDto>.From(returnedUser);
             if (userDto.Id != -1)
             {
                 if (_configuration!=null)
@@ -45,11 +46,15 @@ namespace WebApi.Controllers
                     //Authenticate
                     string jwtToken = GenerateToken(userDto);
 
-                    Response.Cookies.Append("X-Access-Token", jwtToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationMinutes"])) });
-                    //Response.Cookies.Append("X-Email", user.Email, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                    //Response.Cookies.Append("X-Refresh-Token", user.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    Response.Cookies.Append("X-Access-Token", jwtToken, new CookieOptions()
+                        {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Strict,
+                        Expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationMinutes"]))
+                        });
                 }
-                return Ok(userDto.Id);
+                userDto.Password = null;
+                return Ok(userDto);
             }
             else
             {

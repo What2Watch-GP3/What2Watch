@@ -6,9 +6,9 @@ namespace StubsClassLibrary
 {
     public class UserStub : IUserDataAccess
     {
-        public async Task<int> LoginAsync(User user)
+        public async Task<User> LoginAsync(User user)
         {
-            return await Task.FromResult(1);
+            return await Task.FromResult(new User() { Id = 1, Name = "Kathi"});
         }
     }
 }

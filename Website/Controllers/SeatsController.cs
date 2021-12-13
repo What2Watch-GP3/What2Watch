@@ -42,12 +42,15 @@ namespace WebSite.Controllers
                     CreationTime = DateTime.Now,
                     SeatPosition = seatPosition,
                     ShowId = (int)TempData.Peek("ShowId"),
-                    UserId = 1 //TODO: maybe this: this.User.Claims.First(claim => claim.Type == "UserId").Value;
+                    //if no claim for user-id exists, it means that Convert.ToInt32 will return 0 which will match a service account.
+                    //in case you close the session and didn't buy your tickets, your ticket reservation is lost, thus
+                    UserId = User.Identity.Name != null ? Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "user-id").Value) : 0
                 };
                 reservationDtos.Add(reservation);
             }
+            //TODO:uncomment after implementation of next screen.
             await _client.CreateReservationAsync(reservationDtos);
-            return RedirectToAction("Confirm", "Bookings");
+            return RedirectToAction("Confirm", "Bookings", new { reservationDtos = reservationDtos });
         }
 
         [HttpGet]

@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApiClient;
+using WebApiClient.DTOs;
 
 namespace WebSite.Controllers
 {
@@ -26,6 +29,13 @@ namespace WebSite.Controllers
             TempData["TitleDictionary"] = JsonConvert.SerializeObject(titleDictionary);
             TempData.Keep();
 
+
+            var rawValue = ViewData["userData"] as UserDto;
+            if (rawValue != null)
+            {
+                UserDto smth = rawValue;
+                TempData.Keep();
+            }
             return View(movies);
         }
 

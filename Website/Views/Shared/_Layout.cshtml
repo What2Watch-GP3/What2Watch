@@ -1,14 +1,17 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - What2Watch</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" />
 
+
 </head>
-<body  >
+<body>
     <header class="bg-black">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black box-shadow mb-3 " style="margin-bottom: 0 !important;">
             <div class="container">
@@ -20,7 +23,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Movies" asp-action="Index">Movies</a>
                         </li>
@@ -35,20 +38,20 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <!--if (TempData["UserEmail"] == null)
-        {
-        <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-        }
-        else
-        {
-        //
-        <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-        <li><a class="nav-link" asp-controller="Login" asp-action="Login">Hello, @TempData["UserEmail"]</a></li>
-        }-->
-                        <li><a class="nav-link " asp-area="" asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-
-                    </ul>
+                    <div class="form-inline my-2 my-lg-0">
+                        @if (Context.User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link text-white" asp-controller="Users" asp-action="Login"><i class="bi bi-person-fill"></i> @Context.User.Identity.Name  </a>
+                            @using (Html.BeginForm("Logout", "Users", FormMethod.Post))
+                            {
+                                <button class="nav-link btn btn-confirm btn-sm" type="submit"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                            }
+                        }
+                        else
+                        {
+                            <a class="nav-link btn btn-confirm btn-sm" asp-controller="Users" asp-action="Login"><i class="bi bi-box-arrow-in-left"></i> Login</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
@@ -78,7 +81,7 @@
             @RenderBody()
         </main>
     </div>
-    
+
     <footer class="footer text-muted bg-black">
         <div class="container">
             What2Watch
