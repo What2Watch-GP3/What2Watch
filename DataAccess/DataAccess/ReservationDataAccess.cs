@@ -31,14 +31,14 @@ namespace DataAccess.DataAccess
                     int userId = reservations.FirstOrDefault().UserId;
                     int showId = reservations.FirstOrDefault().ShowId;
                     int[] seatIds = reservations.Select(res => res.SeatId).ToArray();
-                    bool isCreated = await connection.ExecuteAsync(command, new { CreationTime=DateTime.Now, UserId = userId, SeatIds = seatIds ,ShowId = showId }, transaction) > 0;
-                    if (!isCreated)
+                    int rowsAffected = await connection.ExecuteAsync(command, new { CreationTime = DateTime.Now, UserId = userId, SeatIds = seatIds, ShowId = showId }, transaction);
+                    if (rowsAffected < reservations.Count())
                     {
                         transaction.Rollback();
-                        return isCreated;
+                        return false;
                     }
                     transaction.Commit();
-                    return isCreated;
+                    return true;
                 }
                 catch (Exception ex)
                 {

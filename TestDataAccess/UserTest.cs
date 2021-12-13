@@ -52,14 +52,14 @@ namespace TestDataAccess
         {
             //Arrange
             //Act
-            var userID = await _userDataAccess.LoginAsync(
+            var userDto = await _userDataAccess.LoginAsync(
                 new User()
                 {
                     Email = "tests@user.dk",
                     Password = "password1234"
                 });
             //Assert
-            Assert.AreEqual(-1, userID, "User ID was found");
+            Assert.IsNull(userDto, "User ID was found");
 
         }
 

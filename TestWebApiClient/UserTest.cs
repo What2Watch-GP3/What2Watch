@@ -9,15 +9,14 @@ namespace TestWebApiClient
     class UserTest
     {
         private IWebApiClient _webApiClient;
-        private UserDto userDto;
+        private UserDto _userDto;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             //Arrange
-            userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
-            int responseUserId = 1;
-            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = responseUserId });
+            _userDto = new UserDto() { Email = "test@user.dk", Password = "password1234" };
+            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = new UserDto() { Id = 1, Email = "test@user.dk", Password = "password1234" } });
         }
 
         [Test]
@@ -25,11 +24,11 @@ namespace TestWebApiClient
         {
             //Arrange
             //Act
-           var userDtoId = await _webApiClient.LoginAsync(this.userDto);
+            UserDto userDto = await _webApiClient.LoginAsync(_userDto);
 
             //Assert
             //Assert.That(userDto, Is.InstanceOf<UserDto>(), "User object was not from instance userDto");
-            Assert.AreEqual(1, userDtoId);
+            Assert.AreEqual(1, userDto.Id);
         }
     }
 }
