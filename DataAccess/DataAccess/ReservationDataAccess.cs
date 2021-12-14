@@ -77,11 +77,11 @@ namespace DataAccess.DataAccess
         }
         public async Task<bool> DeleteByShowAndSeatIdAsync(int showId, int seatId)
         {
-            string command = $"DELETE FROM [{TableName}] WHERE seat_id=@SeatId AND show_id=@ShowId ;";
+            string command = $"UPDATE [Reservation] SET creation_time = NULL, user_id = NULL WHERE show_id=@showId AND seat_id=@seatId";
             try
             {
                 using var connection = CreateConnection();
-                return await connection.ExecuteAsync(command, new { SeatId = seatId, ShowId=showId  }) > 0;
+                return await connection.ExecuteAsync(command, new { ShowId = showId, SeatId = seatId}) > 0;
             }
             catch (Exception ex)
             {

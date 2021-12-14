@@ -28,7 +28,7 @@ namespace TestDataAccess
             var tickets = await _ticketDataAccess.GetTicketsByShowIdAsync(1);
 
             //Assert
-            Assert.IsNotEmpty(tickets, $"The list of seats based on ticket id 1 was empty.");
+            Assert.IsNotEmpty(tickets, $"The list of seats based on show id 1 was empty.");
             Assert.AreEqual(3, tickets.Count(), $"The amount of tickets recieved its not expected (3 were expected).{tickets.Count()}");
         }
     }

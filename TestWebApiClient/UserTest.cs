@@ -16,7 +16,7 @@ namespace TestWebApiClient
         {
             //Arrange
             _userDto = new UserDto() { Id = 1, Email = "test@user.dk", Password = "password1234" };
-            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = userDto });
+            _webApiClient = new WebApiClient.WebApiClient(new RestClientStub() { ResponseData = _userDto });
         }
 
         [Test]

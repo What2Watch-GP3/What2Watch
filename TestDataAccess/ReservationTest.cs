@@ -24,14 +24,14 @@ namespace TestDataAccess
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,1);
-            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,3);
-            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1,2);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(2, 1);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(3, 1);
+            _reservationDataAccess.DeleteByShowAndSeatIdAsync(1, 1);
         }
 
 
-        [Test]
-        [Order(1)]
+        //[Test]
+        //[Order(1)]
         public async Task CreatingAReservationReturnsItsId()
         {
             //Arrange
