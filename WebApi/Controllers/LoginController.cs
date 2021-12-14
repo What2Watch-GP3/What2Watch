@@ -39,7 +39,7 @@ namespace WebApi.Controllers
             //Authorize
             var returnedUser = await _userDataAccess.LoginAsync(user);
             userDto = DtoConverter<User, UserDto>.From(returnedUser);
-            if (userDto.Id != -1)
+            if (userDto != null)
             {
                 if (_configuration!=null)
                 {

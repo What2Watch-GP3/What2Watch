@@ -35,7 +35,7 @@ namespace DesktopClientWinforms.Pages
                 Password = txtPassword.Text
             };
             userDto = await _client.LoginAsync(userDto);
-            if (userDto.Id > 0)
+            if (userDto != null)
             {
                 HomePage homePage = new HomePage(_client, _parent);
                 homePage.Dock = DockStyle.Fill;
