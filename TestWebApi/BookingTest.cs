@@ -15,7 +15,7 @@ namespace TestWebApi
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _testBookingWebApi = new BookingsController(new BookingStubs(), null);
+            _testBookingWebApi = new BookingsController(new BookingStubs(), new ReservationStub());
         }
 
         [Test]

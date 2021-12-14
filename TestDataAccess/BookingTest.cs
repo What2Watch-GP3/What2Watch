@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DataAccess.Models;
 using NUnit.Framework;
 using DataAccess.DataAccess;
+using System.Collections.Generic;
 
 namespace TestDataAccess
 {
@@ -28,7 +29,14 @@ namespace TestDataAccess
         public async Task TestConfirmBooking()
         {
             //Arrange
-            Booking booking = new() { TotalPrice = 11.99M, Date = DateTime.Now, UserId =1 };
+            Booking booking = new() { TotalPrice = 11.99M, Date = DateTime.Now, UserId =1,
+                Tickets = new List<Ticket>()
+                {
+                    new Ticket() { CreationTime = DateTime.Now, SeatId = 1, ShowId = 1 },
+                    new Ticket() { CreationTime = DateTime.Now, SeatId = 2, ShowId = 1 },
+                    new Ticket() { CreationTime = DateTime.Now, SeatId = 3, ShowId = 1 }
+                }
+            };
 
             //Act
             booking.Id = await _bookingDataAccess.CreateAsync(booking);

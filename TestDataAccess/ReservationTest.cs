@@ -49,13 +49,13 @@ namespace TestDataAccess
         
         [Test]
         [Order(2)]
-        public async Task GetReservationsByShowId1()
+        public async Task GetReservationsByShowId1AndUserId1()
         {
             //act
-            reservations = await _reservationDataAccess.GetReservationsByShowIdAsync(1);
+            reservations = await _reservationDataAccess.GetByUserAndShowIdAsync(2, 1);
 
             //ASSERT
-            Assert.IsNotEmpty(reservations, $"No reservations returned. Show id was 1");
+            Assert.IsTrue(reservations.Any(), $"No reservations returned. Show id was 2. User Id was 1");
         }
     }
 }

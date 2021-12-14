@@ -10,13 +10,13 @@ namespace TestDataAccess
 {
     class BaseTest
     {
-        private IBookingDataAccess _randomDataAccess;
+        private IShowDataAccess _randomDataAccess;
         private int _lastCreatedId;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _randomDataAccess = new BookingDataAccess(Configuration.CONNECTION_STRING_TEST);
+            _randomDataAccess = new ShowDataAccess(Configuration.CONNECTION_STRING_TEST);
         }
              
         [Test]
@@ -24,13 +24,19 @@ namespace TestDataAccess
         public async Task CreateAnObject()
         {
             //Arrange
-            Booking randomObject = new Booking() { TotalPrice = 190M, Date = DateTime.Now, UserId = 1};
-
+            Show randomObject = new() { 
+                StartTime = DateTime.Now,
+                MovieId = 1,
+                RoomId = 1,
+                DubLanguage = "English",
+                SubtitlesLanguage = "English",
+                GraphicType = "_2D",
+                SoundType = "iMax"
+            };
             //Act
             _lastCreatedId = await _randomDataAccess.CreateAsync(randomObject);
-
             //Assert
-            Assert.IsTrue(_lastCreatedId > 0, "The booking was not created.");
+            Assert.IsTrue(_lastCreatedId > 0, "The object was not created.");
         }
 
         [Test]
@@ -39,10 +45,10 @@ namespace TestDataAccess
         {
             //Arrange
             //Act
-            Booking randomObject = await _randomDataAccess.GetByIdAsync(_lastCreatedId);
+            Show randomObject = await _randomDataAccess.GetByIdAsync(_lastCreatedId);
 
             //Assert
-            Assert.IsNotNull(randomObject, $"Could not find a booking with id: {_lastCreatedId}.");
+            Assert.IsNotNull(randomObject, $"Could not find an object with id: `{_lastCreatedId}`.");
         }
 
         [Test]
@@ -54,7 +60,7 @@ namespace TestDataAccess
             var randomObjects = await _randomDataAccess.GetAllAsync();
 
             //Assert
-            Assert.IsNotEmpty(randomObjects, $"The list of bookings was empty.");
+            Assert.IsNotEmpty(randomObjects, $"The list of objects was empty.");
         }
 
         [Test]
@@ -62,13 +68,23 @@ namespace TestDataAccess
         public async Task UpdateAnObject()
         {
             //Arrange
-            Booking newObject = new Booking() { Id = _lastCreatedId, TotalPrice = 200M, Date = DateTime.Now };
+            Show newObject = new()
+            {
+                Id = _lastCreatedId,
+                StartTime = DateTime.Now,
+                MovieId = 2, // Changed from 1
+                RoomId = 1,
+                DubLanguage = "English",
+                SubtitlesLanguage = "English",
+                GraphicType = "_2D",
+                SoundType = "iMax"
+            };
             //Act
             bool updated = await _randomDataAccess.UpdateAsync(newObject);
-            Booking updatedObject = await _randomDataAccess.GetByIdAsync(_lastCreatedId);
+            Show updatedObject = await _randomDataAccess.GetByIdAsync(_lastCreatedId);
             //Assert
             Assert.IsTrue(updated, $"The dataAccess method for updating a row with id: {_lastCreatedId} returned false.");
-            Assert.IsTrue(updatedObject.TotalPrice == 200M, "The database row returned a different value.");
+            Assert.IsTrue(updatedObject.MovieId == 2, "The database row returned a different value.");
         }
 
         [Test]

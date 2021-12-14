@@ -42,7 +42,11 @@ namespace StubsClassLibrary
 
         public Task<IEnumerable<Reservation>> GetByUserAndShowIdAsync(int showId, int userId)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<Reservation>>(new List<Reservation>()
+            {
+                new Reservation() { CreationTime = DateTime.Now, SeatId = 2, ShowId = 1, UserId = 1 },
+                new Reservation() { CreationTime = DateTime.Now, SeatId = 1, ShowId = 1, UserId = 1 }
+            });
         }
 
         public Task<IEnumerable<Reservation>> GetByUserIdAsync(int userId)

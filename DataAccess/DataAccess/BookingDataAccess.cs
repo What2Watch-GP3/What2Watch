@@ -51,18 +51,20 @@ namespace DataAccess.DataAccess
                         }
                     }
                     
+                    // TODO: make it set user id and date to null
+
                     // Delete Reservations
-                    command = $"DELETE FROM [Reservation] WHERE seat_id=@SeatId AND show_id=@ShowId;";
-                    foreach (Ticket reservation in entity.Tickets)
-                    {
-                        // Put Tickets in DB, Put Booking DB
-                        bool isDeleted = await connection.ExecuteAsync(command, new { SeatId = reservation.SeatId, ShowId = reservation.ShowId }, transaction) > 0;
-                        if (!isDeleted)
-                        {
-                            transaction.Rollback();
-                            return -1;
-                        }
-                    }
+                    //command = $"DELETE FROM [Reservation] WHERE seat_id=@SeatId AND show_id=@ShowId;";
+                    //foreach (Ticket reservation in entity.Tickets)
+                    //{
+                    //    // Put Tickets in DB, Put Booking DB
+                    //    bool isDeleted = await connection.ExecuteAsync(command, new { SeatId = reservation.SeatId, ShowId = reservation.ShowId }, transaction) > 0;
+                    //    if (!isDeleted)
+                    //    {
+                    //        transaction.Rollback();
+                    //        return -1;
+                    //    }
+                    //}
                     // Commit
                     transaction.Commit();
                     return bookingId;
