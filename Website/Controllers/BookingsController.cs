@@ -29,16 +29,29 @@ namespace WebSite.Controllers
 
         // GET: BookingsController/Confirm
         //TODO: consider adding a collection of reservationDTOs as a parameter
+        //[Route("[action]")]
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> Confirm(IEnumerable<ReservationDto>? reservationDtos)
+        public async Task<ActionResult> Confirm(IEnumerable<ReservationDto> reservationDtos)
         {
             dynamic model = new ExpandoObject();
-
-            
+            if (!reservationDtos.Any())
+            {
+                //var reservations = await _client.GetReservationsAsync();
+                //model.Reservations = reservations;
+                //model.ResCount = reservations.ToList().Count;
+                model.ResCount = JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()).ToList().Count;
+            }
+            else
+            {
+                model.Reservations = reservationDtos;
+            }
             model.TotalPrice = _client.GetTotalPrice(JsonConvert.DeserializeObject<IEnumerable<string>>(TempData.Peek("SelectedSeatPositions").ToString()));
-            model.Date = _client.GetShowById((int)TempData.Peek("ShowId")).StartTime;
-            model.Reservations = reservationDtos;
+            var showDto = _client.GetShowById((int)TempData.Peek("ShowId"));
+            model.Date = showDto.StartTime;
+            var movie = await _client.GetMovieByIdAsync(1);
+            model.MovieTitle = movie.Title;
+
             return View(model);
         }
 

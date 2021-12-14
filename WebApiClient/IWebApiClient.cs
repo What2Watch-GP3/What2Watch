@@ -22,5 +22,6 @@ namespace WebApiClient
         ShowDto GetShowById(int showId);
         void addToken(string value);
         void Logout();
+        Task<IEnumerable<ReservationDto>> GetReservationsAsync();
     }
 }

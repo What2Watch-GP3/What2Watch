@@ -99,7 +99,21 @@ namespace DataAccess.DataAccess
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error getting List of Tickets by selected Show id {showId}. Error: {ex.Message}", ex);
+                throw new Exception($"Error getting List of Reservations by selected Show id {showId}. Error: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<IEnumerable<Reservation>> GetByUserIdAsync(int userId)
+        {
+            string command = "SELECT * FROM Reservation WHERE user_id=@UserId";
+            try
+            {
+                using var connection = CreateConnection();
+                return await connection.QueryAsync<Reservation>(command, new {UserId = userId });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting List of Reservations by selected User id {userId}. Error: {ex.Message}", ex);
             }
         }
     }

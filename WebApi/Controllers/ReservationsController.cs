@@ -1,7 +1,9 @@
 ﻿using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Tools.Converters;
 using WebApi.DTOs;
@@ -35,5 +37,26 @@ namespace WebApi.Controllers
                 return BadRequest();
             }
         }
+
+        //Get api/reservations
+        //TODO: make this accept an option show id and either return all reservations - thus cart or by showid- thus confirm booking
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ReservationDto>>> GetAllAsync()
+        {
+            var temp = HttpContext.User.Claims;
+            var userId = Convert.ToInt32(HttpContext.User.FindFirst("id").Value);
+            IEnumerable<Reservation> reservations = await _reservationDataAccess.GetByUserIdAsync(userId);
+            var reservationDtos = DtoConverter<Reservation, ReservationDto>.FromList(reservations);
+            if (reservationDtos != null && reservationDtos.Any())
+            {
+                return Ok(reservationDtos);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
     }
 }

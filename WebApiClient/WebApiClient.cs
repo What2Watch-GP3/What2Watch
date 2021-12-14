@@ -14,6 +14,7 @@ namespace WebApiClient
         private IRestClient _client;
         public RoomDto _room;
         private IEnumerable<ShowDto> _shows;
+        public IEnumerable<MovieDto> _movies;
 
         public WebApiClient(IRestClient client)
         {
@@ -26,8 +27,8 @@ namespace WebApiClient
             var response = await _client.RequestAsync<IEnumerable<MovieDto>>(Method.GET, $"movies");
 
             if (!response.IsSuccessful) throw new Exception($"Error retreiving all movies. Message was {response.Content}.");
-
-            return response.Data;
+            _movies = response.Data;
+            return _movies;
         }
 
         public async Task<IEnumerable<CinemaDto>> GetCinemasByMovieIdAsync(int movieId)
@@ -108,7 +109,7 @@ namespace WebApiClient
                 throw new Exception($"Error login in for userDto email={userDto.Email}");
             }
             userDto = response.Data;
-            var sessionCookie = response.Cookies.SingleOrDefault(x => x.Name == "X-Access-Token");
+            var sessionCookie = response.Cookies.FirstOrDefault(x => x.Name == "X-Access-Token");
             if (sessionCookie != null)
             {
                 userDto.Password = sessionCookie.Value;
@@ -201,6 +202,15 @@ namespace WebApiClient
         public void addToken(string value)
         {
             _client.AddDefaultParameter("X-Access-Token", value, ParameterType.Cookie);
+        }
+
+        public async Task<IEnumerable<ReservationDto>> GetReservationsAsync()
+        {
+            var response = await _client.RequestAsync<IEnumerable<ReservationDto>>(Method.POST, $"reservations");
+
+            if (!response.IsSuccessful) throw new Exception($"Error showing reservations for current user. Message was {response.Content}");
+
+            return response.Data;
         }
     }
 }
