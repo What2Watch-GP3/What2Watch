@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.DataAccess
@@ -15,12 +16,14 @@ namespace DataAccess.DataAccess
         {
             Values = new List<string> { "creation_time", "user_id", "seat_id", "show_id" };
             RawValues = new List<string> { "CreationTime", "UserId", "SeatId", "ShowId" };
-        } 
+        }
 
         // Overload of the CreateAsync method from BaseDataAccess to accept and return IEnumerables
         public async Task<bool> CreateAsync(IEnumerable<Reservation> reservations)
         {
-            string command = $"UPDATE [Reservation] SET creation_time = @CreationTime, user_id = @UserId WHERE seat_id IN @SeatIds AND show_id = @ShowId AND user_id IS NULL;";
+            string command = "INSERT INTO [Reservation] VALUES (@CreationTime, @UserId, @SeatId, @ShowId);";
+            string readCommandReservations = "SELECT * FROM [Reservation] WHERE show_id = @ShowId AND seat_id IN @SeatIds;";
+            string readCommandTickets = "SELECT * FROM [Ticket] WHERE show_id = @ShowId AND seat_id IN @SeatIds;";
             try
             {
                 using var connection = CreateConnection();
@@ -28,14 +31,25 @@ namespace DataAccess.DataAccess
                 using var transaction = connection.BeginTransaction(IsolationLevel.RepeatableRead);
                 try
                 {
-                    int userId = reservations.FirstOrDefault().UserId;
                     int showId = reservations.FirstOrDefault().ShowId;
                     int[] seatIds = reservations.Select(res => res.SeatId).ToArray();
-                    int rowsAffected = await connection.ExecuteAsync(command, new { CreationTime = DateTime.Now, UserId = userId, SeatIds = seatIds, ShowId = showId }, transaction);
-                    if (rowsAffected < reservations.Count())
+
+                    // Check if reservations or tickets already exist
+                    int rowsAffected = await connection.ExecuteScalarAsync<int>(readCommandReservations, new { ShowId = showId, SeatIds = seatIds }, transaction);
+                    rowsAffected += await connection.ExecuteScalarAsync<int>(readCommandTickets, new { ShowId = showId, SeatIds = seatIds }, transaction);
+                    if (rowsAffected > 0)
                     {
                         transaction.Rollback();
                         return false;
+                    }
+
+                    foreach (Reservation reservation in reservations)
+                    {
+                        if (!(await connection.ExecuteAsync(command, reservation, transaction) > 0))
+                        {
+                            transaction.Rollback();
+                            return false;
+                        }
                     }
                     transaction.Commit();
                     return true;
