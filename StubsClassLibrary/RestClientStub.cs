@@ -51,8 +51,8 @@ namespace StubsClassLibrary
         public bool AutomaticDecompression { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int? MaxRedirects { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string UserAgent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Timeout { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int ReadWriteTimeout { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Timeout { get; set; }
+        public int ReadWriteTimeout { get; set; }
         public bool UseSynchronizationContext { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IAuthenticator Authenticator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public Uri BaseUrl { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
