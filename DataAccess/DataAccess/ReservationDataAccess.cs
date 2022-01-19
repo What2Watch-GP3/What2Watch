@@ -59,7 +59,7 @@ namespace DataAccess.DataAccess
             {
                 using var connection = CreateConnection();
                 connection.Open();
-                using var transaction = connection.BeginTransaction(IsolationLevel.RepeatableRead);
+                using var transaction = connection.BeginTransaction(IsolationLevel.ReadUncommitted);
                 try
                 {
                     return await connection.QueryAsync<Reservation>(command, new { ShowId = showId }, transaction);

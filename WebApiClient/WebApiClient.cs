@@ -20,6 +20,8 @@ namespace WebApiClient
         {
             _client = client;
             _client.CookieContainer = new CookieContainer();
+            //_client.Timeout = 120000;
+            _client.ReadWriteTimeout = 120000;
         }
 
         public async Task<IEnumerable<MovieDto>> GetAllMoviesAsync()
@@ -158,7 +160,6 @@ namespace WebApiClient
         public async Task<IEnumerable<int>> CreateReservationAsync(IEnumerable<ReservationDto> reservationDtos)
         {
 
-            
             // Map ReservationDto's SeatPosition to _seats's Seat Id
             foreach(var reservationDto in reservationDtos)
             {
